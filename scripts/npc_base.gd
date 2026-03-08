@@ -20,5 +20,6 @@ func _on_player_exit(body):
 		player_nearby = false
 		
 func interact(player: Node):
-	print(npc_name, ": ", dialogue_lines[current_line])
+	var dialogue_box = get_tree().get_root().get_node("World/DialogueBox")
+	dialogue_box.show_dialogue(npc_name, dialogue_lines[current_line])
 	current_line = (current_line + 1) % dialogue_lines.size()

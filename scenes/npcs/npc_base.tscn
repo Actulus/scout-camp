@@ -32,13 +32,8 @@ shape = SubResource("CapsuleShape3D_prnpe")
 shape = SubResource("SphereShape3D_7ain8")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1221298716]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -41.5
-offset_right = 41.5
+offset_right = 83.0
 offset_bottom = 23.0
-grow_horizontal = 2
 pivot_offset = Vector2(0, 1.2)
 text = "NPC Name"
 horizontal_alignment = 1

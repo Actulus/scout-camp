@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cerljfpmf3n6e"]
+
+[ext_resource type="Script" uid="uid://oykwmpxk4cd7" path="res://scripts/dialogue_box.gd" id="1_xg44k"]
+
+[sub_resource type="SystemFont" id="SystemFont_xg44k"]
+font_weight = 600
+
+[sub_resource type="LabelSettings" id="LabelSettings_6iboe"]
+font = SubResource("SystemFont_xg44k")
+
+[node name="DialogueBox" type="CanvasLayer" unique_id=1184870650]
+script = ExtResource("1_xg44k")
+
+[node name="Control" type="Control" parent="." unique_id=1406418083]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control" unique_id=1121570238]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="NPCName" type="Label" parent="Control/Panel" unique_id=1720988765]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+text = "Sam"
+label_settings = SubResource("LabelSettings_6iboe")
+
+[node name="DialogueText" type="RichTextLabel" parent="Control/Panel" unique_id=1504212577]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = -10.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContinueBtn" type="Button" parent="Control/Panel" unique_id=1836561753]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Continue"

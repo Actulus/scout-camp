@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://0u3ty737eby0" path="res://scenes/collectible_item.tscn" id="4_6m72w"]
 [ext_resource type="PackedScene" uid="uid://c40xqnotbooew" path="res://scenes/ui/hud.tscn" id="5_v5dby"]
 [ext_resource type="PackedScene" uid="uid://b6foj8hb62bgc" path="res://scenes/npcs/npc_base.tscn" id="6_t5ptc"]
+[ext_resource type="PackedScene" uid="uid://cerljfpmf3n6e" path="res://scenes/ui/dialogue_box.tscn" id="7_bq33v"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
 size = Vector3(100, 0.2, 100)
@@ -137,3 +138,5 @@ display_name = "mushroom"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2096596, 1.0033016, 7.181285)
 npc_name = "Sam"
 dialogue_lines = ["Hello!", "Nice day for scouting.", "Nice to meet you!", "How are you?"]
+
+[node name="DialogueBox" parent="." unique_id=1184870650 instance=ExtResource("7_bq33v")]
