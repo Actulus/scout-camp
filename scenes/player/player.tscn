@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bevjqmfse0o8t" path="res://scripts/playercontroller.gd" id="1_8afob"]
 [ext_resource type="Script" uid="uid://dwib51lujeghw" path="res://scripts/camera_rig.gd" id="2_dovo2"]
+[ext_resource type="Script" uid="uid://cjbvbt6h5cqla" path="res://scripts/inventorysystem.gd" id="3_lvxji"]
+[ext_resource type="Script" uid="uid://cuq46cqgnwsh" path="res://scripts/interactzone.gd" id="4_p47bc"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dovo2"]
 radius = 0.4
@@ -10,6 +12,9 @@ height = 1.8
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 radius = 0.4
 height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_75vfm"]
+radius = 2.5
 
 [node name="Player" type="CharacterBody3D" unique_id=561802944]
 script = ExtResource("1_8afob")
@@ -25,3 +30,12 @@ script = ExtResource("2_dovo2")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=465924469]
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 12, 10)
+
+[node name="Inventory" type="Node" parent="." unique_id=1164573449]
+script = ExtResource("3_lvxji")
+
+[node name="InteractZone" type="Area3D" parent="." unique_id=857241589]
+script = ExtResource("4_p47bc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractZone" unique_id=821802019]
+shape = SubResource("SphereShape3D_75vfm")

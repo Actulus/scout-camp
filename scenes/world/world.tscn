@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bqs7yms3roulb" path="res://scenes/player/player.tscn" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://eh11j284xbpx" path="res://scenes/camp/camp.tscn" id="2_1fp7r"]
 [ext_resource type="PackedScene" uid="uid://chelyo0srflym" path="res://scenes/leaders_house/leader_house.tscn" id="3_6m72w"]
+[ext_resource type="PackedScene" uid="uid://0u3ty737eby0" path="res://scenes/collectible_item.tscn" id="4_6m72w"]
+[ext_resource type="PackedScene" uid="uid://c40xqnotbooew" path="res://scenes/ui/hud.tscn" id="5_v5dby"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
 size = Vector3(80, 0.2, 80)
@@ -34,7 +36,12 @@ size = Vector3(4, 30, 90)
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2gmx"]
 size = Vector3(4, 30, 90)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1fp7r"]
+sky_top_color = Color(0.44217616, 0.6520406, 0.98092073, 1)
+sky_horizon_color = Color(0.9458304, 0.68844277, 0.92277855, 1)
+
 [sub_resource type="Sky" id="Sky_4rhad"]
+sky_material = SubResource("ProceduralSkyMaterial_1fp7r")
 
 [sub_resource type="Environment" id="Environment_dphjl"]
 background_mode = 2
@@ -105,3 +112,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="Camp" parent="." unique_id=1478507277 instance=ExtResource("2_1fp7r")]
 
 [node name="LeaderHouse" parent="." unique_id=1637668464 instance=ExtResource("3_6m72w")]
+
+[node name="CollectibleItem" parent="." unique_id=1833875501 instance=ExtResource("4_6m72w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4164124, 0.5221069, 0)
+item_name = "dry_tinder"
+display_name = "dry tinder"
+
+[node name="CollectibleItem2" parent="." unique_id=390955147 instance=ExtResource("4_6m72w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.710508, 0.5402169, -4.881875)
+item_name = "dry_kindling"
+display_name = "dry kindling"
+
+[node name="CollectibleItem3" parent="." unique_id=443268623 instance=ExtResource("4_6m72w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6715198, 0.6100936, 0)
+item_name = "matches"
+display_name = "matches"
+
+[node name="CollectibleItem4" parent="." unique_id=131894017 instance=ExtResource("4_6m72w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3622296, 1.8551369)
+item_name = "mushroom"
+display_name = "mushroom"
+
+[node name="HUD" parent="." unique_id=1440731385 instance=ExtResource("5_v5dby")]
