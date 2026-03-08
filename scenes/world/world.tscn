@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bl2tn1kmaac5m"]
 
 [ext_resource type="PackedScene" uid="uid://bqs7yms3roulb" path="res://scenes/player/player.tscn" id="1_dphjl"]
+[ext_resource type="PackedScene" uid="uid://eh11j284xbpx" path="res://scenes/camp/camp.tscn" id="2_1fp7r"]
+[ext_resource type="PackedScene" uid="uid://chelyo0srflym" path="res://scenes/leaders_house/leader_house.tscn" id="3_6m72w"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
 size = Vector3(80, 0.2, 80)
@@ -99,3 +101,7 @@ environment = SubResource("Environment_dphjl")
 
 [node name="Player" parent="." unique_id=561802944 instance=ExtResource("1_dphjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Camp" parent="." unique_id=1478507277 instance=ExtResource("2_1fp7r")]
+
+[node name="LeaderHouse" parent="." unique_id=1637668464 instance=ExtResource("3_6m72w")]

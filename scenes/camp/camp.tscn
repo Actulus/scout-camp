@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://eh11j284xbpx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pbcj1"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bqk0h"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bqk0h"]
+size = Vector3(6, 0.3, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_15lph"]
+size = Vector3(6, 0.3, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w8r68"]
+size = Vector3(2, 2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oq6a4"]
+size = Vector3(2, 2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8lvbw"]
+size = Vector3(3, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ou4a0"]
+size = Vector3(3, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m2efa"]
+size = Vector3(3, 2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_52u7r"]
+size = Vector3(3, 2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbcj1"]
+albedo_color = Color(0, 0.5833335, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_15lph"]
+material = SubResource("StandardMaterial3D_pbcj1")
+size = Vector3(4, 0.1, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w8r68"]
+size = Vector3(4, 0.1, 12)
+
+[node name="Camp" type="Node3D" unique_id=1478507277]
+
+[node name="Firepit" type="StaticBody3D" parent="." unique_id=1297271410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Firepit" unique_id=759346130]
+mesh = SubResource("BoxMesh_pbcj1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Firepit" unique_id=559017624]
+shape = SubResource("BoxShape3D_bqk0h")
+
+[node name="Label3D" type="Label3D" parent="Firepit" unique_id=1881599988]
+text = "FIREPIT"
+
+[node name="TentArea" type="StaticBody3D" parent="." unique_id=1642555778]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TentArea" unique_id=987062674]
+mesh = SubResource("BoxMesh_bqk0h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TentArea" unique_id=689983469]
+shape = SubResource("BoxShape3D_15lph")
+
+[node name="Label3D" type="Label3D" parent="TentArea" unique_id=2000875807]
+text = "TENT AREA"
+
+[node name="NoticeBoard" type="StaticBody3D" parent="." unique_id=999561699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NoticeBoard" unique_id=1938085999]
+mesh = SubResource("BoxMesh_w8r68")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NoticeBoard" unique_id=749679469]
+shape = SubResource("BoxShape3D_oq6a4")
+
+[node name="Label3D" type="Label3D" parent="NoticeBoard" unique_id=1485467128]
+text = "NOTICE BOARD"
+
+[node name="CookingStation" type="StaticBody3D" parent="." unique_id=1326477239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CookingStation" unique_id=1377116346]
+mesh = SubResource("BoxMesh_8lvbw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CookingStation" unique_id=281560613]
+shape = SubResource("BoxShape3D_ou4a0")
+
+[node name="Label3D" type="Label3D" parent="CookingStation" unique_id=1513005613]
+text = "COOKING"
+
+[node name="BadgeWall" type="StaticBody3D" parent="." unique_id=214054637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BadgeWall" unique_id=542348568]
+mesh = SubResource("BoxMesh_m2efa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BadgeWall" unique_id=1292265336]
+shape = SubResource("BoxShape3D_52u7r")
+
+[node name="Label3D" type="Label3D" parent="BadgeWall" unique_id=1496714078]
+text = "BADGE WALL"
+
+[node name="Stream" type="StaticBody3D" parent="." unique_id=863975974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.1, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stream" unique_id=1332855724]
+mesh = SubResource("BoxMesh_15lph")
+
+[node name="WaterCollectTrigger" type="Area3D" parent="Stream" unique_id=811407149]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stream/WaterCollectTrigger" unique_id=1062754961]
+shape = SubResource("BoxShape3D_w8r68")
