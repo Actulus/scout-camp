@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bl2tn1kmaac5m"]
 
+[ext_resource type="PackedScene" uid="uid://bqs7yms3roulb" path="res://scenes/player/player.tscn" id="1_dphjl"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
 size = Vector3(80, 0.2, 80)
 
@@ -94,3 +96,6 @@ light_energy = 1.2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=776421101]
 environment = SubResource("Environment_dphjl")
+
+[node name="Player" parent="." unique_id=561802944 instance=ExtResource("1_dphjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
