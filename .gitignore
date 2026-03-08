@@ -3,3 +3,4 @@
 /android/
 *.import
 export_credentials
+/addons/godot-git-plugin-v3.2.1
