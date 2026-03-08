@@ -15,7 +15,10 @@ func _on_body_entered(body):
 	if body.has_method("interact"):
 		current_target = body
 		if prompt_label:
-			prompt_label.text = "Press E  —  " + body.display_name
+			if "display_name" in body: 
+				prompt_label.text = "Press E  —  " + current_target.display_name
+			else: 
+				prompt_label.text = "Press E to talk"
 			prompt_label.show()
 		
 func _on_body_exited(body):

@@ -67,7 +67,7 @@ shape = SubResource("BoxShape3D_15lph")
 text = "TENT AREA"
 
 [node name="NoticeBoard" type="StaticBody3D" parent="." unique_id=999561699]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.9135308)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NoticeBoard" unique_id=1938085999]
 mesh = SubResource("BoxMesh_w8r68")
@@ -91,7 +91,7 @@ shape = SubResource("BoxShape3D_ou4a0")
 text = "COOKING"
 
 [node name="BadgeWall" type="StaticBody3D" parent="." unique_id=214054637]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.825, 1, -1.7046089)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BadgeWall" unique_id=542348568]
 mesh = SubResource("BoxMesh_m2efa")

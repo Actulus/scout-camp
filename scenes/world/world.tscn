@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://chelyo0srflym" path="res://scenes/leaders_house/leader_house.tscn" id="3_6m72w"]
 [ext_resource type="PackedScene" uid="uid://0u3ty737eby0" path="res://scenes/collectible_item.tscn" id="4_6m72w"]
 [ext_resource type="PackedScene" uid="uid://c40xqnotbooew" path="res://scenes/ui/hud.tscn" id="5_v5dby"]
+[ext_resource type="PackedScene" uid="uid://b6foj8hb62bgc" path="res://scenes/npcs/npc_base.tscn" id="6_t5ptc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
 size = Vector3(100, 0.2, 100)
@@ -106,6 +107,7 @@ environment = SubResource("Environment_dphjl")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Camp" parent="." unique_id=1478507277 instance=ExtResource("2_1fp7r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018461227, -0.023444176, -0.009774208)
 
 [node name="LeaderHouse" parent="." unique_id=1637668464 instance=ExtResource("3_6m72w")]
 
@@ -130,3 +132,8 @@ item_name = "mushroom"
 display_name = "mushroom"
 
 [node name="HUD" parent="." unique_id=1440731385 instance=ExtResource("5_v5dby")]
+
+[node name="NPC" parent="." unique_id=1345696528 instance=ExtResource("6_t5ptc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2096596, 1.0033016, 7.181285)
+npc_name = "Sam"
+dialogue_lines = ["Hello!", "Nice day for scouting.", "Nice to meet you!", "How are you?"]

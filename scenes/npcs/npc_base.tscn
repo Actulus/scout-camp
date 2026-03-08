@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b6foj8hb62bgc"]
+
+[ext_resource type="Script" uid="uid://dou6oitwlb02o" path="res://scripts/npc_base.gd" id="1_r0mbh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhfuy"]
+albedo_color = Color(0, 0.7007078, 0.42706272, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_10117"]
+material = SubResource("StandardMaterial3D_jhfuy")
+radius = 0.35
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_prnpe"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7ain8"]
+radius = 3.0
+
+[node name="NPC" type="CharacterBody3D" unique_id=1345696528]
+script = ExtResource("1_r0mbh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1562188799]
+mesh = SubResource("CapsuleMesh_10117")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=989295693]
+shape = SubResource("CapsuleShape3D_prnpe")
+
+[node name="TalkZone" type="Area3D" parent="." unique_id=25469455]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TalkZone" unique_id=1796057413]
+shape = SubResource("SphereShape3D_7ain8")
+
+[node name="NameLabel" type="Label" parent="." unique_id=1221298716]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.5
+offset_right = 41.5
+offset_bottom = 23.0
+grow_horizontal = 2
+pivot_offset = Vector2(0, 1.2)
+text = "NPC Name"
+horizontal_alignment = 1
