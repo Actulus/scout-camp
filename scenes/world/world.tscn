@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c40xqnotbooew" path="res://scenes/ui/hud.tscn" id="5_v5dby"]
 [ext_resource type="PackedScene" uid="uid://b6foj8hb62bgc" path="res://scenes/npcs/npc_base.tscn" id="6_t5ptc"]
 [ext_resource type="PackedScene" uid="uid://cerljfpmf3n6e" path="res://scenes/ui/dialogue_box.tscn" id="7_bq33v"]
+[ext_resource type="PackedScene" uid="uid://dgk1tifyk2p2v" path="res://scenes/skills/shelter/shelter_item.tscn" id="8_j2gmx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
 size = Vector3(100, 0.2, 100)
@@ -134,9 +135,45 @@ display_name = "mushroom"
 
 [node name="HUD" parent="." unique_id=1440731385 instance=ExtResource("5_v5dby")]
 
-[node name="NPC" parent="." unique_id=1345696528 instance=ExtResource("6_t5ptc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2096596, 1.0033016, 7.181285)
+[node name="DialogueBox" parent="." unique_id=1184870650 instance=ExtResource("7_bq33v")]
+
+[node name="NPC2" parent="." unique_id=1719892071 instance=ExtResource("6_t5ptc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0077496, 6.2046003)
 npc_name = "Sam"
 dialogue_lines = ["Hello!", "Nice day for scouting.", "Nice to meet you!", "How are you?"]
 
-[node name="DialogueBox" parent="." unique_id=1184870650 instance=ExtResource("7_bq33v")]
+[node name="ShelterItem" parent="." unique_id=1522532805 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.780376, 0.3707962, 0)
+
+[node name="ShelterItem2" parent="." unique_id=1179493612 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.780376, 0.3707962, 4.824134)
+item_name = "large_branch"
+display_name = "A large sturdy branch"
+tooltip = "Dry, large and strong - good for a frame."
+
+[node name="ShelterItem3" parent="." unique_id=1024415040 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.59852, 0.3707962, 0)
+item_name = "dry_leaves"
+display_name = "Dry leaves"
+tooltip = "Dry - good for roof"
+
+[node name="ShelterItem4" parent="." unique_id=2003925748 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.513088, 0.3707962, 2.10015)
+item_name = "moss"
+display_name = "Moss"
+tooltip = "Good for roof"
+
+[node name="ShelterItem5" parent="." unique_id=21246902 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.780376, 0.3707962, -7.561109)
+item_name = "moss"
+display_name = "Moss"
+tooltip = "Good for roof"
+
+[node name="ShelterItem6" parent="." unique_id=2145830609 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.652378, 0.3707962, -2.0965776)
+
+[node name="ShelterItem7" parent="." unique_id=1814268711 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0256557, 0.3707962, -15.437374)
+item_name = "tentkitbag"
+display_name = "Tent Kit Bag"
+tooltip = "All the materials to make a tent."

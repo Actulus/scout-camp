@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4b001gmyhx76" path="res://scenes/camp/sleep_trigger.gd" id="1_bqk0h"]
 [ext_resource type="Script" uid="uid://da411k1xros5e" path="res://scenes/camp/notice_board.gd" id="2_15lph"]
+[ext_resource type="Script" uid="uid://bo74ttgf3frte" path="res://scripts/shelter_skill_trigger.gd" id="3_w8r68"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pbcj1"]
 size = Vector3(3, 0.5, 3)
@@ -45,6 +46,9 @@ size = Vector3(4, 0.1, 12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w8r68"]
 size = Vector3(4, 0.1, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m2efa"]
+size = Vector3(8, 2, 8)
 
 [node name="Camp" type="Node3D" unique_id=1478507277]
 
@@ -129,3 +133,10 @@ shape = SubResource("BoxShape3D_w8r68")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stream/WaterCollectTrigger" unique_id=1062754961]
 shape = SubResource("BoxShape3D_w8r68")
+
+[node name="ShelterSkillTrigger" type="Area3D" parent="." unique_id=1015984212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9104414, 0, 5.1111717)
+script = ExtResource("3_w8r68")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShelterSkillTrigger" unique_id=1298370173]
+shape = SubResource("BoxShape3D_m2efa")

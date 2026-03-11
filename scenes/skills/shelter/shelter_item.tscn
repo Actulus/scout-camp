@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dgk1tifyk2p2v"]
+
+[ext_resource type="Script" uid="uid://dldl5dqdayaui" path="res://scripts/shelter_item.gd" id="1_nsaj5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8enfd"]
+size = Vector3(0.4, 0.4, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nsaj5"]
+size = Vector3(0.4, 0.4, 0.8)
+
+[node name="ShelterItem" type="StaticBody3D" unique_id=1522532805]
+script = ExtResource("1_nsaj5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=828180972]
+mesh = SubResource("BoxMesh_8enfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=939251514]
+shape = SubResource("BoxShape3D_nsaj5")

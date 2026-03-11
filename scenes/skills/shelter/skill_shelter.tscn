@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bx2gdd7q47kg1"]
+
+[ext_resource type="Script" uid="uid://cby5lctqhdtt1" path="res://scripts/skill_shelter.gd" id="1_rnhr6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rnhr6"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnhr6"]
+transparency = 1
+albedo_color = Color(0.53333336, 0.6666667, 0.73333335, 0.15686275)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3h851"]
+size = Vector3(1.8, 0.5, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h851"]
+transparency = 1
+albedo_color = Color(0.53333336, 0.6666667, 0.73333335, 0.15686275)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hhj3o"]
+size = Vector3(2.2, -0.1, 2.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhj3o"]
+transparency = 1
+albedo_color = Color(0.53333336, 0.6666667, 0.73333335, 0.15686275)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ga44b"]
+
+[node name="SkillShelter" type="Node3D" unique_id=1727661045]
+script = ExtResource("1_rnhr6")
+
+[node name="SlotFrame" type="MeshInstance3D" parent="." unique_id=166960079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_rnhr6")
+surface_material_override/0 = SubResource("StandardMaterial3D_rnhr6")
+
+[node name="SlotInsulation" type="MeshInstance3D" parent="." unique_id=192163307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.3)
+mesh = SubResource("BoxMesh_3h851")
+surface_material_override/0 = SubResource("StandardMaterial3D_3h851")
+
+[node name="SlotRoof" type="MeshInstance3D" parent="." unique_id=819812814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_hhj3o")
+surface_material_override/0 = SubResource("StandardMaterial3D_hhj3o")
+
+[node name="ShelterUI" type="CanvasLayer" parent="." unique_id=1146211451]
+
+[node name="Control" type="Control" parent="ShelterUI" unique_id=58728409]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="ShelterUI/Control" unique_id=980993346]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 280.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="ShelterUI/Control/Panel" unique_id=116227890]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 148.0
+offset_bottom = 33.0
+text = "Build your shelter"
+label_settings = SubResource("LabelSettings_ga44b")
+
+[node name="AddFrameBtn" type="Button" parent="ShelterUI/Control/Panel" unique_id=155004687]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 113.0
+offset_bottom = 81.0
+text = "Place Frame"
+
+[node name="AddInsulationBtn" type="Button" parent="ShelterUI/Control/Panel" unique_id=169452976]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 131.0
+offset_bottom = 131.0
+text = "Add Insulation"
+
+[node name="AddRoofBtn" type="Button" parent="ShelterUI/Control/Panel" unique_id=630319135]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 150.0
+offset_right = 89.0
+offset_bottom = 181.0
+text = "Add Roof"
+
+[node name="StatusText" type="Label" parent="ShelterUI/Control/Panel" unique_id=1094778019]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 210.0
+offset_right = 50.0
+offset_bottom = 233.0
