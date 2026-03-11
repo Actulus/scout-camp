@@ -4,6 +4,7 @@
 
 [sub_resource type="SystemFont" id="SystemFont_xg44k"]
 font_weight = 600
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_6iboe"]
 font = SubResource("SystemFont_xg44k")

@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://b5w21y6rg4j6s"
+DayManager="*uid://b5tt846ieys20"
 
 [editor]
 

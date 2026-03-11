@@ -12,6 +12,7 @@ func _ready():
 	print("Prompt label found: ", prompt_label)
 
 func _on_body_entered(body):
+	print("Body entered: ", body.name, " — has interact: ", body.has_method("interact"))
 	if body.has_method("interact"):
 		current_target = body
 		if prompt_label:

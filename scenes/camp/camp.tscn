@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://eh11j284xbpx"]
 
+[ext_resource type="Script" uid="uid://b4b001gmyhx76" path="res://scenes/camp/sleep_trigger.gd" id="1_bqk0h"]
+[ext_resource type="Script" uid="uid://da411k1xros5e" path="res://scenes/camp/notice_board.gd" id="2_15lph"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_pbcj1"]
 size = Vector3(3, 0.5, 3)
 
@@ -11,6 +14,9 @@ size = Vector3(6, 0.3, 6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_15lph"]
 size = Vector3(6, 0.3, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8lvbw"]
+size = Vector3(2, 1, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w8r68"]
 size = Vector3(2, 2, 0.2)
@@ -66,8 +72,16 @@ shape = SubResource("BoxShape3D_15lph")
 [node name="Label3D" type="Label3D" parent="TentArea" unique_id=2000875807]
 text = "TENT AREA"
 
+[node name="SleepTrigger" type="StaticBody3D" parent="TentArea" unique_id=437594728]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66796064, 1.0548267)
+script = ExtResource("1_bqk0h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TentArea/SleepTrigger" unique_id=1127289091]
+shape = SubResource("BoxShape3D_8lvbw")
+
 [node name="NoticeBoard" type="StaticBody3D" parent="." unique_id=999561699]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.9135308)
+script = ExtResource("2_15lph")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NoticeBoard" unique_id=1938085999]
 mesh = SubResource("BoxMesh_w8r68")
@@ -107,6 +121,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.1, -10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stream" unique_id=1332855724]
 mesh = SubResource("BoxMesh_15lph")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stream" unique_id=704350697]
+shape = SubResource("BoxShape3D_w8r68")
 
 [node name="WaterCollectTrigger" type="Area3D" parent="Stream" unique_id=811407149]
 
