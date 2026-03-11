@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b6foj8hb62bgc" path="res://scenes/npcs/npc_base.tscn" id="6_t5ptc"]
 [ext_resource type="PackedScene" uid="uid://cerljfpmf3n6e" path="res://scenes/ui/dialogue_box.tscn" id="7_bq33v"]
 [ext_resource type="PackedScene" uid="uid://dgk1tifyk2p2v" path="res://scenes/skills/shelter/shelter_item.tscn" id="8_j2gmx"]
+[ext_resource type="PackedScene" uid="uid://dc6o1d7aqpj1k" path="res://scenes/ui/badge_card.tscn" id="9_1yooq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
 size = Vector3(100, 0.2, 100)
@@ -133,8 +134,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3622296, 1.8551369)
 item_name = "mushroom"
 display_name = "mushroom"
 
-[node name="HUD" parent="." unique_id=1440731385 instance=ExtResource("5_v5dby")]
-
 [node name="DialogueBox" parent="." unique_id=1184870650 instance=ExtResource("7_bq33v")]
 
 [node name="NPC2" parent="." unique_id=1719892071 instance=ExtResource("6_t5ptc")]
@@ -177,3 +176,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0256557, 0.3707962, -15.437
 item_name = "tentkitbag"
 display_name = "Tent Kit Bag"
 tooltip = "All the materials to make a tent."
+
+[node name="BadgeCard" parent="." unique_id=497995844 instance=ExtResource("9_1yooq")]
+
+[node name="HUD" parent="." unique_id=1440731385 instance=ExtResource("5_v5dby")]

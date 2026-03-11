@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dc6o1d7aqpj1k"]
+
+[ext_resource type="Script" uid="uid://cdb78sfa40weg" path="res://scripts/badge_card.gd" id="1_aywcv"]
+
+[node name="BadgeCard" type="CanvasLayer" unique_id=497995844]
+script = ExtResource("1_aywcv")
+
+[node name="Control" type="Control" parent="." unique_id=1481637342]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control" unique_id=1097994881]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BadgeName" type="Label" parent="Control/Panel" unique_id=23618093]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
+
+[node name="KnowledgeText" type="RichTextLabel" parent="Control/Panel" unique_id=67693426]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 80.0
+fit_content = true
+autowrap_mode = 0
+
+[node name="DismissBtn" type="Button" parent="Control/Panel" unique_id=430130334]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -41.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Great!"

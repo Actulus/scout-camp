@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://c40xqnotbooew"]
 
+[ext_resource type="Script" uid="uid://bj5tgqgm75ljq" path="res://scripts/hud.gd" id="1_0mwgc"]
+
 [node name="HUD" type="CanvasLayer" unique_id=1440731385]
+layer = 0
+script = ExtResource("1_0mwgc")
 
 [node name="Control" type="Control" parent="." unique_id=511750140]
 layout_mode = 3
@@ -25,3 +29,49 @@ offset_right = 65.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Press E to collect"
+
+[node name="Panel" type="Panel" parent="Control" unique_id=551987421]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.85
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Badge1" type="ColorRect" parent="Control/Panel" unique_id=1411419600]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Badge2" type="ColorRect" parent="Control/Panel" unique_id=1004538359]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 85.0
+offset_bottom = 40.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Badge3" type="ColorRect" parent="Control/Panel" unique_id=1475748582]
+layout_mode = 0
+offset_left = 90.0
+offset_right = 130.0
+offset_bottom = 40.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Badge4" type="ColorRect" parent="Control/Panel" unique_id=1817455627]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 175.0
+offset_bottom = 40.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Badge5" type="ColorRect" parent="Control/Panel" unique_id=552274049]
+layout_mode = 0
+offset_left = 180.0
+offset_right = 220.0
+offset_bottom = 40.0
+color = Color(0.2, 0.2, 0.2, 1)
