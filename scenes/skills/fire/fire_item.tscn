@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cw5fydvm5by5h"]
+
+[ext_resource type="Script" uid="uid://c8mc5x511wsju" path="res://scripts/fire_item.gd" id="1_3xj0r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_slwn2"]
+size = Vector3(0.4, 0.4, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3xj0r"]
+size = Vector3(0.4, 0.4, 0.8)
+
+[node name="FireItem" type="StaticBody3D" unique_id=1144220124]
+script = ExtResource("1_3xj0r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=458471911]
+mesh = SubResource("BoxMesh_slwn2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1018793432]
+shape = SubResource("BoxShape3D_3xj0r")

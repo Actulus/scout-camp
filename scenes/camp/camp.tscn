@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://eh11j284xbpx"]
 
 [ext_resource type="Script" uid="uid://b4b001gmyhx76" path="res://scenes/camp/sleep_trigger.gd" id="1_bqk0h"]
+[ext_resource type="Script" uid="uid://dywj2pl74vprf" path="res://scripts/fire_skill_trigger.gd" id="1_oq6a4"]
 [ext_resource type="Script" uid="uid://da411k1xros5e" path="res://scenes/camp/notice_board.gd" id="2_15lph"]
 [ext_resource type="Script" uid="uid://bo74ttgf3frte" path="res://scripts/shelter_skill_trigger.gd" id="3_w8r68"]
 
@@ -9,6 +10,9 @@ size = Vector3(3, 0.5, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bqk0h"]
 size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgpur"]
+size = Vector3(2.6498413, 2, 2.6004639)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bqk0h"]
 size = Vector3(6, 0.3, 6)
@@ -63,6 +67,14 @@ shape = SubResource("BoxShape3D_bqk0h")
 
 [node name="Label3D" type="Label3D" parent="Firepit" unique_id=1881599988]
 text = "FIREPIT"
+
+[node name="FireSkillTrigger" type="Area3D" parent="Firepit" unique_id=400452412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22620821, 0)
+script = ExtResource("1_oq6a4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Firepit/FireSkillTrigger" unique_id=884637880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058441162, 0, -0.012268066)
+shape = SubResource("BoxShape3D_lgpur")
 
 [node name="TentArea" type="StaticBody3D" parent="." unique_id=1642555778]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)

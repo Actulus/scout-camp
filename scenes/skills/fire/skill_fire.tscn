@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://djrwbf8ol54tn"]
+
+[ext_resource type="Script" uid="uid://bmwvuqls3ec2m" path="res://scripts/skill_fire.gd" id="1_57wbx"]
+
+[node name="SkillFire" type="Node3D" unique_id=2016362658]
+script = ExtResource("1_57wbx")
+
+[node name="FireUI" type="CanvasLayer" parent="." unique_id=15015460]
+
+[node name="Control" type="Control" parent="FireUI" unique_id=1665829313]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="FireUI/Control" unique_id=1733342144]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="FireUI/Control/Panel" unique_id=951909631]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 120.0
+offset_bottom = 33.0
+text = "Lit  your fire"
+
+[node name="TinderSlotBtn" type="Button" parent="FireUI/Control/Panel" unique_id=580036221]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 18.0
+offset_bottom = 58.0
+text = "Place tinder"
+
+[node name="KindlingSlotBtn" type="Button" parent="FireUI/Control/Panel" unique_id=225757306]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 18.0
+offset_bottom = 108.0
+text = "Place kindling"
+
+[node name="FuelSlotBtn" type="Button" parent="FireUI/Control/Panel" unique_id=1969367048]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 150.0
+offset_right = 18.0
+offset_bottom = 158.0
+text = "Place fuel"
+
+[node name="StatusText" type="Label" parent="FireUI/Control/Panel" unique_id=1259975770]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 210.0
+offset_right = 50.0
+offset_bottom = 233.0
