@@ -52,6 +52,14 @@ sky_material = SubResource("ProceduralSkyMaterial_1fp7r")
 background_mode = 2
 sky = SubResource("Sky_4rhad")
 
+[sub_resource type="Curve3D" id="Curve3D_gb53w"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 20),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
 [node name="World" type="Node3D" unique_id=430405692]
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=2059235516]
@@ -141,6 +149,14 @@ display_name = "mushroom"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0077496, 6.2046003)
 npc_name = "Sam"
 dialogue_lines = ["Hello!", "Nice day for scouting.", "Nice to meet you!", "How are you?"]
+patrol_path = NodePath("../Path3D")
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1969210549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0077496, 6.2046003)
+curve = SubResource("Curve3D_gb53w")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1176469900]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="ShelterItem" parent="." unique_id=1522532805 instance=ExtResource("8_j2gmx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.780376, 0.3707962, 0)
