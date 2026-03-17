@@ -1,14 +1,7 @@
 [gd_scene format=3 uid="uid://b6foj8hb62bgc"]
 
 [ext_resource type="Script" uid="uid://dou6oitwlb02o" path="res://scripts/npc_base.gd" id="1_r0mbh"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhfuy"]
-albedo_color = Color(0, 0.7007078, 0.42706272, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_10117"]
-material = SubResource("StandardMaterial3D_jhfuy")
-radius = 0.35
-height = 1.8
+[ext_resource type="ArrayMesh" uid="uid://dqt3e5n0pxn62" path="res://assets/models/kenney_mini-characters/Models/OBJ format/character-male-a.obj" id="2_jhfuy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_prnpe"]
 radius = 0.35
@@ -21,7 +14,8 @@ radius = 3.0
 script = ExtResource("1_r0mbh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1562188799]
-mesh = SubResource("CapsuleMesh_10117")
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.65424305, 0)
+mesh = ExtResource("2_jhfuy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=989295693]
 shape = SubResource("CapsuleShape3D_prnpe")

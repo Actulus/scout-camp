@@ -2,12 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bevjqmfse0o8t" path="res://scripts/playercontroller.gd" id="1_8afob"]
 [ext_resource type="Script" uid="uid://dwib51lujeghw" path="res://scripts/camera_rig.gd" id="2_dovo2"]
+[ext_resource type="ArrayMesh" uid="uid://x8rtn5jie18b" path="res://assets/models/kenney_mini-characters/Models/OBJ format/character-male-d.obj" id="2_p47bc"]
 [ext_resource type="Script" uid="uid://cjbvbt6h5cqla" path="res://scripts/inventorysystem.gd" id="3_lvxji"]
 [ext_resource type="Script" uid="uid://cuq46cqgnwsh" path="res://scripts/interactzone.gd" id="4_p47bc"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_dovo2"]
-radius = 0.4
-height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 radius = 0.4
@@ -20,7 +17,8 @@ radius = 2.5
 script = ExtResource("1_8afob")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=194508358]
-mesh = SubResource("CapsuleMesh_dovo2")
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.6785438, 0)
+mesh = ExtResource("2_p47bc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
 shape = SubResource("CapsuleShape3D_gmlin")

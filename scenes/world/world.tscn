@@ -11,9 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://dc6o1d7aqpj1k" path="res://scenes/ui/badge_card.tscn" id="9_1yooq"]
 [ext_resource type="PackedScene" uid="uid://cw5fydvm5by5h" path="res://scenes/skills/fire/fire_item.tscn" id="10_gb53w"]
 [ext_resource type="PackedScene" uid="uid://d03ct21m7yv1l" path="res://scenes/skills/navigation/skill_navigation.tscn" id="11_5qq27"]
+[ext_resource type="PackedScene" uid="uid://b74ehrpefpv0q" path="res://assets/models/kenney_nature-kit/Models/GLTF format/tree_cone.glb" id="12_dlabj"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_4rhad"]
-size = Vector3(100, 0.2, 100)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srmg5"]
+albedo_color = Color(0, 0.336582, 0.1735956, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_umvgx"]
+material = SubResource("StandardMaterial3D_srmg5")
+size = Vector2(100, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dphjl"]
 size = Vector3(100, 0.2, 100)
@@ -66,7 +71,7 @@ point_count = 3
 [node name="Ground" type="StaticBody3D" parent="." unique_id=2059235516]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1570561622]
-mesh = SubResource("BoxMesh_4rhad")
+mesh = SubResource("PlaneMesh_umvgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=92557620]
 shape = SubResource("BoxShape3D_dphjl")
@@ -95,6 +100,7 @@ shape = SubResource("BoxShape3D_6m72w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mountains/WallEast" unique_id=643679175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05783081, 0.06546402, 0.0011177063)
 mesh = SubResource("BoxMesh_v5dby")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mountains/WallEast" unique_id=1408942496]
@@ -240,3 +246,9 @@ display_name = "Compass"
 
 [node name="SkillNavigation" parent="." unique_id=828446682 instance=ExtResource("11_5qq27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6460075, 0, 6.653038)
+
+[node name="tree_cone2" parent="." unique_id=1802841328 instance=ExtResource("12_dlabj")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 23.509926, 0, -16.086193)
+
+[node name="tree_cone3" parent="." unique_id=1620114225 instance=ExtResource("12_dlabj")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.338013, 0, 25.685257)
