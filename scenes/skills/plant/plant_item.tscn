@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://gwj3rgv43cje"]
+
+[ext_resource type="Script" uid="uid://bo54o20ykls7j" path="res://scripts/plant_item.gd" id="1_kx15x"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nvshm"]
+height = 0.8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kx15x"]
+height = 0.8
+
+[node name="PlantItem" type="StaticBody3D" unique_id=846562658]
+script = ExtResource("1_kx15x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1530743851]
+mesh = SubResource("CylinderMesh_nvshm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=151984773]
+shape = SubResource("CylinderShape3D_kx15x")

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bo74ttgf3frte" path="res://scripts/shelter_skill_trigger.gd" id="3_w8r68"]
 [ext_resource type="Script" uid="uid://dpgiskkh3eb5a" path="res://scripts/water_collect_trigger.gd" id="4_8lvbw"]
 [ext_resource type="Script" uid="uid://d17u00sfcm2fw" path="res://scripts/water_skill_trigger.gd" id="4_ou4a0"]
+[ext_resource type="Script" uid="uid://dqky0fh5fpa1v" path="res://scripts/plant_skill_trigger.gd" id="7_m2efa"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pbcj1"]
 size = Vector3(3, 0.5, 3)
@@ -58,6 +59,10 @@ size = Vector3(4, 0.1, 12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m2efa"]
 size = Vector3(8, 2, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ou4a0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3171m"]
 
 [node name="Camp" type="Node3D" unique_id=1478507277]
 
@@ -164,3 +169,13 @@ script = ExtResource("3_w8r68")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ShelterSkillTrigger" unique_id=1298370173]
 shape = SubResource("BoxShape3D_m2efa")
+
+[node name="PlantSkillTrigger" type="Area3D" parent="." unique_id=618616867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9325075, 0, -7.6243553)
+script = ExtResource("7_m2efa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlantSkillTrigger" unique_id=1138221660]
+mesh = SubResource("BoxMesh_ou4a0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlantSkillTrigger" unique_id=8016968]
+shape = SubResource("BoxShape3D_3171m")

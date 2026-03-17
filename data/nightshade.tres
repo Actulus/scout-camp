@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://b831nfl14ho0c"]
+
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_rl4gk"]
+
+[resource]
+script = ExtResource("1_rl4gk")
+plant_id = "nightshade"
+display_name = "Nightshade"

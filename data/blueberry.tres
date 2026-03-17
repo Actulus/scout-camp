@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://xfddx66rfaiv"]
+
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_bstuc"]
+
+[resource]
+script = ExtResource("1_bstuc")
+plant_id = "blueberry"
+display_name = "Blueberry"
+is_safe = true

@@ -7,7 +7,7 @@ var badge_colors = {
 	"plants": Color("#228B22"),
 	"navigation": Color("#FFD700"),
 }
-var badge_slots = ["shelter", "fire", "water", "pants", "navigation"]
+var badge_slots = ["shelter", "fire", "water", "plants", "navigation"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

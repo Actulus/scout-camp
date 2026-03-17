@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://mbk1xhu66rja"]
+
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_cp0h7"]
+
+[resource]
+script = ExtResource("1_cp0h7")
+plant_id = "death_cap"
+display_name = "Death Cap"
+visual_clue = "Pale greenish cap, white ring on stem, bulbous cup at base."
+real_world_fact = "Responsible for over 90 percent of fatal mushroom poisonings worldwide."

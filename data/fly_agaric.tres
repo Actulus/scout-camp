@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://p8kq5824r1nf"]
+
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_sbf4r"]
+
+[resource]
+script = ExtResource("1_sbf4r")
+plant_id = "fly_agaric"
+display_name = "Fly Agaric"

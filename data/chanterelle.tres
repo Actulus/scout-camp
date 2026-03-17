@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://dglhcqt8tg4n8"]
+
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_ngnlx"]
+
+[resource]
+script = ExtResource("1_ngnlx")
+plant_id = "chanterelle"
+display_name = "Chanterelle"
+is_safe = true
