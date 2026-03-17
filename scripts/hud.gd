@@ -17,3 +17,6 @@ func _on_badge_earned(badge_id: String):
 	var idx = badge_slots.find(badge_id)
 	if idx >= 0:
 		get_node("Control/Panel/Badge" + str(idx+1)).color = badge_colors[badge_id]
+
+func _process(_delta):
+	$Control/CompassRose.visible = GameManager.current_day == 5 and get_node("/root/World/Player/Inventory").has_item("compass")

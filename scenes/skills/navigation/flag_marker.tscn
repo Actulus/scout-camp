@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dg7djq4fbwgw3"]
+
+[ext_resource type="Script" uid="uid://5k32lokhd2cn" path="res://scripts/flag_marker.gd" id="1_6qj2v"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a2k4u"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6qj2v"]
+
+[node name="FlagMarker" type="StaticBody3D" unique_id=1267834448]
+script = ExtResource("1_6qj2v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=236235086]
+mesh = SubResource("CylinderMesh_a2k4u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1154027636]
+shape = SubResource("CylinderShape3D_6qj2v")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1431819378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2886634, 0)
+text = "Flag"

@@ -13,6 +13,7 @@ var badges_earned: Array = []
 signal skill_completed(skill_id: String)
 signal badge_earned(badge_id: String)
 signal day_changed(day_number: int)
+signal flag_found(flag_index: int)
 
 func complete_skill(skill_id:  String):
 	if not skills_completed[skill_id]:

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d03ct21m7yv1l"]
+
+[ext_resource type="PackedScene" uid="uid://dg7djq4fbwgw3" path="res://scenes/skills/navigation/flag_marker.tscn" id="1_5hsj3"]
+[ext_resource type="Script" uid="uid://8xpv1vdxcxm7" path="res://scripts/skill_navigation.gd" id="1_p45x0"]
+
+[node name="SkillNavigation" type="Node3D" unique_id=828446682]
+script = ExtResource("1_p45x0")
+
+[node name="FlagMarker" parent="." unique_id=1267834448 instance=ExtResource("1_5hsj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.294044)
+
+[node name="FlagMarker2" parent="." unique_id=301356755 instance=ExtResource("1_5hsj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.50364, 0, 29.694199)
+clue_text = "Walk south from the large rock."
+flag_index = 2
+
+[node name="FlagMarker3" parent="." unique_id=753149457 instance=ExtResource("1_5hsj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.41362, 0, -37.448864)
+clue_text = "Walk west from the large rock."
+flag_index = 3
