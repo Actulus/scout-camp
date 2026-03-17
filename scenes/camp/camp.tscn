@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://dywj2pl74vprf" path="res://scripts/fire_skill_trigger.gd" id="1_oq6a4"]
 [ext_resource type="Script" uid="uid://da411k1xros5e" path="res://scenes/camp/notice_board.gd" id="2_15lph"]
 [ext_resource type="Script" uid="uid://bo74ttgf3frte" path="res://scripts/shelter_skill_trigger.gd" id="3_w8r68"]
+[ext_resource type="Script" uid="uid://dpgiskkh3eb5a" path="res://scripts/water_collect_trigger.gd" id="4_8lvbw"]
+[ext_resource type="Script" uid="uid://d17u00sfcm2fw" path="res://scripts/water_skill_trigger.gd" id="4_ou4a0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pbcj1"]
 size = Vector3(3, 0.5, 3)
@@ -34,6 +36,9 @@ size = Vector3(3, 1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ou4a0"]
 size = Vector3(3, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0hqdg"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m2efa"]
 size = Vector3(3, 2, 0.2)
@@ -120,6 +125,12 @@ shape = SubResource("BoxShape3D_ou4a0")
 [node name="Label3D" type="Label3D" parent="CookingStation" unique_id=1513005613]
 text = "COOKING"
 
+[node name="WaterSkillTrigger" type="Area3D" parent="CookingStation" unique_id=1889688186]
+script = ExtResource("4_ou4a0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CookingStation/WaterSkillTrigger" unique_id=1211553860]
+shape = SubResource("BoxShape3D_0hqdg")
+
 [node name="BadgeWall" type="StaticBody3D" parent="." unique_id=214054637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.825, 1, -1.7046089)
 
@@ -142,6 +153,7 @@ mesh = SubResource("BoxMesh_15lph")
 shape = SubResource("BoxShape3D_w8r68")
 
 [node name="WaterCollectTrigger" type="Area3D" parent="Stream" unique_id=811407149]
+script = ExtResource("4_8lvbw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stream/WaterCollectTrigger" unique_id=1062754961]
 shape = SubResource("BoxShape3D_w8r68")

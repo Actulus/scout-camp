@@ -226,3 +226,8 @@ item_name = "fuel"
 [node name="ShelterItem9" parent="." unique_id=1240354194 instance=ExtResource("8_j2gmx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.026655, 1.0419927, 3.1472225)
 item_name = "kindling"
+
+[node name="ShelterItem10" parent="." unique_id=1724516930 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26549435, -16.463396)
+item_name = "canteen"
+display_name = "Canteen"

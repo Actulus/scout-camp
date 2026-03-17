@@ -21,9 +21,11 @@ mesh = SubResource("BoxMesh_hf1c1")
 shape = SubResource("BoxShape3D_6uk20")
 
 [node name="Label3D" type="Label3D" parent="StaticBody3D" unique_id=1652783759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74336, 3.0443687)
 text = "LEADERS HOUSE"
 
 [node name="DoorTrigger" type="Area3D" parent="." unique_id=459134678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.927832)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorTrigger" unique_id=2060159270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5369377)

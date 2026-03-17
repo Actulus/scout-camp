@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://c612r5505ajcr"]
+
+[ext_resource type="Script" uid="uid://x4vxceo0mm3x" path="res://scripts/skill_water.gd" id="1_dxnlt"]
+
+[node name="SkillWater" type="Node3D" unique_id=1089832993]
+script = ExtResource("1_dxnlt")
+
+[node name="WaterUI" type="CanvasLayer" parent="." unique_id=718763952]
+
+[node name="Control" type="Control" parent="WaterUI" unique_id=44071431]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="WaterUI/Control" unique_id=866328393]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="WaterUI/Control/Panel" unique_id=900381899]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 219.0
+offset_bottom = 33.0
+text = "Make your water drinkable"
+
+[node name="BoilBtn" type="Button" parent="WaterUI/Control/Panel" unique_id=1319377999]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 18.0
+offset_bottom = 58.0
+text = "Boil the  water"
+
+[node name="SettleBtn" type="Button" parent="WaterUI/Control/Panel" unique_id=363478862]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 142.0
+offset_bottom = 131.0
+text = "Settle the water"
+
+[node name="ClothBtn" type="Button" parent="WaterUI/Control/Panel" unique_id=681046187]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 150.0
+offset_right = 138.0
+offset_bottom = 181.0
+text = "Cloth the water"
+
+[node name="SugarBtn" type="Button" parent="WaterUI/Control/Panel" unique_id=333519841]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 141.0
+offset_bottom = 231.0
+text = "Sugar the water"
+
+[node name="StatusText" type="Label" parent="WaterUI/Control/Panel" unique_id=2095160058]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 250.0
+offset_right = 50.0
+offset_bottom = 273.0
