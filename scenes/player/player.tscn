@@ -1,42 +1,36 @@
 [gd_scene format=3 uid="uid://bqs7yms3roulb"]
 
-[ext_resource type="Script" uid="uid://bevjqmfse0o8t" path="res://scripts/playercontroller.gd" id="1_8afob"]
-[ext_resource type="Script" uid="uid://cjbvbt6h5cqla" path="res://scripts/inventorysystem.gd" id="3_lvxji"]
-[ext_resource type="Script" uid="uid://cuq46cqgnwsh" path="res://scripts/interactzone.gd" id="4_p47bc"]
+[ext_resource type="Script" uid="uid://bevjqmfse0o8t" path="res://scenes/player/playercontroller.gd" id="1_8afob"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gmlin"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvxji"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_75vfm"]
-radius = 2.5
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvxji"]
+height = 1.0
 
 [node name="Player" type="CharacterBody3D" unique_id=561802944]
 script = ExtResource("1_8afob")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=194508358]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.6785438, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_gmlin")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
+[node name="StandingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_gmlin")
+
+[node name="CrouchingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1804506796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_lvxji")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1189459293]
-transform = Transform3D(1, 0, 0, 0, 0.9637517, 0.2668011, 0, -0.2668011, 0.9637517, 0, 0.52595985, -0.70708454)
-fov = 60.0
+[node name="Head" type="Node3D" parent="." unique_id=36290060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1794283897]
-target_position = Vector3(0, 0, -4)
+[node name="Eyes" type="Node3D" parent="Head" unique_id=245276796]
 
-[node name="Inventory" type="Node" parent="." unique_id=1164573449]
-script = ExtResource("3_lvxji")
+[node name="Camera3D" type="Camera3D" parent="Head/Eyes" unique_id=2090621624]
 
-[node name="InteractZone" type="Area3D" parent="." unique_id=857241589]
-script = ExtResource("4_p47bc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractZone" unique_id=821802019]
-shape = SubResource("SphereShape3D_75vfm")
-
-[node name="CarryObjectMarker" type="Marker3D" parent="." unique_id=1632318703]
-unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.045, -0.373, -1.67)
+[node name="StandupCheck" type="RayCast3D" parent="." unique_id=1512231536]
+target_position = Vector3(0, 2, 0)
