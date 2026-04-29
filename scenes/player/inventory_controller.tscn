@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://b2mdi8qtvuc3e"]
+
+[ext_resource type="Script" uid="uid://dpmuwkj1rqur0" path="res://scenes/player/inventory_controller.gd" id="1_ny5yd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8gqj"]
+bg_color = Color(0.53333336, 0.62352943, 0.5882353, 0.62352943)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+border_blend = true
+
+[node name="InventoryController" type="Node" unique_id=2143623853]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=541181378]
+
+[node name="InventoryUI" type="Control" parent="CanvasLayer" unique_id=992822927]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ny5yd")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/InventoryUI" unique_id=1895882975]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -142.5
+offset_right = 180.0
+offset_bottom = 142.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y8gqj")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/InventoryUI/Panel" unique_id=895252100]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/InventoryUI/Panel/MarginContainer" unique_id=1938759145]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 5

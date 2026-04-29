@@ -1,6 +1,25 @@
 [gd_scene format=3 uid="uid://cw5fydvm5by5h"]
 
-[ext_resource type="Script" uid="uid://c8mc5x511wsju" path="res://scripts/fire_item.gd" id="1_3xj0r"]
+[sub_resource type="GDScript" id="GDScript_slwn2"]
+script/source = "extends StaticBody3D
+
+@export var item_name: String = \"tinder\"
+@export var is_wet: bool = false 
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var mat = StandardMaterial3D.new()
+	# Wet items look dark and slightl shiny 
+	# Dry items look warm golden
+	mat.albedo_color = Color(\"#3d2a1a\") if is_wet else Color(\"#c8a050\")
+	$MeshInstance3D.material_override = mat 
+	item_name = (\"Wet \" if is_wet else \"Dry \") + item_name.replace(\"_\", \" \") 
+
+
+func interact(player: Node):
+	player.get_node(\"Inventory\").add_item(item_name)
+	queue_free()
+"
 
 [sub_resource type="BoxMesh" id="BoxMesh_slwn2"]
 size = Vector3(0.4, 0.4, 0.8)
@@ -9,7 +28,7 @@ size = Vector3(0.4, 0.4, 0.8)
 size = Vector3(0.4, 0.4, 0.8)
 
 [node name="FireItem" type="StaticBody3D" unique_id=1144220124]
-script = ExtResource("1_3xj0r")
+script = SubResource("GDScript_slwn2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=458471911]
 mesh = SubResource("BoxMesh_slwn2")

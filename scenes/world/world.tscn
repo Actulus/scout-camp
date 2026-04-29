@@ -3,15 +3,25 @@
 [ext_resource type="PackedScene" uid="uid://bqs7yms3roulb" path="res://scenes/player/player.tscn" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://eh11j284xbpx" path="res://scenes/camp/camp.tscn" id="2_1fp7r"]
 [ext_resource type="PackedScene" uid="uid://chelyo0srflym" path="res://scenes/leaders_house/leader_house.tscn" id="3_6m72w"]
-[ext_resource type="PackedScene" uid="uid://0u3ty737eby0" path="res://scenes/collectible_item.tscn" id="4_6m72w"]
-[ext_resource type="PackedScene" uid="uid://c40xqnotbooew" path="res://scenes/ui/hud.tscn" id="5_v5dby"]
-[ext_resource type="PackedScene" uid="uid://b6foj8hb62bgc" path="res://scenes/npcs/npc_base.tscn" id="6_t5ptc"]
-[ext_resource type="PackedScene" uid="uid://cerljfpmf3n6e" path="res://scenes/ui/dialogue_box.tscn" id="7_bq33v"]
-[ext_resource type="PackedScene" uid="uid://dgk1tifyk2p2v" path="res://scenes/skills/shelter/shelter_item.tscn" id="8_j2gmx"]
-[ext_resource type="PackedScene" uid="uid://dc6o1d7aqpj1k" path="res://scenes/ui/badge_card.tscn" id="9_1yooq"]
-[ext_resource type="PackedScene" uid="uid://cw5fydvm5by5h" path="res://scenes/skills/fire/fire_item.tscn" id="10_gb53w"]
-[ext_resource type="PackedScene" uid="uid://d03ct21m7yv1l" path="res://scenes/skills/navigation/skill_navigation.tscn" id="11_5qq27"]
+[ext_resource type="Texture2D" uid="uid://oiqv4lo7lg0b" path="res://assets/textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="6_bq33v"]
+[ext_resource type="Texture2D" uid="uid://bk8r802pul38c" path="res://assets/textures/kenney_prototype-textures/PNG/Dark/texture_01.png" id="7_j2gmx"]
+[ext_resource type="PackedScene" uid="uid://dbvi5hujish4g" path="res://objects/cube_1_kg.tscn" id="8_j2gmx"]
 [ext_resource type="PackedScene" uid="uid://b74ehrpefpv0q" path="res://assets/models/kenney_nature-kit/Models/GLTF format/tree_cone.glb" id="12_dlabj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5dby"]
+sky_top_color = Color(0, 0.45849943, 0.7871284, 1)
+sky_horizon_color = Color(0.5684099, 0.67359805, 0.7451422, 1)
+ground_bottom_color = Color(0.25399244, 0.21624544, 0.17379308, 1)
+ground_horizon_color = Color(0.5684099, 0.67359805, 0.7451422, 1)
+
+[sub_resource type="Sky" id="Sky_t5ptc"]
+sky_material = SubResource("ProceduralSkyMaterial_v5dby")
+
+[sub_resource type="Environment" id="Environment_bq33v"]
+background_mode = 2
+sky = SubResource("Sky_t5ptc")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srmg5"]
 albedo_color = Color(0, 0.336582, 0.1735956, 1)
@@ -47,30 +57,31 @@ size = Vector3(4, 30, 90)
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2gmx"]
 size = Vector3(4, 30, 90)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1fp7r"]
-sky_top_color = Color(0.44217616, 0.6520406, 0.98092073, 1)
-sky_horizon_color = Color(0.9458304, 0.68844277, 0.92277855, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yooq"]
+albedo_texture = ExtResource("6_bq33v")
+uv1_triplanar = true
 
-[sub_resource type="Sky" id="Sky_4rhad"]
-sky_material = SubResource("ProceduralSkyMaterial_1fp7r")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gb53w"]
+albedo_texture = ExtResource("7_j2gmx")
+uv1_triplanar = true
 
-[sub_resource type="Environment" id="Environment_dphjl"]
-background_mode = 2
-sky = SubResource("Sky_4rhad")
-
-[sub_resource type="Curve3D" id="Curve3D_gb53w"]
-closed = true
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 20),
-"tilts": PackedFloat32Array(0, 0, 0)
-}
-point_count = 3
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bq33v"]
+albedo_texture = ExtResource("7_j2gmx")
+uv1_triplanar = true
 
 [node name="World" type="Node3D" unique_id=430405692]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1403228488]
+environment = SubResource("Environment_bq33v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1974513823]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=2059235516]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1570561622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00034163287, 0.009473562, -0.048166893)
 mesh = SubResource("PlaneMesh_umvgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=92557620]
@@ -115,140 +126,42 @@ mesh = SubResource("BoxMesh_bq33v")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mountains/WallWest" unique_id=2044974560]
 shape = SubResource("BoxShape3D_j2gmx")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=773862326]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
-light_energy = 1.2
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=776421101]
-environment = SubResource("Environment_dphjl")
-
 [node name="Player" parent="." unique_id=561802944 instance=ExtResource("1_dphjl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9047414, 0)
 
 [node name="Camp" parent="." unique_id=1478507277 instance=ExtResource("2_1fp7r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018461227, -0.023444176, -0.009774208)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018461227, 0.5408387, -0.009774208)
 
 [node name="LeaderHouse" parent="." unique_id=1637668464 instance=ExtResource("3_6m72w")]
-
-[node name="CollectibleItem" parent="." unique_id=1833875501 instance=ExtResource("4_6m72w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4164124, 0.5221069, 0)
-item_name = "dry_tinder"
-display_name = "dry tinder"
-
-[node name="CollectibleItem2" parent="." unique_id=390955147 instance=ExtResource("4_6m72w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.710508, 0.5402169, -4.881875)
-item_name = "dry_kindling"
-display_name = "dry kindling"
-
-[node name="CollectibleItem3" parent="." unique_id=443268623 instance=ExtResource("4_6m72w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6715198, 0.6100936, 0)
-item_name = "matches"
-display_name = "matches"
-
-[node name="CollectibleItem4" parent="." unique_id=131894017 instance=ExtResource("4_6m72w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3622296, 1.8551369)
-item_name = "mushroom"
-display_name = "mushroom"
-
-[node name="DialogueBox" parent="." unique_id=1184870650 instance=ExtResource("7_bq33v")]
-
-[node name="NPC2" parent="." unique_id=1719892071 instance=ExtResource("6_t5ptc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0077496, 6.2046003)
-npc_name = "Sam"
-dialogue_lines = ["Hello!", "Nice day for scouting.", "Nice to meet you!", "How are you?"]
-patrol_path = NodePath("../Path3D")
-
-[node name="Path3D" type="Path3D" parent="." unique_id=1969210549]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0077496, 6.2046003)
-curve = SubResource("Curve3D_gb53w")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1176469900]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-
-[node name="ShelterItem" parent="." unique_id=1522532805 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.780376, 0.3707962, 0)
-
-[node name="ShelterItem2" parent="." unique_id=1179493612 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.780376, 0.3707962, 4.824134)
-item_name = "large_branch"
-display_name = "A large sturdy branch"
-tooltip = "Dry, large and strong - good for a frame."
-
-[node name="ShelterItem3" parent="." unique_id=1024415040 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.59852, 0.3707962, 0)
-item_name = "dry_leaves"
-display_name = "Dry leaves"
-tooltip = "Dry - good for roof"
-
-[node name="ShelterItem4" parent="." unique_id=2003925748 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.513088, 0.3707962, 2.10015)
-item_name = "moss"
-display_name = "Moss"
-tooltip = "Good for roof"
-
-[node name="ShelterItem5" parent="." unique_id=21246902 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.780376, 0.3707962, -7.561109)
-item_name = "moss"
-display_name = "Moss"
-tooltip = "Good for roof"
-
-[node name="ShelterItem6" parent="." unique_id=2145830609 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.652378, 0.3707962, -2.0965776)
-
-[node name="ShelterItem7" parent="." unique_id=1814268711 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0256557, 0.3707962, -15.437374)
-item_name = "tentkitbag"
-display_name = "Tent Kit Bag"
-tooltip = "All the materials to make a tent."
-
-[node name="BadgeCard" parent="." unique_id=497995844 instance=ExtResource("9_1yooq")]
-
-[node name="HUD" parent="." unique_id=1440731385 instance=ExtResource("5_v5dby")]
-
-[node name="FireItem" parent="." unique_id=1144220124 instance=ExtResource("10_gb53w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.440994, 0.4720726, -19.945631)
-
-[node name="FireItem2" parent="." unique_id=1785645586 instance=ExtResource("10_gb53w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.150032, 0.82046795, 0)
-
-[node name="FireItem3" parent="." unique_id=458552582 instance=ExtResource("10_gb53w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5964718, 13.245226)
-
-[node name="FireItem4" parent="." unique_id=739016342 instance=ExtResource("10_gb53w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9815645, 0.49682236, -1.9964504)
-is_wet = true
-
-[node name="FireItem5" parent="." unique_id=1650152686 instance=ExtResource("10_gb53w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.098742, 0.13669491, -8.279341)
-is_wet = true
-
-[node name="FireItem6" parent="." unique_id=5434286 instance=ExtResource("10_gb53w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.78246, 0.64143467, -2.8108807)
-is_wet = true
-
-[node name="ShelterItem8" parent="." unique_id=1088426330 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.581318, 0.9329653, 0)
-item_name = "fuel"
-
-[node name="ShelterItem9" parent="." unique_id=1240354194 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.026655, 1.0419927, 3.1472225)
-item_name = "kindling"
-
-[node name="ShelterItem10" parent="." unique_id=1724516930 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26549435, -16.463396)
-item_name = "canteen"
-display_name = "Canteen"
-
-[node name="ShelterItem11" parent="." unique_id=992768937 instance=ExtResource("8_j2gmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.155239, 0.41312122, -16.078634)
-item_name = "compass"
-display_name = "Compass"
-
-[node name="SkillNavigation" parent="." unique_id=828446682 instance=ExtResource("11_5qq27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6460075, 0, 6.653038)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0048823, 0)
 
 [node name="tree_cone2" parent="." unique_id=1802841328 instance=ExtResource("12_dlabj")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 23.509926, 0, -16.086193)
 
 [node name="tree_cone3" parent="." unique_id=1620114225 instance=ExtResource("12_dlabj")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.338013, 0, 25.685257)
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=225777147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018681526, 0, -0.01291132)
+use_collision = true
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_1yooq")
+
+[node name="Wall" type="CSGBox3D" parent="." unique_id=951994068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.288864, 2, 0)
+use_collision = true
+size = Vector3(1, 3, 10)
+material = SubResource("StandardMaterial3D_gb53w")
+
+[node name="CrouchCheck" type="CSGBox3D" parent="." unique_id=1798734389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.548, 3, 8.06)
+use_collision = true
+size = Vector3(8, 2, 1)
+material = SubResource("StandardMaterial3D_bq33v")
+
+[node name="Cube_1kg2" parent="." unique_id=1795174791 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3318863, 2.341803, 16.217777)
+mass = 10.0
+
+[node name="Cube_1kg" parent="." unique_id=2135259275 instance=ExtResource("8_j2gmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1200485, 1.1709015, 16.757881)

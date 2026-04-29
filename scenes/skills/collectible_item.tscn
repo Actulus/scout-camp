@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dgk1tifyk2p2v"]
 
-[ext_resource type="Script" uid="uid://dldl5dqdayaui" path="res://scripts/shelter_item.gd" id="1_nsaj5"]
+[ext_resource type="Script" uid="uid://dldl5dqdayaui" path="res://scripts/collectible_item.gd" id="1_nsaj5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8enfd"]
 size = Vector3(0.4, 0.4, 0.8)
@@ -24,7 +24,7 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_nsaj5"]
 size = Vector3(0.4, 0.4, 0.8)
 
-[node name="ShelterItem" type="CharacterBody3D" unique_id=1540005257]
+[node name="CollectibleItem" type="CharacterBody3D" unique_id=1540005257]
 script = ExtResource("1_nsaj5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=828180972]

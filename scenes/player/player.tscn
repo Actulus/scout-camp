@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bqs7yms3roulb"]
 
 [ext_resource type="Script" uid="uid://bevjqmfse0o8t" path="res://scenes/player/playercontroller.gd" id="1_8afob"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gmlin"]
+[ext_resource type="PackedScene" uid="uid://bkja20180wi1j" path="res://interactions/interaction_controller.tscn" id="2_dovo2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 
@@ -11,11 +10,6 @@ height = 1.0
 
 [node name="Player" type="CharacterBody3D" unique_id=561802944]
 script = ExtResource("1_8afob")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=194508358]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.6785438, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_gmlin")
 
 [node name="StandingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -31,6 +25,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 [node name="Eyes" type="Node3D" parent="Head" unique_id=245276796]
 
 [node name="Camera3D" type="Camera3D" parent="Head/Eyes" unique_id=2090621624]
+unique_name_in_owner = true
+
+[node name="InteractionRayCast3D" type="RayCast3D" parent="Head/Eyes/Camera3D" unique_id=201751466]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -2)
+
+[node name="Hand" type="Marker3D" parent="Head/Eyes/Camera3D" unique_id=1990177918]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="StandupCheck" type="RayCast3D" parent="." unique_id=1512231536]
 target_position = Vector3(0, 2, 0)
+
+[node name="InteractionController" parent="." unique_id=1269839320 instance=ExtResource("2_dovo2")]
+unique_name_in_owner = true

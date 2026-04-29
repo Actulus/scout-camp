@@ -19,4 +19,4 @@ func _update_task(day: int):
 func interact(player: Node):
 	var day = GameManager.current_day
 	var box = get_tree().get_root().get_node("World/DialogueBox")
-	box.show_dialogue("Notice Board", tasks.get(day, "All tasks complete!"))
+	#box.show_dialogue("Notice Board", tasks.get(day, "All tasks complete!"))
