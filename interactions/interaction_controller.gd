@@ -65,6 +65,9 @@ func _process(delta: float) -> void:
 				if Input.is_action_pressed("primary"):
 					current_object = potential_object
 					interaction_component.preInteract()
+					
+					if interaction_component.interaction_type == interaction_component.InteractionType.DOOR:
+						interaction_component.set_direction(current_object.to_local(interaction_raycast.get_collision_point()))
 
 #var current_note: StaticBody3D
 #var note_interaction_component: InspectableInteraction 
@@ -176,13 +179,13 @@ func _process(delta: float) -> void:
 	#if item_equipped and Input.is_action_just_pressed("primary"):
 		#_use_equipped_item()
 		#
-## Determines if the object the player is interacting with should stop mouse camera  movement 
-#func isCameraLocked() -> bool:
-	#if interaction_component:
-		#if interaction_component.lock_camera and interaction_component.is_interacting:
-			#return true 
-	#return false 
-	#
+# Determines if the object the player is interacting with should stop mouse camera  movement 
+func isCameraLocked() -> bool:
+	if interaction_component:
+		if interaction_component.lock_camera and interaction_component.is_interacting:
+			return true 
+	return false 
+	
 ## Called when the player is looking at an interactable object
 #func _focus() -> void: 
 	#_update_reticle_state()

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://chelyo0srflym" path="res://scenes/leaders_house/leader_house.tscn" id="3_6m72w"]
 [ext_resource type="Texture2D" uid="uid://oiqv4lo7lg0b" path="res://assets/textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="6_bq33v"]
 [ext_resource type="Texture2D" uid="uid://bk8r802pul38c" path="res://assets/textures/kenney_prototype-textures/PNG/Dark/texture_01.png" id="7_j2gmx"]
+[ext_resource type="PackedScene" uid="uid://dej28nybw6bcg" path="res://objects/door.tscn" id="8_1yooq"]
 [ext_resource type="PackedScene" uid="uid://dbvi5hujish4g" path="res://objects/cube_1_kg.tscn" id="8_j2gmx"]
 [ext_resource type="PackedScene" uid="uid://b74ehrpefpv0q" path="res://assets/models/kenney_nature-kit/Models/GLTF format/tree_cone.glb" id="12_dlabj"]
 
@@ -165,3 +166,6 @@ mass = 10.0
 
 [node name="Cube_1kg" parent="." unique_id=2135259275 instance=ExtResource("8_j2gmx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1200485, 1.1709015, 16.757881)
+
+[node name="Door" parent="." unique_id=1296721048 instance=ExtResource("8_1yooq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.5547962, 20)
