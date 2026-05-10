@@ -5,7 +5,7 @@ extends Node
 enum InteractionType {
 	DEFAULT,
 	DOOR,
-	
+	SWITCH
 }
 
 @export var object_ref: Node3D
@@ -26,6 +26,10 @@ func _ready() -> void:
 		InteractionType.DOOR:
 			starting_rotation = pivot_point.rotation.x 
 			maximum_rotation = deg_to_rad(rad_to_deg(starting_rotation)+maximum_rotation)
+		InteractionType.SWITCH:
+			starting_rotation = object_ref.rotation.x 
+			maximum_rotation = deg_to_rad(rad_to_deg(starting_rotation)+maximum_rotation)
+			
 	
 # run once, when the player first clicks on an object to interact with 
 func preInteract() -> void: 
@@ -35,6 +39,8 @@ func preInteract() -> void:
 			player_hand = get_tree().get_root().find_child("Hand", true, false)
 		InteractionType.DOOR:
 			lock_camera = true 
+		InteractionType.SWITCH:
+			lock_camera = true
 	
 # run every frame, perform some logic on this object 
 func interact() -> void:
@@ -69,6 +75,14 @@ func _input(event: InputEvent) -> void:
 						pivot_point.rotate_y(event.relative.y * .001)
 						
 					pivot_point.rotation.y = clamp(pivot_point.rotation.y, starting_rotation, maximum_rotation)
+			InteractionType.SWITCH:
+				if event is InputEventMouseMotion:
+					var percentage: float 
+					object_ref.rotate_z(event.relative.y * .001)
+					object_ref.rotation.z = clamp(object_ref.rotation.z, starting_rotation, maximum_rotation)
+					percentage = (object_ref.rotation.z - starting_rotation) / (maximum_rotation - starting_rotation)
+					
+					#notify_nodes(percentage)
 
 func _default_interact() -> void: 
 	var object_current_position: Vector3 = object_ref.global_transform.origin
