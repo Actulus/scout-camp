@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://hj3r50c73bam"]
+[gd_scene format=3 uid="uid://dxcmxj2n04gm8"]
 
 [ext_resource type="PackedScene" uid="uid://ch868pqs36aec" path="res://interactions/interaction_component.tscn" id="1_bd5kx"]
 
@@ -18,7 +18,6 @@ mesh = SubResource("BoxMesh_rbxwc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Switch" unique_id=10351868]
 shape = SubResource("BoxShape3D_bd5kx")
 
-[node name="InteractionComponent" parent="Switch" unique_id=673456141 node_paths=PackedStringArray("object_ref", "pivot_point") instance=ExtResource("1_bd5kx")]
+[node name="InteractionComponent" parent="Switch" unique_id=673456141 node_paths=PackedStringArray("object_ref") instance=ExtResource("1_bd5kx")]
 object_ref = NodePath("..")
 interaction_type = 2
-pivot_point = NodePath("..")

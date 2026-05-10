@@ -10,9 +10,10 @@ enum InteractionType {
 
 @export var object_ref: Node3D
 @export var interaction_type: InteractionType = InteractionType.DEFAULT 
-@export var pivot_point: Node3D
 @export var maximum_rotation: float = 90 
+@export var nodes_to_affect: Array[Node]
 
+var pivot_point: Node3D
 var can_interact: bool = true 
 var is_interacting: bool = false 
 var lock_camera: bool = false 
@@ -24,10 +25,11 @@ var player_hand: Marker3D
 func _ready() -> void:
 	match interaction_type:
 		InteractionType.DOOR:
-			starting_rotation = pivot_point.rotation.x 
+			pivot_point = get_tree().get_current_scene().find_child("PivotPoint", true, false)
+			starting_rotation = pivot_point.rotation.x
 			maximum_rotation = deg_to_rad(rad_to_deg(starting_rotation)+maximum_rotation)
 		InteractionType.SWITCH:
-			starting_rotation = object_ref.rotation.x 
+			starting_rotation = object_ref.rotation.z 
 			maximum_rotation = deg_to_rad(rad_to_deg(starting_rotation)+maximum_rotation)
 			
 	
@@ -82,7 +84,7 @@ func _input(event: InputEvent) -> void:
 					object_ref.rotation.z = clamp(object_ref.rotation.z, starting_rotation, maximum_rotation)
 					percentage = (object_ref.rotation.z - starting_rotation) / (maximum_rotation - starting_rotation)
 					
-					#notify_nodes(percentage)
+					notify_nodes(percentage)
 
 func _default_interact() -> void: 
 	var object_current_position: Vector3 = object_ref.global_transform.origin
@@ -116,3 +118,7 @@ func set_direction(_normal: Vector3) -> void:
 	else: 
 		is_front = false
 	
+func notify_nodes(percentage: float) -> void:
+	for node in nodes_to_affect:
+		if node.has_method("execute"):
+			node.call("execute", percentage)
