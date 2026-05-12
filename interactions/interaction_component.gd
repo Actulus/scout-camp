@@ -101,7 +101,7 @@ func _input(event: InputEvent) -> void:
 				if event is InputEventMouseMotion:
 					var mouse_position: Vector2 = event.position
 					var percentage: float 
-					if calculate_cross_product(mouse_position) < 0:
+					if calculate_cross_product(mouse_position) > 0:
 						wheel_rotation += 0.2 
 					else: 
 						wheel_rotation -= 0.2
