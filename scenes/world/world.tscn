@@ -335,4 +335,4 @@ use_collision = true
 size = Vector3(3.331543, 1, 51.77722)
 
 [node name="CollectibleItem" parent="." unique_id=320321223 instance=ExtResource("13_srmg5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.340643, 0.49267396, -9.71833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.940548, 0.6287384, -9.028762)
