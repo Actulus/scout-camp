@@ -4,12 +4,12 @@ extends Node
 @onready var interaction_controller: Node = %InteractionController
 @onready var interaction_raycast: RayCast3D = %InteractionRayCast3D
 @onready var player_camera: Camera3D = %Camera3D
-#@onready var hand: Marker3D = %Hand 
-#@onready var note_hand: Marker3D = %NoteHand 
+@onready var hand: Marker3D = %Hand 
+@onready var note_hand: Marker3D = %NoteHand 
 @onready var interactable_check: Area3D = $"../InteractableCheck"
 #@onready var item_hand: Marker3D = %ItemHand 
-#@onready var note_overlay: Control = %NoteOverlay 
-#@onready var note_content: RichTextLabel = %NoteContent
+@onready var note_overlay: Control = %NoteOverlay 
+@onready var note_content: RichTextLabel = %NoteContent
 #@onready var inventory_controller: InventoryController = %InventoryController/CanvasLayer/InventoryUI
 #@onready var interaction_textbox: Label = %InteractionTextBox
 @onready var outline_material: Material = preload("res://assets/materials/item_highlighter.tres")
@@ -35,6 +35,18 @@ var current_object: Object
 var last_potential_object: Object
 #var interaction_component: AbstractInteraction
 var interaction_component: Node 
+
+var current_note: StaticBody3D
+var note_interaction_component: InspectableInteraction 
+var is_note_overlay_display: bool = false 
+
+var interact_failure_player: AudioStreamPlayer
+#var interact_failure_sound_effect: AudioStreamMP3 = load("res://assets/audio/fail.mp3")
+var interact_success_player: AudioStreamPlayer
+#var interact_success_sound_effect: AudioStreamMP3 = load("res://assets/audio/success.mp3")
+var equip_item_player: AudioStreamPlayer
+#var equip_item_sound_effect: AudioStreamMP3 = load("res://assets/audio/equip.mp3")
+	
 
 func _ready() -> void: 
 	default_reticle.position.x = get_viewport().size.x / 2 - default_reticle.texture.get_size().x / 2
@@ -107,6 +119,9 @@ func _process(delta: float) -> void:
 					
 					if interaction_component.interaction_type == interaction_component.InteractionType.COLLECTIBLE:
 						interaction_component.connect("item_collected", Callable(self, "_on_item_collected"))
+						
+					if interaction_component.interaction_type == interaction_component.InteractionType.NOTE:
+						interaction_component.connect("note_collected", Callable(self, "_on_note_collected"))
 					
 					if interaction_component.interaction_type == interaction_component.InteractionType.DOOR:
 						interaction_component.set_direction(current_object.to_local(interaction_raycast.get_collision_point()))
@@ -115,17 +130,6 @@ func _process(delta: float) -> void:
 		else: 
 			_unfocus()
 
-#var current_note: StaticBody3D
-#var note_interaction_component: InspectableInteraction 
-#var is_note_overlay_display: bool = false 
-#
-#var interact_failure_player: AudioStreamPlayer
-#var interact_failure_sound_effect: AudioStreamMP3 = load("res://assets/audio/fail.mp3")
-#var interact_success_player: AudioStreamPlayer
-#var interact_success_sound_effect: AudioStreamMP3 = load("res://assets/audio/success.mp3")
-#var equip_item_player: AudioStreamPlayer
-#var equip_item_sound_effect: AudioStreamMP3 = load("res://assets/audio/equip.mp3")
-	
 #func _process(delta: float) -> void:
 	#if inventory_controller.visible == false:
 		## If on the previous frame, we were interacting with and object, lets keep interacting with it
@@ -200,13 +204,17 @@ func _process(delta: float) -> void:
 					#_update_reticle_state()
 					#current_object = null 
 #
-#func _input(event: InputEvent) -> void:
-	#if is_note_overlay_display and event.is_action_pressed("primary"):
-		#_on_note_collected()
+func _input(event: InputEvent) -> void:
+	if is_note_overlay_display and Input.is_action_just_pressed("primary"):
+		note_overlay.visible = false 
+		is_note_overlay_display = false 
+		var children = note_hand.get_children()
+		for child in children:
+			child.queue_free()
 	#
 	#if item_equipped and Input.is_action_just_pressed("primary"):
 		#_use_equipped_item()
-		#
+		
 # Determines if the object the player is interacting with should stop mouse camera  movement 
 func isCameraLocked() -> bool:
 	if interaction_component:
@@ -260,12 +268,21 @@ func _unfocus() -> void:
 	#is_note_overlay_display = true 
 	#note_content.bbcode_enabled = true 
 	#note_content.text = note_interaction_component.content
-#
-### Puts the note currently in the player's hand and puts it in their inventory
-#func _on_note_collected():
-	## Hide the note overlay and mark that no note is being inspected
-	#note_overlay.visible = false
-	#is_note_overlay_display = false
+
+## Puts the note currently in the player's hand and puts it in their inventory
+func _on_note_collected(note: Node3D) -> void:
+	note.get_parent().remove_child(note)
+	note_hand.add_child(note)
+	note.transform.origin = note_hand.transform.origin
+	note.position = Vector3(0.0, 0.0, 0.0)
+	note.rotation_degrees = Vector3(90.0, 10.0, 0.0)
+	# Hide the note overlay and mark that no note is being inspected
+	note_overlay.visible = true
+	is_note_overlay_display = true
+	var ic = note.get_node_or_null("InteractionComponent")
+	note_content.bbcode_enabled = true 
+	note_content.text = ic.content
+	
 	#
 	## Add the note's ItemData to the player's inventory
 	#_add_item_to_inventory(note_interaction_component.item_data)
@@ -279,8 +296,8 @@ func _unfocus() -> void:
 	## Clear references to the current note
 	#current_note = null
 	#note_interaction_component = null
-		#
-## Called when the player collects an item
+		
+# Called when the player collects an item
 func _on_item_collected(item: Node3D) -> void:
 	print("Collected ", item)
 	#var ic: CollectableInteraction = find_interaction_component(item)

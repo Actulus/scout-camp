@@ -7,13 +7,16 @@ enum InteractionType {
 	DOOR,
 	SWITCH,
 	WHEEL,
-	COLLECTIBLE
+	COLLECTIBLE,
+	NOTE
 }
 
 @export var object_ref: Node3D
 @export var interaction_type: InteractionType = InteractionType.DEFAULT 
 @export var maximum_rotation: float = 90 
 @export var nodes_to_affect: Array[Node]
+@export var pivot_point: Node3D
+@export var content: String 
 
 var can_interact: bool = true 
 var is_interacting: bool = false 
@@ -21,7 +24,6 @@ var lock_camera: bool = false
 var starting_rotation: float 
 var is_front: bool
 var player_hand: Marker3D
-var pivot_point: Node3D
 var camera: Camera3D
 var previous_mouse_position: Vector2
 
@@ -43,11 +45,12 @@ var wheel_kick_intensity: float = 0.1
 
 # Signals 
 signal item_collected(item: Node)
+signal note_collected(note: Node3D)
 
 func _ready() -> void:
 	match interaction_type:
 		InteractionType.DOOR:
-			pivot_point = get_tree().get_current_scene().find_child("PivotPoint", true, false)
+			#pivot_point = get_tree().get_current_scene().find_child("PivotPoint", true, false)
 			starting_rotation = pivot_point.rotation.x
 			maximum_rotation = deg_to_rad(rad_to_deg(starting_rotation)+maximum_rotation)
 		InteractionType.SWITCH:
@@ -57,7 +60,8 @@ func _ready() -> void:
 			starting_rotation = object_ref.rotation.z 
 			maximum_rotation = deg_to_rad(rad_to_deg(starting_rotation)+maximum_rotation)
 			camera = get_tree().get_current_scene().find_child("Camera3D", true, false)
-			
+		InteractionType.NOTE:
+			content = content.replace("\\n", "\n")
 	
 # run once, when the player first clicks on an object to interact with 
 func preInteract() -> void: 
@@ -117,6 +121,8 @@ func interact() -> void:
 			_default_interact()
 		InteractionType.COLLECTIBLE: 
 			collect_item()
+		InteractionType.NOTE:
+			_collect_note()
 	
 func auxInteract() -> void: 
 	if not can_interact:
@@ -237,3 +243,10 @@ func calculate_cross_product(_mouse_position: Vector2) -> float:
 func collect_item() -> void: 
 	emit_signal("item_collected", get_parent())
 	get_parent().queue_free()
+	
+func _collect_note()->void:
+	var col = get_parent().find_child("CollisionShape3D", true, false)
+	if col:
+		col.get_parent().remove_child(col)
+		col.queue_free()
+	emit_signal("note_collected", get_parent())

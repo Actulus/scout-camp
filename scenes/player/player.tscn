@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dngxh1umv88gs" path="res://assets/reticles/tile_0200.png" id="2_gmlin"]
 [ext_resource type="Texture2D" uid="uid://dn2schj4r8oqu" path="res://assets/reticles/tile_0155.png" id="3_p47bc"]
 [ext_resource type="Texture2D" uid="uid://bpbofp8bugulh" path="res://assets/reticles/tile_0156.png" id="4_75vfm"]
+[ext_resource type="Shader" uid="uid://bigyoy6yviijj" path="res://assets/shaders/note_fade.gdshader" id="5_75vfm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 
@@ -14,8 +15,74 @@ height = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_p47bc"]
 radius = 5.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0owmy"]
+shader = ExtResource("5_75vfm")
+shader_parameter/rect_width_px = 576.0
+shader_parameter/fade_width_px = 100.0
+shader_parameter/fade_strength = 0.70000003325
+
 [node name="Player" type="CharacterBody3D" unique_id=561802944]
 script = ExtResource("1_8afob")
+
+[node name="StandingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_gmlin")
+
+[node name="CrouchingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1804506796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_lvxji")
+
+[node name="Head" type="Node3D" parent="." unique_id=36290060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Eyes" type="Node3D" parent="Head" unique_id=245276796]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Eyes" unique_id=2090621624]
+unique_name_in_owner = true
+cull_mask = 524285
+fov = 90.0
+
+[node name="InteractionRayCast3D" type="RayCast3D" parent="Head/Eyes/Camera3D" unique_id=201751466]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -2)
+
+[node name="Hand" type="Marker3D" parent="Head/Eyes/Camera3D" unique_id=1990177918]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Eyes/Camera3D" unique_id=593033818]
+remote_path = NodePath("../../SubViewportContainer/SubViewport/NoteCamera")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Head/Eyes" unique_id=847901072]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Head/Eyes/SubViewportContainer" unique_id=197746733]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="NoteCamera" type="Camera3D" parent="Head/Eyes/SubViewportContainer/SubViewport" unique_id=769165053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+cull_mask = 2
+fov = 90.0
+
+[node name="NoteHand" type="Marker3D" parent="Head/Eyes/SubViewportContainer/SubViewport/NoteCamera" unique_id=4766950]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, -0.21986175, -0.75)
+
+[node name="StandupCheck" type="RayCast3D" parent="." unique_id=1512231536]
+target_position = Vector3(0, 2, 0)
+
+[node name="InteractableCheck" type="Area3D" parent="." unique_id=1705241148]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCheck" unique_id=1831000204]
+shape = SubResource("SphereShape3D_p47bc")
 
 [node name="GUI" type="Node" parent="." unique_id=1662015740]
 
@@ -60,37 +127,49 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="StandingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_gmlin")
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI" unique_id=1753731916]
 
-[node name="CrouchingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1804506796]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CapsuleShape3D_lvxji")
-
-[node name="Head" type="Node3D" parent="." unique_id=36290060]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-
-[node name="Eyes" type="Node3D" parent="Head" unique_id=245276796]
-
-[node name="Camera3D" type="Camera3D" parent="Head/Eyes" unique_id=2090621624]
+[node name="NoteOverlay" type="Control" parent="GUI/CanvasLayer" unique_id=1650644644]
 unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="InteractionRayCast3D" type="RayCast3D" parent="Head/Eyes/Camera3D" unique_id=201751466]
+[node name="BlackOverlay" type="ColorRect" parent="GUI/CanvasLayer/NoteOverlay" unique_id=902550064]
+material = SubResource("ShaderMaterial_0owmy")
+layout_mode = 0
+offset_left = 576.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+
+[node name="Control" type="Control" parent="GUI/CanvasLayer/NoteOverlay" unique_id=1705330130]
+anchors_preset = 0
+offset_left = 700.0
+offset_top = 15.0
+offset_right = 1130.0
+offset_bottom = 635.0
+
+[node name="NoteContent" type="RichTextLabel" parent="GUI/CanvasLayer/NoteOverlay/Control" unique_id=1287475766]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -2)
-
-[node name="Hand" type="Marker3D" parent="Head/Eyes/Camera3D" unique_id=1990177918]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-
-[node name="StandupCheck" type="RayCast3D" parent="." unique_id=1512231536]
-target_position = Vector3(0, 2, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "safsafsdfergweruiywger"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="InteractionController" parent="." unique_id=1269839320 instance=ExtResource("2_dovo2")]
 unique_name_in_owner = true
-
-[node name="InteractableCheck" type="Area3D" parent="." unique_id=1705241148]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCheck" unique_id=1831000204]
-shape = SubResource("SphereShape3D_p47bc")

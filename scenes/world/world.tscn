@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b74ehrpefpv0q" path="res://assets/models/kenney_nature-kit/Models/GLTF format/tree_cone.glb" id="12_dlabj"]
 [ext_resource type="Script" uid="uid://d4nrcia5kc6rc" path="res://scripts/bridge_pivotpoint.gd" id="12_srmg5"]
 [ext_resource type="PackedScene" uid="uid://261ekgs40bxb" path="res://objects/collectible_item.tscn" id="13_srmg5"]
+[ext_resource type="PackedScene" uid="uid://csldwg70n17j" path="res://objects/note.tscn" id="14_umvgx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5dby"]
 sky_top_color = Color(0, 0.45849943, 0.7871284, 1)
@@ -115,6 +116,7 @@ environment = SubResource("Environment_bq33v")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1974513823]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+layers = 3
 shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=2059235516]
@@ -246,6 +248,7 @@ nodes_to_affect = [NodePath("../../../SpotLight3D")]
 [node name="SpotLight3D" type="SpotLight3D" parent="Podium" unique_id=259653049]
 transform = Transform3D(0.67140335, -0.74091387, 0.016256839, -0.052844584, -0.025983348, 0.9982647, -0.7392057, -0.6710973, -0.056598596, 0, 3.3921256, 0)
 visible = false
+layers = 3
 light_color = Color(0.8558606, 1.3957917e-06, 0.44956666, 1)
 light_energy = 100.0
 script = ExtResource("11_dlabj")
@@ -336,3 +339,6 @@ size = Vector3(3.331543, 1, 51.77722)
 
 [node name="CollectibleItem" parent="." unique_id=320321223 instance=ExtResource("13_srmg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.940548, 0.6287384, -9.028762)
+
+[node name="Note" parent="." unique_id=358437179 instance=ExtResource("14_umvgx")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -8, 0.50889254, -18)

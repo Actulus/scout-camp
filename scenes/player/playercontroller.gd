@@ -8,7 +8,6 @@ extends CharacterBody3D
 @onready var standup_check: RayCast3D = $StandupCheck
 @onready var interaction_controller: Node = %InteractionController
 
-
 # movement vars 
 const walking_speed: float = 3.0 
 const sprinting_speed: float = 5.0 
@@ -20,15 +19,21 @@ var moving: bool = false
 var input_direction: Vector2 = Vector2.ZERO 
 var direction: Vector3 = Vector3.ZERO
 var lerp_speed: float = 10.0 
+var mouse_input: Vector2
+var is_in_air: bool = false
 
 # player settings 
 var base_fov: float = 90.0
 
 # sensitivity settings 
-var normal_sensitivity: float = -0.2
+var normal_sensitivity: float = 0.2
 var current_sensitivity: float = normal_sensitivity 
 var sensitivity_restore_speed: float = 5.0 
 var sensitivity_fading_in: bool = false 
+
+# note variables 
+@onready var note_hand: Marker3D = %NoteHand
+var note_sway_amount: float = 0.1 
 
 # state machine 
 enum PlayerState {
@@ -51,6 +56,15 @@ const head_bobbing_crouching_intensity: float = 0.05
 var head_bobbing_current_intensity: float = 0.0
 var head_bobbing_vector: Vector2 = Vector2.ZERO
 var head_bobbing_index: float = 0.0
+var last_bob_position_x: float = 0.0
+var last_bob_direction: int = 0
+
+# Leaning Vars
+var lean_angle: float = 12.0                # How much to tilt (degrees)
+var lean_offset: float = 0.25               # How far to move camera sideways
+var lean_speed: float = 8.0                 # How quickly to lerp between states
+var target_lean: float = 0.0                        # -1 = left, 1 = right, 0 = neutral
+var current_lean: float = 0.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -58,11 +72,13 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
-		
+	
+	# Camera movement via mouse
 	if event is InputEventMouseMotion:
 		if current_sensitivity > 0.01 and not interaction_controller.isCameraLocked():
-			rotate_y(deg_to_rad(event.relative.x) * current_sensitivity)
-			head.rotate_x(deg_to_rad(event.relative.y) * current_sensitivity)
+			mouse_input = event.relative
+			rotate_y(deg_to_rad(-mouse_input.x * current_sensitivity))
+			head.rotate_x(deg_to_rad(-mouse_input.y * current_sensitivity))
 			head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 func _process(delta: float) -> void:
@@ -86,12 +102,12 @@ func _physics_process(delta: float) -> void:
 		else: #falling down 
 			velocity += get_gravity() * delta * 2.0
 	else: # jumping 
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and player_state != PlayerState.CROUCHING:
 			velocity.y = jump_velocity
 			
 	# movement logic 
 	input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	direction = lerp(direction, (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized(), delta*10.01)
+	direction = lerp(direction, (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized(), delta*10.0)
 	if direction:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
@@ -100,6 +116,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 	move_and_slide()
+	note_tilt_and_sway(input_direction, delta)
 	
 func updatePlayerState() -> void:
 	moving = (input_direction != Vector2.ZERO)
@@ -178,3 +195,26 @@ func set_camera_locked(locked: bool) -> void:
 		sensitivity_fading_in = false 
 	else:
 		sensitivity_fading_in = true 
+
+func note_tilt_and_sway(input_dir: Vector2, delta: float) -> void:
+	if note_hand:
+		note_hand.rotation.z = lerp(note_hand.rotation.z, -input_dir.x * note_sway_amount, 10 * delta)
+		note_hand.rotation.x = lerp(note_hand.rotation.x, -input_dir.y * note_sway_amount, 10 * delta)
+	#if item_hand:
+		#item_hand.rotation.z = lerp(item_hand.rotation.z, -input_dir.x * note_sway_amount*2, 10 * delta)
+		#item_hand.rotation.x = lerp(item_hand.rotation.x, -input_dir.y * note_sway_amount*2, 10 * delta)
+
+func play_footsteps() -> void:
+	if moving and is_on_floor():
+		var bob_position_x = head_bobbing_vector.x
+		var bob_direction = sign(bob_position_x - last_bob_position_x)  # +1 = moving right, -1 = moving left
+
+		# A direction change means we just reached a peak in the bobbing cycle
+		#if bob_direction != 0 and bob_direction != last_bob_direction and last_bob_direction != 0:
+			#footsteps_se.play()
+
+		last_bob_direction = bob_direction
+		last_bob_position_x = bob_position_x
+	else:
+		last_bob_direction = 0
+		last_bob_position_x = head_bobbing_vector.x
