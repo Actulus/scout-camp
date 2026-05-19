@@ -6,30 +6,29 @@ extends Node
 @onready var player_camera: Camera3D = %Camera3D
 #@onready var hand: Marker3D = %Hand 
 #@onready var note_hand: Marker3D = %NoteHand 
+@onready var interactable_check: Area3D = $"../InteractableCheck"
 #@onready var item_hand: Marker3D = %ItemHand 
-#@onready var interactable_check: Area3D = $".../InteractableCheck"
 #@onready var note_overlay: Control = %NoteOverlay 
 #@onready var note_content: RichTextLabel = %NoteContent
 #@onready var inventory_controller: InventoryController = %InventoryController/CanvasLayer/InventoryUI
 #@onready var interaction_textbox: Label = %InteractionTextBox
-#@onready var outline_material: Material = preload("res://assets/materials/item_highlighter.tres")
-#
-#@onready var default_reticle: TextureRect = %DefaultReticle
-#@onready var highlight_reticle: TextureRect = %HighlightReticle
-#@onready var interacting_reticle: TextureRect = %InteractingReticle
-#@onready var use_reticle: TextureRect = %UseReticle
-#enum Reticle {
-	#DEFAULT,
-	#HIGHLIGHT,
-	#INTERACTING,
-	#USE_ITEM
-#}
+@onready var outline_material: Material = preload("res://assets/materials/outline.tres")
+@onready var default_reticle: TextureRect = %DefaultReticle
+@onready var highlight_reticle: TextureRect = %HighlightReticle
+@onready var interacting_reticle: TextureRect = %InteractingReticle
+@onready var use_reticle: TextureRect = %UseReticle
+enum Reticle {
+	DEFAULT,
+	HIGHLIGHT,
+	INTERACTING,
+	USE_ITEM
+}
 
-#signal invent_on_item_collected(item)
-#
-#var item_equipped: bool = false 
-#var equipped_item: Node3D
-#var equipped_item_interaction_component: AbstractInteraction 
+signal invent_on_item_collected(item)
+
+var item_equipped: bool = false 
+var equipped_item: Node3D
+var equipped_item_interaction_component: AbstractInteraction 
 
 var current_object: Object 
 #var potential_interaction_component: AbstractInteraction
@@ -37,50 +36,15 @@ var last_potential_object: Object
 #var interaction_component: AbstractInteraction
 var interaction_component: Node 
 
-func _process(delta: float) -> void:
-	# if on prev. frame, we were inter. w/ an ojb., keep iner. w/ it 
-	if current_object:
-		if Input.is_action_just_pressed("secondary"):
-			if interaction_component:
-				interaction_component.auxInteract()
-				current_object = null
-		elif Input.is_action_pressed("primary"):
-			if interaction_component:
-				interaction_component.interact()
-		else:
-			if interaction_component:
-				interaction_component.postInteract()
-				current_object = null
-	else: # we weren't inter. w/ sg, let's see if we can 
-		var potential_object: Object = interaction_raycast.get_collider()
-		
-		if potential_object and potential_object is Node:
-			interaction_component = potential_object.get_node_or_null("InteractionComponent")
-			if interaction_component:
-				if interaction_component.can_interact == false:
-					return
-					
-				last_potential_object = current_object
-				
-				if Input.is_action_pressed("primary"):
-					current_object = potential_object
-					interaction_component.preInteract()
-					
-					if interaction_component.interaction_type == interaction_component.InteractionType.DOOR:
-						interaction_component.set_direction(current_object.to_local(interaction_raycast.get_collision_point()))
-
-#var current_note: StaticBody3D
-#var note_interaction_component: InspectableInteraction 
-#var is_note_overlay_display: bool = false 
-#
-#var interact_failure_player: AudioStreamPlayer
-#var interact_failure_sound_effect: AudioStreamMP3 = load("res://assets/audio/fail.mp3")
-#var interact_success_player: AudioStreamPlayer
-#var interact_success_sound_effect: AudioStreamMP3 = load("res://assets/audio/success.mp3")
-#var equip_item_player: AudioStreamPlayer
-#var equip_item_sound_effect: AudioStreamMP3 = load("res://assets/audio/equip.mp3")
-
-#func _ready() -> void: 
+func _ready() -> void: 
+	default_reticle.position.x = get_viewport().size.x / 2 - default_reticle.texture.get_size().x / 2
+	default_reticle.position.y = get_viewport().size.y / 2 - default_reticle.texture.get_size().y / 2
+	highlight_reticle.position.x = get_viewport().size.x / 2 - highlight_reticle.texture.get_size().x / 2
+	highlight_reticle.position.y = get_viewport().size.y / 2 - highlight_reticle.texture.get_size().y / 2
+	interacting_reticle.position.x = get_viewport().size.x / 2 - interacting_reticle.texture.get_size().x / 2
+	interacting_reticle.position.y = get_viewport().size.y / 2 - interacting_reticle.texture.get_size().y / 2
+	interactable_check.body_entered.connect(_on_body_entered)
+	interactable_check.body_entered.connect(_on_body_exited)
 	#interactable_check.body_entered.connect(_collectable_item_entered_range)
 	#interactable_check.body_exited.connect(_collectable_item_exited_range)
 	#invent_on_item_collected.connect(inventory_controller.pickup_item)
@@ -97,6 +61,70 @@ func _process(delta: float) -> void:
 	#equip_item_player.volume_db = -20.0
 	#equip_item_player.stream = equip_item_sound_effect
 	#add_child(equip_item_player)
+
+func _process(delta: float) -> void:
+	if interaction_component and interaction_component.is_interacting: 
+		default_reticle.visible = false   
+		highlight_reticle.visible = false  
+		interacting_reticle.visible = true 
+	# if on prev. frame, we were inter. w/ an ojb., keep iner. w/ it 
+	if current_object:
+		var distance = 3.0 # in meters 
+		if player_camera.global_transform.origin.distance_to(current_object.global_transform.origin) > 3.0: 
+			if interaction_component: 
+				interaction_component.postInteract()
+			current_object = null 
+			_unfocus()
+		
+		if Input.is_action_just_pressed("secondary"):
+			if interaction_component:
+				interaction_component.auxInteract()
+				current_object = null
+				_unfocus()
+		elif Input.is_action_pressed("primary"):
+			if interaction_component:
+				interaction_component.interact()
+		else:
+			if interaction_component:
+				interaction_component.postInteract()
+				current_object = null
+				_unfocus()
+	else: # we weren't inter. w/ sg, let's see if we can 
+		var potential_object: Object = interaction_raycast.get_collider()
+		
+		if potential_object and potential_object is Node:
+			interaction_component = potential_object.get_node_or_null("InteractionComponent")
+			if interaction_component:
+				if interaction_component.can_interact == false:
+					return
+					
+				last_potential_object = current_object
+				_focus()
+				
+				if Input.is_action_just_pressed("primary"):
+					current_object = potential_object
+					interaction_component.preInteract()
+					
+					if interaction_component.interaction_type == interaction_component.InteractionType.COLLECTIBLE:
+						interaction_component.connect("item_collected", Callable(self, "_on_item_collected"))
+					
+					if interaction_component.interaction_type == interaction_component.InteractionType.DOOR:
+						interaction_component.set_direction(current_object.to_local(interaction_raycast.get_collision_point()))
+			else: 
+				_unfocus()
+		else: 
+			_unfocus()
+
+#var current_note: StaticBody3D
+#var note_interaction_component: InspectableInteraction 
+#var is_note_overlay_display: bool = false 
+#
+#var interact_failure_player: AudioStreamPlayer
+#var interact_failure_sound_effect: AudioStreamMP3 = load("res://assets/audio/fail.mp3")
+#var interact_success_player: AudioStreamPlayer
+#var interact_success_sound_effect: AudioStreamMP3 = load("res://assets/audio/success.mp3")
+#var equip_item_player: AudioStreamPlayer
+#var equip_item_sound_effect: AudioStreamMP3 = load("res://assets/audio/equip.mp3")
 	
 #func _process(delta: float) -> void:
 	#if inventory_controller.visible == false:
@@ -186,14 +214,20 @@ func isCameraLocked() -> bool:
 			return true 
 	return false 
 	
-## Called when the player is looking at an interactable object
-#func _focus() -> void: 
+# Called when the player is looking at an interactable object
+func _focus() -> void: 
 	#_update_reticle_state()
-	#
-## Called when the player is NOT looking at an interactable object 
-#func _unfocus() -> void: 
+	default_reticle.visible = false  
+	highlight_reticle.visible = true 
+	interacting_reticle.visible = false 
+	
+# Called when the player is NOT looking at an interactable object 
+func _unfocus() -> void: 
 	#_update_reticle_state() 
-	#
+	default_reticle.visible = true   
+	highlight_reticle.visible = false  
+	interacting_reticle.visible = false 
+	
 ## Displays the picked up note in the player's hand
 #func on_note_inspected(note: Node3D):
 	## If the player is holding the note and they go to pickup another one, collect the currently held note first 
@@ -246,8 +280,9 @@ func isCameraLocked() -> bool:
 	#current_note = null
 	#note_interaction_component = null
 		#
-### Called when the player collects an item
-#func _on_item_collected(item: Node3D) -> void:
+## Called when the player collects an item
+func _on_item_collected(item: Node3D) -> void:
+	print("Collected ", item)
 	#var ic: CollectableInteraction = find_interaction_component(item)
 	#if not ic:
 		#return
@@ -256,9 +291,9 @@ func isCameraLocked() -> bool:
 	#_add_item_to_inventory(ic.item_data)
 	## Play the item's pickup sound effect
 	#_play_sound_effect(ic.collect_sound_effect)
-	## Delete the item from the world since it exists in the inventory
-	#item.queue_free()
-	#
+	# Delete the item from the world since it exists in the inventory
+	item.queue_free()
+	
 ### Equips an object in the players hannd
 #func on_item_equipped(item: Node3D):
 	## Set the equipped item and update flag
@@ -432,3 +467,17 @@ func isCameraLocked() -> bool:
 #
 	## Fallback: default reticle
 	#default_reticle.visible = true
+func _on_body_entered(body: Node3D) -> void :
+	if body.name != "Player":
+		var name = body.name 
+		var ic = body.get_node_or_null("InteractionComponent")
+		if ic and ic.interaction_type == ic.InteractionType.COLLECTIBLE: 
+			var mesh: MeshInstance3D = body.find_child("MeshInstance3D", true, false)
+			mesh.material_overlay = outline_material
+			
+
+func _on_body_exited(body: Node3D) -> void :
+	if body.name != "Player":
+		var mesh: MeshInstance3D = body.find_child("MeshInstance3D", true, false)
+		if mesh: 
+			mesh.material_overlay = null 

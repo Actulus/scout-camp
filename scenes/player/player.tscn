@@ -2,14 +2,63 @@
 
 [ext_resource type="Script" uid="uid://bevjqmfse0o8t" path="res://scenes/player/playercontroller.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://bkja20180wi1j" path="res://interactions/interaction_controller.tscn" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://dngxh1umv88gs" path="res://assets/reticles/tile_0200.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://dn2schj4r8oqu" path="res://assets/reticles/tile_0155.png" id="3_p47bc"]
+[ext_resource type="Texture2D" uid="uid://bpbofp8bugulh" path="res://assets/reticles/tile_0156.png" id="4_75vfm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvxji"]
 height = 1.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_p47bc"]
+radius = 5.0
+
 [node name="Player" type="CharacterBody3D" unique_id=561802944]
 script = ExtResource("1_8afob")
+
+[node name="GUI" type="Node" parent="." unique_id=1662015740]
+
+[node name="ReticleLayer" type="CanvasLayer" parent="GUI" unique_id=1252076530]
+
+[node name="Control" type="Control" parent="GUI/ReticleLayer" unique_id=355523078]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DefaultReticle" type="TextureRect" parent="GUI/ReticleLayer/Control" unique_id=1183679235]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_gmlin")
+stretch_mode = 3
+
+[node name="HighlightReticle" type="TextureRect" parent="GUI/ReticleLayer/Control" unique_id=1204310464]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_p47bc")
+stretch_mode = 3
+
+[node name="InteractingReticle" type="TextureRect" parent="GUI/ReticleLayer/Control" unique_id=1562979837]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_75vfm")
+stretch_mode = 3
+
+[node name="UseReticle" type="TextureRect" parent="GUI/ReticleLayer/Control" unique_id=310735720]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="StandingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -40,3 +89,8 @@ target_position = Vector3(0, 2, 0)
 
 [node name="InteractionController" parent="." unique_id=1269839320 instance=ExtResource("2_dovo2")]
 unique_name_in_owner = true
+
+[node name="InteractableCheck" type="Area3D" parent="." unique_id=1705241148]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCheck" unique_id=1831000204]
+shape = SubResource("SphereShape3D_p47bc")

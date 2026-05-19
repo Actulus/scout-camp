@@ -6,7 +6,8 @@ enum InteractionType {
 	DEFAULT,
 	DOOR,
 	SWITCH,
-	WHEEL
+	WHEEL,
+	COLLECTIBLE
 }
 
 @export var object_ref: Node3D
@@ -24,6 +25,10 @@ var pivot_point: Node3D
 var camera: Camera3D
 var previous_mouse_position: Vector2
 var wheel_rotation: float = 0.0
+var door_angle: float = 0.0 
+
+# Signals 
+signal item_collected(item: Node)
 
 func _ready() -> void:
 	match interaction_type:
@@ -63,6 +68,8 @@ func interact() -> void:
 	match interaction_type:
 		InteractionType.DEFAULT:
 			_default_interact()
+		InteractionType.COLLECTIBLE: 
+			collect_item()
 	
 func auxInteract() -> void: 
 	if not can_interact:
@@ -83,12 +90,18 @@ func _input(event: InputEvent) -> void:
 		match interaction_type:
 			InteractionType.DOOR:
 				if event is InputEventMouseMotion:
+					var delta: float = -event.relative.y * .001
+					
 					if is_front: 
-						pivot_point.rotate_y(-event.relative.y * 0.001)
+						pivot_point.rotate_y(delta)
 					else:
-						pivot_point.rotate_y(event.relative.y * 0.001)
+						pivot_point.rotate_y(delta)
+						delta = -delta 
 						
-					pivot_point.rotation.y = clamp(pivot_point.rotation.y, starting_rotation, maximum_rotation)
+					door_angle += delta 
+					door_angle = clamp(door_angle, starting_rotation, maximum_rotation)
+					pivot_point.rotation.y = door_angle
+					
 			InteractionType.SWITCH:
 				if event is InputEventMouseMotion:
 					var percentage: float 
@@ -111,6 +124,10 @@ func _input(event: InputEvent) -> void:
 					percentage = (object_ref.rotation.z - starting_rotation) / (maximum_rotation - starting_rotation)
 				
 					previous_mouse_position = mouse_position
+					
+					var min_wheel_rotation: float = starting_rotation / 0.1
+					var max_wheel_rotation: float = maximum_rotation / 0.1
+					wheel_rotation = clamp(wheel_rotation, min_wheel_rotation, max_wheel_rotation)
 					
 					notify_nodes(percentage)
 
@@ -148,7 +165,7 @@ func set_direction(_normal: Vector3) -> void:
 	
 func notify_nodes(percentage: float) -> void:
 	for node in nodes_to_affect:
-		if node.has_method("execute"):
+		if node and node.has_method("execute"):
 			node.call("execute", percentage)
 
 func calculate_cross_product(_mouse_position: Vector2) -> float:
@@ -157,3 +174,7 @@ func calculate_cross_product(_mouse_position: Vector2) -> float:
 	var vector_to_current = _mouse_position - center_position
 	var cross_product = vector_to_current.x * vector_to_previous.y - vector_to_current.y * vector_to_previous.x
 	return cross_product
+	
+func collect_item() -> void: 
+	emit_signal("item_collected", get_parent())
+	get_parent().queue_free()
