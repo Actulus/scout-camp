@@ -12,7 +12,7 @@ extends Node
 @onready var note_content: RichTextLabel = %NoteContent
 #@onready var inventory_controller: InventoryController = %InventoryController/CanvasLayer/InventoryUI
 #@onready var interaction_textbox: Label = %InteractionTextBox
-@onready var outline_material: Material = preload("res://assets/materials/item_highlighter.tres")
+@onready var outline_material: Material = preload("res://assets/materials/outline.tres")
 @onready var default_reticle: TextureRect = %DefaultReticle
 @onready var highlight_reticle: TextureRect = %HighlightReticle
 @onready var interacting_reticle: TextureRect = %InteractingReticle
@@ -49,14 +49,15 @@ var equip_item_player: AudioStreamPlayer
 	
 
 func _ready() -> void: 
+	interactable_check.body_entered.connect(_on_body_entered)
+	interactable_check.body_entered.connect(_on_body_exited)
 	default_reticle.position.x = get_viewport().size.x / 2 - default_reticle.texture.get_size().x / 2
 	default_reticle.position.y = get_viewport().size.y / 2 - default_reticle.texture.get_size().y / 2
 	highlight_reticle.position.x = get_viewport().size.x / 2 - highlight_reticle.texture.get_size().x / 2
 	highlight_reticle.position.y = get_viewport().size.y / 2 - highlight_reticle.texture.get_size().y / 2
 	interacting_reticle.position.x = get_viewport().size.x / 2 - interacting_reticle.texture.get_size().x / 2
 	interacting_reticle.position.y = get_viewport().size.y / 2 - interacting_reticle.texture.get_size().y / 2
-	interactable_check.body_entered.connect(_on_body_entered)
-	interactable_check.body_entered.connect(_on_body_exited)
+	
 	#interactable_check.body_entered.connect(_collectable_item_entered_range)
 	#interactable_check.body_exited.connect(_collectable_item_exited_range)
 	#invent_on_item_collected.connect(inventory_controller.pickup_item)
@@ -82,7 +83,7 @@ func _process(delta: float) -> void:
 	# if on prev. frame, we were inter. w/ an ojb., keep iner. w/ it 
 	if current_object:
 		var distance = 3.0 # in meters 
-		if player_camera.global_transform.origin.distance_to(current_object.global_transform.origin) > 3.0: 
+		if player_camera.global_transform.origin.distance_to(current_object.global_transform.origin) > distance: 
 			if interaction_component: 
 				interaction_component.postInteract()
 			current_object = null 
@@ -486,12 +487,11 @@ func _on_item_collected(item: Node3D) -> void:
 	#default_reticle.visible = true
 func _on_body_entered(body: Node3D) -> void :
 	if body.name != "Player":
-		var name = body.name 
+		var name = body.name
 		var ic = body.get_node_or_null("InteractionComponent")
 		if ic and ic.interaction_type == ic.InteractionType.COLLECTIBLE: 
 			var mesh: MeshInstance3D = body.find_child("MeshInstance3D", true, false)
 			mesh.material_overlay = outline_material
-			
 
 func _on_body_exited(body: Node3D) -> void :
 	if body.name != "Player":

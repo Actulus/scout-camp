@@ -120,7 +120,7 @@ func interact() -> void:
 		InteractionType.DEFAULT:
 			_default_interact()
 		InteractionType.COLLECTIBLE: 
-			collect_item()
+			_collect_item()
 		InteractionType.NOTE:
 			_collect_note()
 	
@@ -240,7 +240,7 @@ func calculate_cross_product(_mouse_position: Vector2) -> float:
 	var cross_product = vector_to_current.x * vector_to_previous.y - vector_to_current.y * vector_to_previous.x
 	return cross_product
 	
-func collect_item() -> void: 
+func _collect_item() -> void: 
 	emit_signal("item_collected", get_parent())
 	get_parent().queue_free()
 	
