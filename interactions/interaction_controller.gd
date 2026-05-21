@@ -12,7 +12,7 @@ extends Node
 @onready var note_content: RichTextLabel = %NoteContent
 #@onready var inventory_controller: InventoryController = %InventoryController/CanvasLayer/InventoryUI
 #@onready var interaction_textbox: Label = %InteractionTextBox
-@onready var outline_material: Material = preload("res://assets/materials/outline.tres")
+@onready var outline_material: Material = preload("res://assets/materials/item_highlighter.tres")
 @onready var default_reticle: TextureRect = %DefaultReticle
 @onready var highlight_reticle: TextureRect = %HighlightReticle
 @onready var interacting_reticle: TextureRect = %InteractingReticle
@@ -37,7 +37,7 @@ var last_potential_object: Object
 var interaction_component: Node 
 
 var current_note: StaticBody3D
-var note_interaction_component: InspectableInteraction 
+var note_interaction_component: Node 
 var is_note_overlay_display: bool = false 
 
 var interact_failure_player: AudioStreamPlayer
@@ -50,7 +50,7 @@ var equip_item_player: AudioStreamPlayer
 
 func _ready() -> void: 
 	interactable_check.body_entered.connect(_on_body_entered)
-	interactable_check.body_entered.connect(_on_body_exited)
+	interactable_check.body_exited.connect(_on_body_exited)
 	default_reticle.position.x = get_viewport().size.x / 2 - default_reticle.texture.get_size().x / 2
 	default_reticle.position.y = get_viewport().size.y / 2 - default_reticle.texture.get_size().y / 2
 	highlight_reticle.position.x = get_viewport().size.x / 2 - highlight_reticle.texture.get_size().x / 2
@@ -211,8 +211,13 @@ func _input(event: InputEvent) -> void:
 		is_note_overlay_display = false 
 		var children = note_hand.get_children()
 		for child in children:
+			if note_interaction_component.secondary_soundeffect:
+				note_interaction_component.secondary_audio_player.stream == note_interaction_component.secondary_soundeffect
+				note_interaction_component.secondary_audio_player.play()
+				child.visible = false 
+				await note_interaction_component.secondary_audio_player.finished
 			child.queue_free()
-	#
+	
 	#if item_equipped and Input.is_action_just_pressed("primary"):
 		#_use_equipped_item()
 		
@@ -280,21 +285,20 @@ func _on_note_collected(note: Node3D) -> void:
 	# Hide the note overlay and mark that no note is being inspected
 	note_overlay.visible = true
 	is_note_overlay_display = true
-	var ic = note.get_node_or_null("InteractionComponent")
+	note_interaction_component = note.get_node_or_null("InteractionComponent")
 	note_content.bbcode_enabled = true 
-	note_content.text = ic.content
+	note_content.text = note_interaction_component.content
 	
-	#
-	## Add the note's ItemData to the player's inventory
+	# Add the note's ItemData to the player's inventory
 	#_add_item_to_inventory(note_interaction_component.item_data)
-	#
-	## Play the sound effect for putting the note away
+	
+	# Play the sound effect for putting the note away
 	#_play_sound_effect(note_interaction_component.put_away_sound_effect)
-	#
-	## Remove the note from the world
+	
+	# Remove the note from the world
 	#current_note.queue_free()
-	#
-	## Clear references to the current note
+	
+	# Clear references to the current note
 	#current_note = null
 	#note_interaction_component = null
 		

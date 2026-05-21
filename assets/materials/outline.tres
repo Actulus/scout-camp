@@ -1,11 +1,11 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://b1oewtf0uagx0"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bb8qavkctskbx"]
 
-[ext_resource type="Shader" uid="uid://ce8shwkl44xx4" path="res://assets/shaders/outline.gdshader" id="1_0lybl"]
+[ext_resource type="Shader" uid="uid://bb8qavkctskbx" path="res://assets/materials/outline.tres" id="1_povrl"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_0lybl")
-shader_parameter/outline_color = Color(0.79477066, 0.0002920574, 0.74371624, 1)
+shader = ExtResource("1_povrl")
+shader_parameter/outline_color = Color(0.139901, 0, 0.854185, 1)
 shader_parameter/outline_width = 2.0
 shader_parameter/pulse_speed = 1.0
 shader_parameter/min_alpha = 0.0

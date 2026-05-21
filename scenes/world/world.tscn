@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://d4nrcia5kc6rc" path="res://scripts/bridge_pivotpoint.gd" id="12_srmg5"]
 [ext_resource type="PackedScene" uid="uid://261ekgs40bxb" path="res://objects/collectible_item.tscn" id="13_srmg5"]
 [ext_resource type="PackedScene" uid="uid://csldwg70n17j" path="res://objects/note.tscn" id="14_umvgx"]
-[ext_resource type="PackedScene" uid="uid://c2kc6g61jq1jo" path="res://objects/coll2.tscn" id="15_mxkvs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5dby"]
 sky_top_color = Color(0, 0.45849943, 0.7871284, 1)
@@ -338,11 +337,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13699913, -1, 25.146614)
 use_collision = true
 size = Vector3(3.331543, 1, 51.77722)
 
-[node name="CollectibleItem" parent="." unique_id=320321223 instance=ExtResource("13_srmg5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.940548, 0.6287384, -9.028762)
-
 [node name="Note" parent="." unique_id=358437179 instance=ExtResource("14_umvgx")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -8, 0.50889254, -18)
 
-[node name="RigidBody3D" parent="." unique_id=288593872 instance=ExtResource("15_mxkvs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -13)
+[node name="CollectibleItem3" parent="." unique_id=320321223 instance=ExtResource("13_srmg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.588756, 0.60749435, -15.689541)
+
+[node name="CollectibleItem" parent="." unique_id=315262293 instance=ExtResource("13_srmg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.677346, 0.61132383, -8.277803)
+
+[node name="CollectibleItem4" parent="." unique_id=1394858552 instance=ExtResource("13_srmg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0535088, 0.7065191, -10.961792)
+
+[node name="CollectibleItem2" parent="." unique_id=780203207 instance=ExtResource("13_srmg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.181667, 0.79702187, -16.555607)
+
+[node name="Note2" parent="." unique_id=1872564950 instance=ExtResource("14_umvgx")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -9.832114, 0.73899937, -0.08967495)
+
+[node name="Note3" parent="." unique_id=781381880 instance=ExtResource("14_umvgx")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -16.672314, 0.81383896, -1.6545262)

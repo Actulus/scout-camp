@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dxcmxj2n04gm8"]
 
 [ext_resource type="PackedScene" uid="uid://ch868pqs36aec" path="res://interactions/interaction_component.tscn" id="1_bd5kx"]
+[ext_resource type="AudioStream" uid="uid://bw8t5curnp5ia" path="res://assets/audio/switch_hydraulic_down.wav" id="2_e8wiv"]
+[ext_resource type="AudioStream" uid="uid://5bo5he8duy0" path="res://assets/audio/switch_snap.wav" id="3_0kjxy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rbxwc"]
 size = Vector3(0.1, 0.75, 0.1)
@@ -21,3 +23,5 @@ shape = SubResource("BoxShape3D_bd5kx")
 [node name="InteractionComponent" parent="Switch" unique_id=673456141 node_paths=PackedStringArray("object_ref") instance=ExtResource("1_bd5kx")]
 object_ref = NodePath("..")
 interaction_type = 2
+primary_soundeffect = ExtResource("2_e8wiv")
+secondary_soundeffect = ExtResource("3_0kjxy")

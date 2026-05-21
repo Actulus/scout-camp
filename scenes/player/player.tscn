@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dn2schj4r8oqu" path="res://assets/reticles/tile_0155.png" id="3_p47bc"]
 [ext_resource type="Texture2D" uid="uid://bpbofp8bugulh" path="res://assets/reticles/tile_0156.png" id="4_75vfm"]
 [ext_resource type="Shader" uid="uid://bigyoy6yviijj" path="res://assets/shaders/note_fade.gdshader" id="5_75vfm"]
+[ext_resource type="AudioStream" uid="uid://bqcuchan3la0" path="res://assets/audio/Antons_Footsteps_FS_Grass_Walk_02.wav" id="7_0owmy"]
+[ext_resource type="AudioStream" uid="uid://b46jihj162om4" path="res://assets/audio/jump_Antons_Footsteps_FS_Grass_Walk_07.wav" id="8_qek5x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 
@@ -68,6 +70,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="NoteCamera" type="Camera3D" parent="Head/Eyes/SubViewportContainer/SubViewport" unique_id=769165053]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 cull_mask = 2
 fov = 90.0
@@ -173,3 +176,15 @@ vertical_alignment = 1
 
 [node name="InteractionController" parent="." unique_id=1269839320 instance=ExtResource("2_dovo2")]
 unique_name_in_owner = true
+
+[node name="Audio" type="Node3D" parent="." unique_id=580695283]
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="Audio" unique_id=1832466451]
+unique_name_in_owner = true
+stream = ExtResource("7_0owmy")
+volume_db = -20.0
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="Audio" unique_id=1293689693]
+unique_name_in_owner = true
+stream = ExtResource("8_qek5x")
+volume_db = -20.0

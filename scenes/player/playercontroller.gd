@@ -7,6 +7,9 @@ extends CharacterBody3D
 @onready var standing_collision_shape_3d: CollisionShape3D = $StandingCollisionShape3D
 @onready var standup_check: RayCast3D = $StandupCheck
 @onready var interaction_controller: Node = %InteractionController
+@onready var note_camera: Camera3D = %NoteCamera
+@onready var footsteps_soundeffect: AudioStreamPlayer3D = %Footsteps
+@onready var jump_soundeffect: AudioStreamPlayer3D = %Jump
 
 # movement vars 
 const walking_speed: float = 3.0 
@@ -21,6 +24,7 @@ var direction: Vector3 = Vector3.ZERO
 var lerp_speed: float = 10.0 
 var mouse_input: Vector2
 var is_in_air: bool = false
+
 
 # player settings 
 var base_fov: float = 90.0
@@ -56,7 +60,7 @@ const head_bobbing_crouching_intensity: float = 0.05
 var head_bobbing_current_intensity: float = 0.0
 var head_bobbing_vector: Vector2 = Vector2.ZERO
 var head_bobbing_index: float = 0.0
-var last_bob_position_x: float = 0.0
+var last_bob_position_x: float = 0.0 
 var last_bob_direction: int = 0
 
 # Leaning Vars
@@ -97,13 +101,18 @@ func _physics_process(delta: float) -> void:
 	
 	# falling 
 	if not is_on_floor():
+		is_in_air = true 
 		if velocity.y >= 0: # jumping upwards
 			velocity += get_gravity() * delta 
 		else: #falling down 
 			velocity += get_gravity() * delta * 2.0
 	else: # jumping 
+		if is_in_air: 
+			is_in_air = false 
+			footsteps_soundeffect.play()
 		if Input.is_action_just_pressed("jump") and player_state != PlayerState.CROUCHING:
 			velocity.y = jump_velocity
+			jump_soundeffect.play()
 			
 	# movement logic 
 	input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -181,13 +190,17 @@ func updateCamera(delta: float) -> void:
 		head_bobbing_index += head_bobbing_sprinting_speed * delta 
 
 	head_bobbing_vector.y = sin(head_bobbing_index)
-	head_bobbing_vector.x = sin(head_bobbing_index/2.0) + 0.5
+	head_bobbing_vector.x = sin(head_bobbing_index/2.0)
 	if moving:
 		eyes.position.y = lerp(eyes.position.y, head_bobbing_vector.y*(head_bobbing_current_intensity/2.0), delta*lerp_speed)
 		eyes.position.x = lerp(eyes.position.x, head_bobbing_vector.x*(head_bobbing_current_intensity/2.0), delta*lerp_speed)
 	else: 
 		eyes.position.y = lerp(eyes.position.y, 0.0, delta*lerp_speed)
 		eyes.position.x = lerp(eyes.position.x, 0.0, delta*lerp_speed)
+		
+	note_camera.fov = camera_3d.fov 
+	
+	play_footsteps()
 
 func set_camera_locked(locked: bool) -> void:
 	if locked:
@@ -210,8 +223,8 @@ func play_footsteps() -> void:
 		var bob_direction = sign(bob_position_x - last_bob_position_x)  # +1 = moving right, -1 = moving left
 
 		# A direction change means we just reached a peak in the bobbing cycle
-		#if bob_direction != 0 and bob_direction != last_bob_direction and last_bob_direction != 0:
-			#footsteps_se.play()
+		if bob_direction != 0 and bob_direction != last_bob_direction and last_bob_direction != 0:
+			footsteps_soundeffect.play()
 
 		last_bob_direction = bob_direction
 		last_bob_position_x = bob_position_x
