@@ -18,7 +18,7 @@ rotates within a limited range.
 """
 
 ## Sound effect to play when the swtich snaps to a final position
-@export var snap_sound_effect: AudioStreamMP3 = preload("res://assets/audio/equip.mp3")
+@export var snap_sound_effect: AudioStreamWAV = preload("res://assets/audio/switch_snap.wav")
 var snap_audio_player: AudioStreamPlayer3D
 
 ## True if the switch is currently snapping into a starting/final place after the player has let go of it
@@ -56,7 +56,7 @@ func _ready() -> void:
 ## Runs once, as soon as the node is added to the scene tree
 func _enter_tree() -> void:
 	# Initialize Audio
-	movement_sound = preload("res://assets/audio/equip.mp3")
+	movement_sound = preload("res://assets/audio/switch_hydraulic_down.wav")
 
 ## Runs once, when the player FIRST clicks on an object to interact with
 func pre_interact() -> void:

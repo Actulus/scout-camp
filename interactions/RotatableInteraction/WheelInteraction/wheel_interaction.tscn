@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://mqqrryymbmw6"]
+
+[ext_resource type="Script" uid="uid://kr3vjpi0pese" path="res://interactions/RotatableInteraction/WheelInteraction/wheel_interaction.gd" id="1_ui3oq"]
+[ext_resource type="AudioStream" uid="uid://bfbjeoc5yj73t" path="res://assets/audio/wheel_Vehicle_Car_Hand_Brake_Mono_03.wav" id="2_iis1s"]
+
+[node name="WheelInteraction" type="Node" unique_id=865620819]
+script = ExtResource("1_ui3oq")
+movement_sound = ExtResource("2_iis1s")

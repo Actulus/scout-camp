@@ -1,11 +1,25 @@
 [gd_scene format=3 uid="uid://261ekgs40bxb"]
 
 [ext_resource type="ArrayMesh" uid="uid://dm87m5wpqtmf7" path="res://assets/models/kenney_nature-kit/Models/OBJ format/log_stack.obj" id="1_o6483"]
-[ext_resource type="PackedScene" uid="uid://ch868pqs36aec" path="res://interactions/interaction_component.tscn" id="2_kmayk"]
+[ext_resource type="PackedScene" uid="uid://8k6p0eg7gmtf" path="res://interactions/CollectableInteraction/ConsumableInteraction/consumable_interaction.tscn" id="2_5nf2q"]
 [ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="3_kmayk"]
+[ext_resource type="Script" uid="uid://cejo7t7av1gpr" path="res://inventory/actions/consumable_action.gd" id="4_lfkmn"]
+[ext_resource type="Texture2D" uid="uid://bykrumvdxasc8" path="res://interactions/CollectableInteraction/ConsumableInteraction/Interactables/wood.png" id="5_d811m"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="6_6m3aw"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xg3bh"]
 points = PackedVector3Array(0.22471707, 0.14377236, -0.17013311, 0.22471707, 0.14377236, -0.19577818, 0.14705737, 0.303787, 0.16526821, 0.16809367, 0.25977364, 0.30753234, 0.19998072, 0.08656856, 0.33498433, 0.2118708, 0.1660164, -0.19577818, 0.1308852, 0.33240584, 0.16874316, 0.19998072, 0.08656856, -0.33505383, 0.14996754, 0.1731711, -0.33505383, 0.11920299, 0.3464101, 0.31802663, 0.14996754, 0.1731711, 0.33498433, 0.021421611, 0.3464101, 0.33894578, -0.027469084, 0.25977364, 0.34944013, -3.0428171e-05, 0.086602464, 0.35500005, -0.05000204, -8.195639e-08, 0.35500005, 0.14996754, -8.195639e-08, 0.33498433, -0.021233022, 0.3464101, -0.3371388, 0.12394239, 0.33240584, 0.13642621, 0.14996754, -8.195639e-08, -0.33505383, -0.05000204, -8.195639e-08, -0.355, -3.0428171e-05, 0.086602464, -0.355, 0.027657658, 0.25977364, -0.34756362, -0.1500284, 0.17320502, 0.35500005, -0.119014405, 0.3464101, -0.31615013, -0.05000204, 0.17320502, 0.35500005, -0.1500284, -8.195639e-08, 0.35500005, -0.1500284, 0.17320502, -0.355, -0.1500284, -8.195639e-08, -0.355, -0.05000204, 0.17320502, -0.355, -0.2, 0.086602464, 0.35500005, -0.2, 0.086602464, -0.355, -0.16790509, 0.25977364, -0.30565584)
+
+[sub_resource type="Resource" id="Resource_00gfk"]
+script = ExtResource("4_lfkmn")
+metadata/_custom_type_script = "uid://cejo7t7av1gpr"
+
+[sub_resource type="Resource" id="Resource_xnode"]
+script = ExtResource("6_6m3aw")
+item_name = "wood"
+item_icon = ExtResource("5_d811m")
+action_data = SubResource("Resource_00gfk")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
 
 [node name="CollectibleItem" type="RigidBody3D" unique_id=320321223]
 
@@ -15,7 +29,6 @@ mesh = ExtResource("1_o6483")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1118850526]
 shape = SubResource("ConvexPolygonShape3D_xg3bh")
 
-[node name="InteractionComponent" parent="." unique_id=673456141 node_paths=PackedStringArray("object_ref") instance=ExtResource("2_kmayk")]
-object_ref = NodePath("..")
-interaction_type = 4
-primary_soundeffect = ExtResource("3_kmayk")
+[node name="CollectableInteraction" parent="." unique_id=1431469201 instance=ExtResource("2_5nf2q")]
+collect_sound_effect = ExtResource("3_kmayk")
+item_data = SubResource("Resource_xnode")

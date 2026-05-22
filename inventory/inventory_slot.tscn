@@ -53,6 +53,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_u6pog")
 script = ExtResource("1_5agom")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=379003515]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 8

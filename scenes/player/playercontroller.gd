@@ -1,15 +1,23 @@
 extends CharacterBody3D
 
-@onready var head: Node3D = $Head
-@onready var eyes: Node3D = $Head/Eyes
-@onready var camera_3d: Camera3D = $Head/Eyes/Camera3D
+@onready var head: Node3D = %Head
+@onready var eyes: Node3D = %Eyes
+@onready var camera_3d: Camera3D = %Camera3D
 @onready var crouching_collision_shape_3d: CollisionShape3D = $CrouchingCollisionShape3D
 @onready var standing_collision_shape_3d: CollisionShape3D = $StandingCollisionShape3D
 @onready var standup_check: RayCast3D = $StandupCheck
 @onready var interaction_controller: Node = %InteractionController
-@onready var note_camera: Camera3D = %NoteCamera
 @onready var footsteps_soundeffect: AudioStreamPlayer3D = %Footsteps
 @onready var jump_soundeffect: AudioStreamPlayer3D = %Jump
+
+# note variables 
+@onready var note_camera: Camera3D = %NoteCamera
+@onready var note_hand: Marker3D = %NoteHand
+@export var note_sway_amount: float = 0.1 
+
+# item hand variables 
+@onready var item_hand: Marker3D = %ItemHand
+var item_hand_rest_position: Vector3
 
 # movement vars 
 const walking_speed: float = 3.0 
@@ -25,7 +33,6 @@ var lerp_speed: float = 10.0
 var mouse_input: Vector2
 var is_in_air: bool = false
 
-
 # player settings 
 var base_fov: float = 90.0
 
@@ -34,10 +41,6 @@ var normal_sensitivity: float = 0.2
 var current_sensitivity: float = normal_sensitivity 
 var sensitivity_restore_speed: float = 5.0 
 var sensitivity_fading_in: bool = false 
-
-# note variables 
-@onready var note_hand: Marker3D = %NoteHand
-var note_sway_amount: float = 0.1 
 
 # state machine 
 enum PlayerState {
@@ -70,22 +73,64 @@ var lean_speed: float = 8.0                 # How quickly to lerp between states
 var target_lean: float = 0.0                        # -1 = left, 1 = right, 0 = neutral
 var current_lean: float = 0.0
 
+# inventory vars
+@onready var inventory_controller: InventoryController = %InventoryController/CanvasLayer/InventoryUI
+@onready var interaction_raycast: RayCast3D = %InteractionRayCast3D
+var inventory_opened_flag: bool = false
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	item_hand_rest_position = item_hand.position
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
+		
+	if Input.is_action_pressed("lean_left"):
+		target_lean = -1.0
+	elif Input.is_action_pressed("lean_right"):
+		target_lean = 1.0
+	else:
+		target_lean = 0.0
 	
-	# Camera movement via mouse
-	if event is InputEventMouseMotion:
-		if current_sensitivity > 0.01 and not interaction_controller.isCameraLocked():
-			mouse_input = event.relative
-			rotate_y(deg_to_rad(-mouse_input.x * current_sensitivity))
-			head.rotate_x(deg_to_rad(-mouse_input.y * current_sensitivity))
-			head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+	if Input.is_action_just_pressed("inventory"):
+		# If the player was interacting with something, end that interaction
+		if interaction_controller.interaction_component != null:
+			interaction_controller.interaction_component.post_interact()
+		# If the inventory is open show the cursor, inventory panel, and block all other interaction
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		inventory_controller.visible = true
+		interaction_raycast.enabled = false
+		inventory_opened_flag = true
+	elif Input.is_action_pressed("inventory"):
+		return # no-op
+	elif Input.is_action_just_released("inventory"):
+		# If the inventory is closed
+		inventory_controller.visible = false
+		interaction_raycast.enabled = true
+		if not interaction_controller.current_object:
+			# Special check for interactable objects that still show the mouse (wheels)
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		# Camera movement via mouse
+		if event is InputEventMouseMotion:
+			if current_sensitivity > 0.01 and not interaction_controller.isCameraLocked():
+				mouse_input = event.relative
+				rotate_y(deg_to_rad(-mouse_input.x * current_sensitivity))
+				head.rotate_x(deg_to_rad(-mouse_input.y * current_sensitivity))
+				head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 func _process(delta: float) -> void:
+	# TODO: Kludge fix for context menu being open and letting go of inventory button
+	if inventory_opened_flag and !Input.is_action_pressed("inventory"):
+		# If the inventory is closed
+		inventory_controller.visible = false
+		inventory_controller.context_menu.visible = false
+		interaction_raycast.enabled = true
+		if not interaction_controller.current_object:
+			# Special check for interactable objects that still show the mouse (wheels)
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
 	if sensitivity_fading_in:
 		current_sensitivity = lerp(current_sensitivity, normal_sensitivity, delta * sensitivity_restore_speed)
 		
@@ -198,8 +243,16 @@ func updateCamera(delta: float) -> void:
 		eyes.position.y = lerp(eyes.position.y, 0.0, delta*lerp_speed)
 		eyes.position.x = lerp(eyes.position.x, 0.0, delta*lerp_speed)
 		
-	note_camera.fov = camera_3d.fov 
+	# head lean
+	current_lean = lerp(current_lean, target_lean, delta * lean_speed)
 	
+	var target_tilt: float = deg_to_rad(-lean_angle) * current_lean
+	var target_offset: float = lean_offset * current_lean
+	
+	camera_3d.rotation.z = lerp(camera_3d.rotation.z, target_tilt, delta * lean_speed)
+	camera_3d.position.x = lerp(camera_3d.position.x, target_offset, delta * lean_speed)
+	
+	note_camera.fov = camera_3d.fov
 	play_footsteps()
 
 func set_camera_locked(locked: bool) -> void:
@@ -213,9 +266,9 @@ func note_tilt_and_sway(input_dir: Vector2, delta: float) -> void:
 	if note_hand:
 		note_hand.rotation.z = lerp(note_hand.rotation.z, -input_dir.x * note_sway_amount, 10 * delta)
 		note_hand.rotation.x = lerp(note_hand.rotation.x, -input_dir.y * note_sway_amount, 10 * delta)
-	#if item_hand:
-		#item_hand.rotation.z = lerp(item_hand.rotation.z, -input_dir.x * note_sway_amount*2, 10 * delta)
-		#item_hand.rotation.x = lerp(item_hand.rotation.x, -input_dir.y * note_sway_amount*2, 10 * delta)
+	if item_hand:
+		item_hand.rotation.z = lerp(item_hand.rotation.z, -input_dir.x * note_sway_amount*2, 10 * delta)
+		item_hand.rotation.x = lerp(item_hand.rotation.x, -input_dir.y * note_sway_amount*2, 10 * delta)
 
 func play_footsteps() -> void:
 	if moving and is_on_floor():

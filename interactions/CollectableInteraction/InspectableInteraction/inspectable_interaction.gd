@@ -17,7 +17,7 @@ with without immediately adding it to their inventory.
 @export var content: String
 
 ## Sound effect to play when the player puts this object away to be done inspecting
-@export var put_away_sound_effect: AudioStreamWAV = preload("res://assets/audio/put_away_item.wav")
+@export var put_away_sound_effect: AudioStreamWAV = preload("res://assets/audio/book_flip_kenney_cards.wav")
 
 ## Notify the player that this is being picked up to be inspected
 signal note_inspected(note: Node3D)
@@ -27,7 +27,7 @@ signal note_inspected(note: Node3D)
 func _ready() -> void:
 	super()
 	# Initialize Audio
-	collect_sound_effect = load("res://assets/sound_effects/drawKnife2.ogg")
+	collect_sound_effect = load("res://assets/audio/book_flip_kenney_cards.wav")
 
 	# Replace newline characters to ensure formatting displays as expected
 	content = content.replace("\\n", "\n")

@@ -31,11 +31,11 @@ Use this class for standard hinged doors that open on a pivot.
 @export var reverse_input_direction: bool = false
 
 ## Sound effect to play when the door shuts
-@export var shut_sound_effect: AudioStreamMP3 = preload("res://assets/audio/equip.mp3")
+@export var shut_sound_effect: AudioStreamWAV = preload("res://assets/audio/Household_Door_Wood_Open_Stereo.wav")
 var shut_audio_player: AudioStreamPlayer3D
 
 ## Sound effect to play when the door is locked and the player interacts with the door
-@export var locked_sound_effect: AudioStreamMP3 = preload("res://assets/audio/equip.mp3")
+@export var locked_sound_effect: AudioStreamWAV = preload("res://assets/audio/door_close.wav")
 var locked_audio_player: AudioStreamPlayer3D
 
 ## True if the player is interacting with the front of the door, false if its the back
@@ -78,7 +78,7 @@ func _ready() -> void:
 ## Runs once, as soon as the node is added to the scene tree
 func _enter_tree() -> void:
 	# Initialize Audio
-	movement_sound = preload("res://assets/audio/equip.mp3")
+	movement_sound = preload("res://assets/audio/door_close.wav")
 
 ## Runs once, when the player FIRST clicks on an object to interact with
 func pre_interact() -> void:

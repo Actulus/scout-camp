@@ -11,7 +11,7 @@ a base for doors, wheels, switches, or any other rotatable objects in the game.
 """
 
 ## Default sound effect for when the rotatable object is being rotated
-@export var movement_sound: AudioStreamMP3
+@export var movement_sound: AudioStreamWAV
 var movement_audio_player: AudioStreamPlayer3D
 
 ## Maximum rotation (in degrees) in which the object can rotate.
@@ -96,7 +96,7 @@ func _play_movement_sounds(delta: float) -> void:
 
 	# Start sound if not already playing
 	if movement_audio_player and not movement_audio_player.playing and target_volume > 0.0:
-		movement_audio_player.volume_db = -15.0
+		movement_audio_player.volume_db = 20.0
 		movement_audio_player.play()
 
 	# Smooth fade in/out

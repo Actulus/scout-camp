@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://dej28nybw6bcg"]
 
 [ext_resource type="Texture2D" uid="uid://b7uacy1qp2adm" path="res://assets/textures/kenney_prototype-textures/PNG/Purple/texture_01.png" id="1_j7xx1"]
-[ext_resource type="PackedScene" uid="uid://ch868pqs36aec" path="res://interactions/interaction_component.tscn" id="2_khffo"]
-[ext_resource type="AudioStream" uid="uid://y7bd1s04bdoq" path="res://assets/audio/Household_Door_Wood_Open_Stereo.wav" id="3_4hvcy"]
-[ext_resource type="AudioStream" uid="uid://17qacm5qqvsc" path="res://assets/audio/door_close.wav" id="4_87mug"]
+[ext_resource type="PackedScene" uid="uid://c4uv3bg3l2t2f" path="res://interactions/RotatableInteraction/DoorInteraction/door_interaction.tscn" id="2_1xtfa"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4hvcy"]
 size = Vector3(1.6, 2.6, 0.1)
@@ -18,6 +16,7 @@ size = Vector3(1.6, 2.6, 0.1)
 [node name="Door" type="Node3D" unique_id=1296721048]
 
 [node name="PivotPoint" type="Node3D" parent="." unique_id=1922024837]
+unique_name_in_owner = true
 
 [node name="Door" type="StaticBody3D" parent="PivotPoint" unique_id=76776432]
 
@@ -30,13 +29,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_87mug")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.3, 0)
 shape = SubResource("BoxShape3D_encw8")
 
-[node name="InteractionComponent" parent="PivotPoint/Door" unique_id=673456141 node_paths=PackedStringArray("object_ref", "pivot_point") instance=ExtResource("2_khffo")]
-object_ref = NodePath("..")
-interaction_type = 1
-pivot_point = NodePath("../..")
-primary_soundeffect = ExtResource("3_4hvcy")
-secondary_soundeffect = ExtResource("4_87mug")
-
 [node name="Label3D" type="Label3D" parent="PivotPoint/Door" unique_id=547496286]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7940959, 2, 0.055181086)
 text = "FRONT"
@@ -44,3 +36,7 @@ text = "FRONT"
 [node name="Label3D2" type="Label3D" parent="PivotPoint/Door" unique_id=872235538]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.7205373, 1.977088, -0.05537033)
 text = "BACK"
+
+[node name="DoorInteraction" parent="PivotPoint/Door" unique_id=335607095 node_paths=PackedStringArray("pivot_point") instance=ExtResource("2_1xtfa")]
+pivot_point = NodePath("../..")
+maximum_rotation = 90.0

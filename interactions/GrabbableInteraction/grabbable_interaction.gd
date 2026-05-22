@@ -12,7 +12,7 @@ mechanics in the game world.
 """
 
 ## Sound effect to play when a grabbable objects collides with something
-@export var collision_sound_effect: AudioStreamMP3 = preload("res://assets/audio/equip.mp3")
+@export var collision_sound_effect: AudioStreamWAV = preload("res://assets/audio/put_away_item.wav")
 var collision_audio_player: AudioStreamPlayer3D
 
 ## Represents where the players hand is in 3D space

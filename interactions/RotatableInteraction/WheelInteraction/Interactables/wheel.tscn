@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://covvljwqxmf1r"]
 
-[ext_resource type="PackedScene" uid="uid://ch868pqs36aec" path="res://interactions/interaction_component.tscn" id="1_45fdq"]
-[ext_resource type="AudioStream" uid="uid://bfbjeoc5yj73t" path="res://assets/audio/wheel_Vehicle_Car_Hand_Brake_Mono_03.wav" id="2_t0jdk"]
-[ext_resource type="AudioStream" uid="uid://bqii57l4r0drt" path="res://assets/audio/wheel_stop_Vehicle_Car_Trunk_Close_Impact_Mono.wav" id="3_7wgt2"]
+[ext_resource type="PackedScene" uid="uid://mqqrryymbmw6" path="res://interactions/RotatableInteraction/WheelInteraction/wheel_interaction.tscn" id="1_bgj8w"]
+[ext_resource type="AudioStream" uid="uid://bfbjeoc5yj73t" path="res://assets/audio/wheel_Vehicle_Car_Hand_Brake_Mono_03.wav" id="2_5ly6w"]
+[ext_resource type="Texture2D" uid="uid://brcg5jse4qbjs" path="res://assets/reticles/wheel_reticle.png" id="2_of50o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c5phc"]
 size = Vector3(0.1, 1, 0.1)
@@ -64,10 +64,11 @@ mesh = SubResource("CylinderMesh_a7oxc")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_ebv5s")
 
-[node name="InteractionComponent" parent="Wheel" unique_id=673456141 node_paths=PackedStringArray("object_ref", "nodes_to_affect") instance=ExtResource("1_45fdq")]
-object_ref = NodePath("..")
-interaction_type = 3
+[node name="WheelInteraction" parent="Wheel" unique_id=865620819 instance=ExtResource("1_bgj8w")]
+movement_sound = ExtResource("2_5ly6w")
 maximum_rotation = 360.0
-nodes_to_affect = [null]
-primary_soundeffect = ExtResource("2_t0jdk")
-secondary_soundeffect = ExtResource("3_7wgt2")
+
+[node name="Icon" type="Sprite3D" parent="." unique_id=459433647]
+transform = Transform3D(-0.025, 0, 0, 0, -0.025, 0, 0, 0, -0.025, 0, 0, 0.07)
+visible = false
+texture = ExtResource("2_of50o")

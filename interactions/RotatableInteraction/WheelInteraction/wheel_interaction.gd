@@ -13,7 +13,7 @@ Use this class for interactive wheels or valves.
 """
 
 ## Sound effect to play when the wheel kickbacks
-@export var kickback_sound_effect: AudioStreamMP3 = preload("res://assets/audio/equip.mp3")
+@export var kickback_sound_effect: AudioStreamWAV = preload("res://assets/audio/wheel_stop_Vehicle_Car_Trunk_Close_Impact_Mono.wav")
 var kickback_audio_player: AudioStreamPlayer3D
 
 ## Determines how far the wheel should kickback after the player lets go, as if it is a ratchet and pawl system
@@ -54,7 +54,7 @@ func _ready() -> void:
 ## Runs once, as soon as the node is added to the scene tree
 func _enter_tree() -> void:
 	# Initialize Audio
-	movement_sound = preload("res://assets/audio/equip.mp3")
+	movement_sound = preload("res://assets/audio/wheel_Vehicle_Car_Hand_Brake_Mono_03.wav")
 
 ## Runs once, when the player FIRST clicks on an object to interact with
 func pre_interact() -> void:

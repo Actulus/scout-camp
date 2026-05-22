@@ -14,7 +14,7 @@ to define how the inventory should handle it when collected.
 """
 
 ## Sound effect to play when the player collects this item
-@export var collect_sound_effect: AudioStreamMP3 = load("res://assets/audio/equip.mp3")
+@export var collect_sound_effect: AudioStreamWAV = load("res://assets/audio/item_pickup_minifantasy.wav")
 
 ## Define the ItemData for when this item enters the player inventory
 @export var item_data: ItemData

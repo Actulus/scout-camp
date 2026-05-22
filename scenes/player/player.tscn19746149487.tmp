@@ -95,7 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, -0.25, -0.75)
 
 [node name="ItemHand" type="Marker3D" parent="Head/Eyes/SubViewportContainer/SubViewport/NoteCamera" unique_id=1101413457]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5602107, -0.25, -0.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.25, -0.75)
 
 [node name="GUI" type="Node" parent="." unique_id=1662015740]
 
@@ -166,10 +166,10 @@ text = "nothing interesting happens"
 horizontal_alignment = 1
 
 [node name="NoteLayer" type="CanvasLayer" parent="GUI" unique_id=1753731916]
+visible = false
 
 [node name="NoteOverlay" type="Control" parent="GUI/NoteLayer" unique_id=1650644644]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

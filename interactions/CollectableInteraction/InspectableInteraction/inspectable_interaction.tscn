@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bmpq1lpt8h5dt"]
+
+[ext_resource type="Script" uid="uid://b2g2n2vg1exwx" path="res://interactions/CollectableInteraction/InspectableInteraction/inspectable_interaction.gd" id="1_ii77p"]
+
+[node name="InspectableInteraction" type="Node" unique_id=1005071742]
+script = ExtResource("1_ii77p")

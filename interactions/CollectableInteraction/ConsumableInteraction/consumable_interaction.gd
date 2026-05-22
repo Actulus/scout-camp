@@ -20,7 +20,7 @@ signal item_collected(item: Node)
 func _ready() -> void:
 	super()
 	# Initialize Audio
-	collect_sound_effect = load("res://assets/audio/equip.mp3")
+	collect_sound_effect = load("res://assets/audio/put_away_item.wav")
 	
 ## Runs once, when the player FIRST clicks on an object to interact with
 func pre_interact() -> void:
