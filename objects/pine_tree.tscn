@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://basxrhm2gi4ij"]
+
+[ext_resource type="PackedScene" uid="uid://dyx7t8fhvvvkc" path="res://assets/models/kenney_nature-kit/Models/GLTF format/tree_pineSmallA.glb" id="1_0ie04"]
+
+[node name="Node3D" type="Node3D" unique_id=1830800801]
+
+[node name="tree_pineSmallA2" parent="." unique_id=1093829872 instance=ExtResource("1_0ie04")]
