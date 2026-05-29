@@ -36,6 +36,7 @@ turbulence_noise_scale = 2.0
 turbulence_influence_max = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ex57o"]
+transparency = 1
 albedo_color = Color(2.3302248, 0.9012536, 0.27733648, 1)
 billboard_mode = 3
 billboard_keep_scale = true
