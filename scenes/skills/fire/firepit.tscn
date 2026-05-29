@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://djrwbf8ol54tn"]
+
+[ext_resource type="ArrayMesh" uid="uid://cp45tu2arbrph" path="res://assets/models/kenney_nature-kit/Models/OBJ format/campfire_bricks.obj" id="1_6neqt"]
+[ext_resource type="PackedScene" uid="uid://bdyvldfbcy43l" path="res://interactions/FireInteraction/fire_interaction.tscn" id="2_6neqt"]
+[ext_resource type="ArrayMesh" uid="uid://sphv1rsbjby6" path="res://assets/models/kenney_nature-kit/Models/OBJ format/log.obj" id="3_hvlfo"]
+[ext_resource type="Shader" uid="uid://bf8t2otpyxnqj" path="res://assets/shaders/flame_shader.gdshader" id="4_njdky"]
+[ext_resource type="Texture2D" uid="uid://ba4wcdghlpvj6" path="res://assets/textures/flame_noise.tres" id="5_s8t07"]
+
+[sub_resource type="Gradient" id="Gradient_njdky"]
+offsets = PackedFloat32Array(0, 0.53090507, 1)
+colors = PackedColorArray(1, 0.4, 0, 1, 1.2554234, 0.8092497, 0, 1, 1.2555383, 0.8073662, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s8t07"]
+gradient = SubResource("Gradient_njdky")
+
+[sub_resource type="Curve" id="Curve_njdky"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.4979424, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s8t07"]
+curve = SubResource("Curve_njdky")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pk5uv"]
+direction = Vector3(0, 1, 0)
+spread = 20.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, -0.2, 0)
+scale_min = 0.099999994
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_s8t07")
+color = Color(0.8274293, 3.946722e-06, 8.663535e-07, 1)
+color_initial_ramp = SubResource("GradientTexture1D_s8t07")
+turbulence_noise_strength = 2.0
+turbulence_noise_scale = 2.0
+turbulence_influence_max = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ex57o"]
+albedo_color = Color(2.3302248, 0.9012536, 0.27733648, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_t7drb"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_ex57o")
+size = Vector2(0.1, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pk5uv"]
+render_priority = 0
+shader = ExtResource("4_njdky")
+shader_parameter/noise_texture = ExtResource("5_s8t07")
+shader_parameter/color_bottom = Color(1, 0.2, 0, 1)
+shader_parameter/color_top = Color(1, 0.8, 0, 0)
+shader_parameter/flame_speed = 2.0
+shader_parameter/flame_distortion = 0.3
+shader_parameter/flame_height = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hvlfo"]
+material = SubResource("ShaderMaterial_pk5uv")
+size = Vector2(0.6, 0.6)
+orientation = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ex57o"]
+render_priority = 0
+shader = ExtResource("4_njdky")
+shader_parameter/noise_texture = ExtResource("5_s8t07")
+shader_parameter/color_bottom = Color(1, 0.2, 0, 1)
+shader_parameter/color_top = Color(1, 0.8, 0, 0)
+shader_parameter/flame_speed = 2.0
+shader_parameter/flame_distortion = 0.3
+shader_parameter/flame_height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v3guq"]
+height = 1.0
+
+[node name="FirePit" type="Node3D" unique_id=2016362658]
+
+[node name="StoneRing" type="MeshInstance3D" parent="." unique_id=1121850128]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("1_6neqt")
+
+[node name="Wood1" type="MeshInstance3D" parent="." unique_id=228334551]
+transform = Transform3D(-0.23143286, 0.41278374, 0.052149534, 0.22869802, 0.07635745, 0.41053367, 0.3475733, 0.22461145, -0.23540106, -0.06757492, 0.15177573, 0.08048257)
+visible = false
+mesh = ExtResource("3_hvlfo")
+
+[node name="Wood2" type="MeshInstance3D" parent="." unique_id=667914648]
+transform = Transform3D(0.26698992, 0.50631315, -0.38530934, -0.122792825, 0.4510074, 0.5075571, 0.6242902, -0.12782523, 0.26461747, 0.03125, 0.16351318, -0.028822824)
+visible = false
+mesh = ExtResource("3_hvlfo")
+
+[node name="Wood3" type="MeshInstance3D" parent="." unique_id=1597262094]
+transform = Transform3D(-0.2505811, -0.39394695, 0.09319934, 0.13428643, 0.022513743, 0.45621416, -0.38189974, 0.2664022, 0.09926532, -0.04434132, 0.17820396, -0.09077895)
+visible = false
+mesh = ExtResource("3_hvlfo")
+
+[node name="FireParticles" type="GPUParticles3D" parent="." unique_id=1173252625]
+emitting = false
+amount = 50
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_pk5uv")
+draw_pass_1 = SubResource("QuadMesh_t7drb")
+
+[node name="FireLight" type="OmniLight3D" parent="." unique_id=694525424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+light_color = Color(1, 0.4, 0, 1)
+light_energy = 2.0
+
+[node name="Flames" type="Node3D" parent="." unique_id=401021031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29907227, 0)
+visible = false
+
+[node name="Flame" type="MeshInstance3D" parent="Flames" unique_id=1100302873]
+transform = Transform3D(-0.9999619, 0.008726574, 0, -0.008726574, -0.9999619, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("PlaneMesh_hvlfo")
+surface_material_override/0 = SubResource("ShaderMaterial_ex57o")
+
+[node name="Flame2" type="MeshInstance3D" parent="Flames" unique_id=702949227]
+transform = Transform3D(4.371139e-08, -3.821371e-15, 1, -8.742278e-08, -1, 0, 1, -8.742278e-08, -4.371139e-08, 0, 0.6, 0)
+mesh = SubResource("PlaneMesh_hvlfo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=363329175]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=785590178]
+transform = Transform3D(0.9999879, 0, -0.0049218084, 0, 1, 0, 0.0049218084, 0, 0.9999879, 0, 0, 0)
+shape = SubResource("CylinderShape3D_v3guq")
+
+[node name="FireInteraction" parent="StaticBody3D" unique_id=1818648971 instance=ExtResource("2_6neqt")]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ulhin1vrmdps"]
+
+[ext_resource type="Script" uid="uid://d3366wckc0ufl" path="res://interactions/CollectableInteraction/UsableConsumableInteraction/usable_consumable_interaction.gd" id="1_g6vcy"]
+
+[node name="UsableConsumableInteraction" type="Node" unique_id=807350017]
+script = ExtResource("1_g6vcy")

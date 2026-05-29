@@ -1,3 +1,4 @@
+# skill_fire.gd
 extends Node3D
 
 var slots_filled = {"tinder": false, "kindling": false, "fuel": false}

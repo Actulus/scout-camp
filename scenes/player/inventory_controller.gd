@@ -156,13 +156,44 @@ func use_collectable(slot_id: int) -> void:
 	if item_data == null:
 		return
 
-	# Cache the item's action data
-	var action_data: ActionData = item_data.action_data
+	# check if this item can be used on a world target
+	var ic: AbstractInteraction = _get_interaction_component_for_item(slot)
+	if ic is UsableConsumableInteraction:
+		var usable := ic as UsableConsumableInteraction
+		if usable.use_target_group != "":
+			# find the target the player is looking at
+			var target_ic = interaction_controller.potential_interaction_component
+			if target_ic and target_ic.object_ref.is_in_group(usable.use_target_group):
+				if target_ic.use_item(item_data):
+					slot.fill_slot(null)
+					inventory_full = false
+					interaction_controller.interact_success_player.play()
+					return
+			# player not looking at valid target
+			_show_use_hint(usable.use_target_group)
+			interaction_controller.interact_failure_player.play()
+			return
 
-	# Collectable has been used, the inventory is no longer full
-	inventory_full = false
-	# Make the slot empty again
+	# default consume behavior — item has no world target
 	slot.fill_slot(null)
+	inventory_full = false
+	
+func _get_interaction_component_for_item(slot: InventorySlot) -> AbstractInteraction:
+	if slot.slot_data == null or slot.slot_data.item_model_prefab == null:
+		return null
+	var temp = slot.slot_data.item_model_prefab.instantiate()
+	var ic = interaction_controller.find_interaction_component(temp)
+	temp.queue_free()
+	return ic
+
+func _show_use_hint(group: String) -> void:
+	var hints := {
+		"fire_pit": "Look at the fire pit to use this",
+		"boiling_station": "Look at the boiling station to use this",
+		"water_source": "Look at a water source to use this"
+	}
+	var text = hints.get(group, "Find the right place to use this")
+	interaction_controller._show_interaction_text(text, 2.0)
 
 ## Drops the item from the provided slot, assuming it will be placed in a valid position. Otherwise, it remains in the inventory
 func drop_collectable(slot_id: int) -> void:

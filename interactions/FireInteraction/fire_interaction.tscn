@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bdyvldfbcy43l"]
+
+[ext_resource type="Script" uid="uid://c2xv4fe36re2j" path="res://interactions/FireInteraction/fire_interaction.gd" id="1_ge2ur"]
+
+[node name="FireInteraction" type="Node" unique_id=1818648971]
+script = ExtResource("1_ge2ur")

@@ -20,7 +20,7 @@ signal item_collected(item: Node)
 func _ready() -> void:
 	super()
 	# Initialize Audio
-	collect_sound_effect = load("res://assets/audio/equip.mp3")
+	collect_sound_effect = load("res://assets/audio/put_away_item.wav")
 	
 	_collect_mesh_and_collision_nodes()
 

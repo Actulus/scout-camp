@@ -1,15 +1,29 @@
-extends Area3D
+extends StaticBody3D
 
-var skill_scene = preload("res://scenes/skills/fire/skill_fire.tscn")
-var skill_instance = null
+@export var required_item: String = "stick"
+@export var required_amount: int = 2
 
-func _ready():
-	body_entered.connect(_on_body_entered)
+@onready var fire_particles = $"../FireParticles"
+@onready var fire_light = $"../FireLight"
 
-func _on_body_entered(body):
-	if body.name == "Player" and GameManager.current_day == 2:
-		if skill_instance == null:
-			skill_instance = skill_scene.instantiate()
-			skill_instance.set_player(body)
-			get_tree().root.add_child(skill_instance)
-			skill_instance.global_position = global_position
+var is_lit: bool = false
+
+# this gets called by your interaction system
+# look at how door_interaction connects to the player
+# and replicate the same connection here
+func interact():
+	if is_lit:
+		return
+	
+	# check inventory - adjust this to match your inventory API
+	var inventory = get_tree().get_first_node_in_group("inventory")
+	if inventory and inventory.has_item(required_item, required_amount):
+		inventory.remove_item(required_item, required_amount)
+		_light_fire()
+
+func _light_fire():
+	is_lit = true
+	fire_particles.emitting = true
+	fire_light.visible = true
+	# notify other systems that fire is lit
+	get_tree().call_group("fire_listeners", "on_fire_lit")

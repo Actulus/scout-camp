@@ -1,3 +1,4 @@
+#playercontroller.gd
 extends CharacterBody3D
 
 @onready var head: Node3D = %Head

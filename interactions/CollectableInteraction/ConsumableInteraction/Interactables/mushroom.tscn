@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://byv5cmbadxk32"]
+
+[ext_resource type="ArrayMesh" uid="uid://c7h8ceelc0m8t" path="res://assets/models/kenney_nature-kit/Models/OBJ format/mushroom_red.obj" id="1_wvehj"]
+[ext_resource type="PackedScene" uid="uid://8k6p0eg7gmtf" path="res://interactions/CollectableInteraction/ConsumableInteraction/consumable_interaction.tscn" id="2_a7gcu"]
+[ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="3_pnu5e"]
+[ext_resource type="Script" uid="uid://cejo7t7av1gpr" path="res://inventory/actions/consumable_action.gd" id="4_o2r1y"]
+[ext_resource type="Texture2D" uid="uid://b4v04ew1u2321" path="res://assets/models/kenney_nature-kit/Side/mushroom_red.png" id="5_wyetn"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="6_o2xm6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u4rtf"]
+points = PackedVector3Array(-0.020639306, 0.13162716, -0.088876314, 0.0035800266, 0.12883069, 0.09038434, -0.0055478835, 0.12880915, 0.09030896, -0.046910185, 1.3877788e-17, 0.046562664, 0.04575286, 0.004904974, -0.046396848, 0.082904935, 0.12883042, 0.04461322, -0.085367806, 0.12591581, -0.056327067, 0.021934839, 0.19918112, -0.0194493, 0.08350293, 0.12594679, -0.05639099, 0.046615936, 0.003123276, 0.04495244, -0.08481056, 0.12880889, 0.044573743, -0.044660304, 0.0049671857, -0.046389196, -0.024104161, 0.2000254, 0.008148864, 0.003612601, 0.12594718, -0.10248898, 0.022169223, 0.20018113, 0.008170744, -0.0025163048, 0.19920377, -0.031668443, -0.00557824, 0.1259162, -0.10236692, -0.02709253, 0.19657658, -0.019515822, -0.005547938, 0.19892412, 0.020193966, 0.006645091, 0.12580612, 0.090514034, 0.08375354, 0.129108, -0.05346291, -0.008606772, 0.1257749, 0.090390995, -0.0855914, 0.12906429, -0.053387634, 0.08045352, 0.12595497, 0.048059143, -0.0823146, 0.12592666, 0.047997195, -0.083858944, 0.12247577, 0.0440029, 0.081993215, 0.12250267, 0.04406631, 0.00053059356, 0.12892778, -0.10214343, 0.0035800927, 0.19900095, 0.02021437, 0.070748605, 0.1441167, 0.03548765, -0.023888139, 0.19910373, -0.019438427, -0.051367145, 0.16856177, 0.023295967)
+
+[sub_resource type="Resource" id="Resource_00gfk"]
+script = ExtResource("4_o2r1y")
+metadata/_custom_type_script = "uid://cejo7t7av1gpr"
+
+[sub_resource type="Resource" id="Resource_xnode"]
+script = ExtResource("6_o2xm6")
+item_name = "wood"
+item_icon = ExtResource("5_wyetn")
+action_data = SubResource("Resource_00gfk")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="CollectibleItem" type="RigidBody3D" unique_id=320321223]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1587255914]
+mesh = ExtResource("1_wvehj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=685593990]
+shape = SubResource("ConvexPolygonShape3D_u4rtf")
+
+[node name="CollectableInteraction" parent="." unique_id=1431469201 instance=ExtResource("2_a7gcu")]
+collect_sound_effect = ExtResource("3_pnu5e")
+item_data = SubResource("Resource_xnode")

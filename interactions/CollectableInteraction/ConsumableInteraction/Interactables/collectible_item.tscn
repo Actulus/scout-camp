@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://8k6p0eg7gmtf" path="res://interactions/CollectableInteraction/ConsumableInteraction/consumable_interaction.tscn" id="2_5nf2q"]
 [ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="3_kmayk"]
 [ext_resource type="Script" uid="uid://cejo7t7av1gpr" path="res://inventory/actions/consumable_action.gd" id="4_lfkmn"]
-[ext_resource type="Texture2D" uid="uid://bykrumvdxasc8" path="res://interactions/CollectableInteraction/ConsumableInteraction/Interactables/wood.png" id="5_d811m"]
+[ext_resource type="Texture2D" uid="uid://nhamg88pcx0l" path="res://assets/models/kenney_nature-kit/Side/log_stack.png" id="5_5nf2q"]
 [ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="6_6m3aw"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xg3bh"]
@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://cejo7t7av1gpr"
 [sub_resource type="Resource" id="Resource_xnode"]
 script = ExtResource("6_6m3aw")
 item_name = "wood"
-item_icon = ExtResource("5_d811m")
+item_icon = ExtResource("5_5nf2q")
 action_data = SubResource("Resource_00gfk")
 metadata/_custom_type_script = "uid://dwxgooifqus3f"
 
