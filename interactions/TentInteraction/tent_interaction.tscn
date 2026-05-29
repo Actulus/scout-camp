@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://tvb875jc8laj"]
+
+[ext_resource type="Script" uid="uid://cvqxsvd0um3o6" path="res://interactions/TentInteraction/tent_interaction.gd" id="1_md5md"]
+
+[node name="TentInteraction" type="Node" unique_id=1317721900]
+script = ExtResource("1_md5md")

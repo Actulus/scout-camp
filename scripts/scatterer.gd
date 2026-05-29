@@ -7,6 +7,11 @@ extends MultiMeshInstance3D
 @export var scale_max: float = 7.0
 @export var collision_radius: float = 1.0
 @export var collision_height: float = 3.0
+@export var min_distance_from_others: float = 3.0
+@export var avoid_multimeshes: Array[NodePath] = []
+
+var _placed_positions: Array[Vector3] = []
+var _avoid_transforms: Array[Transform3D] = []
 
 func _ready():
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
@@ -30,7 +35,18 @@ func _ready():
 		multimesh.set_instance_transform(placed, t)
 		placed += 1
 	multimesh.instance_count = placed
+	await get_tree().physics_frame
+	_cache_multimesh_positions()
 	_add_collision()
+
+func _cache_multimesh_positions():
+	for path in avoid_multimeshes:
+		var node = get_node(path) as MultiMeshInstance3D
+		if not node or not node.multimesh: continue
+		for i in node.multimesh.instance_count:
+			_avoid_transforms.append(
+				node.multimesh.get_instance_transform(i)
+			)
 
 func _get_height(x: float, z: float) -> float:
 	var space = get_world_3d().direct_space_state
@@ -60,3 +76,12 @@ func _add_collision():
 		shape.transform = adjusted
 		
 		sBody.add_child(shape)
+		
+func _too_close(pos: Vector3) -> bool:
+	for p in _placed_positions:
+		if pos.distance_to(p) < min_distance_from_others:
+			return true
+	for t in _avoid_transforms:
+		if pos.distance_to(t.origin) < min_distance_from_others:
+			return true
+	return false

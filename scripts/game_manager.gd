@@ -3,6 +3,7 @@ extends Node
 var current_day: int = 1 
 var skills_completed: Dictionary = {
 	"shelter": false,
+	"tent": false,
 	"fire": false,
 	"water": false,
 	"plants": false,

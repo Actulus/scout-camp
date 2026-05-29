@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://3bjrbefeg31v"]
+
+[ext_resource type="ArrayMesh" uid="uid://bjii6imd53tra" path="res://assets/models/tent_canvas.tres" id="1_3giw2"]
+[ext_resource type="PackedScene" uid="uid://c3h303wte1cdb" path="res://interactions/CollectableInteraction/EquippableInteraction/equippable_interaction.tscn" id="2_yuyco"]
+[ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="3_g5gq1"]
+[ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="4_1x308"]
+[ext_resource type="Texture2D" uid="uid://b5w2g7jdaderq" path="res://assets/models/tent_canvas.png" id="5_f254j"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="6_d8nsm"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3giw2"]
+points = PackedVector3Array(-0.18959405, 0.038242213, -0.09865721, -0.18959405, -0.042723134, -0.09682236, -0.20079751, 0.03308531, -0.085369006, -0.18959405, 0.09680303, -0.042723127, 0.18955483, 0.038242213, -0.09865721, -0.18959405, -0.09865721, -0.038261533, -0.20079751, -0.085369006, -0.03310463, -0.20079751, -0.03696749, -0.083765924, 0.18955483, -0.042723134, -0.09682236, -0.20079751, 0.08374659, -0.036967475, -0.18959405, 0.0986572, 0.038242243, 0.18955483, 0.09680303, -0.042723127, 0.2007976, 0.03308531, -0.085369006, -0.18959405, -0.09682236, 0.04270383, 0.18955483, -0.09865721, -0.038261533, -0.20079751, -0.083765924, 0.03694818, 0.2007976, -0.03696749, -0.083765924, 0.2007976, -0.085369006, -0.03310463, -0.20079751, 0.08534967, 0.03308534, -0.20079751, 0.036948152, 0.083746634, -0.18959405, 0.0427038, 0.09680306, 0.18955483, 0.0986572, 0.038242243, 0.2007976, 0.08374659, -0.036967475, -0.18959405, -0.038261544, 0.09865723, 0.18955483, -0.09682236, 0.04270383, -0.20079751, -0.033104636, 0.085349716, 0.2007976, -0.083765924, 0.03694818, 0.18955483, 0.0427038, 0.09680306, 0.2007976, 0.036948152, 0.083746634, 0.2007976, 0.08534967, 0.03308534, 0.18955483, -0.038261544, 0.09865723, 0.2007976, -0.033104636, 0.085349716)
+
+[sub_resource type="Resource" id="Resource_u6xgk"]
+script = ExtResource("4_1x308")
+success_text = "Canvas added"
+metadata/_custom_type_script = "uid://cwrr3yrlkcf84"
+
+[sub_resource type="Resource" id="Resource_roh6h"]
+script = ExtResource("6_d8nsm")
+item_name = "tent_canvas"
+item_icon = ExtResource("5_f254j")
+action_data = SubResource("Resource_u6xgk")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="TentCanvas" type="RigidBody3D" unique_id=557959429]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=198169001]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = ExtResource("1_3giw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=635451010]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_3giw2")
+
+[node name="EquippableInteraction" parent="." unique_id=489219896 instance=ExtResource("2_yuyco")]
+collect_sound_effect = ExtResource("3_g5gq1")
+item_data = SubResource("Resource_roh6h")

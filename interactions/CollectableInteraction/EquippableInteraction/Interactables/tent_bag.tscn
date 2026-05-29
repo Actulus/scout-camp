@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://d0st32d0y6en2"]
+
+[ext_resource type="ArrayMesh" uid="uid://1t1fw5duasam" path="res://assets/models/bag.tres" id="1_8poqh"]
+[ext_resource type="PackedScene" uid="uid://c3h303wte1cdb" path="res://interactions/CollectableInteraction/EquippableInteraction/equippable_interaction.tscn" id="2_tpf4w"]
+[ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="3_77hqx"]
+[ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="4_luqmy"]
+[ext_resource type="Texture2D" uid="uid://b1lukgevtq42w" path="res://assets/models/bag.png" id="5_ycwsu"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="6_oocg6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tpf4w"]
+points = PackedVector3Array(-0.2573948, -0.24034384, -0.004132122, -0.20138377, -0.35714138, -0.08453086, -0.23569052, -0.32534987, -0.014076531, -0.23569052, -0.32534987, 0.03022933, -0.25654462, -0.24057256, 0.016999722, -0.20038357, 0.3784086, 0.014202863, -0.20038357, 0.37680763, -0.055851907, -0.20038357, 0.32618517, -0.10424209, -0.14057182, 0.14077288, -0.26250905, -0.14057182, 0.04090035, -0.26086643, -0.17142788, -0.35714138, -0.11454165, -0.17142788, -0.38710314, -0.08453086, -0.14057182, -0.1029619, -0.22761485, -0.17142788, -0.38710314, 0.04971859, -0.20138377, -0.35714138, 0.060462087, -0.21548656, -0.30537537, 0.074490815, -0.22208785, -0.19719279, 0.078175575, -0.20038357, 0.32999712, 0.064857155, -0.18918137, 0.33579123, 0.0779092, -0.18918137, 0.3917504, 0.019352645, -0.18918137, 0.38984442, -0.061623216, -0.18918137, 0.33129317, -0.11756049, 0.14138365, 0.14077288, -0.26250905, 0.14138365, 0.04090035, -0.26086643, 0.17218971, -0.35714138, -0.11454165, 0.17218971, -0.38710314, -0.08453086, 0.14138365, -0.1029619, -0.22761485, 0.17218971, -0.38710314, 0.04971859, -0.17142788, -0.3587424, 0.08931863, -0.20138377, -0.24568054, 0.09810877, -0.13877146, -0.20725629, 0.17686489, -0.13732117, -0.12590972, 0.1767317, 0.1899932, 0.33579123, 0.0779092, -0.08741136, -0.14100495, 0.18521109, 0.1899932, 0.3917504, 0.019352645, 0.1899932, 0.38984442, -0.061623216, 0.1899932, 0.33129317, -0.11756049, 0.20119539, 0.32618517, -0.10424209, 0.2535057, -0.24034384, -0.004132122, 0.20219561, -0.35714138, -0.08453086, 0.23645234, -0.32534987, -0.014076531, 0.23645234, -0.32534987, 0.03022933, 0.20219561, -0.35714138, 0.060462087, 0.17218971, -0.3587424, 0.08931863, 0.00040590763, -0.31795472, 0.13708729, -0.13121997, -0.31795472, 0.13358009, -0.08556099, -0.17676085, 0.19102678, 0.20119539, 0.32999712, 0.064857155, 0.20119539, 0.3784086, 0.014202863, 0.08347225, -0.14100495, 0.18521109, 0.13813299, -0.12590972, 0.1767317, 0.20119539, 0.37680763, -0.055851907, 0.2526055, -0.24057256, 0.016999722, 0.21629837, -0.30537537, 0.074490815, 0.13958329, -0.20725629, 0.17686489, 0.1320318, -0.31795472, 0.13358009, 0.081621885, -0.17676085, 0.19102678, 0.22289968, -0.19719279, 0.078175575, 0.24480397, -0.18270746, 0.03102845, 0.20219561, -0.24568054, 0.09810877)
+
+[sub_resource type="Resource" id="Resource_p4mut"]
+script = ExtResource("4_luqmy")
+success_text = "Tent set up!"
+metadata/_custom_type_script = "uid://cwrr3yrlkcf84"
+
+[sub_resource type="Resource" id="Resource_el6ee"]
+script = ExtResource("6_oocg6")
+item_name = "tent_bag"
+item_icon = ExtResource("5_ycwsu")
+action_data = SubResource("Resource_p4mut")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="TentBag" type="RigidBody3D" unique_id=2093838896]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=697461881]
+mesh = ExtResource("1_8poqh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=80754623]
+shape = SubResource("ConvexPolygonShape3D_tpf4w")
+
+[node name="EquippableInteraction" parent="." unique_id=489219896 instance=ExtResource("2_tpf4w")]
+collect_sound_effect = ExtResource("3_77hqx")
+item_data = SubResource("Resource_el6ee")
