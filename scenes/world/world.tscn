@@ -107,6 +107,6 @@ camp_clear_radius = 20.0
 avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../StickScatterer"), NodePath("../MushroomScatterer")])
 
 [node name="FirePit" parent="." unique_id=2016362658 instance=ExtResource("9_1yooq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.251269, -0.20789099, 5.788615)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 7.251269, -0.20789099, 5.788615)
 
 [editable path="camp_landscape_w_Mountains"]
