@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://b831nfl14ho0c"]
+[gd_resource type="Resource" script_class="PlantInfo" format=3 uid="uid://b831nfl14ho0c"]
 
+[ext_resource type="Texture2D" uid="uid://diii71cw3dc4e" path="res://assets/plants/images/nightshade.jpg" id="1_glkkp"]
 [ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_rl4gk"]
 
 [resource]
 script = ExtResource("1_rl4gk")
 plant_id = "nightshade"
 display_name = "Nightshade"
+image = ExtResource("1_glkkp")

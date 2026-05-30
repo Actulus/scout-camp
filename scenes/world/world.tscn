@@ -5,6 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cwdr2myxwjaqg" path="res://assets/models/kenney_nature-kit/Models/OBJ format/tree_oak_dark.obj" id="3_1yooq"]
 [ext_resource type="ArrayMesh" uid="uid://g1gaxbbvx2ud" path="res://assets/models/kenney_nature-kit/Models/OBJ format/tree_pineRoundD.obj" id="3_6m72w"]
 [ext_resource type="PackedScene" uid="uid://dx1alfdeco5xl" path="res://interactions/WaterInteraction/water_interaction.tscn" id="3_wbwoo"]
+[ext_resource type="PackedScene" uid="uid://r7ft4cjpx72y" path="res://scenes/skills/plant/notice_board.tscn" id="4_ckok1"]
 [ext_resource type="PackedScene" uid="uid://c1od2lbapn5de" path="res://scenes/skills/shelter/tent_spot.tscn" id="4_dlabj"]
 [ext_resource type="Script" uid="uid://b0vsknat0qtq2" path="res://scripts/scatterer.gd" id="4_v5dby"]
 [ext_resource type="Script" uid="uid://uf3v57djnjuy" path="res://scripts/collectible_scatterer.gd" id="5_t5ptc"]
@@ -25,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://cwqfbeeyk5pc7" path="res://interactions/CollectableInteraction/InspectableInteraction/Interactables/book_page_3.tscn" id="25_page3"]
 [ext_resource type="PackedScene" uid="uid://cp3nxnaamappp" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/map_item.tscn" id="26_map"]
 [ext_resource type="PackedScene" uid="uid://cp3nxnaacompp" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/compass_item.tscn" id="27_compass"]
-[ext_resource type="PackedScene" uid="uid://cp3nxnaapl0on" path="res://scenes/skills/plant/plant_skill_zone.tscn" id="28_plzon"]
 [ext_resource type="Script" uid="uid://cp3navcntrl01" path="res://scripts/navigation_controller.gd" id="29_navctr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5dby"]
@@ -93,6 +93,9 @@ mesh = SubResource("PlaneMesh_tytul")
 shape = SubResource("ConcavePolygonShape3D_dlabj")
 
 [node name="WaterInteraction" parent="camp_landscape_w_Mountains/RiverNLake/StaticBody3D" unique_id=2088268351 instance=ExtResource("3_wbwoo")]
+
+[node name="NoticeBoard" parent="camp_landscape_w_Mountains" unique_id=212740403 instance=ExtResource("4_ckok1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.8074951, -2.032837)
 
 [node name="Bucket" parent="." unique_id=310901583 instance=ExtResource("15_wbwoo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.236672, -0.19255362, -2.074677)
@@ -175,9 +178,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.3, -30)
 
 [node name="BookPage3" parent="." unique_id=800000006 instance=ExtResource("25_page3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0.3, 20)
-
-[node name="PlantSkillZone" parent="." unique_id=800000007 instance=ExtResource("28_plzon")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 15)
 
 [node name="NavigationController" type="Node" parent="." unique_id=800000008]
 script = ExtResource("29_navctr")

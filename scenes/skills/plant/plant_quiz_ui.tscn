@@ -1,6 +1,19 @@
 [gd_scene format=3 uid="uid://bd5xsukf5x1kc"]
 
 [ext_resource type="Script" uid="uid://c81bwid0ftdjd" path="res://scenes/skills/plant/plant_quiz_ui.gd" id="1_drhel"]
+[ext_resource type="Texture2D" uid="uid://i1vqhgww40oj" path="res://assets/plants/images/blueberry.jpg" id="2_drhel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drhel"]
+bg_color = Color(0.18039216, 0.49019608, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3250b"]
+bg_color = Color(0.2627451, 0.627451, 0.2784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ierfc"]
+bg_color = Color(0.7764706, 0.15686275, 0.15686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77djy"]
+bg_color = Color(0.7764706, 0.15686275, 0.15686275, 1)
 
 [node name="PlantQuizUI" type="CanvasLayer" unique_id=1086250323]
 script = ExtResource("1_drhel")
@@ -52,11 +65,13 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "◀"
 
-[node name="PlantImage" type="ColorRect" parent="Control/PanelContainer/VBoxContainer/NavigationRow" unique_id=129908938]
+[node name="PlantImage" type="TextureRect" parent="Control/PanelContainer/VBoxContainer/NavigationRow" unique_id=2135026100]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 200)
+custom_minimum_size = Vector2(300, 350)
 layout_mode = 2
-color = Color(0, 0.43465683, 0.33754033, 1)
+texture = ExtResource("2_drhel")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="NextButton" type="Button" parent="Control/PanelContainer/VBoxContainer/NavigationRow" unique_id=1484496179]
 unique_name_in_owner = true
@@ -82,11 +97,19 @@ alignment = 1
 [node name="EdibleButton" type="Button" parent="Control/PanelContainer/VBoxContainer/AnswerRow" unique_id=1647591901]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_drhel")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3250b")
 text = "edible"
 
 [node name="PoisonousButton" type="Button" parent="Control/PanelContainer/VBoxContainer/AnswerRow" unique_id=1855585286]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_ierfc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_77djy")
 text = "poisonous"
 
 [node name="StatusLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=514972269]

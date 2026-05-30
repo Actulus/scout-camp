@@ -6,7 +6,7 @@ class_name PlantQuizUI
 @onready var progress_label: Label = %ProgressLabel
 @onready var plant_name_label: Label = %PlantNameLabel
 @onready var plant_info_label: Label = %PlantInfoLabel
-@onready var plant_color_rect: ColorRect = %PlantImage
+@onready var plant_image: TextureRect = %PlantImage
 @onready var edible_btn: Button = %EdibleButton
 @onready var poisonous_btn: Button = %PoisonousButton
 @onready var status_label: Label = %StatusLabel
@@ -17,6 +17,7 @@ class_name PlantQuizUI
 var current_index: int = 0
 var player_answers: Dictionary = {}
 var correct_answers: Dictionary = {}
+var wrong_answers: Array = []
 
 signal quiz_completed
 signal quiz_closed
@@ -27,38 +28,61 @@ func _ready() -> void:
 	prev_btn.pressed.connect(func(): _navigate(-1))
 	next_btn.pressed.connect(func(): _navigate(1))
 	submit_btn.pressed.connect(_submit)
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	# don't call _show_plant here — plants not assigned yet
 
 func setup() -> void:
-	# no signal connections here — only data setup
 	correct_answers.clear()
 	for plant in plants:
 		correct_answers[plant.plant_id] = plant.is_safe
 	if plants.size() > 0:
 		_show_plant(0)
 	_update_submit_state()
+	_freeze_player(true)
+
+func _freeze_player(frozen: bool) -> void:
+	# show/hide mouse
+	Input.set_mouse_mode(
+		Input.MOUSE_MODE_VISIBLE if frozen else Input.MOUSE_MODE_CAPTURED)
 	
-	# release mouse, block player movement
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# freeze player movement
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.set_physics_process(not frozen)
+	
+	# disable interaction raycast so player can't interact with world
+	var ic = get_tree().get_first_node_in_group("interaction_controller")
+	if ic:
+		ic.set_process(not frozen)
+		ic.set_physics_process(not frozen)
+		ic.interaction_raycast.enabled = not frozen
 
 func _show_plant(index: int) -> void:
 	current_index = index
 	var plant = plants[index]
 	
-	plant_color_rect.color = Color(0.2, 0.8, 0.2) if plant.is_safe else Color(0.8, 0.2, 0.2)
-	
 	progress_label.text = "Plant %d of %d" % [index + 1, plants.size()]
 	plant_name_label.text = plant.display_name
 	plant_info_label.text = plant.visual_clue
 	
-	# show previous answer if already categorized
-	status_label.text = ""
-	if player_answers.has(plant.plant_id):
-		var prev = player_answers[plant.plant_id]
-		status_label.text = "Categorized as: " + ("Edible" if prev else "Poisonous")
-		_highlight_buttons(prev)
+	# show image if available, color fallback if not
+	if plant.image != null:
+		plant_image.texture = plant.image
+		plant_image.modulate = Color.WHITE
 	else:
+		plant_image.texture = null
+		# color hint as fallback
+		plant_image.modulate = Color(0.2, 0.8, 0.2) if plant.is_safe else Color(0.8, 0.2, 0.2)
+	
+	status_label.text = ""
+	if plant.plant_id in wrong_answers:
+		status_label.text = "❌ Wrong! Try again."
+		status_label.modulate = Color(1.0, 0.3, 0.3)
+	elif player_answers.has(plant.plant_id):
+		var prev_answer = player_answers[plant.plant_id]
+		status_label.text = "✓ Categorized as: " + ("Edible" if prev_answer else "Poisonous")
+		status_label.modulate = Color(0.3, 1.0, 0.3)
+		_highlight_buttons(prev_answer)
+	else:
+		status_label.modulate = Color.WHITE
 		_highlight_buttons(null)
 	
 	# update navigation buttons
@@ -68,9 +92,12 @@ func _show_plant(index: int) -> void:
 func _answer(is_edible: bool) -> void:
 	var plant: PlantInfo = plants[current_index]
 	player_answers[plant.plant_id] = is_edible
+	# clear wrong flag when player re-answers
+	wrong_answers.erase(plant.plant_id)
 	
 	var label = "Edible" if is_edible else "Poisonous"
 	status_label.text = plant.display_name + " marked as " + label
+	status_label.modulate = Color.WHITE
 	_highlight_buttons(is_edible)
 	_update_submit_state()
 	
@@ -113,49 +140,53 @@ func _update_submit_state() -> void:
 
 func _submit() -> void:
 	var correct_count = 0
-	var wrong_plants: Array = []
+	wrong_answers.clear()
+	var wrong_plant_names: Array = []
 	
 	for plant in plants:
-		if player_answers.get(plant.plant_id) == correct_answers[plant.plant_id]:
-			correct_count += 1
-		else:
-			wrong_plants.append(plant.display_name)
+		if player_answers.get(plant.plant_id) != correct_answers[plant.plant_id]:
+			wrong_answers.append(plant.plant_id)
+			wrong_plant_names.append(plant.display_name)
 	
-	if wrong_plants.is_empty():
-		status_label.text = "Perfect! All plants correctly identified!"
+	
+	if wrong_answers.is_empty():
+		status_label.text = "✓ Perfect! All plants correctly identified!"
+		status_label.modulate = Color(0.3, 1.0, 0.3)
 		GameManager.complete_skill("plants")
 		await get_tree().create_timer(2.0).timeout
 		_close()
 	else:
-		status_label.text = "Incorrect: " + ", ".join(wrong_plants) + "\nCheck the guide and try again."
-		# clear wrong answers only
-		for plant in plants:
-			if player_answers.get(plant.plant_id) != correct_answers[plant.plant_id]:
-				player_answers.erase(plant.plant_id)
+		status_label.text = "❌ Incorrect: " + ", ".join(wrong_plant_names)
+		status_label.modulate = Color(1.0, 0.3, 0.3)
+		
+		# clear only wrong answers so player retries just those
+		for plant_id in wrong_answers:
+			player_answers.erase(plant_id)
+		
 		_update_submit_state()
-		# show first wrong plant
+		
+		# navigate to first wrong plant
 		for i in range(plants.size()):
-			if not player_answers.has(plants[i].plant_id):
+			if plants[i].plant_id in wrong_answers:
 				_show_plant(i)
 				return
 
 func _close() -> void:
-	# restore mouse capture
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	_freeze_player(false)
 	emit_signal("quiz_closed")
 	queue_free()
 
 func _input(event: InputEvent) -> void:
 	if not visible:
 		return
+	# block mouse motion so camera doesn't rotate
+	if event is InputEventMouseMotion:
+		get_viewport().set_input_as_handled()
+		return
 	# only block movement keys, not mouse clicks on UI
 	if event is InputEventKey:
-		var action_keys = ["move_forward", "move_backward", "move_left", 
-						  "move_right", "jump", "sprint", "crouch"]
-		for action in action_keys:
+		for action in ["move_forward", "move_backward", "move_left", 
+					   "move_right", "jump", "sprint", "crouch"]:
 			if event.is_action(action):
 				get_viewport().set_input_as_handled()
 				return
-	# block mouse motion so camera doesn't move
-	if event is InputEventMouseMotion:
-		get_viewport().set_input_as_handled()

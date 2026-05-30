@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dntkk4n8yvq60"]
+
+[ext_resource type="Script" uid="uid://ceysat3eu8ahx" path="res://interactions/NoticeBoardInteraction/noticeboard_interaction.gd" id="1_ffgt2"]
+
+[node name="NoticeboardInteraction" type="Node" unique_id=1465900357]
+script = ExtResource("1_ffgt2")

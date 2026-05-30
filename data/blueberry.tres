@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="PlantInfo" format=3 uid="uid://xfddx66rfaiv"]
 
 [ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_bstuc"]
+[ext_resource type="Texture2D" uid="uid://i1vqhgww40oj" path="res://assets/plants/images/blueberry.jpg" id="1_vbg1m"]
 
 [resource]
 script = ExtResource("1_bstuc")
 plant_id = "blueberry"
 display_name = "Blueberry"
 is_safe = true
+image = ExtResource("1_vbg1m")

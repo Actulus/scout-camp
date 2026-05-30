@@ -6,3 +6,4 @@ class_name PlantInfo
 @export var is_safe: bool 
 @export var visual_clue: String
 @export var real_world_fact: String 
+@export var image: Texture2D

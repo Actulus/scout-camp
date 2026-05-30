@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://r7ft4cjpx72y"]
+
+[ext_resource type="PackedScene" uid="uid://dntkk4n8yvq60" path="res://interactions/NoticeBoardInteraction/noticeboard_interaction.tscn" id="1_7frs4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emni7"]
+albedo_color = Color(0.54509807, 0.27058825, 0.07450981, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7frs4"]
+material = SubResource("StandardMaterial3D_emni7")
+top_radius = 0.05
+bottom_radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dx6s"]
+albedo_color = Color(0.54509807, 0.27058825, 0.07450981, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nwu03"]
+material = SubResource("StandardMaterial3D_3dx6s")
+size = Vector3(0.8, 0.6, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_638hg"]
+albedo_color = Color(1, 1, 0.9411765, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ah1l5"]
+material = SubResource("StandardMaterial3D_638hg")
+size = Vector3(0.6, 0.4, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5eg0b"]
+size = Vector3(1, 2.2492676, 0.31713867)
+
+[node name="NoticeBoard" type="StaticBody3D" unique_id=212740403]
+
+[node name="Post" type="MeshInstance3D" parent="." unique_id=1552839900]
+mesh = SubResource("CylinderMesh_7frs4")
+
+[node name="Board" type="MeshInstance3D" parent="." unique_id=784070425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5988617, 0.05065918)
+mesh = SubResource("BoxMesh_nwu03")
+
+[node name="Paper" type="MeshInstance3D" parent="." unique_id=451735615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59183955, 0.06781006)
+mesh = SubResource("BoxMesh_ah1l5")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1483498616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58051753, 0.074279785)
+pixel_size = 0.002
+text = "Plant ID Test
+Press E to start"
+font_size = 36
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1584180516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13952637, -0.014770508)
+shape = SubResource("BoxShape3D_5eg0b")
+
+[node name="NoticeboardInteraction" parent="." unique_id=1465900357 instance=ExtResource("1_7frs4")]
