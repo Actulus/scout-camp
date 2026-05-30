@@ -206,10 +206,14 @@ func on_note_inspected(note: Node3D):
 	current_note.position = Vector3(0.0,0.0,0.0)
 	current_note.rotation_degrees = Vector3(90,10,0)
 	
-	# Show the note overlay as well as the note text 
-	note_overlay.visible = true 
-	is_note_overlay_display = true 
-	note_content.bbcode_enabled = true 
+	# Let the item swap its own mesh (e.g. closed → open book)
+	if current_note.has_method("on_inspection_started"):
+		current_note.on_inspection_started()
+
+	# Show the note overlay as well as the note text
+	note_overlay.visible = true
+	is_note_overlay_display = true
+	note_content.bbcode_enabled = true
 	note_content.text = note_interaction_component.content
 
 # Puts the note currently in the player's hand and puts it in their inventory

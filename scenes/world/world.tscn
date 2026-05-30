@@ -149,9 +149,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.817813, 0.15454066, 0.0067
 [node name="TentPoles" parent="." unique_id=1915320521 instance=ExtResource("12_srmg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.228617, -0.10020327, -0.9452685)
 
-[node name="Bucket2" parent="." unique_id=740226925 instance=ExtResource("15_wbwoo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.236672, -0.19255362, -2.074677)
-
 [node name="CookingPot" parent="." unique_id=29031691 instance=ExtResource("16_tytul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0520267, -0.2019043, 5.491482)
 
@@ -163,9 +160,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2623005, 0.6494448, 4.26922
 
 [node name="PurifyStation" parent="." unique_id=979031062 instance=ExtResource("19_ues17")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.839527, -0.17053443, 4.3423014)
-
-[node name="PlantFieldGuide" parent="." unique_id=800000001 instance=ExtResource("22_guide")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 10)
 
 [node name="MapItem" parent="." unique_id=800000002 instance=ExtResource("26_map")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.91449, 0.6521728, 4.6520996)
@@ -187,5 +181,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 15)
 
 [node name="NavigationController" type="Node" parent="." unique_id=800000008]
 script = ExtResource("29_navctr")
+
+[node name="PlantFieldGuide" parent="." unique_id=100000001 instance=ExtResource("22_guide")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 10.226498, 0.7720207, 4.140381)
 
 [editable path="camp_landscape_w_Mountains"]

@@ -13,8 +13,8 @@ albedo_texture = ExtResource("1_emusa")
 material = SubResource("StandardMaterial3D_map")
 size = Vector2(0.5, 0.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_map"]
-size = Vector3(0.5, 0.02, 0.3)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qsrpm"]
+data = PackedVector3Array(0.25, 0, 0.14999999, -0.25, 0, 0.14999999, 0.25, 0, -0.14999999, -0.25, 0, 0.14999999, -0.25, 0, -0.14999999, 0.25, 0, -0.14999999)
 
 [sub_resource type="Resource" id="Resource_mapact"]
 script = ExtResource("4_iact")
@@ -32,8 +32,8 @@ metadata/_custom_type_script = "uid://dwxgooifqus3f"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=500000002]
 mesh = SubResource("PlaneMesh_map")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=500000003]
-shape = SubResource("BoxShape3D_map")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2005902901]
+shape = SubResource("ConcavePolygonShape3D_qsrpm")
 
 [node name="InspectableInteraction" parent="." unique_id=1005071742 instance=ExtResource("2_insp")]
 content = "[center][img=640x480]res://assets/models/map.png[/img][/center]\\n\\nPress [b]M[/b] anytime to open the map overlay while the map is in your inventory."

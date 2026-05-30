@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://bd5xsukf5x1kc"]
+
+[ext_resource type="Texture2D" uid="uid://b4v04ew1u2321" path="res://assets/models/kenney_nature-kit/Side/mushroom_red.png" id="1_ccm5x"]
+[ext_resource type="Script" uid="uid://c81bwid0ftdjd" path="res://scenes/skills/plant/plant_quiz_ui.gd" id="1_drhel"]
+
+[node name="PlantQuizUI" type="CanvasLayer" unique_id=1086250323]
+script = ExtResource("1_drhel")
+
+[node name="Control" type="Control" parent="." unique_id=149999847]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1569242528]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer" unique_id=107492265]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=1832930222]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Plant Identification"
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=1670408431]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Plant 1 of 6"
+horizontal_alignment = 1
+
+[node name="NavigationRow" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1002691858]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="Control/PanelContainer/VBoxContainer/NavigationRow" unique_id=786503528]
+unique_name_in_owner = true
+layout_mode = 2
+text = "◀"
+
+[node name="PlantImage" type="TextureRect" parent="Control/PanelContainer/VBoxContainer/NavigationRow" unique_id=1182917371]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_ccm5x")
+expand_mode = 2
+
+[node name="NextButton" type="Button" parent="Control/PanelContainer/VBoxContainer/NavigationRow" unique_id=1484496179]
+unique_name_in_owner = true
+layout_mode = 2
+text = "▶"
+
+[node name="PlantNameLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=1427737170]
+unique_name_in_owner = true
+layout_mode = 2
+text = "plant display name"
+horizontal_alignment = 1
+
+[node name="PlantInfoLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=733940792]
+unique_name_in_owner = true
+layout_mode = 2
+text = "visual clue text"
+horizontal_alignment = 1
+
+[node name="AnswerRow" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1427694751]
+layout_mode = 2
+alignment = 1
+
+[node name="EdibleButton" type="Button" parent="Control/PanelContainer/VBoxContainer/AnswerRow" unique_id=1647591901]
+unique_name_in_owner = true
+layout_mode = 2
+text = "edible"
+
+[node name="PoisonousButton" type="Button" parent="Control/PanelContainer/VBoxContainer/AnswerRow" unique_id=1855585286]
+unique_name_in_owner = true
+layout_mode = 2
+text = "poisonous"
+
+[node name="StatusLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=514972269]
+unique_name_in_owner = true
+layout_mode = 2
+text = "feedback text"
+horizontal_alignment = 1
+
+[node name="SubmitButton" type="Button" parent="Control/PanelContainer/VBoxContainer" unique_id=1914443459]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Submit All"

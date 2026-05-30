@@ -1,5 +1,5 @@
 extends Resource
-class_name PlantData
+class_name PlantInfo
 
 @export var plant_id: String 
 @export var display_name: String 

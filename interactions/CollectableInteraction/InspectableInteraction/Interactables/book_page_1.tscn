@@ -7,13 +7,14 @@
 [ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_v2xrm"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bp1"]
+size = Vector2(0.3, 0.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bp1"]
 transparency = 1
 albedo_texture = ExtResource("1_sjawa")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bp1"]
-size = Vector3(2.25, 0.3, 3.1)
+size = Vector3(0.4, 0.1, 0.5)
 
 [sub_resource type="Resource" id="Resource_bp1act"]
 script = ExtResource("4_i2poj")
@@ -30,11 +31,11 @@ metadata/_custom_type_script = "uid://dwxgooifqus3f"
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=200000002]
-transform = Transform3D(1.112, 0, 0, 0, 1, 0, 0, 0, 1.536, 0, 0, 0)
 mesh = SubResource("PlaneMesh_bp1")
 surface_material_override/0 = SubResource("StandardMaterial3D_bp1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=200000003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0033447146, 0, -0.0020873994)
 shape = SubResource("BoxShape3D_bp1")
 
 [node name="InspectableInteraction" parent="." unique_id=200000004 instance=ExtResource("2_a4uc4")]
