@@ -27,11 +27,16 @@ func _has_item(item_name: String) -> bool:
 	for slot in inventory.inventory_slots:
 		if slot.slot_data and slot.slot_data.item_name == item_name:
 			return true
-	# also check equipped item via interaction_controller group
 	var ic = get_tree().get_first_node_in_group("interaction_controller")
-	if ic and ic.item_equipped and ic.equipped_item_interaction_component:
-		if ic.equipped_item_interaction_component.item_data.item_name == item_name:
-			return true
+	if ic:
+		# Item currently held in hand (equippable)
+		if ic.item_equipped and ic.equipped_item_interaction_component:
+			if ic.equipped_item_interaction_component.item_data.item_name == item_name:
+				return true
+		# Item currently being read as a note/map (inspectable)
+		if ic.note_interaction_component and ic.note_interaction_component.item_data:
+			if ic.note_interaction_component.item_data.item_name == item_name:
+				return true
 	return false
 
 func _get_inventory() -> InventoryController:

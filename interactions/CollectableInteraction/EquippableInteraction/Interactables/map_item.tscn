@@ -1,40 +1,41 @@
 [gd_scene format=3 uid="uid://cp3nxnaamappp"]
 
-[ext_resource type="PackedScene" uid="uid://c3h303wte1cdb" path="res://interactions/CollectableInteraction/EquippableInteraction/equippable_interaction.tscn" id="1_equip"]
-[ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="2_sound"]
-[ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="3_eqact"]
-[ext_resource type="Texture2D" uid="uid://cgsrsfhts6ds8" path="res://assets/notes/oldpage.png" id="4_icon"]
+[ext_resource type="Texture2D" uid="uid://wk81e3nmnb7t" path="res://assets/models/map.png" id="1_emusa"]
+[ext_resource type="PackedScene" uid="uid://bmpq1lpt8h5dt" path="res://interactions/CollectableInteraction/InspectableInteraction/inspectable_interaction.tscn" id="2_insp"]
+[ext_resource type="AudioStream" uid="uid://dh4pukhvkdvmi" path="res://assets/audio/book_flip_kenney_cards.wav" id="3_sound"]
+[ext_resource type="Script" uid="uid://c5boc4i7m1t8k" path="res://inventory/actions/inspectable_action.gd" id="4_iact"]
 [ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_idata"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_map"]
-size = Vector3(0.3, 0.02, 0.4)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_map"]
+albedo_texture = ExtResource("1_emusa")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_map"]
+material = SubResource("StandardMaterial3D_map")
+size = Vector2(0.5, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_map"]
-size = Vector3(0.3, 0.02, 0.4)
+size = Vector3(0.5, 0.02, 0.3)
 
 [sub_resource type="Resource" id="Resource_mapact"]
-script = ExtResource("3_eqact")
-one_time_use = false
-success_text = "Map equipped"
-metadata/_custom_type_script = "uid://cwrr3yrlkcf84"
+script = ExtResource("4_iact")
+metadata/_custom_type_script = "uid://c5boc4i7m1t8k"
 
 [sub_resource type="Resource" id="Resource_mapdata"]
 script = ExtResource("5_idata")
 item_name = "map"
-item_icon = ExtResource("4_icon")
+item_icon = ExtResource("1_emusa")
 action_data = SubResource("Resource_mapact")
 metadata/_custom_type_script = "uid://dwxgooifqus3f"
 
-[node name="MapItem" type="RigidBody3D" unique_id=500000001]
+[node name="MapItem" type="StaticBody3D" unique_id=500000001]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=500000002]
-mesh = SubResource("BoxMesh_map")
+mesh = SubResource("PlaneMesh_map")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=500000003]
 shape = SubResource("BoxShape3D_map")
 
-[node name="EquippableInteraction" parent="." unique_id=500000004 instance=ExtResource("1_equip")]
-collect_sound_effect = ExtResource("2_sound")
+[node name="InspectableInteraction" parent="." unique_id=1005071742 instance=ExtResource("2_insp")]
+content = "[center][img=640x480]res://assets/models/map.png[/img][/center]\\n\\nPress [b]M[/b] anytime to open the map overlay while the map is in your inventory."
+collect_sound_effect = ExtResource("3_sound")
 item_data = SubResource("Resource_mapdata")
-hand_rotation = Vector3(0.0, 180.0, -90.0)
-hand_position = Vector3(0.1, -0.05, -0.15)
