@@ -49,6 +49,6 @@ mesh = SubResource("CylinderMesh_odso8")
 
 [node name="EquippableInteraction" parent="." unique_id=489219896 instance=ExtResource("2_odso8")]
 hand_rotation = Vector3(0, 0, 0)
-hand_position = Vector3(0, -1, 0)
+hand_position = Vector3(0, -0.5, 0)
 collect_sound_effect = ExtResource("3_3tw04")
 item_data = SubResource("Resource_4lh8m")
