@@ -16,6 +16,9 @@ or trigger collection events.
 ## Notify the player / inventory manager that this item was picked up
 signal item_collected(item: Node)
 
+@export var hand_rotation: Vector3 = Vector3(0, 180, -90)
+@export var hand_position: Vector3 = Vector3(0, 0, 0)
+
 ## Runs once, after the node and all its children have entered the scene tree and are ready
 func _ready() -> void:
 	super()
@@ -35,9 +38,12 @@ func interact() -> void:
 	if not can_interact:
 		return
 	
-	item_collected.emit(get_parent())
-	
 	# The item is now in the player hand and should NOT be interacted with
+	if object_ref.is_in_group("cooking_pot"):
+		var ic = get_tree().get_first_node_in_group("interaction_controller")
+		if ic: ic._show_interaction_text("Pot is on the fire!", 1.5)
+		return
+	item_collected.emit(get_parent())
 	can_interact = false
 	
 ## Alternate interaction using secondary button

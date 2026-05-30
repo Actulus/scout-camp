@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cwqfbeeyk5nc7"]
+
+[ext_resource type="Texture2D" uid="uid://cgsrsfhts6ds8" path="res://assets/notes/oldpage.png" id="1_sjawa"]
+[ext_resource type="PackedScene" uid="uid://bmpq1lpt8h5dt" path="res://interactions/CollectableInteraction/InspectableInteraction/inspectable_interaction.tscn" id="2_a4uc4"]
+[ext_resource type="AudioStream" uid="uid://dh4pukhvkdvmi" path="res://assets/audio/book_flip_kenney_cards.wav" id="3_p3g4h"]
+[ext_resource type="Script" uid="uid://c5boc4i7m1t8k" path="res://inventory/actions/inspectable_action.gd" id="4_i2poj"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_v2xrm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bp1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bp1"]
+transparency = 1
+albedo_texture = ExtResource("1_sjawa")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bp1"]
+size = Vector3(2.25, 0.3, 3.1)
+
+[sub_resource type="Resource" id="Resource_bp1act"]
+script = ExtResource("4_i2poj")
+metadata/_custom_type_script = "uid://c5boc4i7m1t8k"
+
+[sub_resource type="Resource" id="Resource_bp1data"]
+script = ExtResource("5_v2xrm")
+item_name = "book_page_1"
+item_icon = ExtResource("1_sjawa")
+action_data = SubResource("Resource_bp1act")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="BookPage1" type="StaticBody3D" unique_id=200000001]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=200000002]
+transform = Transform3D(1.112, 0, 0, 0, 1, 0, 0, 0, 1.536, 0, 0, 0)
+mesh = SubResource("PlaneMesh_bp1")
+surface_material_override/0 = SubResource("StandardMaterial3D_bp1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=200000003]
+shape = SubResource("BoxShape3D_bp1")
+
+[node name="InspectableInteraction" parent="." unique_id=200000004 instance=ExtResource("2_a4uc4")]
+content = "[b]Lost Scout Notes - Page 1 of 3[/b]\\n\\nDear fellow scouts,\\n\\nI lost my navigation notes across camp while hiking. If you find this, please collect the other two pages!\\n\\nUse your [b]map and compass[/b] (press M) to help you search. Red markers show page locations.\\n\\nPage 2 clue: Walk [b]northeast[/b] from the firepit. Look among the tall pine trees.\\n\\nPage 3 clue: Head [b]southwest[/b] from camp toward the river bend.\\n\\nGood luck, scout!\\n- Kofi"
+collect_sound_effect = ExtResource("3_p3g4h")
+item_data = SubResource("Resource_bp1data")

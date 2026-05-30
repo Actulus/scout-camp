@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bfywnaxr5wlgf"]
+
+[ext_resource type="Script" uid="uid://cen3qrbngpaf8" path="res://interactions/PotInteraction/pot_interaction.gd" id="1_t8qnq"]
+
+[node name="PotInteraction" type="Node" unique_id=111503430]
+script = ExtResource("1_t8qnq")

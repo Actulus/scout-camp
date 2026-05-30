@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://d1gyaiyir3bxc"]
+
+[ext_resource type="PackedScene" uid="uid://dx1alfdeco5xl" path="res://interactions/WaterInteraction/water_interaction.tscn" id="1_2knhn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bekw1"]
+size = Vector3(30, 1, 230)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2knhn"]
+size = Vector3(30, 1, 230)
+
+[node name="WaterSource" type="Area3D" unique_id=1337087860]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1698316505]
+shape = SubResource("BoxShape3D_bekw1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1351311673]
+mesh = SubResource("BoxMesh_2knhn")
+
+[node name="WaterInteraction" parent="." unique_id=2088268351 instance=ExtResource("1_2knhn")]

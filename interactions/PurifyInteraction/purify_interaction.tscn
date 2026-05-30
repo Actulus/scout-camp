@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c5vcpix5me0v7"]
+
+[ext_resource type="Script" uid="uid://dlf0jrohmdi1l" path="res://interactions/PurifyInteraction/purify_interaction.gd" id="1_xngeh"]
+
+[node name="PurifyInteraction" type="Node" unique_id=1011956626]
+script = ExtResource("1_xngeh")

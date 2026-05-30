@@ -6,11 +6,13 @@ extends Node3D
 @export var camp_clear_radius: float = 8.0
 @export var min_distance_from_others: float = 3.0
 @export var avoid_multimeshes: Array[NodePath] = []
+@export var water_level: float = -1.5
 
 var _placed_positions: Array[Vector3] = []
 var _avoid_transforms: Array[Transform3D] = []
 
 func _ready():
+	await get_tree().physics_frame
 	await get_tree().physics_frame
 	_cache_multimesh_positions()
 	_scatter()
@@ -34,6 +36,8 @@ func _scatter():
 		var dist = Vector2(x, z).length()
 		if dist > world_radius: continue
 		if dist < camp_clear_radius: continue
+		var height = _get_height(x, z)
+		if height < water_level: continue
 		var pos = Vector3(x, _get_height(x, z), z)
 		if _too_close(pos): continue
 
@@ -45,7 +49,9 @@ func _scatter():
 		instance.rotation.y = randf() * TAU
 
 		_placed_positions.append(pos)
+		GameManager.scattered_positions.append(pos)
 		placed += 1
+		
 
 func _too_close(pos: Vector3) -> bool:
 	for p in _placed_positions:
@@ -54,11 +60,15 @@ func _too_close(pos: Vector3) -> bool:
 	for t in _avoid_transforms:
 		if pos.distance_to(t.origin) < min_distance_from_others:
 			return true
+	#for p in GameManager.scattered_positions:
+		#if pos.distance_to(p) < min_distance_from_others:
+			#return true
 	return false
 
 func _get_height(x: float, z: float) -> float:
 	var space = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(
 		Vector3(x, 50, z), Vector3(x, -50, z))
+	query.collision_mask = 1
 	var result = space.intersect_ray(query)
 	return result.position.y if result else 0.0

@@ -27,7 +27,6 @@ func _do_boil():
 	if not GameManager.skills_completed["fire"]:
 		feedback.text = "You need a fire to boil water. Complete the fire skill first."
 		return
-	player_ref.get_node("Inventory").set_item_state("canteen", "safe")
+	feedback.text = "Now collect, boil, and purify your water to complete the skill!"
 	await get_tree().create_timer(2.5).timeout
-	GameManager.complete_skill("water")
 	queue_free()

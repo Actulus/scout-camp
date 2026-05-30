@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bwhc53xt8f8al"]
+
+[ext_resource type="ArrayMesh" uid="uid://bti77mn0644um" path="res://assets/models/table.tres" id="1_pn5l0"]
+[ext_resource type="PackedScene" uid="uid://c5vcpix5me0v7" path="res://interactions/PurifyInteraction/purify_interaction.tscn" id="2_wuxho"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7udri"]
+points = PackedVector3Array(-0.8530642, 0.7275219, -0.5176566, -0.80318356, -0.0024683475, -0.4677496, -0.8530642, 0.7275219, 0.5123436, -0.8530642, 0.7774554, -0.5176566, 0.8569366, 0.7275219, -0.5176566, -0.80318356, -0.0024683475, 0.4622349, 0.81191015, -0.0024683475, -0.4677496, -0.8530642, 0.7774554, 0.5123436, 0.8567692, 0.7275219, 0.5123436, 0.8569366, 0.7774554, -0.5176566, 0.81191015, -0.0024683475, 0.4622349, 0.8567692, 0.7774554, 0.5123436)
+
+[node name="PurifyStation" type="StaticBody3D" unique_id=979031062]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2007642728]
+mesh = ExtResource("1_pn5l0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=229329990]
+shape = SubResource("ConvexPolygonShape3D_7udri")
+
+[node name="PurifyInteraction" parent="." unique_id=1011956626 instance=ExtResource("2_wuxho")]

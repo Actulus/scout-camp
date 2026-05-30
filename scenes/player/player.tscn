@@ -61,6 +61,7 @@ fov = 90.0
 [node name="InteractionRayCast3D" type="RayCast3D" parent="Head/Eyes/Camera3D" unique_id=201751466]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -2)
+collide_with_areas = true
 
 [node name="Hand" type="Marker3D" parent="Head/Eyes/Camera3D" unique_id=1990177918]
 unique_name_in_owner = true

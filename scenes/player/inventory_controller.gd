@@ -173,6 +173,15 @@ func use_collectable(slot_id: int) -> void:
 			_show_use_hint(usable.use_target_group)
 			interaction_controller.interact_failure_player.play()
 			return
+			
+	# drinking purified water
+	if item_data.item_name == "purified_water_mug":
+		GameManager.complete_skill("water")
+		interaction_controller._show_interaction_text("Water drunk! Skill complete.", 3.0)
+		interaction_controller.interact_success_player.play()
+		slot.fill_slot(null)
+		inventory_full = false
+		return
 
 	# default consume behavior — item has no world target
 	slot.fill_slot(null)

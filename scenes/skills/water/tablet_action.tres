@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EquippableAction" format=3 uid="uid://b1d65cdasl28y"]
+
+[ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="1_jyoyh"]
+
+[resource]
+script = ExtResource("1_jyoyh")
+success_text = "Tablet added!"
+metadata/_custom_type_script = "uid://cwrr3yrlkcf84"

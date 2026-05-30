@@ -1,6 +1,7 @@
 extends Node
 
 var current_day: int = 1 
+var fire_lit: bool = false
 var skills_completed: Dictionary = {
 	"shelter": false,
 	"tent": false,
@@ -10,11 +11,17 @@ var skills_completed: Dictionary = {
 	"navigation": false 
 }
 var badges_earned: Array = []
+var scattered_positions: Array[Vector3] = []
+var plant_guide_read: bool = false
+var pages_found: int = 0
 
 signal skill_completed(skill_id: String)
 signal badge_earned(badge_id: String)
 signal day_changed(day_number: int)
 signal flag_found(flag_index: int)
+
+func _ready() -> void:
+	scattered_positions.clear()
 
 func complete_skill(skill_id:  String):
 	if not skills_completed[skill_id]:

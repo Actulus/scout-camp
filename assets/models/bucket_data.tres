@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bklpjoml1gwog"]
+
+[ext_resource type="Resource" uid="uid://wbgrlevm16ey" path="res://assets/models/bucket_action.tres" id="1_3bvlo"]
+[ext_resource type="Texture2D" uid="uid://c0jui8urjlbdp" path="res://assets/models/bucket.png" id="2_x032a"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="3_2b5sx"]
+
+[resource]
+script = ExtResource("3_2b5sx")
+item_name = "bucket"
+item_icon = ExtResource("2_x032a")
+action_data = ExtResource("1_3bvlo")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"

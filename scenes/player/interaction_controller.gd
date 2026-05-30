@@ -27,9 +27,10 @@ enum Reticle {
 
 signal invent_on_item_collected(item)
 
-var item_equipped: bool = false 
+var item_equipped: bool = false
 var equipped_item: Node3D
-var equipped_item_interaction_component: AbstractInteraction 
+var equipped_item_interaction_component: AbstractInteraction
+var _item_swap_on_use: PackedScene = null
 
 var current_object: Object 
 var potential_interaction_component: AbstractInteraction
@@ -47,7 +48,8 @@ var interact_success_sound_effect: AudioStreamWAV = load("res://assets/audio/suc
 var equip_item_player: AudioStreamPlayer
 var equip_item_sound_effect: AudioStreamWAV = load("res://assets/audio/item_pickup_minifantasy.wav")
 	
-func _ready() -> void: 
+func _ready() -> void:
+	add_to_group("interaction_controller")
 	interactable_check.body_entered.connect(_collectable_item_entered_range)
 	interactable_check.body_exited.connect(_collectable_item_exited_range)
 	invent_on_item_collected.connect(inventory_controller.pickup_item)
@@ -66,6 +68,21 @@ func _ready() -> void:
 	add_child(equip_item_player)
 
 func _process(delta: float) -> void:
+	if item_equipped:
+		_update_reticle_state()
+		# still update potential_object so use_item knows what to target
+		potential_object = interaction_raycast.get_collider()
+		if potential_object and potential_object is Node:
+			if potential_object == equipped_item or potential_object.get_parent() == equipped_item:
+				potential_object = null
+				potential_interaction_component = null
+			else:
+				potential_interaction_component = find_interaction_component(potential_object)
+				print("equipped mode - potential: ", potential_object.name if potential_object else "null")
+				print("equipped mode - ic: ", potential_interaction_component)
+		else:
+			potential_interaction_component = null
+		return  # skip all other interaction logic
 	if inventory_controller.visible == false:
 		# If on the previous frame, we were interacting with and object, lets keep interacting with it
 		if current_object:
@@ -134,10 +151,6 @@ func _process(delta: float) -> void:
 								
 						if interaction_component is DoorInteraction: 
 							interaction_component.set_direction(current_object.to_local(interaction_raycast.get_collision_point()))
-							
-				#else: # If the object we just looked at can't be interacted with, call unfocus, not necessary?
-					#current_object = null
-					#_unfocus()
 			else: # needed to show reticle 
 				_unfocus()
 	else: 
@@ -204,16 +217,29 @@ func _on_note_collected() -> void:
 	# Hide the note overlay and mark that no note is being inspected
 	note_overlay.visible = false
 	is_note_overlay_display = false
-	
+
+	# Track special collectible notes
+	if note_interaction_component.item_data:
+		match note_interaction_component.item_data.item_name:
+			"plant_field_guide":
+				GameManager.plant_guide_read = true
+				_show_interaction_text("Plant guide read! You can now attempt the plant skill.", 3.0)
+			"book_page_1", "book_page_2", "book_page_3":
+				if not GameManager.skills_completed["navigation"]:
+					GameManager.pages_found += 1
+					_show_interaction_text("Page found! (%d/3)" % GameManager.pages_found, 2.0)
+					if GameManager.pages_found >= 3:
+						GameManager.complete_skill("navigation")
+
 	# Add the note's ItemData to the player's inventory
 	_add_item_to_inventory(note_interaction_component.item_data)
-	
+
 	# Play the sound effect for putting the note away
 	_play_sound_effect(note_interaction_component.put_away_sound_effect)
-	
+
 	# Remove the note from the world
 	current_note.queue_free()
-	
+
 	# Clear references to the current note
 	current_note = null
 	note_interaction_component = null
@@ -236,6 +262,9 @@ func on_item_equipped(item: Node3D):
 	# Set the equipped item and update flag
 	equipped_item = item
 	item_equipped = true
+	
+	if item is CollisionObject3D:
+		interaction_raycast.add_exception(item)
 	
 	# Cache the interaction component for this item
 	equipped_item_interaction_component = find_interaction_component(equipped_item)
@@ -261,25 +290,58 @@ func on_item_equipped(item: Node3D):
 	# Set the items's transform/rotation
 	item.transform.origin = item_hand.transform.origin
 	item.position = Vector3(0.0,0.0,0.0)
-	item.rotation_degrees = Vector3(0,180,-90)
+	var equippable = find_interaction_component(item) as EquippableInteraction
+	if equippable:
+		item.rotation_degrees = equippable.hand_rotation
+		item.position = equippable.hand_position
+	else:
+		item.rotation_degrees = Vector3(0, 180, -90)
 	
 	# Play sound effect
 	equip_item_player.play()
 	
-# Performs the "use" action of a given item (provided from its action data) on a potential object
-# If there is no object to use it on, or this potential object cant be interacted with this item type
-# (whether its the wrong key, or using a key on a box) then it is a no-op
+# Called by interactions that want to replace the equipped item with a different one on success.
+func swap_equipped_item_after_use(new_scene: PackedScene) -> void:
+	_item_swap_on_use = new_scene
+
+# Called by interactions that physically place the equipped item in the world themselves
+# (e.g. cooking pot placed on fire). Clears IC state without returning item to inventory
+# or destroying it.
+func unequip_no_destroy() -> void:
+	if equipped_item is CollisionObject3D:
+		interaction_raycast.remove_exception(equipped_item)
+	equipped_item = null
+	equipped_item_interaction_component = null
+	item_equipped = false
+
 func _use_equipped_item() -> void:
-	# If there is an object we can use the equipped object on
+	_item_swap_on_use = null
 	if potential_object:
-		# Call the "use_item" method on the potential object. Its the object's responsibilty to determine if an item can be used on it, and what happens if it is used
 		if potential_interaction_component != null and potential_interaction_component.has_method("use_item") and potential_interaction_component.use_item(equipped_item_interaction_component.item_data):
-			# If the item is a single use item, destroy it after use (i.e. door specific keys)
+			# swap: use_item scheduled a replacement item (e.g. empty bucket → dirty water bucket)
+			if _item_swap_on_use != null:
+				var swap_scene = _item_swap_on_use
+				_item_swap_on_use = null
+				if equipped_item is CollisionObject3D:
+					interaction_raycast.remove_exception(equipped_item)
+				equipped_item.queue_free()
+				equipped_item = null
+				var new_item = swap_scene.instantiate()
+				get_tree().current_scene.add_child(new_item)
+				on_item_equipped(new_item)
+				interact_success_player.play()
+				return
+			# use_item already handled the equipped item (e.g. pot placed on fire via unequip_no_destroy)
+			if not item_equipped:
+				interact_success_player.play()
+				return
+			# normal success: destroy if one-time-use
 			if equipped_item_interaction_component.item_data.action_data.one_time_use:
+				if equipped_item is CollisionObject3D:
+					interaction_raycast.remove_exception(equipped_item)
 				equipped_item.queue_free()
 				equipped_item = null
 				item_equipped = false
-			# Play a sound effect and inform the player via text that the item was successfully used
 			_show_interaction_text(equipped_item_interaction_component.item_data.action_data.success_text, 1.0)
 			interact_success_player.play()
 			return
@@ -287,14 +349,13 @@ func _use_equipped_item() -> void:
 			_show_interaction_text("Nothing interesting happens...", 1.0)
 	else:
 		_show_interaction_text("Nothing to be used on...", 1.0)
-	
-	# Failure logic. Unequip the item and return the item to the inventory. Play failure sound effect
+
 	interact_failure_player.play()
 	inventory_controller.pickup_item(equipped_item_interaction_component.item_data)
+	if equipped_item is CollisionObject3D:
+		interaction_raycast.remove_exception(equipped_item)
 	equipped_item.queue_free()
 	equipped_item = null
-	
-	# Reset other logic to ensure interactions are stable
 	item_equipped = false
 	current_object = null
 	potential_interaction_component = null
@@ -329,6 +390,10 @@ func _collectable_item_exited_range(body: Node3D) -> void:
 ## Recursively searches a node to find its InteractionComponent node. Returns null if there is none.
 func find_interaction_component(node: Node) -> AbstractInteraction:
 	while node:
+		if node.has_method("get_interaction_component"):
+			var ic = node.get_interaction_component()
+			if ic:
+				return ic
 		for child in node.get_children():
 			if child is AbstractInteraction:
 				return child
@@ -364,7 +429,7 @@ func _change_mesh_layer(meshes: Array[MeshInstance3D], layer: int) -> void:
 # Deletes all the collision shapes from the provided array
 func _remove_collision_shapes(collision_shapes: Array[CollisionShape3D]) -> void:
 	for collision_shape in collision_shapes:
-			collision_shape.queue_free()
+		collision_shape.disabled = true
 
 func _update_reticle_state() -> void:
 	# Hide all reticles by default

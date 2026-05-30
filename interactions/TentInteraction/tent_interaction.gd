@@ -14,18 +14,20 @@ var placement_marker: MeshInstance3D
 
 func _ready() -> void:
 	super()
+	# register tent position so scatterers avoid it
 	var tent_spot = object_ref.get_parent()
-	print("TentSpot children:")
-	for child in tent_spot.get_children():
-		print("  - ", child.name)
+	var pos = tent_spot.global_position
+	# block a radius around the tent
+	for i in 8:
+		var angle = i * TAU / 8
+		GameManager.scattered_positions.append(
+			pos + Vector3(cos(angle) * 3.0, 0, sin(angle) * 3.0))
+	GameManager.scattered_positions.append(pos)
 	tent_frame = tent_spot.get_node_or_null("TentFrame")
 	tent_canvas = tent_spot.get_node_or_null("TentCanvas")
 	placement_marker = tent_spot.get_node_or_null("PlacementMarker")
 	if tent_frame: tent_frame.visible = false
 	if tent_canvas: tent_canvas.visible = false
-	print("frame: ", tent_frame)
-	print("canvas: ", tent_canvas)
-	print("marker: ", placement_marker)
 
 func pre_interact() -> void:
 	super()

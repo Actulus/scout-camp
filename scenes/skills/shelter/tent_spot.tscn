@@ -70,8 +70,6 @@ shadow_mesh = SubResource("ArrayMesh_cj136")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfvb6"]
 transparency = 1
-cull_mode = 2
-no_depth_test = true
 albedo_color = Color(1, 1, 1, 0.24313726)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tfx4m"]
@@ -102,5 +100,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_tfx4m")
 
 [node name="TentInteraction" parent="StaticBody3D" unique_id=1317721900 instance=ExtResource("2_mnte2")]
-required_poles = null
-required_canvas = null
+required_poles = "tent_poles"
+required_canvas = "tent_canvas"

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dx1alfdeco5xl"]
+
+[ext_resource type="Script" uid="uid://bj8sr86xc2ta6" path="res://interactions/WaterInteraction/water_interaction.gd" id="1_4ok4n"]
+[ext_resource type="PackedScene" uid="uid://dnyvrrl2fc73r" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/bucket_dirty_water.tscn" id="2_dirty"]
+
+[node name="WaterInteraction" type="Node" unique_id=2088268351]
+script = ExtResource("1_4ok4n")
+dirty_water_scene = ExtResource("2_dirty")

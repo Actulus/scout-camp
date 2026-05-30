@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://di5sbbime63si"]
+
+[ext_resource type="Script" uid="uid://dlm2kpjv0v7fu" path="res://interactions/MugInteraction/mug_interaction.gd" id="1_ah32i"]
+
+[node name="MugInteraction" type="Node" unique_id=1331699598]
+script = ExtResource("1_ah32i")

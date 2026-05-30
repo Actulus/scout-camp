@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dx3i2quod3wt5"]
+
+[ext_resource type="Script" uid="uid://dko5p22u4wl67" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/cooking_pot.gd" id="1_0dung"]
+[ext_resource type="ArrayMesh" uid="uid://dl3ecie40l1sf" path="res://assets/models/cooking_pot.tres" id="1_yx375"]
+[ext_resource type="PackedScene" uid="uid://bfywnaxr5wlgf" path="res://interactions/PotInteraction/pot_interaction.tscn" id="2_0dung"]
+[ext_resource type="PackedScene" uid="uid://c3h303wte1cdb" path="res://interactions/CollectableInteraction/EquippableInteraction/equippable_interaction.tscn" id="3_ejti7"]
+[ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="4_nn7iu"]
+[ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="5_gcfff"]
+[ext_resource type="Texture2D" uid="uid://c67rciownibsm" path="res://assets/models/cooking_pot.png" id="6_l6b7x"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="7_g5ww7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c12e"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0.6, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n5484"]
+material = SubResource("StandardMaterial3D_4c12e")
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c0s6j"]
+points = PackedVector3Array(-4.6610832e-05, 0.11277305, -0.4980403, -4.6610832e-05, 0.52216256, -0.4980403, 0.29268163, 0.11277305, -0.40297583, -4.6610832e-05, 0.042014368, -0.46352458, -0.2927749, 0.11277305, -0.40297583, -4.6610832e-05, 0.55053973, -0.48517004, 0.29268163, 0.52216256, -0.40297583, -0.2927749, 0.52216256, -0.40297583, 0.27233028, 0.042014368, -0.37499276, 0.5744059, 0.36627233, -0.11797747, 0.47359574, 0.11277305, -0.1539557, 0.22334504, 0.012742177, -0.30752134, -4.6610832e-05, 0.012742177, -0.38006285, -0.22343826, 0.012742177, -0.30752134, -0.27254185, 0.042014368, -0.37499276, -0.47368896, 0.11277305, -0.1539557, -0.59970176, 0.36627233, -0.11797747, -0.28520226, 0.55053973, -0.3925431, 0.28510904, 0.55053973, -0.3925431, 0.5744059, 0.4163404, -0.11797747, -0.59970176, 0.4163404, -0.11797747, 0.44070232, 0.042014368, -0.14323047, 0.5877763, 0.3630082, -0.0803417, 0.59179926, 0.3630082, -9.7543e-05, 0.36130828, 0.012742177, -0.117489964, -0.36151987, 0.012742177, -0.117489964, -0.4407955, 0.042014368, -0.14323047, -0.6131904, 0.3630082, -0.0803417, -0.46138352, 0.55053973, -0.1499581, 0.46129024, 0.55053973, -0.1499581, 0.5877763, 0.4196046, -0.0803417, -0.6131904, 0.4196046, -0.0803417, 0.44070232, 0.042014368, 0.1431329, 0.59179926, 0.4196046, -9.7543e-05, 0.5877763, 0.3630082, 0.080244094, 0.47359574, 0.11277305, 0.15385816, 0.36130828, 0.012742177, 0.11739239, -0.36151987, 0.012742177, 0.11739239, -0.61697674, 0.3630082, -9.7543e-05, -0.4407955, 0.042014368, 0.1431329, -0.61697674, 0.4196046, -9.7543e-05, -0.46138352, 0.55053973, 0.14986053, 0.46129024, 0.55053973, 0.14986053, 0.27233028, 0.042014368, 0.3748952, 0.22334504, 0.012742177, 0.3074238, 0.5877763, 0.4196046, 0.08014664, 0.5744059, 0.4163404, 0.1178799, 0.5744059, 0.36627233, 0.1178799, 0.29268163, 0.11277305, 0.40287825, -0.22343826, 0.012742177, 0.3074238, -0.27254185, 0.042014368, 0.3748952, -0.6131904, 0.3630082, 0.08014664, -0.47368896, 0.11277305, 0.15385816, -0.6131904, 0.4196046, 0.08014664, -0.59970176, 0.4163404, 0.1178799, -0.28520226, 0.55053973, 0.39234808, 0.28510904, 0.55053973, 0.39234808, -4.6610832e-05, 0.11277305, 0.49804023, -4.6610832e-05, 0.042014368, 0.46342704, -4.6610832e-05, 0.012742177, 0.37996528, 0.29268163, 0.52216256, 0.40287825, -0.2927749, 0.11277305, 0.40287825, -0.59970176, 0.36627233, 0.1178799, -0.2927749, 0.52216256, 0.40287825, -4.6610832e-05, 0.55053973, 0.48507246, -4.6610832e-05, 0.52216256, 0.49804023)
+
+[sub_resource type="Resource" id="Resource_jsren"]
+script = ExtResource("5_gcfff")
+one_time_use = false
+success_text = "Pot added!"
+metadata/_custom_type_script = "uid://cwrr3yrlkcf84"
+
+[sub_resource type="Resource" id="Resource_8mqdv"]
+script = ExtResource("7_g5ww7")
+item_name = "cooking_pot"
+item_icon = ExtResource("6_l6b7x")
+action_data = SubResource("Resource_jsren")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="CookingPot" type="RigidBody3D" unique_id=29031691]
+script = ExtResource("1_0dung")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1825528220]
+mesh = ExtResource("1_yx375")
+
+[node name="WaterSurface" type="MeshInstance3D" parent="." unique_id=1524379034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32147217, 0)
+visible = false
+mesh = SubResource("CylinderMesh_n5484")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=584185476]
+shape = SubResource("ConvexPolygonShape3D_c0s6j")
+
+[node name="PotInteraction" parent="." unique_id=111503430 instance=ExtResource("2_0dung")]
+
+[node name="EquippableInteraction" parent="." unique_id=489219896 instance=ExtResource("3_ejti7")]
+hand_rotation = Vector3(0, 0, 0)
+hand_position = Vector3(0, -1, 0)
+collect_sound_effect = ExtResource("4_nn7iu")
+item_data = SubResource("Resource_8mqdv")

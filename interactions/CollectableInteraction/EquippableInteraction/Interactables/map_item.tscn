@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cp3nxnaamappp"]
+
+[ext_resource type="PackedScene" uid="uid://c3h303wte1cdb" path="res://interactions/CollectableInteraction/EquippableInteraction/equippable_interaction.tscn" id="1_equip"]
+[ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="2_sound"]
+[ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="3_eqact"]
+[ext_resource type="Texture2D" uid="uid://cgsrsfhts6ds8" path="res://assets/notes/oldpage.png" id="4_icon"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_idata"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_map"]
+size = Vector3(0.3, 0.02, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_map"]
+size = Vector3(0.3, 0.02, 0.4)
+
+[sub_resource type="Resource" id="Resource_mapact"]
+script = ExtResource("3_eqact")
+one_time_use = false
+success_text = "Map equipped"
+metadata/_custom_type_script = "uid://cwrr3yrlkcf84"
+
+[sub_resource type="Resource" id="Resource_mapdata"]
+script = ExtResource("5_idata")
+item_name = "map"
+item_icon = ExtResource("4_icon")
+action_data = SubResource("Resource_mapact")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="MapItem" type="RigidBody3D" unique_id=500000001]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=500000002]
+mesh = SubResource("BoxMesh_map")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=500000003]
+shape = SubResource("BoxShape3D_map")
+
+[node name="EquippableInteraction" parent="." unique_id=500000004 instance=ExtResource("1_equip")]
+collect_sound_effect = ExtResource("2_sound")
+item_data = SubResource("Resource_mapdata")
+hand_rotation = Vector3(0.0, 180.0, -90.0)
+hand_position = Vector3(0.1, -0.05, -0.15)

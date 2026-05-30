@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cwqfbeeyk5oc7"]
+
+[ext_resource type="Texture2D" uid="uid://cgsrsfhts6ds8" path="res://assets/notes/oldpage.png" id="1_sjawa"]
+[ext_resource type="PackedScene" uid="uid://bmpq1lpt8h5dt" path="res://interactions/CollectableInteraction/InspectableInteraction/inspectable_interaction.tscn" id="2_a4uc4"]
+[ext_resource type="AudioStream" uid="uid://dh4pukhvkdvmi" path="res://assets/audio/book_flip_kenney_cards.wav" id="3_p3g4h"]
+[ext_resource type="Script" uid="uid://c5boc4i7m1t8k" path="res://inventory/actions/inspectable_action.gd" id="4_i2poj"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_v2xrm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bp2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bp2"]
+transparency = 1
+albedo_texture = ExtResource("1_sjawa")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bp2"]
+size = Vector3(2.25, 0.3, 3.1)
+
+[sub_resource type="Resource" id="Resource_bp2act"]
+script = ExtResource("4_i2poj")
+metadata/_custom_type_script = "uid://c5boc4i7m1t8k"
+
+[sub_resource type="Resource" id="Resource_bp2data"]
+script = ExtResource("5_v2xrm")
+item_name = "book_page_2"
+item_icon = ExtResource("1_sjawa")
+action_data = SubResource("Resource_bp2act")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="BookPage2" type="StaticBody3D" unique_id=300000001]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=300000002]
+transform = Transform3D(1.112, 0, 0, 0, 1, 0, 0, 0, 1.536, 0, 0, 0)
+mesh = SubResource("PlaneMesh_bp2")
+surface_material_override/0 = SubResource("StandardMaterial3D_bp2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=300000003]
+shape = SubResource("BoxShape3D_bp2")
+
+[node name="InspectableInteraction" parent="." unique_id=300000004 instance=ExtResource("2_a4uc4")]
+content = "[b]Lost Scout Notes - Page 2 of 3[/b]\\n\\nYou found page 2! Great navigation skills!\\n\\n[b]Navigation Tip:[/b] Always note landmarks. The sun rises in the [b]east[/b] and sets in the [b]west[/b]. Your compass shows true north.\\n\\nWhen lost, remember STOP:\\n• [b]S[/b]top - don't panic\\n• [b]T[/b]hink - what do you know?\\n• [b]O[/b]bserve - look around for landmarks\\n• [b]P[/b]lan - decide the safest route\\n\\nOne more page to find! Check [b]southwest[/b] near the river.\\n- Kofi"
+collect_sound_effect = ExtResource("3_p3g4h")
+item_data = SubResource("Resource_bp2data")

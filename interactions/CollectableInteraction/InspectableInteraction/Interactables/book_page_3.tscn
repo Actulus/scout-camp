@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cwqfbeeyk5pc7"]
+
+[ext_resource type="Texture2D" uid="uid://cgsrsfhts6ds8" path="res://assets/notes/oldpage.png" id="1_sjawa"]
+[ext_resource type="PackedScene" uid="uid://bmpq1lpt8h5dt" path="res://interactions/CollectableInteraction/InspectableInteraction/inspectable_interaction.tscn" id="2_a4uc4"]
+[ext_resource type="AudioStream" uid="uid://dh4pukhvkdvmi" path="res://assets/audio/book_flip_kenney_cards.wav" id="3_p3g4h"]
+[ext_resource type="Script" uid="uid://c5boc4i7m1t8k" path="res://inventory/actions/inspectable_action.gd" id="4_i2poj"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_v2xrm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bp3"]
+transparency = 1
+albedo_texture = ExtResource("1_sjawa")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bp3"]
+size = Vector3(2.25, 0.3, 3.1)
+
+[sub_resource type="Resource" id="Resource_bp3act"]
+script = ExtResource("4_i2poj")
+metadata/_custom_type_script = "uid://c5boc4i7m1t8k"
+
+[sub_resource type="Resource" id="Resource_bp3data"]
+script = ExtResource("5_v2xrm")
+item_name = "book_page_3"
+item_icon = ExtResource("1_sjawa")
+action_data = SubResource("Resource_bp3act")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="BookPage3" type="StaticBody3D" unique_id=400000001]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=400000002]
+transform = Transform3D(1.112, 0, 0, 0, 1, 0, 0, 0, 1.536, 0, 0, 0)
+mesh = SubResource("PlaneMesh_bp3")
+surface_material_override/0 = SubResource("StandardMaterial3D_bp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=400000003]
+shape = SubResource("BoxShape3D_bp3")
+
+[node name="InspectableInteraction" parent="." unique_id=400000004 instance=ExtResource("2_a4uc4")]
+content = "[b]Lost Scout Notes - Page 3 of 3[/b]\\n\\nYou found all my pages! Excellent navigation!\\n\\n[b]Final Navigation Tip:[/b]\\nWhen reading a map, line it up with your compass so [b]north on the map[/b] matches [b]north on your compass[/b].\\n\\nKey landmarks to remember:\\n• Camp firepit = centre of the map\\n• River = to the west\\n• Pine forest = to the northeast\\n• Open meadow = to the south\\n\\n[b]Well done, scout![/b] Return to camp and report to the leader.\\n\\nYou have earned your Navigation Badge!\\n- Kofi"
+collect_sound_effect = ExtResource("3_p3g4h")
+item_data = SubResource("Resource_bp3data")
