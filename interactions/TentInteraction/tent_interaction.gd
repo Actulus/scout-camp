@@ -75,7 +75,7 @@ func use_item(item_data: ItemData) -> bool:
 		if tent_canvas: tent_canvas.visible = true
 		if placement_marker: placement_marker.visible = false
 		if ic: ic._show_interaction_text("Tent built! You have shelter.", 3.0)
-		GameManager.complete_skill("shelter")
+		GameManager.complete_skill("tent")
 		return true
 
 	return false

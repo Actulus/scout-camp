@@ -37,3 +37,4 @@ func earn_badge(badge_id: String):
 func advance_day():
 	current_day += 1
 	emit_signal("day_changed", current_day)
+	

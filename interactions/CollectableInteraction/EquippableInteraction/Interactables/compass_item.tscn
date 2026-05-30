@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://c3h303wte1cdb" path="res://interactions/CollectableInteraction/EquippableInteraction/equippable_interaction.tscn" id="1_equip"]
 [ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="2_sound"]
+[ext_resource type="Shader" uid="uid://b15fib3a5ta47" path="res://assets/shaders/needle_gradient.gdshader" id="2_vpjvh"]
 [ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="3_eqact"]
 [ext_resource type="Texture2D" uid="uid://cgsrsfhts6ds8" path="res://assets/notes/oldpage.png" id="4_icon"]
 [ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_idata"]
-[ext_resource type="Script" uid="uid://cp3compassscr1" path="res://scripts/compass_item.gd" id="6_cscr"]
+[ext_resource type="Script" uid="uid://cwre8iyixjxuy" path="res://scripts/compass_item.gd" id="6_cscr"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_compass"]
 top_radius = 0.07
@@ -26,18 +27,15 @@ albedo_color = Color(0.95, 0.92, 0.82, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_needle"]
 size = Vector3(0.008, 0.003, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_needle_red"]
-albedo_color = Color(0.9, 0.1, 0.1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_needle_tail"]
-size = Vector3(0.008, 0.003, 0.06)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_needle_blue"]
-albedo_color = Color(0.1, 0.2, 0.8, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mx4ma"]
+render_priority = 0
+shader = ExtResource("2_vpjvh")
+shader_parameter/color_top = Color(1, 0, 0, 1)
+shader_parameter/color_bottom = Color(0, 0, 1, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_compass"]
-radius = 0.07
 height = 0.03
+radius = 0.07
 
 [sub_resource type="Resource" id="Resource_compassact"]
 script = ExtResource("3_eqact")
@@ -65,20 +63,15 @@ mesh = SubResource("CylinderMesh_face")
 surface_material_override/0 = SubResource("StandardMaterial3D_face")
 
 [node name="Needle" type="MeshInstance3D" parent="." unique_id=600000012]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, 0.025)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, -0.0020131152)
 mesh = SubResource("BoxMesh_needle")
-surface_material_override/0 = SubResource("StandardMaterial3D_needle_red")
-
-[node name="NeedleTail" type="MeshInstance3D" parent="." unique_id=600000013]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, -0.03)
-mesh = SubResource("BoxMesh_needle_tail")
-surface_material_override/0 = SubResource("StandardMaterial3D_needle_blue")
+surface_material_override/0 = SubResource("ShaderMaterial_mx4ma")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=600000003]
 shape = SubResource("CylinderShape3D_compass")
 
 [node name="EquippableInteraction" parent="." unique_id=600000004 instance=ExtResource("1_equip")]
+hand_rotation = Vector3(-20, -180, -30)
+hand_position = Vector3(0, 0, 0.3)
 collect_sound_effect = ExtResource("2_sound")
 item_data = SubResource("Resource_compassdata")
-hand_rotation = Vector3(-90.0, 0.0, 0.0)
-hand_position = Vector3(0.0, -0.05, -0.2)

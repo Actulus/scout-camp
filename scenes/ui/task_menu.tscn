@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://brcxfygwhfk5t"]
+
+[ext_resource type="Script" uid="uid://cb1mh8xa8d01m" path="res://scenes/ui/task_menu.gd" id="1_wk2u3"]
+
+[node name="TaskMenu" type="CanvasLayer" unique_id=1432026446]
+script = ExtResource("1_wk2u3")
+
+[node name="Control" type="Control" parent="." unique_id=1549844065]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=98697570]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.7
+anchor_bottom = 0.1
+offset_left = 800.0
+offset_top = 10.0
+offset_right = 340.0
+offset_bottom = 450.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer" unique_id=1950023479]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1893809617]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1382850617]
+layout_mode = 2
+text = "Scout Tasks [T]"
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=886551922]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2 / 5 completed"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1650665457]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TaskList" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/ScrollContainer" unique_id=283776288]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1

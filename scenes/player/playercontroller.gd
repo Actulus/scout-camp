@@ -80,6 +80,7 @@ var current_lean: float = 0.0
 var inventory_opened_flag: bool = false
 
 func _ready() -> void:
+	add_to_group("player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	item_hand_rest_position = item_hand.position
 
@@ -93,7 +94,7 @@ func _input(event: InputEvent) -> void:
 		target_lean = 1.0
 	else:
 		target_lean = 0.0
-	
+		
 	if Input.is_action_just_pressed("inventory"):
 		# If the player was interacting with something, end that interaction
 		if interaction_controller.interaction_component != null:

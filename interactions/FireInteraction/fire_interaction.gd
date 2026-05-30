@@ -132,6 +132,7 @@ func use_item(item_data: ItemData) -> bool:
 func _light_fire() -> void:
 	is_lit = true
 	GameManager.fire_lit = true
+	GameManager.complete_skill("fire")
 	#can_interact = false
 	wood_count = required_amount  # ensure guard above always triggers
 	if fire_particles:

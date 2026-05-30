@@ -28,7 +28,6 @@ action_data = SubResource("Resource_bp1act")
 metadata/_custom_type_script = "uid://dwxgooifqus3f"
 
 [node name="BookPage1" type="StaticBody3D" unique_id=200000001]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=200000002]
 mesh = SubResource("PlaneMesh_bp1")

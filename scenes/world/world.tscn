@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cwqfbeeyk5pc7" path="res://interactions/CollectableInteraction/InspectableInteraction/Interactables/book_page_3.tscn" id="25_page3"]
 [ext_resource type="PackedScene" uid="uid://cp3nxnaamappp" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/map_item.tscn" id="26_map"]
 [ext_resource type="PackedScene" uid="uid://cp3nxnaacompp" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/compass_item.tscn" id="27_compass"]
+[ext_resource type="PackedScene" uid="uid://brcxfygwhfk5t" path="res://scenes/ui/task_menu.tscn" id="28_2x71e"]
 [ext_resource type="Script" uid="uid://cp3navcntrl01" path="res://scripts/navigation_controller.gd" id="29_navctr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5dby"]
@@ -171,18 +172,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.91449, 0.6521728, 4.6520996
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.485168, 0.63929445, 4.3415527)
 
 [node name="BookPage1" parent="." unique_id=800000004 instance=ExtResource("23_page1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.3, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -0.16630858, -5)
 
 [node name="BookPage2" parent="." unique_id=800000005 instance=ExtResource("24_page2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.3, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.05091554, -30)
 
 [node name="BookPage3" parent="." unique_id=800000006 instance=ExtResource("25_page3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0.3, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.7191, 0.2824219, 20)
 
 [node name="NavigationController" type="Node" parent="." unique_id=800000008]
 script = ExtResource("29_navctr")
 
 [node name="PlantFieldGuide" parent="." unique_id=100000001 instance=ExtResource("22_guide")]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 10.226498, 0.7720207, 4.140381)
+
+[node name="TaskMenu" parent="." unique_id=1432026446 instance=ExtResource("28_2x71e")]
 
 [editable path="camp_landscape_w_Mountains"]
