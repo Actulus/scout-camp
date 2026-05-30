@@ -130,8 +130,8 @@ func _start_cooking() -> void:
 			current_color = COLOR_HOT.lerp(COLOR_BOILED, (progress - 0.5) * 2.0)
 		_set_water(current_color)
 		var ic2 = get_tree().get_first_node_in_group("interaction_controller")
-		if ic2:
-			ic2.interaction_textbox.text = "Boiling... %ds remaining (look at pot to check)" % boil_remaining
+		if ic2 and (ic2.current_object == object_ref or ic2.potential_object == object_ref):
+			ic2.interaction_textbox.text = "Boiling... %ds remaining" % boil_remaining
 			ic2.interaction_textbox.visible = true
 		await get_tree().create_timer(1.0).timeout
 		boil_remaining -= 1

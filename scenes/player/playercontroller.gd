@@ -85,9 +85,6 @@ func _ready() -> void:
 	item_hand_rest_position = item_hand.position
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
-		
 	if Input.is_action_pressed("lean_left"):
 		target_lean = -1.0
 	elif Input.is_action_pressed("lean_right"):
