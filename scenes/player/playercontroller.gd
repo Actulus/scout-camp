@@ -122,6 +122,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	# TODO: Kludge fix for context menu being open and letting go of inventory button
 	if inventory_opened_flag and !Input.is_action_pressed("inventory"):
+		inventory_opened_flag = false
 		# If the inventory is closed
 		inventory_controller.visible = false
 		inventory_controller.context_menu.visible = false
