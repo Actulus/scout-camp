@@ -34,11 +34,12 @@ func interact() -> void:
 			ic._show_interaction_text("Add dirty water to the pot first", 1.5)
 		"dirty_water":
 			if is_boiling:
-				# Direct set avoids stacking async timers when called every frame
 				ic.interaction_textbox.text = "Boiling... %ds remaining" % boil_remaining
 				ic.interaction_textbox.visible = true
+			elif object_ref.is_in_group("cooking_pot") and GameManager.fire_lit:
+				ic._show_interaction_text("Pot on fire — boiling starting soon!", 1.5)
 			elif GameManager.fire_lit:
-				ic._show_interaction_text("Pot on fire — boiling will start soon", 1.5)
+				ic._show_interaction_text("Equip pot and use it on the firepit to place it on fire.", 1.5)
 			else:
 				ic._show_interaction_text("Light the fire to boil the water!", 1.5)
 		"boiled_water":
@@ -62,11 +63,11 @@ func use_item(item_data: ItemData) -> bool:
 				return false
 			contents = "dirty_water"
 			_set_water(COLOR_DIRTY)
-			if is_in_group("cooking_pot") and GameManager.fire_lit:
+			if object_ref.is_in_group("cooking_pot") and GameManager.fire_lit:
 				if ic: ic._show_interaction_text("Dirty water added — boiling started!", 2.0)
 				_start_cooking()
 			else:
-				if ic: ic._show_interaction_text("Dirty water added. Light the fire to boil.", 2.0)
+				if ic: ic._show_interaction_text("Dirty water added. Place pot on lit fire to boil.", 2.0)
 			return true
 
 		"mug":

@@ -43,9 +43,9 @@ func interact() -> void:
 					"": ic._show_interaction_text("Pot on fire — equip dirty water bucket and use it on the pot.", 2.0)
 					"dirty_water":
 						if pot_ic.is_boiling:
-							ic._show_interaction_text("Boiling... %ds remaining. Look at the pot." % pot_ic.boil_remaining, 2.0)
+							ic._show_interaction_text("Boiling! %ds remaining — look at pot." % pot_ic.boil_remaining, 2.0)
 						else:
-							ic._show_interaction_text("Pot has water but fire is off? Check fire state.", 2.0)
+							ic._show_interaction_text("Pot has water on lit fire — boiling starting.", 2.0)
 					"boiled_water": ic._show_interaction_text("Water boiled! Equip a mug and use it on the pot.", 2.0)
 					"purified_water": ic._show_interaction_text("Water purified! Equip a mug and use it on the pot.", 2.0)
 			else:
