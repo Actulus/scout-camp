@@ -50,6 +50,7 @@ var equip_item_sound_effect: AudioStreamWAV = load("res://assets/audio/item_pick
 	
 func _ready() -> void:
 	add_to_group("interaction_controller")
+	_style_note_overlay()
 	interactable_check.body_entered.connect(_collectable_item_entered_range)
 	interactable_check.body_exited.connect(_collectable_item_exited_range)
 	invent_on_item_collected.connect(inventory_controller.pickup_item)
@@ -473,3 +474,19 @@ func _update_reticle_state() -> void:
 
 	# Fallback: default reticle
 	default_reticle.visible = true
+
+func _style_note_overlay() -> void:
+	var font_body = UiFonts.body
+	
+	# right side panel background
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color("#1C2E1A", 0.92)
+	panel_style.border_color = Color("#C68B3A")
+	panel_style.set_border_width_all(2)
+	panel_style.set_corner_radius_all(10)
+	note_overlay.add_theme_stylebox_override("panel", panel_style)
+	
+	# note content text
+	note_content.add_theme_font_override("normal_font", font_body)
+	note_content.add_theme_font_size_override("normal_font_size", 15)
+	note_content.add_theme_color_override("default_color", Color("#F5E6C8"))

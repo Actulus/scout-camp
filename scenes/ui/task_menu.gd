@@ -54,74 +54,73 @@ func _build_task_list() -> void:
 
 func _create_task_panel(task: Dictionary) -> PanelContainer:
 	var panel = PanelContainer.new()
-	panel.name = "Task_" + task.id
 	
-	# style based on completion
 	var style = StyleBoxFlat.new()
 	var is_done = GameManager.skills_completed.get(task.id, false)
-	style.bg_color = Color("#1B5E20") if is_done else Color("#1A237E", 0.8)
-	style.corner_radius_top_left = 6
-	style.corner_radius_top_right = 6
-	style.corner_radius_bottom_left = 6
-	style.corner_radius_bottom_right = 6
-	style.content_margin_left = 10
-	style.content_margin_right = 10
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
+	style.bg_color = Color("#1B5E20") if is_done else Color("#1C2E1A")
+	style.border_color = Color("#C68B3A")
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(8)
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
 	panel.add_theme_stylebox_override("panel", style)
 	
+	var font_body = UiFonts.body
+	var font_bold = UiFonts.body_bold
+	
 	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 6)
 	panel.add_child(vbox)
 	
-	# header row
 	var header = HBoxContainer.new()
 	vbox.add_child(header)
 	
 	var title = Label.new()
 	title.text = task.title
-	title.add_theme_font_size_override("font_size", 16)
-	title.add_theme_color_override("font_color", Color.WHITE)
+	title.add_theme_font_override("font", font_bold)
+	title.add_theme_font_size_override("font_size", 15)
+	title.add_theme_color_override("font_color", Color("#F5E6C8"))
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title)
 	
 	var status = Label.new()
-	status.text = "✓ Done" if is_done else "○ Todo"
-	status.add_theme_color_override("font_color", 
-		Color("#69F0AE") if is_done else Color("#90CAF9"))
-	status.add_theme_font_size_override("font_size", 13)
+	status.text = "✓" if is_done else "○"
+	status.add_theme_font_override("font", font_bold)
+	status.add_theme_color_override("font_color",
+		Color("#69F0AE") if is_done else Color("#B8A882"))
 	header.add_child(status)
 	panel.set_meta("status_label", status)
 	panel.set_meta("style", style)
 	panel.set_meta("task_id", task.id)
 	
-	# description (collapsed by default, expand on click)
 	var desc = Label.new()
 	desc.text = task.description
-	desc.add_theme_color_override("font_color", Color("#B0BEC5"))
-	desc.add_theme_font_size_override("font_size", 12)
+	desc.add_theme_font_override("font", font_body)
+	desc.add_theme_font_size_override("font_size", 13)
+	desc.add_theme_color_override("font_color", Color("#B8A882"))
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc.visible = false
 	vbox.add_child(desc)
 	panel.set_meta("desc_label", desc)
 	
-	# hint
 	var hint = Label.new()
 	hint.text = "💡 " + task.hint
-	hint.add_theme_color_override("font_color", Color("#FFD54F"))
-	hint.add_theme_font_size_override("font_size", 11)
+	hint.add_theme_font_override("font", font_body)
+	hint.add_theme_font_size_override("font_size", 12)
+	hint.add_theme_color_override("font_color", Color("#E8B84B"))
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint.visible = false
 	vbox.add_child(hint)
 	panel.set_meta("hint_label", hint)
 	
-	# make panel clickable to expand/collapse
 	var btn = Button.new()
 	btn.flat = true
 	btn.text = ""
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	btn.pressed.connect(func(): _toggle_task(panel))
-	# overlay button covers the panel
 	panel.add_child(btn)
 	
 	return panel

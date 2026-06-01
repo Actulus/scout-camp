@@ -1,45 +1,87 @@
 [gd_scene format=3 uid="uid://npqomoode3pk"]
 
 [ext_resource type="Script" uid="uid://bussbkeclvf0o" path="res://scenes/ui/settings_panel.gd" id="1_dbor5"]
+[ext_resource type="FontFile" uid="uid://dnumgtoltjg7b" path="res://assets/fonts/Amatic_SC/AmaticSC-Bold.ttf" id="2_i3lpr"]
+[ext_resource type="FontFile" uid="uid://cm713jrdxm16g" path="res://assets/fonts/Nunito/static/Nunito-Bold.ttf" id="3_5qqek"]
 
-[node name="SettingsPanel" type="PanelContainer" unique_id=1818067536]
+[sub_resource type="LabelSettings" id="LabelSettings_bbxxw"]
+font = ExtResource("2_i3lpr")
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_ea4bf"]
+font = ExtResource("3_5qqek")
+font_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cax3f"]
+font = ExtResource("3_5qqek")
+font_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lp458"]
+font = ExtResource("3_5qqek")
+font_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
+
+[node name="SettingLayer" type="CanvasLayer" unique_id=1793457476]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1639284470]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect" unique_id=539111338]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsPanel" type="PanelContainer" parent="ColorRect/CenterContainer" unique_id=1818067536]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
 script = ExtResource("1_dbor5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1336509174]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/SettingsPanel" unique_id=1710350914]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer" unique_id=1336509174]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1886699709]
+layout_mode = 2
+text = "⚙Settings"
+label_settings = SubResource("LabelSettings_bbxxw")
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=286069756]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1954952085]
-layout_mode = 2
-
-[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1257310241]
-unique_name_in_owner = true
-layout_mode = 2
-text = "← Back"
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1886699709]
-layout_mode = 2
-text = "Settings"
-
-[node name="DisplayLabel" type="Label" parent="VBoxContainer" unique_id=255665059]
+[node name="DisplayLabel" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=255665059]
 layout_mode = 2
 text = "Display"
+label_settings = SubResource("LabelSettings_ea4bf")
 
-[node name="WindowOptionContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1657779888]
+[node name="WindowOptionContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1657779888]
 layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="VBoxContainer/WindowOptionContainer" unique_id=2049605778]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/WindowOptionContainer" unique_id=2049605778]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Window Mode"
 
-[node name="FullscreenOption" type="OptionButton" parent="VBoxContainer/WindowOptionContainer" unique_id=1397466685]
+[node name="FullscreenOption" type="OptionButton" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/WindowOptionContainer" unique_id=1397466685]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 selected = 0
+allow_reselect = true
 item_count = 3
 popup/item_0/text = "Fullscreen"
 popup/item_0/id = 0
@@ -48,17 +90,20 @@ popup/item_1/id = 1
 popup/item_2/text = "Borderless"
 popup/item_2/id = 2
 
-[node name="ResolutionOptionContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1661634222]
+[node name="ResolutionOptionContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1661634222]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ResolutionOptionContainer" unique_id=2088362115]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/ResolutionOptionContainer" unique_id=2088362115]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Resolution"
 
-[node name="ResolutionOption" type="OptionButton" parent="VBoxContainer/ResolutionOptionContainer" unique_id=639958181]
+[node name="ResolutionOption" type="OptionButton" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/ResolutionOptionContainer" unique_id=639958181]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 selected = 0
+allow_reselect = true
 item_count = 3
 popup/item_0/text = "1920x1080"
 popup/item_0/id = 0
@@ -67,78 +112,125 @@ popup/item_1/id = 1
 popup/item_2/text = "2560x1440"
 popup/item_2/id = 2
 
-[node name="AudioLabel" type="Label" parent="VBoxContainer" unique_id=1493072229]
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=171403789]
+layout_mode = 2
+
+[node name="AudioLabel" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1493072229]
 layout_mode = 2
 text = "Audio"
+label_settings = SubResource("LabelSettings_cax3f")
 
-[node name="VolumeOptionContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1178904129]
+[node name="VolumeOptionContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1178904129]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/VolumeOptionContainer" unique_id=1484200373]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/VolumeOptionContainer" unique_id=1484200373]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Master Volume"
 
-[node name="MasterSlider" type="HSlider" parent="VBoxContainer/VolumeOptionContainer" unique_id=2050261022]
+[node name="MasterSlider" type="HSlider" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/VolumeOptionContainer" unique_id=2050261022]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
-step = 0.05
-tick_count = 3
-ticks_on_borders = true
+step = 0.01
+value = 1.0
 
-[node name="MusicOptionContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=23390239]
+[node name="MasterValueLabel" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/VolumeOptionContainer" unique_id=354069593]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "100%"
+
+[node name="MusicOptionContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=23390239]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MusicOptionContainer" unique_id=348776942]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/MusicOptionContainer" unique_id=348776942]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Music Volume"
 
-[node name="MusicSlider" type="HSlider" parent="VBoxContainer/MusicOptionContainer" unique_id=247067932]
+[node name="MusicSlider" type="HSlider" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/MusicOptionContainer" unique_id=247067932]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
-step = 0.05
-tick_count = 3
-ticks_on_borders = true
+step = 0.01
+value = 0.8
 
-[node name="SFXOptionContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=545570138]
+[node name="MusicValueLabel" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/MusicOptionContainer" unique_id=321115697]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "80%"
+
+[node name="SFXOptionContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=545570138]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/SFXOptionContainer" unique_id=1755201530]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/SFXOptionContainer" unique_id=1755201530]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "SFX Volume"
 
-[node name="SFXSlider" type="HSlider" parent="VBoxContainer/SFXOptionContainer" unique_id=557023231]
+[node name="SFXSlider" type="HSlider" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/SFXOptionContainer" unique_id=557023231]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
-step = 0.05
-tick_count = 3
-ticks_on_borders = true
+step = 0.01
+value = 1.0
 
-[node name="GameplayLabel" type="Label" parent="VBoxContainer" unique_id=273944757]
+[node name="SFXValueLabel" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/SFXOptionContainer" unique_id=17528260]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "100%"
+
+[node name="HSeparator3" type="HSeparator" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=212501514]
+layout_mode = 2
+
+[node name="GameplayLabel" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=273944757]
 layout_mode = 2
 text = "Gameplay"
+label_settings = SubResource("LabelSettings_lp458")
 
-[node name="MouseOptionContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=77254482]
+[node name="MouseOptionContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=77254482]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MouseOptionContainer" unique_id=141025207]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/MouseOptionContainer" unique_id=141025207]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Mouse Sensitivity"
 
-[node name="SensitivitySlider" type="HSlider" parent="VBoxContainer/MouseOptionContainer" unique_id=252666080]
+[node name="SensitivitySlider" type="HSlider" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/MouseOptionContainer" unique_id=252666080]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = 0.05
 max_value = 1.0
 step = 0.05
-value = 0.05
+value = 0.2
 
-[node name="SaveSettingsButton" type="Button" parent="VBoxContainer" unique_id=1896339317]
+[node name="SensitivityValueLabel" type="Label" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/MouseOptionContainer" unique_id=449554155]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "20%"
+
+[node name="HSeparator4" type="HSeparator" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=274198089]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1954952085]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1257310241]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Apply"
+size_flags_horizontal = 3
+text = "← Back"
+
+[node name="SaveSettingsButton" type="Button" parent="ColorRect/CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1896339317]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "✓ Apply"

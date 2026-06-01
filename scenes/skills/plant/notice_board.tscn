@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://r7ft4cjpx72y"]
 
+[ext_resource type="FontFile" uid="uid://2fa53nfifnxi" path="res://assets/fonts/Nunito/static/Nunito-Regular.ttf" id="1_3dx6s"]
 [ext_resource type="PackedScene" uid="uid://dntkk4n8yvq60" path="res://interactions/NoticeBoardInteraction/noticeboard_interaction.tscn" id="1_7frs4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emni7"]
@@ -43,9 +44,13 @@ mesh = SubResource("BoxMesh_ah1l5")
 [node name="Label3D" type="Label3D" parent="." unique_id=1483498616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58051753, 0.074279785)
 pixel_size = 0.002
+modulate = Color(0.9607843, 0.9019608, 0.78431374, 1)
+outline_modulate = Color(0.10980392, 0.18039216, 0.101960786, 1)
 text = "Plant ID Test
 Press E to start"
+font = ExtResource("1_3dx6s")
 font_size = 36
+outline_size = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1584180516]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13952637, -0.014770508)

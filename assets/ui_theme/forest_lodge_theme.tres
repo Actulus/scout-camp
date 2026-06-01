@@ -1,0 +1,188 @@
+[gd_resource type="Theme" format=3 uid="uid://df7hwl2b2bp1w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3phx"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.16470589, 0.23921569, 0.15686275, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3529412, 0.3529412, 0.2901961, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrvq0"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.41568628, 0.6862745, 0.3529412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2tf1"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.2901961, 0.4862745, 0.24705882, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2l36"]
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 8.0
+bg_color = Color(0.22745098, 0.3764706, 0.1882353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qq2gq"]
+bg_color = Color(0.050980393, 0.101960786, 0.047058824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hu1p3"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.050980393, 0.101960786, 0.047058824, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glmon"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.10980392, 0.18039216, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skfxu"]
+bg_color = Color(0.10980392, 0.18039216, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5hlh"]
+bg_color = Color(0.050980393, 0.101960786, 0.047058824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ua10l"]
+bg_color = Color(0.41568628, 0.6862745, 0.3529412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a68mt"]
+
+[resource]
+Button/colors/font_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+Button/colors/font_disabled_color = Color(0.41568628, 0.41568628, 0.3529412, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
+Button/font_sizes/font_size = 16
+Button/fonts/font = null
+Button/styles/disabled = SubResource("StyleBoxFlat_p3phx")
+Button/styles/hover = SubResource("StyleBoxFlat_xrvq0")
+Button/styles/normal = SubResource("StyleBoxFlat_g2tf1")
+Button/styles/pressed = SubResource("StyleBoxFlat_r2l36")
+HSlider/styles/slider = SubResource("StyleBoxFlat_qq2gq")
+Label/colors/font_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+Label/font_sizes/font_size = 16
+Label/fonts/font = null
+LineEdit/colors/font_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+LineEdit/styles/normal = SubResource("StyleBoxFlat_hu1p3")
+OptionButton/colors/font_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+OptionButton/fonts/font = null
+OptionButton/styles/hover = SubResource("StyleBoxFlat_xrvq0")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_g2tf1")
+OptionButton/styles/pressed = SubResource("StyleBoxFlat_r2l36")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_glmon")
+PopupMenu/colors/font_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+PopupMenu/fonts/font = null
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_skfxu")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_o5hlh")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_ua10l")
+RichTextLabel/colors/default_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+RichTextLabel/font_sizes/bold_font_size = 15
+RichTextLabel/font_sizes/normal_font_size = 15
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/normal_font = null
+ScrollContainer/styles/panel = SubResource("StyleBoxEmpty_a68mt")

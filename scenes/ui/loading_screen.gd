@@ -5,6 +5,11 @@ extends CanvasLayer
 
 var _target_scene: String = ""
 
+func _ready() -> void:
+	set_process(false)
+	visible = false
+	
+
 func load_scene(path: String) -> void:
 	_target_scene = path
 	visible = true

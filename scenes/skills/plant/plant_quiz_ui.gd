@@ -23,11 +23,14 @@ signal quiz_completed
 signal quiz_closed
 
 func _ready() -> void:
+	add_to_group("plant_quiz")
 	edible_btn.pressed.connect(func(): _answer(true))
 	poisonous_btn.pressed.connect(func(): _answer(false))
 	prev_btn.pressed.connect(func(): _navigate(-1))
 	next_btn.pressed.connect(func(): _navigate(1))
 	submit_btn.pressed.connect(_submit)
+	_style_answer_buttons()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func setup() -> void:
 	correct_answers.clear()
@@ -190,3 +193,54 @@ func _input(event: InputEvent) -> void:
 			if event.is_action(action):
 				get_viewport().set_input_as_handled()
 				return
+
+func _style_answer_buttons() -> void:
+	var font_bold = load("res://assets/fonts/Nunito-Bold.ttf")
+	
+	# edible - green
+	var edible_style = StyleBoxFlat.new()
+	edible_style.bg_color = Color("#2E7D32")
+	edible_style.border_color = Color("#69F0AE")
+	edible_style.set_border_width_all(2)
+	edible_style.set_corner_radius_all(12)
+	edible_style.content_margin_left = 24
+	edible_style.content_margin_right = 24
+	edible_style.content_margin_top = 12
+	edible_style.content_margin_bottom = 12
+	edible_style.shadow_color = Color(0, 0, 0, 0.3)
+	edible_style.shadow_size = 4
+	edible_style.shadow_offset = Vector2(0, 3)
+	
+	var edible_hover = edible_style.duplicate()
+	edible_hover.bg_color = Color("#43A047")
+	edible_hover.border_color = Color("#B9F6CA")
+	
+	edible_btn.add_theme_stylebox_override("normal", edible_style)
+	edible_btn.add_theme_stylebox_override("hover", edible_hover)
+	edible_btn.add_theme_font_override("font", font_bold)
+	edible_btn.add_theme_font_size_override("font_size", 18)
+	edible_btn.add_theme_color_override("font_color", Color.WHITE)
+	
+	# poisonous - red
+	var poison_style = StyleBoxFlat.new()
+	poison_style.bg_color = Color("#C62828")
+	poison_style.border_color = Color("#FF8A80")
+	poison_style.set_border_width_all(2)
+	poison_style.set_corner_radius_all(12)
+	poison_style.content_margin_left = 24
+	poison_style.content_margin_right = 24
+	poison_style.content_margin_top = 12
+	poison_style.content_margin_bottom = 12
+	poison_style.shadow_color = Color(0, 0, 0, 0.3)
+	poison_style.shadow_size = 4
+	poison_style.shadow_offset = Vector2(0, 3)
+	
+	var poison_hover = poison_style.duplicate()
+	poison_hover.bg_color = Color("#E53935")
+	poison_hover.border_color = Color("#FFCDD2")
+	
+	poisonous_btn.add_theme_stylebox_override("normal", poison_style)
+	poisonous_btn.add_theme_stylebox_override("hover", poison_hover)
+	poisonous_btn.add_theme_font_override("font", font_bold)
+	poisonous_btn.add_theme_font_size_override("font_size", 18)
+	poisonous_btn.add_theme_color_override("font_color", Color.WHITE)

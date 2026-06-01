@@ -3,6 +3,7 @@ extends CanvasLayer
 var compass_label: Label
 
 func _ready() -> void:
+	add_to_group("map")
 	visible = false
 	compass_label = get_node_or_null("Panel/CompassLabel")
 

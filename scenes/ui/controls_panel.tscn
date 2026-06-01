@@ -1,52 +1,86 @@
 [gd_scene format=3 uid="uid://dd086mgmg0rp4"]
 
 [ext_resource type="Script" uid="uid://bduanmwdi526w" path="res://scenes/ui/controls_panel.gd" id="1_6oj3i"]
+[ext_resource type="FontFile" uid="uid://dnumgtoltjg7b" path="res://assets/fonts/Amatic_SC/AmaticSC-Bold.ttf" id="2_83sls"]
 
-[node name="ControlsPanel" type="PanelContainer" unique_id=1571304591]
+[sub_resource type="LabelSettings" id="LabelSettings_fditb"]
+font = ExtResource("2_83sls")
+font_size = 36
+
+[node name="ControlsLayer" type="CanvasLayer" unique_id=1339073414]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=377646369]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect" unique_id=198690699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlsPanel" type="PanelContainer" parent="ColorRect/CenterContainer" unique_id=1571304591]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
 script = ExtResource("1_6oj3i")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1183590956]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/ControlsPanel" unique_id=1692756125]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/ControlsPanel/MarginContainer" unique_id=1183590956]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/ControlsPanel/MarginContainer/VBoxContainer" unique_id=258227207]
+layout_mode = 2
+text = "🎮 Controls"
+label_settings = SubResource("LabelSettings_fditb")
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/CenterContainer/ControlsPanel/MarginContainer/VBoxContainer" unique_id=1120103437]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1700191134]
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/CenterContainer/ControlsPanel/MarginContainer/VBoxContainer" unique_id=1930806648]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1635082942]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/ControlsPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=742657513]
 layout_mode = 2
-text = "← Back"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=258227207]
-layout_mode = 2
-text = "Controls"
-
-[node name="ControlsRichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=1065265723]
+[node name="ControlsText" type="RichTextLabel" parent="ColorRect/CenterContainer/ControlsPanel/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" unique_id=1065265723]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
-text = "[b]Movement[/b]
-W A S D — Move
-Shift — Sprint
-Ctrl — Crouch
-Space — Jump
+text = "[color=#E8B84B][b]Movement[/b][/color]
+[color=#F5E6C8]W A S D[/color] — Move
+[color=#F5E6C8]Shift[/color] — Sprint
+[color=#F5E6C8]Ctrl[/color] — Crouch
+[color=#F5E6C8]Space[/color] — Jump
 
-[b]Interaction[/b]
-Left Click/E — Interact / Use item
-Right Click — Secondary action
-Tab — Open inventory (hold)
-F — Lean left
-G — Lean right
+[color=#E8B84B][b]Interaction[/b][/color]
+[color=#F5E6C8]Left Click / E[/color] — Interact
+[color=#F5E6C8]Right Click[/color] — Secondary
+[color=#F5E6C8]Tab[/color] — Inventory
 
-[b]Items[/b]
-Left Click (equipped) — Use on target
-Double-click (inventory) — Use/Equip/View
-[b]UI[/b]
-M — Map
-T — Task list
-Escape — Pause"
+[color=#E8B84B][b]UI[/b][/color]
+[color=#F5E6C8]M[/color] — Map
+[color=#F5E6C8]T[/color] — Tasks
+[color=#F5E6C8]Escape[/color] — Pause"
 fit_content = true
+
+[node name="BackButton" type="Button" parent="ColorRect/CenterContainer/ControlsPanel/MarginContainer/VBoxContainer" unique_id=1635082942]
+unique_name_in_owner = true
+layout_mode = 2
+text = "← Back"

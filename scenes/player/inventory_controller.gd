@@ -30,7 +30,7 @@ func _ready() -> void:
 
 	# Populate the inventory with inventory slots. Attach all necessary signals
 	for item_slot_index: int in item_slots_count:
-		var slot: InventorySlot = inventory_slot_prefab.instantiate()
+		var slot: InventorySlot = inventory_slot_prefab.instantiate() as InventorySlot
 		inventory_grid.add_child(slot)
 		slot.inventory_slot_id = item_slot_index
 		slot.on_item_swapped.connect(_on_item_swapped_on_slot)

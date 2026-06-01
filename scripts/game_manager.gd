@@ -54,7 +54,21 @@ func advance_day():
 
 func _pause() -> void:
 	get_tree().paused = true
+	
+	var quiz = get_tree().get_first_node_in_group("plant_quiz")
+	if quiz:
+		quiz._close()
+	
+	var task_menu = get_tree().get_first_node_in_group("task_menu")
+	if task_menu and task_menu.visible:
+		task_menu._close()
+		
+	var map = get_tree().get_first_node_in_group("map")
+	if map and map.visible:
+		map.visible = false
+	
 	pause_menu_instance = pause_menu_scene.instantiate()
+	pause_menu_instance.process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().root.add_child(pause_menu_instance)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	pause_menu_instance.resumed.connect(_resume)

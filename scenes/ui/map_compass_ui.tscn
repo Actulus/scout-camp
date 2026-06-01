@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cp3nxnaamapui"]
 
-[ext_resource type="Script" uid="uid://cp3nxm89mapsc" path="res://scripts/map_compass_ui.gd" id="1_mapsc"]
+[ext_resource type="Script" uid="uid://cp3nxnaamapsc" path="res://scripts/map_compass_ui.gd" id="1_mapsc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.08, 0.08, 0.08, 0.92)
@@ -9,93 +9,96 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 14
-
-[sub_resource type="LabelSettings" id="LabelSettings_small"]
-font_size = 11
-font_color = Color(0.8, 0.8, 0.8, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_compass"]
-font_size = 16
-font_color = Color(1.0, 0.85, 0.3, 1)
-
-[node name="MapCompassUI" type="CanvasLayer"]
+[node name="MapCompassUI" type="CanvasLayer" unique_id=2045489866]
 layer = 3
 script = ExtResource("1_mapsc")
 
-[node name="Panel" type="Panel" parent="."]
-anchors_preset = -1
+[node name="Panel" type="Panel" parent="." unique_id=1173301300]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -170.0
+offset_left = -453.0
 offset_top = -215.0
-offset_right = 170.0
+offset_right = 453.0
 offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="TitleLabel" type="Label" parent="Panel"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 332.0
-offset_bottom = 24.0
+[node name="TitleLabel" type="Label" parent="Panel" unique_id=1915745762]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_right = 162.0
+offset_bottom = 21.0
+grow_horizontal = 2
 text = "SCOUT CAMP MAP    [M] close"
-label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
 
-[node name="MapArea" type="ColorRect" parent="Panel"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 28.0
-offset_right = 332.0
-offset_bottom = 328.0
-color = Color(0.12, 0.28, 0.10, 1)
+[node name="MapArea" type="ColorRect" parent="Panel" unique_id=1868233944]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_top = 29.0
+offset_right = 162.0
+offset_bottom = 329.0
+grow_horizontal = 2
+color = Color(0.12, 0.28, 0.1, 1)
 
-[node name="MountainArea" type="ColorRect" parent="Panel/MapArea"]
+[node name="MountainArea" type="ColorRect" parent="Panel/MapArea" unique_id=1630020284]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 324.0
-offset_bottom = 52.0
+offset_left = -15.0
+offset_right = 355.0
+offset_bottom = 314.0
 color = Color(0.45, 0.42, 0.38, 1)
 
-[node name="MountainLabel" type="Label" parent="Panel/MapArea/MountainArea"]
+[node name="MountainLabel" type="Label" parent="Panel/MapArea/MountainArea" unique_id=2114423631]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 18.0
 offset_right = 200.0
 offset_bottom = 36.0
 text = "⛰ Mountains"
-label_settings = SubResource("LabelSettings_small")
 
-[node name="LakeArea" type="ColorRect" parent="Panel/MapArea"]
+[node name="ForestArea" type="ColorRect" parent="Panel/MapArea" unique_id=1169530512]
 layout_mode = 0
-offset_left = 0.0
+offset_left = 72.0
+offset_top = 52.0
+offset_right = 290.0
+offset_bottom = 300.0
+color = Color(0.12156863, 0.2784314, 0.101960786, 1)
+
+[node name="FroestLabel" type="Label" parent="Panel/MapArea/ForestArea" unique_id=1979203657]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 26.0
+offset_right = 123.0
+offset_bottom = 47.0
+text = "🌲 Forest"
+
+[node name="LakeArea" type="ColorRect" parent="Panel/MapArea" unique_id=1678532677]
+layout_mode = 0
 offset_top = 52.0
 offset_right = 72.0
 offset_bottom = 300.0
 color = Color(0.15, 0.38, 0.72, 1)
 
-[node name="LakeLabel" type="Label" parent="Panel/MapArea/LakeArea"]
+[node name="LakeLabel" type="Label" parent="Panel/MapArea/LakeArea" unique_id=1813570320]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 80.0
-offset_right = 70.0
-offset_bottom = 120.0
-text = "Lake &\nRiver"
-label_settings = SubResource("LabelSettings_small")
+offset_left = 5.0
+offset_top = 128.0
+offset_right = 73.0
+offset_bottom = 173.0
+text = "🏞️ 
+Lake & River"
 
-[node name="RiverStrip" type="ColorRect" parent="Panel/MapArea"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 140.0
-offset_right = 110.0
-offset_bottom = 165.0
-color = Color(0.2, 0.45, 0.75, 1)
-
-[node name="CampClearing" type="ColorRect" parent="Panel/MapArea"]
+[node name="CampClearing" type="ColorRect" parent="Panel/MapArea" unique_id=244184133]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 120.0
@@ -103,82 +106,68 @@ offset_right = 240.0
 offset_bottom = 250.0
 color = Color(0.48, 0.62, 0.28, 1)
 
-[node name="FirepitDot" type="ColorRect" parent="Panel/MapArea"]
-layout_mode = 0
-offset_left = 158.0
-offset_top = 170.0
-offset_right = 170.0
-offset_bottom = 182.0
-color = Color(1.0, 0.45, 0.1, 1)
-
-[node name="CampLabel" type="Label" parent="Panel/MapArea"]
+[node name="CampLabel" type="Label" parent="Panel/MapArea" unique_id=534157541]
 layout_mode = 0
 offset_left = 105.0
 offset_top = 183.0
 offset_right = 240.0
 offset_bottom = 200.0
 text = "🏕 Camp / Firepit"
-label_settings = SubResource("LabelSettings_small")
 
-[node name="NorthLabel" type="Label" parent="Panel/MapArea"]
+[node name="NorthLabel" type="Label" parent="Panel/MapArea" unique_id=1079260668]
 layout_mode = 0
 offset_left = 145.0
 offset_top = 4.0
 offset_right = 200.0
 offset_bottom = 22.0
 text = "N ↑"
-label_settings = SubResource("LabelSettings_small")
 
-[node name="SouthLabel" type="Label" parent="Panel/MapArea"]
+[node name="SouthLabel" type="Label" parent="Panel/MapArea" unique_id=1430665657]
 layout_mode = 0
 offset_left = 145.0
 offset_top = 280.0
 offset_right = 200.0
 offset_bottom = 298.0
 text = "↓ S"
-label_settings = SubResource("LabelSettings_small")
 
-[node name="EastLabel" type="Label" parent="Panel/MapArea"]
+[node name="EastLabel" type="Label" parent="Panel/MapArea" unique_id=1870304193]
 layout_mode = 0
 offset_left = 295.0
 offset_top = 140.0
 offset_right = 325.0
 offset_bottom = 158.0
 text = "E→"
-label_settings = SubResource("LabelSettings_small")
 
-[node name="WestLabel" type="Label" parent="Panel/MapArea"]
+[node name="WestLabel" type="Label" parent="Panel/MapArea" unique_id=1810279608]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 140.0
 offset_right = 34.0
 offset_bottom = 158.0
 text = "←W"
-label_settings = SubResource("LabelSettings_small")
 
-[node name="CompassLabel" type="Label" parent="Panel"]
+[node name="CompassLabel" type="Label" parent="Panel" unique_id=1651011454]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 332.0
 offset_right = 332.0
-offset_bottom = 355.0
+offset_bottom = 23.0
 text = "You are facing: N"
-label_settings = SubResource("LabelSettings_compass")
 
-[node name="LegendLabel" type="Label" parent="Panel"]
+[node name="LegendLabel" type="Label" parent="Panel" unique_id=1514819605]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 358.0
-offset_right = 332.0
-offset_bottom = 378.0
-text = "Green=forest  LightGreen=camp clearing  Blue=lake  Gray=mountains"
-label_settings = SubResource("LabelSettings_small")
+offset_top = 29.0
+offset_right = 138.0
+offset_bottom = 122.0
+text = "Green=forest  
+LightGreen=camp clearing  
+Blue=lake  
+Gray=mountains"
 
-[node name="HintLabel" type="Label" parent="Panel"]
+[node name="HintLabel" type="Label" parent="Panel" unique_id=1800175280]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 380.0
+offset_top = 389.0
 offset_right = 332.0
-offset_bottom = 398.0
+offset_bottom = 410.0
 text = "Hold compass in hand to see the needle point north"
-label_settings = SubResource("LabelSettings_small")

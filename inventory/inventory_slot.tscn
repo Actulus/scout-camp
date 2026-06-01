@@ -2,69 +2,77 @@
 
 [ext_resource type="Script" uid="uid://b2xri7im7jetd" path="res://inventory/inventory_slot.gd" id="1_5agom"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmxaq"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_color = Color(0.8, 0.8, 0.8, 0)
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_refl1"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.10980392, 0.18039216, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5agom"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 0.85490197)
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nsnbm"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.16470589, 0.23921569, 0.15686275, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u6pog"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.225, 0.225, 0.225, 0.6)
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[node name="InventorySlot" type="Button" unique_id=1739417511]
-custom_minimum_size = Vector2(66, 66)
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="SlotButton" type="Button" unique_id=1739417511]
+custom_minimum_size = Vector2(76, 76)
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 82.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_hmxaq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_5agom")
-theme_override_styles/hover = SubResource("StyleBoxFlat_u6pog")
+theme_override_styles/normal = SubResource("StyleBoxFlat_refl1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_nsnbm")
 script = ExtResource("1_5agom")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=379003515]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 64)
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=20954341]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = -33.0
+offset_top = -33.0
+offset_right = 33.0
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 1
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=379003515]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5

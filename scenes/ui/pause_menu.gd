@@ -24,11 +24,13 @@ func _ready() -> void:
 	if controls_btn: controls_btn.pressed.connect(_open_controls)
 
 func _go_to_main_menu() -> void:
+	# close everything before scene change
+	var map = get_tree().get_first_node_in_group("map_ui")
+	if map: map.queue_free()
+	var task = get_tree().get_first_node_in_group("task_menu")
+	if task: task.queue_free()
 	get_tree().paused = false
-	if settings_instance:
-		settings_instance.queue_free()
-		settings_instance = null
-	queue_free()  # remove pause menu first
+	queue_free()
 	LoadingScreen.load_scene("res://scenes/ui/main_menu.tscn")
 
 func _open_settings() -> void:

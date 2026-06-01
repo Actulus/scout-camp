@@ -1,17 +1,44 @@
 [gd_scene format=3 uid="uid://8ll551l7dhww"]
 
 [ext_resource type="Script" uid="uid://dfjuwsulyf73b" path="res://scenes/ui/main_menu.gd" id="1_1g8jr"]
-[ext_resource type="Texture2D" uid="uid://b8pjnha8uyaxr" path="res://assets/models/main_menu.png" id="1_fe2o3"]
-[ext_resource type="FontFile" uid="uid://b0mvix5mg7yca" path="res://assets/fonts/matrixtype-font/MatrixtypeDisplayBold-6R4e6.ttf" id="2_1g8jr"]
-[ext_resource type="LabelSettings" uid="uid://c08fhbmfbgvgc" path="res://assets/textures/title_label_settings.tres" id="3_m1kxf"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_x2yvf"]
-font = ExtResource("2_1g8jr")
-font_size = 20
-font_color = Color(0, 0.7529412, 0, 1)
+[ext_resource type="FontFile" uid="uid://dnumgtoltjg7b" path="res://assets/fonts/Amatic_SC/AmaticSC-Bold.ttf" id="3_m1kxf"]
+[ext_resource type="FontFile" uid="uid://c8gy3jgo6ifwa" path="res://assets/fonts/Nunito/static/Nunito-Italic.ttf" id="3_x2yvf"]
+[ext_resource type="FontFile" uid="uid://2fa53nfifnxi" path="res://assets/fonts/Nunito/static/Nunito-Regular.ttf" id="4_x2yvf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uhagc"]
-font = ExtResource("2_1g8jr")
+font = ExtResource("3_m1kxf")
+font_size = 80
+font_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+shadow_color = Color(0, 0, 0, 0.53333336)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_btxxm"]
+font = ExtResource("3_x2yvf")
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhagc"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.54509807, 0.18039216, 0.18039216, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wb0q5"]
+font = ExtResource("4_x2yvf")
+font_size = 12
+font_color = Color(0.41568628, 0.41568628, 0.3529412, 1)
 
 [node name="MainMenu" type="Control" unique_id=391396030]
 layout_mode = 3
@@ -22,76 +49,70 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1g8jr")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1503133188]
+[node name="TextureRect" type="ColorRect" parent="." unique_id=1261938015]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_fe2o3")
-expand_mode = 2
-stretch_mode = 5
+color = Color(0.050980393, 0.101960786, 0.047058824, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=363181132]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=369418746]
 layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -139.0
-offset_right = 139.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 
-[node name="TitleContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=417144962]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=363181132]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="VBoxContainer/TitleContainer" unique_id=1665101709]
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1665101709]
 unique_name_in_owner = true
 layout_mode = 2
 text = "ScoutCamp"
-label_settings = ExtResource("3_m1kxf")
+label_settings = SubResource("LabelSettings_uhagc")
 horizontal_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="VBoxContainer/TitleContainer" unique_id=1002653280]
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1002653280]
 unique_name_in_owner = true
 layout_mode = 2
 text = "A Survival Adventure"
-label_settings = SubResource("LabelSettings_x2yvf")
+label_settings = SubResource("LabelSettings_btxxm")
 horizontal_alignment = 1
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1846552711]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=36988181]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=340977568]
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=340977568]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1g8jr")
 text = "New Game"
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=1934322046]
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1934322046]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1g8jr")
 text = "Settings"
 
-[node name="ControlsButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=834163424]
+[node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=834163424]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1g8jr")
 text = "Controls"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=489243735]
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=489243735]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1g8jr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_uhagc")
 text = "Quit Game"
 
 [node name="VersionLabel" type="Label" parent="." unique_id=699363297]
@@ -107,4 +128,4 @@ offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.1 Demo"
-label_settings = SubResource("LabelSettings_uhagc")
+label_settings = SubResource("LabelSettings_wb0q5")

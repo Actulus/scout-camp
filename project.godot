@@ -25,6 +25,8 @@ GameManager="*uid://b5w21y6rg4j6s"
 DayManager="*uid://b5tt846ieys20"
 GameSettings="*uid://c46reqacysaa7"
 LoadingScreen="*uid://b0n02sd66qamw"
+ThemeAnimator="*uid://ewha4es5cie"
+UiFonts="*uid://d3ygmdpmfhh6u"
 
 [display]
 
@@ -34,6 +36,11 @@ window/size/mode=3
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[gui]
+
+theme/custom="uid://df7hwl2b2bp1w"
+theme/custom_font="uid://2fa53nfifnxi"
 
 [input]
 

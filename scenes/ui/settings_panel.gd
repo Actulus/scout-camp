@@ -29,16 +29,25 @@ func _load_settings() -> void:
 	sensitivity_slider.value = GameSettings.mouse_sensitivity
 	fullscreen_option.selected = GameSettings.window_mode
 	
+	# update labels on load
+	%MasterValueLabel.text = "%d%%" % int(master_slider.value * 100)
+	%MusicValueLabel.text = "%d%%" % int(music_slider.value * 100)
+	%SFXValueLabel.text = "%d%%" % int(sfx_slider.value * 100)
+	%SensitivityValueLabel.text = "%d%%" % int(sensitivity_slider.value * 100)
+	
 	# update audio immediately on slider change
-	master_slider.value_changed.connect(func(v): 
-		AudioServer.set_bus_volume_db(
-			AudioServer.get_bus_index("Master"), linear_to_db(v)))
+	master_slider.value_changed.connect(func(v):
+		%MasterValueLabel.text = "%d%%" % int(v * 100)
+		_set_bus_volume("Master", v))
 	music_slider.value_changed.connect(func(v):
-		AudioServer.set_bus_volume_db(
-			AudioServer.get_bus_index("Music"), linear_to_db(v)))
+		%MusicValueLabel.text = "%d%%" % int(v * 100)
+		_set_bus_volume("Music", v))
 	sfx_slider.value_changed.connect(func(v):
-		AudioServer.set_bus_volume_db(
-			AudioServer.get_bus_index("SFX"), linear_to_db(v)))
+		%SFXValueLabel.text = "%d%%" % int(v * 100)
+		_set_bus_volume("SFX", v))
+	sensitivity_slider.value_changed.connect(func(v):
+		%SensitivityValueLabel.text = "%d%%" % int(v * 100)
+		GameSettings.mouse_sensitivity = v)
 
 func _apply_settings() -> void:
 	# window mode
@@ -59,5 +68,10 @@ func _apply_settings() -> void:
 	GameSettings.mouse_sensitivity = sensitivity_slider.value
 	GameSettings.window_mode = fullscreen_option.selected
 	GameSettings.save()
-	
-	visible = false
+
+func _set_bus_volume(bus_name: String, volume: float) -> void:
+	var idx = AudioServer.get_bus_index(bus_name)
+	if idx == -1:
+		push_error("Audio bus not found: " + bus_name)
+		return
+	AudioServer.set_bus_volume_db(idx, linear_to_db(volume))
