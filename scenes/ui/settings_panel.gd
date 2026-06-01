@@ -20,6 +20,8 @@ func _ready() -> void:
 	back_btn.pressed.connect(func(): visible = false)
 	apply_btn.pressed.connect(_apply_settings)
 	_load_settings()
+	await get_tree().process_frame
+	if fullscreen_option: fullscreen_option.grab_focus()
 
 func _load_settings() -> void:
 	# load saved settings or use defaults

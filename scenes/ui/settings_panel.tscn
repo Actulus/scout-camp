@@ -21,6 +21,7 @@ font = ExtResource("3_5qqek")
 font_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
 
 [node name="SettingLayer" type="CanvasLayer" unique_id=1793457476]
+layer = 11
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1639284470]
 anchors_preset = 15

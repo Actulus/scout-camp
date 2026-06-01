@@ -10,7 +10,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [node name="MapCompassUI" type="CanvasLayer" unique_id=2045489866]
-layer = 3
+layer = 2
 script = ExtResource("1_mapsc")
 
 [node name="Panel" type="Panel" parent="." unique_id=1173301300]

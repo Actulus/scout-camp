@@ -86,6 +86,20 @@ func _run() -> void:
 	theme.set_color("font_pressed_color", "Button", Color("#E8B84B"))
 	theme.set_color("font_disabled_color", "Button", Color("#6A6A5A"))
 	
+	theme.set_constant("focus_mode", "Button", 2) 
+	var btn_focus = StyleBoxFlat.new()
+	btn_focus.bg_color = Color("#4A7C3F")
+	btn_focus.border_color = Color("#E8B84B")
+	btn_focus.set_border_width_all(3)
+	btn_focus.set_corner_radius_all(12)
+	btn_focus.content_margin_left = 20
+	btn_focus.content_margin_right = 20
+	btn_focus.content_margin_top = 10
+	btn_focus.content_margin_bottom = 10
+	btn_focus.shadow_color = Color("#E8B84B", 0.4)
+	btn_focus.shadow_size = 8
+	theme.set_stylebox("focus", "Button", btn_focus)
+	
 	# === LABELS ===
 	theme.set_font("font", "Label", font_body)
 	theme.set_font_size("font_size", "Label", 16)

@@ -24,9 +24,34 @@ signal day_changed(day_number: int)
 signal flag_found(flag_index: int)
 
 func _ready() -> void:
+	reset()
+	set_process_input(true)
+
+func reset() -> void:
+	current_day = 1
+	fire_lit = false
+	skills_completed = {
+		"shelter": false,
+		"tent": false,
+		"fire": false,
+		"water": false,
+		"plants": false,
+		"navigation": false
+	}
+	badges_earned.clear()
 	scattered_positions.clear()
+	plant_guide_read = false
+	pages_found = 0
 
 func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("task_menu"):
+		var menu = get_tree().get_first_node_in_group("task_menu")
+		if menu:
+			if menu.visible:
+				menu._close()
+			else: 
+				menu.open()
+				
 	if Input.is_action_just_pressed("pause"):
 		# don't pause if on main menu
 		if get_tree().current_scene.scene_file_path.contains("main_menu"):

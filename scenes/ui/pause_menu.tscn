@@ -24,19 +24,27 @@ text = "Paused"
 [node name="ResumeButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=975348215]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenuButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1494880837]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../ControlsButton")
 text = "Settings"
 
 [node name="ControlsButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1547051925]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../MainMenuButton")
 text = "Controls"
 
 [node name="MainMenuButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=728159022]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../ControlsButton")
+focus_neighbor_bottom = NodePath("../ResumeButton")
 text = "Exit to Main Menu"

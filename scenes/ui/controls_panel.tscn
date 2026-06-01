@@ -8,6 +8,7 @@ font = ExtResource("2_83sls")
 font_size = 36
 
 [node name="ControlsLayer" type="CanvasLayer" unique_id=1339073414]
+layer = 11
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=377646369]
 anchors_preset = 15

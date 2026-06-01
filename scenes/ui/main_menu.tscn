@@ -94,24 +94,32 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
 text = "New Game"
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1934322046]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../ControlsButton")
 text = "Settings"
 
 [node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=834163424]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 text = "Controls"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=489243735]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
+focus_neighbor_top = NodePath("../ControlsButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
 theme_override_styles/normal = SubResource("StyleBoxFlat_uhagc")
 text = "Quit Game"
 

@@ -16,6 +16,7 @@ bg_color = Color(0.7764706, 0.15686275, 0.15686275, 1)
 bg_color = Color(0.7764706, 0.15686275, 0.15686275, 1)
 
 [node name="PlantQuizUI" type="CanvasLayer" unique_id=1086250323]
+layer = 4
 script = ExtResource("1_drhel")
 
 [node name="Control" type="Control" parent="." unique_id=149999847]

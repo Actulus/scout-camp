@@ -27,6 +27,7 @@ font_size = 12
 font_color = Color(0.2901961, 0.3529412, 0.28235295, 1)
 
 [node name="LoadingScreen" type="CanvasLayer" unique_id=906828054]
+layer = 20
 script = ExtResource("1_rqdcv")
 
 [node name="Control" type="Control" parent="." unique_id=1623528950]

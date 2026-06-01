@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cb1mh8xa8d01m" path="res://scenes/ui/task_menu.gd" id="1_wk2u3"]
 
 [node name="TaskMenu" type="CanvasLayer" unique_id=1432026446]
+layer = 2
 script = ExtResource("1_wk2u3")
 
 [node name="Control" type="Control" parent="." unique_id=1549844065]
@@ -44,6 +45,7 @@ horizontal_alignment = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1650665457]
 layout_mode = 2
 size_flags_vertical = 3
+follow_focus = true
 
 [node name="TaskList" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/ScrollContainer" unique_id=283776288]
 unique_name_in_owner = true

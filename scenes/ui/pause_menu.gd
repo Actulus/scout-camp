@@ -22,6 +22,8 @@ func _ready() -> void:
 	if main_menu_btn: main_menu_btn.pressed.connect(_go_to_main_menu)
 	if settings_btn: settings_btn.pressed.connect(_open_settings)
 	if controls_btn: controls_btn.pressed.connect(_open_controls)
+	
+	resume_btn.grab_focus.call_deferred()
 
 func _go_to_main_menu() -> void:
 	# close everything before scene change
@@ -34,19 +36,28 @@ func _go_to_main_menu() -> void:
 	LoadingScreen.load_scene("res://scenes/ui/main_menu.tscn")
 
 func _open_settings() -> void:
-	if settings_instance: return
+	if settings_instance and is_instance_valid(settings_instance): return
 	settings_instance = settings_scene.instantiate()
-	add_child(settings_instance)
+	settings_instance.process_mode = Node.PROCESS_MODE_ALWAYS
+	# remove the layer = 11 line, it's already set in the scene
+	get_tree().root.add_child(settings_instance)
 	var back = settings_instance.get_node_or_null("%BackButton")
-	if back: back.pressed.connect(func():
-		settings_instance.queue_free()
-		settings_instance = null)
+	if back:
+		back.pressed.connect(func():
+			settings_instance.queue_free()
+			settings_instance = null
+			var s_btn = get_node_or_null("%SettingsButton")
+			if s_btn: s_btn.grab_focus.call_deferred())
 
-func _open_controls() -> void: 
-	if controls_instance: return
+func _open_controls() -> void:
+	if controls_instance and is_instance_valid(controls_instance): return
 	controls_instance = controls_scene.instantiate()
-	add_child(controls_instance)
+	controls_instance.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().root.add_child(controls_instance)
 	var back = controls_instance.get_node_or_null("%BackButton")
-	if back: back.pressed.connect(func():
-		controls_instance.queue_free()
-		controls_instance = null)
+	if back:
+		back.pressed.connect(func():
+			controls_instance.queue_free()
+			controls_instance = null
+			var c_btn = get_node_or_null("%ControlsButton")
+			if c_btn: c_btn.grab_focus.call_deferred())

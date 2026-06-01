@@ -14,6 +14,7 @@ border_blend = true
 [node name="InventoryController" type="Node" unique_id=2143623853]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=541181378]
+layer = 3
 
 [node name="InventoryUI" type="Control" parent="CanvasLayer" unique_id=992822927]
 visible = false
