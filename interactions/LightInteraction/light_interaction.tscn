@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b43v2hlbcfp0m"]
+
+[ext_resource type="Script" uid="uid://c4iqhhhmbydht" path="res://interactions/LightInteraction/light_interaction.gd" id="1_1lg41"]
+
+[node name="LightInteraction" type="Node" unique_id=1084398401]
+script = ExtResource("1_1lg41")

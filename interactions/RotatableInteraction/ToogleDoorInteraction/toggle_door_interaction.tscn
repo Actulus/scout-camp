@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bhvbioklpw0li"]
+
+[ext_resource type="Script" uid="uid://c1okxlimisvip" path="res://interactions/RotatableInteraction/ToogleDoorInteraction/toggle_door_interaction.gd" id="1_yu8gt"]
+
+[node name="ToggleDoorInteraction" type="Node" unique_id=524960099]
+script = ExtResource("1_yu8gt")

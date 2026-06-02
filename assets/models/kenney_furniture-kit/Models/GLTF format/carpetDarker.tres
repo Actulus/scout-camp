@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bag60r3n55b3v"]
+
+[resource]
+resource_name = "carpetDarker"
+albedo_color = Color(0.2805939, 0.15515926, 0.15073726, 1)
+emission_enabled = true

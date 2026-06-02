@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d3wx3wrvqjqku"]
+
+[resource]
+resource_name = "plant"
+albedo_color = Color(0.064051695, 0.34951887, 0.16724226, 1)
+emission_enabled = true

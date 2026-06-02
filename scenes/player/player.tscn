@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://b46jihj162om4" path="res://assets/audio/jump_Antons_Footsteps_FS_Grass_Walk_07.wav" id="8_qek5x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
+height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvxji"]
 height = 1.0
@@ -27,7 +28,6 @@ shader_parameter/fade_strength = 0.70000003325
 
 [node name="Player" type="CharacterBody3D" unique_id=561802944]
 script = ExtResource("1_8afob")
-note_sway_amount = null
 
 [node name="StandingCollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049054487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cquge222ps24y"]
+
+[resource]
+resource_name = "colormap"
+cull_mode = 2
+albedo_color = Color(0.6509804, 0.4627451, 0.34117648, 1)
+texture_filter = 2

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://xdofoogem25o"]
+
+[resource]
+resource_name = "WoodRoof"
+cull_mode = 2
+albedo_color = Color(0.36078438, 0.23921573, 0.117647074, 1)
+roughness = 0.85

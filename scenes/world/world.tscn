@@ -16,18 +16,16 @@
 [ext_resource type="PackedScene" uid="uid://dq56lq1s8mttq" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/tent_poles.tscn" id="12_srmg5"]
 [ext_resource type="PackedScene" uid="uid://3bjrbefeg31v" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/tent_canvas.tscn" id="13_umvgx"]
 [ext_resource type="PackedScene" uid="uid://c3p6hap1fr6rn" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/bucket.tscn" id="15_wbwoo"]
-[ext_resource type="PackedScene" uid="uid://dx3i2quod3wt5" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/cooking_pot.tscn" id="16_tytul"]
-[ext_resource type="PackedScene" uid="uid://bqps2ox226mc4" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/mug.tscn" id="17_t634p"]
-[ext_resource type="PackedScene" uid="uid://hlod7e2vgoaj" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/purification_tablet.tscn" id="18_6hctx"]
-[ext_resource type="PackedScene" uid="uid://bwhc53xt8f8al" path="res://scenes/skills/water/purify_station.tscn" id="19_ues17"]
 [ext_resource type="PackedScene" uid="uid://cw5bvhi5y8yhy" path="res://interactions/CollectableInteraction/InspectableInteraction/Interactables/plant_field_guide.tscn" id="22_guide"]
 [ext_resource type="PackedScene" uid="uid://cwqfbeeyk5nc7" path="res://interactions/CollectableInteraction/InspectableInteraction/Interactables/book_page_1.tscn" id="23_page1"]
 [ext_resource type="PackedScene" uid="uid://cwqfbeeyk5oc7" path="res://interactions/CollectableInteraction/InspectableInteraction/Interactables/book_page_2.tscn" id="24_page2"]
 [ext_resource type="PackedScene" uid="uid://cwqfbeeyk5pc7" path="res://interactions/CollectableInteraction/InspectableInteraction/Interactables/book_page_3.tscn" id="25_page3"]
 [ext_resource type="PackedScene" uid="uid://cp3nxnaamappp" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/map_item.tscn" id="26_map"]
+[ext_resource type="PackedScene" uid="uid://dwuht1uonu1le" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/table.glb" id="26_rwifv"]
 [ext_resource type="PackedScene" uid="uid://cp3nxnaacompp" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/compass_item.tscn" id="27_compass"]
 [ext_resource type="PackedScene" uid="uid://brcxfygwhfk5t" path="res://scenes/ui/task_menu.tscn" id="28_2x71e"]
 [ext_resource type="Script" uid="uid://cp3navcntrl01" path="res://scripts/navigation_controller.gd" id="29_navctr"]
+[ext_resource type="PackedScene" uid="uid://cvosv18b8g06u" path="res://scenes/camp/camp_house.tscn" id="29_wnndm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5dby"]
 sky_top_color = Color(0, 0.45849943, 0.7871284, 1)
@@ -65,6 +63,9 @@ mesh = ExtResource("3_6m72w")
 transform_format = 1
 mesh = ExtResource("3_1yooq")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwifv"]
+albedo_color = Color(0.54509807, 0.3882353, 0.2784314, 1)
+
 [node name="World" type="Node3D" unique_id=430405692]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1403228488]
@@ -77,7 +78,6 @@ shadow_enabled = true
 
 [node name="Player" parent="." unique_id=561802944 groups=["player"] instance=ExtResource("1_dphjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2745132, 1, 0)
-note_sway_amount = 0.1
 
 [node name="camp_landscape_w_Mountains" parent="." unique_id=1766557002 instance=ExtResource("2_sl2e5")]
 
@@ -96,10 +96,10 @@ shape = SubResource("ConcavePolygonShape3D_dlabj")
 [node name="WaterInteraction" parent="camp_landscape_w_Mountains/RiverNLake/StaticBody3D" unique_id=2088268351 instance=ExtResource("3_wbwoo")]
 
 [node name="NoticeBoard" parent="camp_landscape_w_Mountains" unique_id=212740403 instance=ExtResource("4_ckok1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.8074951, -2.032837)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7615967, 0.8074951, -0.4378662)
 
 [node name="Bucket" parent="." unique_id=310901583 instance=ExtResource("15_wbwoo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.236672, -0.19255362, -2.074677)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.936745, -0.19255362, -0.28085375)
 
 [node name="TreeScatterer" type="MultiMeshInstance3D" parent="." unique_id=2122310135]
 multimesh = SubResource("MultiMesh_gb53w")
@@ -124,6 +124,7 @@ script = ExtResource("5_t5ptc")
 collectible_scene = ExtResource("6_bq33v")
 count = 300
 world_radius = 150.0
+camp_clear_radius = 15.0
 avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../TreeScatterer2"), NodePath("../MushroomScatterer"), NodePath("../StoneScatterer"), NodePath("../FirePit"), NodePath("../camp_landscape_w_Mountains/RiverNLake")])
 
 [node name="MushroomScatterer" type="Node3D" parent="." unique_id=866722671]
@@ -131,6 +132,7 @@ script = ExtResource("5_t5ptc")
 collectible_scene = ExtResource("7_bq33v")
 count = 150
 world_radius = 100.0
+camp_clear_radius = 15.0
 min_distance_from_others = 5.0
 avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../TreeScatterer2"), NodePath("../StickScatterer"), NodePath("../StoneScatterer")])
 
@@ -142,34 +144,22 @@ world_radius = 150.0
 avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../TreeScatterer2"), NodePath("../StickScatterer"), NodePath("../MushroomScatterer")])
 
 [node name="FirePit" parent="." unique_id=2016362658 instance=ExtResource("9_1yooq")]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 7.251269, -0.20789099, 5.788615)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 11.304918, -0.20789099, 7.6362104)
 
 [node name="TentSpot" parent="." unique_id=58251706 instance=ExtResource("4_dlabj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856089, -0.07152574, 0.16463089)
+transform = Transform3D(0.2447997, 0, -0.9695737, 0, 1, 0, 0.9695737, 0, 0.2447997, 13.856089, -0.07152574, 3.93227)
 
 [node name="TentCanvas" parent="." unique_id=557959429 instance=ExtResource("13_umvgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.817813, 0.15454066, 0.0067546368)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.817813, 0.15454066, 2.1649578)
 
 [node name="TentPoles" parent="." unique_id=1915320521 instance=ExtResource("12_srmg5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.228617, -0.10020327, -0.9452685)
-
-[node name="CookingPot" parent="." unique_id=29031691 instance=ExtResource("16_tytul")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0520267, -0.2019043, 5.491482)
-
-[node name="Mug" parent="." unique_id=840567046 instance=ExtResource("17_t634p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.48971, 0.6472168, 4.10353)
-
-[node name="PurificationTablet" parent="." unique_id=1222108506 instance=ExtResource("18_6hctx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2623005, 0.6494448, 4.26922)
-
-[node name="PurifyStation" parent="." unique_id=979031062 instance=ExtResource("19_ues17")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.839527, -0.17053443, 4.3423014)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.228617, -0.10020327, 1.1279737)
 
 [node name="MapItem" parent="." unique_id=800000002 instance=ExtResource("26_map")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.91449, 0.6521728, 4.6520996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.463501, 0.55378413, 0.12213135)
 
 [node name="CompassItem" parent="." unique_id=800000003 instance=ExtResource("27_compass")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.485168, 0.63929445, 4.3415527)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0491943, 0.9951294, 0.035095215)
 
 [node name="BookPage1" parent="." unique_id=800000004 instance=ExtResource("23_page1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -0.16630858, -5)
@@ -184,8 +174,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.7191, 0.2824219, 20)
 script = ExtResource("29_navctr")
 
 [node name="PlantFieldGuide" parent="." unique_id=100000001 instance=ExtResource("22_guide")]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 10.226498, 0.7720207, 4.140381)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -3.7352028, 0.7720207, -5.1783447)
 
 [node name="TaskMenu" parent="." unique_id=1432026446 instance=ExtResource("28_2x71e")]
 
+[node name="CampHouse" parent="." unique_id=174347405 instance=ExtResource("29_wnndm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.087927245, -7.245)
+
+[node name="table" parent="." unique_id=1332696875 instance=ExtResource("26_rwifv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 5.6936646, -0.13205457, 0.1875894)
+
+[node name="table(Clone)" parent="table" index="0" unique_id=1936708414]
+surface_material_override/0 = SubResource("StandardMaterial3D_rwifv")
+
 [editable path="camp_landscape_w_Mountains"]
+[editable path="table"]

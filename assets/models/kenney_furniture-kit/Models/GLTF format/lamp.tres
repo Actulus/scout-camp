@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://baioimko4jwh7"]
+
+[resource]
+resource_name = "lamp"
+albedo_color = Color(0.7491792, 0.63720566, 0, 1)
+emission_enabled = true

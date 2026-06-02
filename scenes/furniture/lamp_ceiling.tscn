@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dw1bkk585t16s"]
+
+[ext_resource type="ArrayMesh" uid="uid://0xajbv45u53u" path="res://assets/models/kenney_furniture-kit/Models/OBJ format/lampSquareCeiling.obj" id="1_2o68r"]
+[ext_resource type="Material" uid="uid://baioimko4jwh7" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/lamp.tres" id="2_i5die"]
+[ext_resource type="PackedScene" uid="uid://b43v2hlbcfp0m" path="res://interactions/LightInteraction/light_interaction.tscn" id="2_qo5m1"]
+[ext_resource type="Material" uid="uid://cqeac06s582je" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/metal.tres" id="3_an83j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qo5m1"]
+albedo_color = Color(1, 0.9607843, 0.8784314, 1)
+emission_enabled = true
+emission = Color(1, 0.9607843, 0.8784314, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_wiliy"]
+material = SubResource("StandardMaterial3D_qo5m1")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qo5m1"]
+size = Vector3(0.1854248, 0.39871216, 0.19148064)
+
+[node name="LampCeiling" type="StaticBody3D" unique_id=1970280075]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=58779810]
+mesh = ExtResource("1_2o68r")
+surface_material_override/0 = ExtResource("2_i5die")
+surface_material_override/1 = ExtResource("3_an83j")
+
+[node name="Bulb" type="MeshInstance3D" parent="." unique_id=136146441]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -0.056396484, 0.00787735, 0.06047885)
+visible = false
+mesh = SubResource("SphereMesh_wiliy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1017473124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.059509277, 0.031425476, 0.056204796)
+shape = SubResource("BoxShape3D_qo5m1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2132475821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018127441, -0.02960205, 0.051727295)
+visible = false
+light_color = Color(0.8526918, 0.6468476, 0, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="LightInteraction" parent="." unique_id=1084398401 instance=ExtResource("2_qo5m1")]
