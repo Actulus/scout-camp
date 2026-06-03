@@ -4,8 +4,8 @@ class_name BadgeMenu
 const BADGE_DEFINITIONS = [
 	{"id": "fire",       "name": "The Fire Starter",   "emoji": "🔥", "color": Color("#FF6600"),
 	 "how": "Bring wood to the campfire pit and light it."},
-	{"id": "shelter",    "name": "The Shelter Builder", "emoji": "🏕️", "color": Color("#8B4513"),
-	 "how": "Build a shelter using the poles and canvas found near camp."},
+	# {"id": "shelter", "name": "The Shelter Builder", "emoji": "🏕️", "color": Color("#8B4513"),
+	#  "how": "Collect 4 leaf heaps and 6 wood logs, then assemble your shelter."},
 	{"id": "tent",       "name": "The Tent Camper",     "emoji": "⛺",  "color": Color("#A0522D"),
 	 "how": "Assemble the tent at the designated marker near camp."},
 	{"id": "water",      "name": "The Water Guardian",  "emoji": "💧", "color": Color("#0088FF"),
