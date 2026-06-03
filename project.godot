@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://d6s3xva1kkbc"
 [autoload]
 
 GameManager="*uid://b5w21y6rg4j6s"
+SaveSystem="*res://systems/save_system.gd"
 DayManager="*uid://b5tt846ieys20"
 GameSettings="*uid://c46reqacysaa7"
 LoadingScreen="*uid://b0n02sd66qamw"

@@ -1,0 +1,92 @@
+extends Node
+
+const SAVE_PATH := "user://scoutcamp_save.cfg"
+
+# Set true by load_game_state(); cleared once the player node is found and teleported.
+var _pending_player_restore := false
+
+func _ready() -> void:
+	set_process(false)
+
+# ── Public API ────────────────────────────────────────────────────────────────
+
+func has_save() -> bool:
+	return FileAccess.file_exists(SAVE_PATH)
+
+func delete_save() -> void:
+	if has_save():
+		DirAccess.remove_absolute(SAVE_PATH)
+
+func save() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+	var cfg := ConfigFile.new()
+
+	# GameManager state
+	cfg.set_value("game", "current_day",      GameManager.current_day)
+	cfg.set_value("game", "fire_lit",         GameManager.fire_lit)
+	cfg.set_value("game", "plant_guide_read", GameManager.plant_guide_read)
+	cfg.set_value("game", "animal_guide_read",GameManager.animal_guide_read)
+	cfg.set_value("game", "pages_found",      GameManager.pages_found)
+	cfg.set_value("game", "skills_completed", GameManager.skills_completed)
+	cfg.set_value("game", "badges_earned",    GameManager.badges_earned)
+
+	# Player transform
+	if player:
+		cfg.set_value("player", "pos_x",    player.global_position.x)
+		cfg.set_value("player", "pos_y",    player.global_position.y)
+		cfg.set_value("player", "pos_z",    player.global_position.z)
+		cfg.set_value("player", "rot_y",    player.rotation_degrees.y)
+
+	var err := cfg.save(SAVE_PATH)
+	if err != OK:
+		push_error("SaveSystem: failed to write save file (error %d)" % err)
+
+func load_game_state() -> void:
+	if not has_save():
+		return
+	var cfg := ConfigFile.new()
+	if cfg.load(SAVE_PATH) != OK:
+		push_error("SaveSystem: could not read save file")
+		return
+
+	# Restore GameManager — reset() was intentionally NOT called before this
+	GameManager.current_day       = cfg.get_value("game", "current_day",      1)
+	GameManager.fire_lit          = cfg.get_value("game", "fire_lit",         false)
+	GameManager.plant_guide_read  = cfg.get_value("game", "plant_guide_read", false)
+	GameManager.animal_guide_read = cfg.get_value("game", "animal_guide_read",false)
+	GameManager.pages_found       = cfg.get_value("game", "pages_found",      0)
+	GameManager.badges_earned     = cfg.get_value("game", "badges_earned",    [])
+
+	# Merge saved skills into the current dict so any new keys added later keep defaults
+	var saved_skills: Dictionary = cfg.get_value("game", "skills_completed", {})
+	for key in saved_skills:
+		if GameManager.skills_completed.has(key):
+			GameManager.skills_completed[key] = saved_skills[key]
+
+	# Player position is applied in _process() once the world is ready
+	_pending_player_restore = true
+	set_process(true)
+
+# ── Deferred player restore ───────────────────────────────────────────────────
+
+func _process(_delta: float) -> void:
+	if not _pending_player_restore:
+		set_process(false)
+		return
+	var player := get_tree().get_first_node_in_group("player")
+	if not player:
+		return  # world not ready yet — try again next frame
+	_apply_player_transform(player)
+	_pending_player_restore = false
+	set_process(false)
+
+func _apply_player_transform(player: Node) -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load(SAVE_PATH) != OK:
+		return
+	var px: float = cfg.get_value("player", "pos_x", 0.0)
+	var py: float = cfg.get_value("player", "pos_y", 0.0)
+	var pz: float = cfg.get_value("player", "pos_z", 0.0)
+	var ry: float = cfg.get_value("player", "rot_y", 0.0)
+	player.global_position     = Vector3(px, py, pz)
+	player.rotation_degrees.y  = ry

@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://djk3wc6b04d5y" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/loungeChair.glb" id="16_wjhdg"]
 [ext_resource type="PackedScene" uid="uid://d0jmkem66grg" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/lampRoundFloor.glb" id="17_d0fq1"]
 [ext_resource type="PackedScene" uid="uid://rsu7trrgevu6" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/toilet.glb" id="17_j4t2i"]
+[ext_resource type="PackedScene" uid="uid://c5x00blfr7bld" path="res://interactions/SaveInteraction/save_interaction.tscn" id="18_0ta0h"]
 [ext_resource type="PackedScene" uid="uid://cisscicul2e5m" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/bookcaseClosedWide.glb" id="18_hqiuy"]
 [ext_resource type="PackedScene" uid="uid://dwr4ghispau5i" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/bathroomSink.glb" id="21_hdmf3"]
 [ext_resource type="PackedScene" uid="uid://cafp8m0aqv30u" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/bedSingle.glb" id="22_r30ji"]
@@ -199,6 +200,8 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -17.391888, 0.014312267, 2.09
 
 [node name="bedBunk" parent="Bedroom/Beds" unique_id=724528216 instance=ExtResource("4_g2kk6")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.8986478, -0.002385378, -0.348809)
+
+[node name="SaveInteraction" parent="Bedroom/Beds/bedBunk" unique_id=434475354 instance=ExtResource("18_0ta0h")]
 
 [node name="bedBunk2" parent="Bedroom/Beds" unique_id=340335656 instance=ExtResource("4_g2kk6")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.208427, -0.002385378, -0.348809)
