@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://rgjarinwynjq"]
+
+[ext_resource type="Script" uid="uid://bjq1badbm0syw" path="res://interactions/BookInteraction/book_interaction.gd" id="1_akfel"]
+
+[node name="BookInteraction" type="Node" unique_id=2071179124]
+script = ExtResource("1_akfel")

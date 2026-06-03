@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://bu7gx2dfpt31l"]
+
+[ext_resource type="Script" uid="uid://clo0fgqy1dktd" path="res://scenes/ui/page_book_ui.gd" id="1_6btb4"]
+[ext_resource type="FontFile" uid="uid://xg8wh1ep6jsa" path="res://assets/fonts/Caveat/static/Caveat-Regular.ttf" id="3_hp1q5"]
+[ext_resource type="FontFile" uid="uid://cwg66ebs15g6l" path="res://assets/fonts/Caveat/static/Caveat-Bold.ttf" id="4_e3day"]
+[ext_resource type="FontFile" uid="uid://cj3rteimnyw7r" path="res://assets/fonts/Caveat/static/Caveat-Medium.ttf" id="5_6fm8l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xpp3"]
+bg_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.54509807, 0.3882353, 0.2784314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_6btb4"]
+font = ExtResource("4_e3day")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_etpjd"]
+font = ExtResource("4_e3day")
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+
+[node name="PageBookUI" type="CanvasLayer" unique_id=1991404225]
+layer = 4
+script = ExtResource("1_6btb4")
+
+[node name="Control" type="Control" parent="." unique_id=1591016098]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1062529980]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="BookPanel" type="PanelContainer" parent="Control/ColorRect" unique_id=987526511]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(680, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -240.0
+offset_right = 340.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1xpp3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ColorRect/BookPanel" unique_id=738861128]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect/BookPanel/MarginContainer" unique_id=2035802762]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer" unique_id=1563215092]
+layout_mode = 2
+
+[node name="BookTitle" type="Label" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1762651733]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Æsop's Fables"
+label_settings = SubResource("LabelSettings_6btb4")
+
+[node name="CloseButton" type="Button" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=998353233]
+unique_name_in_owner = true
+layout_mode = 2
+text = "✕"
+
+[node name="HSeparator" type="HSeparator" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer" unique_id=1432336713]
+layout_mode = 2
+
+[node name="PageTitle" type="Label" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer" unique_id=1719113002]
+unique_name_in_owner = true
+layout_mode = 2
+text = "tale title"
+label_settings = SubResource("LabelSettings_etpjd")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer" unique_id=1851120424]
+custom_minimum_size = Vector2(600, 230)
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="PageContent" type="RichTextLabel" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=110756607]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.17254902, 0.09411765, 0.0627451, 1)
+theme_override_fonts/normal_font = ExtResource("3_hp1q5")
+theme_override_fonts/bold_font = ExtResource("4_e3day")
+theme_override_fonts/bold_italics_font = ExtResource("5_6fm8l")
+theme_override_fonts/italics_font = ExtResource("5_6fm8l")
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 26
+theme_override_font_sizes/italics_font_size = 26
+theme_override_font_sizes/mono_font_size = 26
+bbcode_enabled = true
+text = "[b]The Ant and the Grasshopper[/b]\\n\\nIn a field one summer's day a Grasshopper was hopping about, chirping and singing to its heart's content. An Ant passed by, bearing along with great toil an ear of corn he was taking to the nest.\\n\\n[i]\\\"Why not come and chat with me,\\\"[/i] said the Grasshopper, [i]\\\"instead of toiling and moiling in that way?\\\"[/i]\\n\\n[i]\\\"I am helping to lay up food for the winter,\\\"[/i] said the Ant, [i]\\\"and recommend you to do the same.\\\"[/i]\\n\\n[i]\\\"Why bother about winter?\\\"[/i] said the Grasshopper; [i]\\\"we have got plenty of food at present.\\\"[/i]\\n\\nBut the Ant went on its way. When winter came the Grasshopper found itself dying of hunger, while it saw the ants distributing every day corn from the stores they had collected in summer.\\n\\n[color=#8B4513][i]Work today and you shall eat tomorrow.[/i][/color]"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer" unique_id=1696331702]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer" unique_id=487652700]
+layout_mode = 2
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1994919265]
+unique_name_in_owner = true
+layout_mode = 2
+text = "← Previous"
+
+[node name="PageCounter" type="Label" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=947266019]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Page 1 of 7"
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="Control/ColorRect/BookPanel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=667747149]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Next →"
