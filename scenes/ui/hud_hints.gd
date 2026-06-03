@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var hint_bar: HBoxContainer = %HintBar
+@onready var hint_bar: VBoxContainer = %HintBar
 
 # hint sets per context
 const HINTS = {
@@ -26,10 +26,19 @@ const HINTS = {
 		{"key": "Q", "action": "Previous"},
 		{"key": "Esc", "action": "Close"}
 	],
-	"quiz": [
-		{"key": "↑↓", "action": "Navigate"},
-		{"key": "Enter", "action": "Select"},
-		{"key": "B", "action": "Close"}
+	"plant_quiz": [
+		{"key": "E", "action": "Edible"},
+		{"key": "P", "action": "Poisonous"},
+		{"key": "←→", "action": "Navigate"},
+		{"key": "Enter", "action": "Submit"},
+		{"key": "Esc", "action": "Close"}
+	],
+	"animal_quiz": [
+		{"key": "E", "action": "Safe"},
+		{"key": "P", "action": "Dangerous"},
+		{"key": "←→", "action": "Navigate"},
+		{"key": "Enter", "action": "Submit"},
+		{"key": "Esc", "action": "Close"}
 	]
 }
 
@@ -57,9 +66,14 @@ const CONTROLLER_HINTS = {
 		{"key": "X", "action": "Previous"},
 		{"key": "B", "action": "Close"}
 	],
-	"quiz": [
-		{"key": "↑↓", "action": "Navigate"},
-		{"key": "A", "action": "Select"},
+	"plant_quiz": [
+		{"key": "DPad", "action": "Navigate"},
+		{"key": "A", "action": "Confirm"},
+		{"key": "B", "action": "Close"}
+	],
+	"animal_quiz": [
+		{"key": "DPad", "action": "Navigate"},
+		{"key": "A", "action": "Confirm"},
 		{"key": "B", "action": "Close"}
 	]
 }
@@ -71,11 +85,12 @@ var font_body: FontFile
 func _ready() -> void:
 	add_to_group("hud_hints")
 	font_body = UiFonts.body
-	# Fix HintBar layout: full-width at bottom with centered content
-	hint_bar.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	hint_bar.offset_top = -40.0
+	# Right-side vertical bar (Alba-style): anchored center-right, grows up/down
+	hint_bar.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+	hint_bar.offset_left = -210.0
+	hint_bar.offset_right = -10.0
+	hint_bar.offset_top = 0.0
 	hint_bar.offset_bottom = 0.0
-	hint_bar.alignment = HBoxContainer.ALIGNMENT_CENTER
 	_show_hints("default")
 
 func _input(event: InputEvent) -> void:

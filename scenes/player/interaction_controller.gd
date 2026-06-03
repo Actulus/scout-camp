@@ -72,12 +72,16 @@ func _process(delta: float) -> void:
 	var hud = _get_hud_hints()
 	
 	if hud:
-		if item_equipped:
-			hud.set_context("equipped")
-		elif potential_object and potential_interaction_component:
-			hud.set_context("near_object")
+		if is_note_overlay_display:
+			hud.visible = false
 		else:
-			hud.set_context("default")
+			hud.visible = true
+			if item_equipped:
+				hud.set_context("equipped")
+			elif potential_object and potential_interaction_component:
+				hud.set_context("near_object")
+			else:
+				hud.set_context("default")
 			
 	if item_equipped:
 		_update_reticle_state()
@@ -171,9 +175,11 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if is_note_overlay_display and event.is_action_pressed("primary"):
 		_on_note_collected()
-		
+
 	if item_equipped and Input.is_action_just_pressed("primary"):
 		_use_equipped_item()
+	elif item_equipped and Input.is_action_just_pressed("secondary"):
+		_unequip_to_inventory()
 		
 # Determines if the object the player is interacting with should stop mouse camera  movement 
 func isCameraLocked() -> bool:
@@ -376,6 +382,15 @@ func _use_equipped_item() -> void:
 	potential_interaction_component = null
 	
 	
+func _unequip_to_inventory() -> void:
+	inventory_controller.pickup_item(equipped_item_interaction_component.item_data)
+	if equipped_item is CollisionObject3D:
+		interaction_raycast.remove_exception(equipped_item)
+	equipped_item.queue_free()
+	equipped_item = null
+	equipped_item_interaction_component = null
+	item_equipped = false
+
 # Adds the given item data to the first open inventory slot
 func _add_item_to_inventory(item_data: ItemData):
 	if item_data != null:

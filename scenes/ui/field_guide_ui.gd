@@ -32,6 +32,9 @@ func _ready() -> void:
 		ic.set_process(false)
 		ic.set_physics_process(false)
 
+	var hud = get_tree().get_first_node_in_group("hud_hints")
+	if hud: hud.set_context("reading")
+
 	action_btn.pressed.connect(_on_action_btn)
 
 	# force mouse visible after 3 frames
@@ -176,6 +179,8 @@ func _close() -> void:
 	if ic:
 		ic.set_process(true)
 		ic.set_physics_process(true)
+	var hud = get_tree().get_first_node_in_group("hud_hints")
+	if hud: hud.set_context("default")
 	var player = get_tree().get_first_node_in_group("player")
 	if player: player.ui_open = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

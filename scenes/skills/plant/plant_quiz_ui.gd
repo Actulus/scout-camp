@@ -34,7 +34,7 @@ func _ready() -> void:
 
 func setup() -> void:
 	var hud = get_tree().get_first_node_in_group("hud_hints")
-	if hud: hud.set_context("quiz")
+	if hud: hud.set_context("plant_quiz")
 	correct_answers.clear()
 	for plant in plants:
 		correct_answers[plant.plant_id] = plant.is_safe

@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bqcuchan3la0" path="res://assets/audio/Antons_Footsteps_FS_Grass_Walk_02.wav" id="7_0owmy"]
 [ext_resource type="PackedScene" uid="uid://b2mdi8qtvuc3e" path="res://scenes/player/inventory_controller.tscn" id="8_h17s1"]
 [ext_resource type="AudioStream" uid="uid://b46jihj162om4" path="res://assets/audio/jump_Antons_Footsteps_FS_Grass_Walk_07.wav" id="8_qek5x"]
+[ext_resource type="PackedScene" uid="uid://ccrevrk7stibg" path="res://scenes/ui/hud_hints.tscn" id="9_hdhnt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmlin"]
 height = 1.8
@@ -218,6 +219,8 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HUDHints" parent="GUI" unique_id=1999000001 instance=ExtResource("9_hdhnt")]
 
 [node name="InteractionController" parent="." unique_id=1269839320 instance=ExtResource("2_dovo2")]
 unique_name_in_owner = true

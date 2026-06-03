@@ -38,9 +38,8 @@ func _ready() -> void:
 		slot.on_item_right_clicked.connect(_on_slot_right_click)
 		inventory_slots.append(slot)
 
-	# Initialize the context menu for right clicks
+	# Keep context_menu as a node so playercontroller can set context_menu.visible = false
 	add_child(context_menu)
-	context_menu.connect("id_pressed", Callable(self, "_on_context_menu_selected"))
 
 
 ## Helper method that returns true if there is any free inventory slots. False if the inventory is full
@@ -95,58 +94,12 @@ func _on_item_double_clicked(slot_id: int) -> void:
 		ActionData.ActionType.INSPECTABLE:
 			view_inspectable(slot_id)
 
-## Builds and Displays the context menu options specific to the given item type
+## Right-click drops the item directly
 func _on_slot_right_click(slot_id: int) -> void:
 	var slot: InventorySlot = inventory_slots[slot_id]
-	
-	# If the slot is empty, dont perform any action
 	if slot.slot_data == null:
 		return
-
-	context_menu.clear()
-	match _get_item_action_type(slot.slot_data):
-		ActionData.ActionType.CONSUMABLE:
-			context_menu.add_item("Use", 0)
-			context_menu.add_item("Drop", 1)
-		ActionData.ActionType.EQUIPPABLE:
-			context_menu.add_item("Equip", 0)
-			context_menu.add_item("Drop", 1)
-		ActionData.ActionType.INSPECTABLE:
-			context_menu.add_item("View", 0)
-			context_menu.add_item("Drop", 1)
-
-	# Put the slot_id in the meta data to be read when the player selects something
-	# The context menu doesnt automatically know which inventory slot its been displayed for
-	context_menu.set_meta("slot_id", slot_id)
-	
-	# Show the context menu relative to where the players mouse is
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var rect: Rect2i = Rect2i(mouse_pos.floor(), Vector2i(1, 1))
-	context_menu.popup(rect)
-
-## Performs whatever action the player chose from the context menu
-func _on_context_menu_selected(context_menu_choice: int) -> void:
-	# Read in which inventory slot we are acting on
-	var slot_id: int = context_menu.get_meta("slot_id") as int
-	var slot: InventorySlot = inventory_slots[slot_id]
-	
-	# If the slot is empty, dont perform any action
-	if slot.slot_data == null:
-		return
-
-	match _get_item_action_type(slot.slot_data):
-		ActionData.ActionType.CONSUMABLE:
-			match context_menu_choice:
-				0: use_collectable(slot_id)
-				1: drop_collectable(slot_id)
-		ActionData.ActionType.EQUIPPABLE:
-			match context_menu_choice:
-				0: equip_collectable(slot_id)
-				1: drop_collectable(slot_id)
-		ActionData.ActionType.INSPECTABLE:
-			match context_menu_choice:
-				0: view_inspectable(slot_id)
-				1: drop_collectable(slot_id)
+	drop_collectable(slot_id)
 
 
 ## Use's a given collectable from the inventory. Modifier actions are defind here
