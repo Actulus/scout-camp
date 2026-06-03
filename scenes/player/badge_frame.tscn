@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://d4kgyq08c6ybd"]
+
+[ext_resource type="Texture2D" uid="uid://c5hytdxutkl73" path="res://assets/notes/imageFrame.jpg" id="1_h5uem"]
+[ext_resource type="PackedScene" uid="uid://c8h76i1tvu6tj" path="res://interactions/BadgeInteraction/badge_interaction.tscn" id="1_o5hwb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8qus"]
+albedo_color = Color(0.54509807, 0.3882353, 0.2784314, 1)
+albedo_texture = ExtResource("1_h5uem")
+
+[sub_resource type="QuadMesh" id="QuadMesh_o5hwb"]
+material = SubResource("StandardMaterial3D_i8qus")
+size = Vector2(1.2, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h5uem"]
+size = Vector3(1.2338257, 0.9403076, 0.17150879)
+
+[node name="BadgeFrame" type="StaticBody3D" unique_id=1191453677]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=237799247]
+mesh = SubResource("QuadMesh_o5hwb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=588296511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003753662, -6.1035156e-05, -0.0020141602)
+shape = SubResource("BoxShape3D_h5uem")
+
+[node name="BadgeInteraction" parent="." unique_id=617409925 instance=ExtResource("1_o5hwb")]

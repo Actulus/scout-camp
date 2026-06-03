@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://b1uf5c6pdhaeh"]
+
+[ext_resource type="Script" uid="uid://b6jli67pq3nbx" path="res://scenes/ui/badge_ui.gd" id="1_seewq"]
+[ext_resource type="FontFile" uid="uid://dnumgtoltjg7b" path="res://assets/fonts/Amatic_SC/AmaticSC-Bold.ttf" id="2_rxpkn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xliyi"]
+font = ExtResource("2_rxpkn")
+font_size = 18
+
+[node name="BadgeUI" type="CanvasLayer" unique_id=740949661]
+layer = 5
+script = ExtResource("1_seewq")
+
+[node name="Control" type="Control" parent="." unique_id=2131516877]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1485666746]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.53333336)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ColorRect" unique_id=1289772147]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="BadgeGridPanel" type="PanelContainer" parent="Control/ColorRect/HBoxContainer" unique_id=1902985931]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 400)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel" unique_id=1546145959]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer" unique_id=1577582222]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer" unique_id=28941200]
+layout_mode = 2
+text = "🏅 Scout Badges"
+
+[node name="EarnedLabel" type="Label" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer" unique_id=199864709]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0 / 6 earned"
+
+[node name="BadgeGrid" type="GridContainer" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer" unique_id=757335876]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3
+
+[node name="BadgeDetail" type="PanelContainer" parent="Control/ColorRect/HBoxContainer" unique_id=1700212225]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(260, 400)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ColorRect/HBoxContainer/BadgeDetail" unique_id=195818550]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect/HBoxContainer/BadgeDetail/MarginContainer" unique_id=555133003]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DetailImage" type="TextureRect" parent="Control/ColorRect/HBoxContainer/BadgeDetail/MarginContainer/VBoxContainer" unique_id=2136542399]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DetailTitle" type="Label" parent="Control/ColorRect/HBoxContainer/BadgeDetail/MarginContainer/VBoxContainer" unique_id=708530584]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Badge Title"
+label_settings = SubResource("LabelSettings_xliyi")
+
+[node name="HSeparator" type="HSeparator" parent="Control/ColorRect/HBoxContainer/BadgeDetail/MarginContainer/VBoxContainer" unique_id=193162169]
+layout_mode = 2
+
+[node name="DetailDescription" type="Label" parent="Control/ColorRect/HBoxContainer/BadgeDetail/MarginContainer/VBoxContainer" unique_id=369957686]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+text = "Badge Description"
+autowrap_mode = 3

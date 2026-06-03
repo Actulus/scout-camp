@@ -89,11 +89,11 @@ render_target_update_mode = 4
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 cull_mask = 2
-fov = 90.0
+fov = 55.0
 
 [node name="NoteHand" type="Marker3D" parent="Head/Eyes/SubViewportContainer/SubViewport/NoteCamera" unique_id=4766950]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, -0.25, -0.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.429, -0.1, -0.468)
 
 [node name="ItemHand" type="Marker3D" parent="Head/Eyes/SubViewportContainer/SubViewport/NoteCamera" unique_id=1101413457]
 unique_name_in_owner = true
@@ -192,6 +192,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="RightSide" type="Control" parent="GUI/NoteLayer/NoteOverlay/HBoxContainer" unique_id=1705330130]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -206,19 +207,40 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.06469653, 0.06469653, 0.06469653, 1)
 
-[node name="NoteContent" type="RichTextLabel" parent="GUI/NoteLayer/NoteOverlay/HBoxContainer/RightSide/BlackOverlay" unique_id=1287475766]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="GUI/NoteLayer/NoteOverlay/HBoxContainer/RightSide/BlackOverlay" unique_id=592972156]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "safsafsdfergweruiywger"
-fit_content = true
-scroll_active = false
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="NoteContent" type="RichTextLabel" parent="GUI/NoteLayer/NoteOverlay/HBoxContainer/RightSide/BlackOverlay/MarginContainer" unique_id=1287475766]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][b]Final Notes[/b][/center]
+
+Shelter before sunset.
+Water before shelter.
+Fire before water.
+
+That's the order. Took me two days to learn it properly.
+
+[color=#8B4513]If you're reading this — you found all three pages. You know the camp well enough now.[/color]
+
+Trust your training. Trust the guide.
+
+[i]Good luck, Scout.[/i]"
+scroll_following = true
 horizontal_alignment = 1
 vertical_alignment = 1
+justification_flags = 162
 
 [node name="HUDHints" parent="GUI" unique_id=1999000001 instance=ExtResource("9_hdhnt")]
 

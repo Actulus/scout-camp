@@ -222,6 +222,7 @@ func on_note_inspected(note: Node3D):
 	current_note.transform.origin = note_hand.transform.origin
 	current_note.position = Vector3(0.0,0.0,0.0)
 	current_note.rotation_degrees = Vector3(90,10,0)
+	current_note.scale = Vector3.ONE
 	
 	# Let the item swap its own mesh (e.g. closed → open book)
 	if current_note.has_method("on_inspection_started"):

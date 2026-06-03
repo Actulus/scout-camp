@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c8h76i1tvu6tj"]
+
+[ext_resource type="Script" uid="uid://baclra55jtksr" path="res://interactions/BadgeInteraction/badge_interaction.gd" id="1_nlof2"]
+
+[node name="BadgeInteraction" type="Node" unique_id=617409925]
+script = ExtResource("1_nlof2")

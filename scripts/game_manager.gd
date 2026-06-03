@@ -3,6 +3,10 @@ extends Node
 @export var pause_menu_scene: PackedScene = preload("res://scenes/ui/pause_menu.tscn")
 var pause_menu_instance = null
 
+const BadgeMenuScript        = preload("res://scenes/ui/badge_menu.gd")
+const BadgeEarnedPopupScript = preload("res://scenes/ui/badge_earned_popup.gd")
+var _badge_menu_instance: CanvasLayer = null
+
 var current_day: int = 1 
 var fire_lit: bool = false
 var skills_completed: Dictionary = {
@@ -51,10 +55,13 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("task_menu"):
 		var menu = get_tree().get_first_node_in_group("task_menu")
 		if menu:
-			if menu.visible:
-				menu._close()
-			else: 
-				menu.open()
+			if menu.visible: menu._close()
+			else: menu.open()
+
+	if Input.is_action_just_pressed("badge_menu"):
+		var badge_menu = _get_badge_menu()
+		if badge_menu.visible: badge_menu._close()
+		else: badge_menu.open()
 				
 	if Input.is_action_just_pressed("pause"):
 		# don't pause if on main menu
@@ -71,11 +78,22 @@ func complete_skill(skill_id:  String):
 		emit_signal("skill_completed", skill_id)
 		earn_badge(skill_id)
 		
-func earn_badge(badge_id: String):
-	if badge_id not in badges_earned: 
+func earn_badge(badge_id: String) -> void:
+	if badge_id not in badges_earned:
 		badges_earned.append(badge_id)
 		emit_signal("badge_earned", badge_id)
+		# Show earned popup
+		var popup = BadgeEarnedPopupScript.new()
+		get_tree().root.add_child(popup)
+		popup.show_badge(badge_id)
+
 		
+func _get_badge_menu() -> CanvasLayer:
+	if not is_instance_valid(_badge_menu_instance):
+		_badge_menu_instance = BadgeMenuScript.new()
+		get_tree().root.add_child(_badge_menu_instance)
+	return _badge_menu_instance
+
 func advance_day():
 	current_day += 1
 	emit_signal("day_changed", current_day)
@@ -99,6 +117,9 @@ func _pause() -> void:
 	var map = get_tree().get_first_node_in_group("map")
 	if map and map.visible:
 		map.visible = false
+
+	if is_instance_valid(_badge_menu_instance) and _badge_menu_instance.visible:
+		_badge_menu_instance._close()
 	
 	pause_menu_instance = pause_menu_scene.instantiate()
 	pause_menu_instance.process_mode = Node.PROCESS_MODE_ALWAYS

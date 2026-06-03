@@ -6,6 +6,7 @@ extends CanvasLayer
 const HINTS = {
 	"default": [
 		{"key": "T", "action": "Tasks"},
+		{"key": "B", "action": "Badges"},
 		{"key": "M", "action": "Map"},
 		{"key": "Tab", "action": "Inventory"},
 		{"key": "Esc", "action": "Pause"}
@@ -46,8 +47,9 @@ const HINTS = {
 const CONTROLLER_HINTS = {
 	"default": [
 		{"key": "X", "action": "Tasks"},
+		{"key": "Y", "action": "Badges"},
 		{"key": "↑", "action": "Map"},
-		{"key": "Y", "action": "Inventory"},
+		{"key": "LB", "action": "Inventory"},
 		{"key": "Start", "action": "Pause"}
 	],
 	"near_object": [
