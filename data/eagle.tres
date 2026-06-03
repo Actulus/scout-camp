@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://byf6lw5vq7xlp"]
+
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="1_l5anu"]
+[ext_resource type="Texture2D" uid="uid://djuqb5wgt3oso" path="res://assets/animals/eagle.jpg" id="1_nmhch"]
+
+[resource]
+script = ExtResource("1_l5anu")
+animal_id = "eagle"
+display_name = "Golden Eagle"
+latin_name = "Aquila chrysaetos"
+image = ExtResource("1_nmhch")
+habitat = "Mountains, open forest"
+description = "Powerful raptor with 2m wingspan. Hunts rabbits and other small mammals."
+rarity = "Uncommon"
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

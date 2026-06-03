@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://c54h8dxmfc1q8"]
+
+[ext_resource type="Texture2D" uid="uid://dro3loc4p6slp" path="res://assets/animals/owl.jpg" id="1_blqsf"]
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="1_oqwr8"]
+
+[resource]
+script = ExtResource("1_oqwr8")
+animal_id = "owl"
+display_name = "Tawny Owl"
+latin_name = "Strix aluco"
+image = ExtResource("1_blqsf")
+habitat = "Woodland"
+description = "Nocturnal hunter with silent flight. Feeds on mice and voles. Heard more than seen."
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

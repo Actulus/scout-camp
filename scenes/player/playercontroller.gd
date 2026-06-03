@@ -126,6 +126,7 @@ func _input(event: InputEvent) -> void:
 				head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 func _process(delta: float) -> void:
+	if ui_open: return
 	# TODO: Kludge fix for context menu being open and letting go of inventory button
 	if inventory_opened_flag and !Input.is_action_pressed("inventory"):
 		inventory_opened_flag = false

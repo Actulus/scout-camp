@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="PlantInfo" format=3 uid="uid://nvtolh5aqctp"]
 
 [ext_resource type="Texture2D" uid="uid://cwqrp01vx0xd2" path="res://assets/plants/images/elderberry.jpg" id="1_0beje"]
-[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_0n6s5"]
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants_info.gd" id="1_0n6s5"]
 
 [resource]
 script = ExtResource("1_0n6s5")
 plant_id = "elderberry"
 display_name = "Elderberry"
 is_safe = true
+visual_clue = "Small dark purple-black berries in large flat-topped clusters. Compound leaves with 5-7 leaflets. Shrub or small tree up to 6m. Berries droop when ripe."
+real_world_fact = "Raw berries contain cyanogenic glycosides and can cause nausea. Must be cooked before eating. Widely used for elderberry syrup, wine and immune support remedies."
 image = ExtResource("1_0beje")

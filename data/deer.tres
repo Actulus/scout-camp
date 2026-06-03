@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://bcxyxeirygl3g"]
+
+[ext_resource type="Texture2D" uid="uid://b7epyne5skpwo" path="res://assets/animals/deer.jpg" id="1_0lot1"]
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="1_vo6bk"]
+
+[resource]
+script = ExtResource("1_vo6bk")
+animal_id = "deer"
+display_name = "Roe Deer"
+latin_name = "Capreolus capreolus"
+image = ExtResource("1_0lot1")
+habitat = "Dense forest"
+description = "Shy woodland deer. Males have small antlers. Feeds on leaves, berries and grass."
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

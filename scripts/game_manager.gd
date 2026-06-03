@@ -11,11 +11,13 @@ var skills_completed: Dictionary = {
 	"fire": false,
 	"water": false,
 	"plants": false,
+	"animals": false,
 	"navigation": false 
 }
 var badges_earned: Array = []
 var scattered_positions: Array[Vector3] = []
 var plant_guide_read: bool = false
+var animal_guide_read: bool = false
 var pages_found: int = 0
 
 signal skill_completed(skill_id: String)
@@ -36,11 +38,13 @@ func reset() -> void:
 		"fire": false,
 		"water": false,
 		"plants": false,
+		"animals": false,
 		"navigation": false
 	}
 	badges_earned.clear()
 	scattered_positions.clear()
 	plant_guide_read = false
+	animal_guide_read = false
 	pages_found = 0
 
 func _input(event: InputEvent) -> void:
@@ -80,9 +84,13 @@ func advance_day():
 func _pause() -> void:
 	get_tree().paused = true
 	
-	var quiz = get_tree().get_first_node_in_group("plant_quiz")
-	if quiz:
-		quiz._close()
+	var plant_quiz = get_tree().get_first_node_in_group("plant_quiz")
+	if plant_quiz:
+		plant_quiz._close()
+		
+	var animal_quiz = get_tree().get_first_node_in_group("animal_quiz")
+	if animal_quiz:
+		animal_quiz._close()
 	
 	var task_menu = get_tree().get_first_node_in_group("task_menu")
 	if task_menu and task_menu.visible:

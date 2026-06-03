@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bm2ykvd0kcn04"]
+
+[ext_resource type="ArrayMesh" uid="uid://bjhoqy7sypssv" path="res://assets/models/book.tres" id="2_nmsci"]
+[ext_resource type="ArrayMesh" uid="uid://c31mok7bmjkmc" path="res://assets/models/book_open.tres" id="3_ejhvq"]
+[ext_resource type="PackedScene" uid="uid://bxq26roaqt5ss" path="res://interactions/FieldGuideInteraction/field_guide_interaction.tscn" id="4_4uswl"]
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="5_x6qsu"]
+[ext_resource type="Resource" uid="uid://wnv5q8kg4un7" path="res://data/fox.tres" id="6_d2d2f"]
+[ext_resource type="Resource" uid="uid://c54h8dxmfc1q8" path="res://data/owl.tres" id="7_80jop"]
+[ext_resource type="Resource" uid="uid://ddrde1jxiqqbx" path="res://data/bear.tres" id="8_ro38l"]
+[ext_resource type="Resource" uid="uid://bcxyxeirygl3g" path="res://data/deer.tres" id="9_8jqxr"]
+[ext_resource type="Resource" uid="uid://dcvanh1l4mu61" path="res://data/wolf.tres" id="10_wwi41"]
+[ext_resource type="Resource" uid="uid://byf6lw5vq7xlp" path="res://data/eagle.tres" id="11_e7ec1"]
+[ext_resource type="Resource" uid="uid://1a5874hgvgev" path="res://data/rabbit.tres" id="12_etdp0"]
+[ext_resource type="Resource" uid="uid://bncapxehaorey" path="res://data/wild_boar.tres" id="13_tj5ey"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_guide"]
+size = Vector3(0.24368286, 0.63460386, 0.5145508)
+
+[node name="AnimalFieldGuide" type="StaticBody3D" unique_id=100000001]
+
+[node name="ClosedBook" type="MeshInstance3D" parent="." unique_id=100000002]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+mesh = ExtResource("2_nmsci")
+
+[node name="OpenBook" type="MeshInstance3D" parent="." unique_id=100000005]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+visible = false
+mesh = ExtResource("3_ejhvq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=100000003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01576233, 0.021241814, 0.014892578)
+shape = SubResource("BoxShape3D_guide")
+
+[node name="FieldGuideInteraction" parent="." unique_id=649472758 instance=ExtResource("4_4uswl")]
+guide_type = 1
+guide_title = "Animal Field Guide"
+animal_entries = Array[ExtResource("5_x6qsu")]([ExtResource("6_d2d2f"), ExtResource("7_80jop"), ExtResource("8_ro38l"), ExtResource("9_8jqxr"), ExtResource("10_wwi41"), ExtResource("11_e7ec1"), ExtResource("12_etdp0"), ExtResource("13_tj5ey")])

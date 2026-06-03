@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://bncapxehaorey"]
+
+[ext_resource type="Texture2D" uid="uid://d0thl4r87dv4a" path="res://assets/animals/wild_boar.jpg" id="1_62ubt"]
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="2_62ubt"]
+
+[resource]
+script = ExtResource("2_62ubt")
+animal_id = "wild_boar"
+display_name = "Wild Boar"
+latin_name = "Sus scrofa"
+image = ExtResource("1_62ubt")
+habitat = "Dense forest"
+description = "Stocky and powerful. Usually shy but aggressive when cornered. Keep distance."
+is_dangerous = true
+rarity = "Uncommon"
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

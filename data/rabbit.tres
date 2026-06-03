@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://1a5874hgvgev"]
+
+[ext_resource type="Texture2D" uid="uid://bu3jlwdjojwpu" path="res://assets/animals/rabbit.jpg" id="1_shvwv"]
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="2_fgwfc"]
+
+[resource]
+script = ExtResource("2_fgwfc")
+animal_id = "rabbit"
+display_name = "European Rabbit"
+latin_name = "Oryctolagus cuniculus"
+image = ExtResource("1_shvwv")
+habitat = "Forest edges, meadows"
+description = "Small herbivore found in burrows. Ears help detect predators. Active at dawn and dusk."
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

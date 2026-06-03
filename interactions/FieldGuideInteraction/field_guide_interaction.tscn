@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bxq26roaqt5ss"]
+
+[ext_resource type="Script" uid="uid://c3ttvvamfem1j" path="res://interactions/FieldGuideInteraction/field_guide_interaction.gd" id="1_g3khn"]
+
+[node name="FieldGuideInteraction" type="Node" unique_id=649472758]
+script = ExtResource("1_g3khn")

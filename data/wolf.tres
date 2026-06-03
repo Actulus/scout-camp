@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://dcvanh1l4mu61"]
+
+[ext_resource type="Texture2D" uid="uid://5qssxj7n8s12" path="res://assets/animals/wolf.jpg" id="1_3hhh3"]
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="2_3hhh3"]
+
+[resource]
+script = ExtResource("2_3hhh3")
+animal_id = "wolf"
+display_name = "Grey Wolf"
+latin_name = "Canis lupus"
+image = ExtResource("1_3hhh3")
+habitat = "Deep forest"
+description = "Apex predator living in packs. Rarely seen. If encountered stay calm and back away slowly."
+is_dangerous = true
+rarity = "Rare"
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

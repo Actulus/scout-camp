@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://ddrde1jxiqqbx"]
+
+[ext_resource type="Texture2D" uid="uid://bakc353o88otw" path="res://assets/animals/bear.jpg" id="1_3uo3v"]
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="2_3uo3v"]
+
+[resource]
+script = ExtResource("2_3uo3v")
+animal_id = "bear"
+display_name = "Brown Bear"
+latin_name = "Ursus arctos"
+image = ExtResource("1_3uo3v")
+habitat = "Deep forest, mountains"
+description = "Large omnivore. Most dangerous if surprised or with cubs. Make noise while hiking."
+is_dangerous = true
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

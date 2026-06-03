@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://sfoaa0ixvdm2"]
+
+[ext_resource type="FontFile" uid="uid://2fa53nfifnxi" path="res://assets/fonts/Nunito/static/Nunito-Regular.ttf" id="1_7aetc"]
+[ext_resource type="Script" uid="uid://foy3wfkmhuet" path="res://scenes/ui/field_guide_ui.gd" id="1_d5cyo"]
+[ext_resource type="FontFile" uid="uid://c8gy3jgo6ifwa" path="res://assets/fonts/Nunito/static/Nunito-Italic.ttf" id="2_d5cyo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_50480"]
+font = ExtResource("1_7aetc")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_64dp6"]
+font = ExtResource("2_d5cyo")
+font_color = Color(0.72156864, 0.65882355, 0.50980395, 1)
+
+[node name="FieldGuideUI" type="CanvasLayer" unique_id=508458599]
+layer = 4
+script = ExtResource("1_d5cyo")
+
+[node name="Control" type="Control" parent="." unique_id=1119867540]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=14672689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.53333336)
+
+[node name="GuidePanel" type="PanelContainer" parent="Control/ColorRect" unique_id=66998214]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect/GuidePanel" unique_id=1609840539]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TabBar" type="HBoxContainer" parent="Control/ColorRect/GuidePanel/VBoxContainer" unique_id=1723468822]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HSeparator" type="HSeparator" parent="Control/ColorRect/GuidePanel/VBoxContainer" unique_id=1208260394]
+layout_mode = 2
+
+[node name="ContentArea" type="HBoxContainer" parent="Control/ColorRect/GuidePanel/VBoxContainer" unique_id=1167789743]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="LeftPanel" type="VBoxContainer" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea" unique_id=2094719723]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+
+[node name="EntryImage" type="TextureRect" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/LeftPanel" unique_id=55420780]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SafetyBadge" type="PanelContainer" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/LeftPanel" unique_id=1489196062]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SafetyLabel" type="Label" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/LeftPanel/SafetyBadge" unique_id=657801125]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea" unique_id=364246057]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntryTitle" type="Label" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/RightPanel" unique_id=2049968424]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_50480")
+
+[node name="EntrySubtitle" type="Label" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/RightPanel" unique_id=1432518619]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_64dp6")
+
+[node name="HSeparator" type="HSeparator" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/RightPanel" unique_id=1080658383]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/RightPanel" unique_id=1630362463]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="EntryDescription" type="Label" parent="Control/ColorRect/GuidePanel/VBoxContainer/ContentArea/RightPanel/ScrollContainer" unique_id=667041181]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap_mode = 3
+
+[node name="ActionButton" type="Button" parent="Control/ColorRect/GuidePanel/VBoxContainer" unique_id=929417845]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quiz / Danger warning etc"

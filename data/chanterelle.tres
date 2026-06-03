@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlantInfo" format=3 uid="uid://dglhcqt8tg4n8"]
 
-[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_ngnlx"]
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants_info.gd" id="1_ngnlx"]
 [ext_resource type="Texture2D" uid="uid://bmv30hfj3d8bb" path="res://assets/plants/images/chantarella.jpg" id="1_s1jaw"]
 
 [resource]
@@ -8,4 +8,6 @@ script = ExtResource("1_ngnlx")
 plant_id = "chanterelle"
 display_name = "Chanterelle"
 is_safe = true
+visual_clue = "Golden-yellow egg-yolk colored cap, wavy edges, 3-10cm wide. Forked ridges underneath instead of true gills. Fruity apricot smell. Solid white stem."
+real_world_fact = "One of the most prized edible wild mushrooms in the world. Found near oak and pine trees in summer and autumn. Rich in vitamin D and iron. Used in fine cuisine across Europe."
 image = ExtResource("1_s1jaw")

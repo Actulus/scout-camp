@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AnimalInfo" format=3 uid="uid://wnv5q8kg4un7"]
+
+[ext_resource type="Script" uid="uid://dw5j0aiatwrk3" path="res://scenes/skills/animal/animal_info.gd" id="1_ptofs"]
+[ext_resource type="Texture2D" uid="uid://bd7nbb11knokp" path="res://assets/animals/fox.jpg" id="1_tep75"]
+
+[resource]
+script = ExtResource("1_ptofs")
+animal_id = "fox"
+display_name = "Red Fox"
+latin_name = "Vulpes vulpes"
+image = ExtResource("1_tep75")
+habitat = "Forest and forest edges"
+description = "Clever omnivore. Recognizable by bushy tail. Mostly nocturnal, avoid approaching."
+rarity = "Uncommon"
+metadata/_custom_type_script = "uid://dw5j0aiatwrk3"

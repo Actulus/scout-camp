@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="PlantInfo" format=3 uid="uid://b831nfl14ho0c"]
 
 [ext_resource type="Texture2D" uid="uid://diii71cw3dc4e" path="res://assets/plants/images/nightshade.jpg" id="1_glkkp"]
-[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_rl4gk"]
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants_info.gd" id="1_rl4gk"]
 
 [resource]
 script = ExtResource("1_rl4gk")
 plant_id = "nightshade"
 display_name = "Nightshade"
+visual_clue = "Shiny black berries in small clusters, green when unripe. Small purple star-shaped flowers with yellow stamens. Oval pointed leaves. Plant 30-120cm tall."
+real_world_fact = "Contains solanine and other toxic alkaloids. Even a few berries can cause severe poisoning in children. Related to tomatoes and potatoes but far more toxic."
 image = ExtResource("1_glkkp")

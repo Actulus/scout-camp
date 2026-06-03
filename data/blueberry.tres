@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlantInfo" format=3 uid="uid://xfddx66rfaiv"]
 
-[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants.gd" id="1_bstuc"]
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants_info.gd" id="1_bstuc"]
 [ext_resource type="Texture2D" uid="uid://i1vqhgww40oj" path="res://assets/plants/images/blueberry.jpg" id="1_vbg1m"]
 
 [resource]
@@ -8,4 +8,6 @@ script = ExtResource("1_bstuc")
 plant_id = "blueberry"
 display_name = "Blueberry"
 is_safe = true
+visual_clue = "Small round blue-purple berries in clusters. Oval leaves with fine teeth. Low shrub 20-50cm tall. Berries have a small crown at the tip."
+real_world_fact = "One of the most nutritious wild berries. High in antioxidants and vitamin C. Found in acidic forest soils. Can be eaten raw or used to make jam and tea."
 image = ExtResource("1_vbg1m")

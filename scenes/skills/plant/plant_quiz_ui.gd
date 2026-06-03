@@ -33,6 +33,8 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func setup() -> void:
+	var hud = get_tree().get_first_node_in_group("hud_hints")
+	if hud: hud.set_context("quiz")
 	correct_answers.clear()
 	for plant in plants:
 		correct_answers[plant.plant_id] = plant.is_safe
@@ -40,11 +42,17 @@ func setup() -> void:
 		_show_plant(0)
 	_update_submit_state()
 	_freeze_player(true)
+	status_label.text = "[E] Edible  [P] Poisonous  [←→] Navigate"
 
 func _freeze_player(frozen: bool) -> void:
 	# show/hide mouse
 	Input.set_mouse_mode(
 		Input.MOUSE_MODE_VISIBLE if frozen else Input.MOUSE_MODE_CAPTURED)
+	
+	if frozen:
+		await get_tree().process_frame
+		await get_tree().process_frame
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	# freeze player movement
 	var player = get_tree().get_first_node_in_group("player")
@@ -66,6 +74,10 @@ func _show_plant(index: int) -> void:
 	plant_name_label.text = plant.display_name
 	plant_info_label.text = plant.visual_clue
 	
+	plant_info_label.text = plant.visual_clue if plant.visual_clue else ""
+	plant_info_label.custom_minimum_size = Vector2(0, 60)
+	plant_info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	
 	# show image if available, color fallback if not
 	if plant.image != null:
 		plant_image.texture = plant.image
@@ -75,17 +87,23 @@ func _show_plant(index: int) -> void:
 		# color hint as fallback
 		plant_image.modulate = Color(0.2, 0.8, 0.2) if plant.is_safe else Color(0.8, 0.2, 0.2)
 	
-	status_label.text = ""
-	if plant.plant_id in wrong_answers:
-		status_label.text = "❌ Wrong! Try again."
+	plant_image.custom_minimum_size = Vector2(300, 320)
+	plant_image.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	plant_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	
+	status_label.text = "[E] Edible  [P] Poisonous  [←→] Navigate"
+	status_label.modulate = Color.WHITE
+	
+	if wrong_answers and plant.plant_id in wrong_answers:
+		status_label.text = "❌ Wrong! Check the guide and try again."
 		status_label.modulate = Color(1.0, 0.3, 0.3)
 	elif player_answers.has(plant.plant_id):
 		var prev_answer = player_answers[plant.plant_id]
-		status_label.text = "✓ Categorized as: " + ("Edible" if prev_answer else "Poisonous")
+		status_label.text = "✓ Categorized as: " + \
+			("Edible [E]" if prev_answer else "Poisonous [P]")
 		status_label.modulate = Color(0.3, 1.0, 0.3)
 		_highlight_buttons(prev_answer)
 	else:
-		status_label.modulate = Color.WHITE
 		_highlight_buttons(null)
 	
 	# update navigation buttons
@@ -175,6 +193,8 @@ func _submit() -> void:
 				return
 
 func _close() -> void:
+	var hud = get_tree().get_first_node_in_group("hud_hints")
+	if hud: hud.set_context("default")
 	_freeze_player(false)
 	emit_signal("quiz_closed")
 	queue_free()
@@ -182,21 +202,66 @@ func _close() -> void:
 func _input(event: InputEvent) -> void:
 	if not visible:
 		return
-	# block mouse motion so camera doesn't rotate
-	if event is InputEventMouseMotion:
+		
+	# block Tab entirely in quiz
+	if event is InputEventKey and event.keycode == KEY_TAB:
 		get_viewport().set_input_as_handled()
 		return
-	# only block movement keys, not mouse clicks on UI
-	if event is InputEventKey:
-		for action in ["move_forward", "move_backward", "move_left", 
-					   "move_right", "jump", "sprint", "crouch"]:
-			if event.is_action(action):
+		
+	# close with Escape/B button
+	if event.is_action_pressed("ui_cancel"):
+		_close()
+		get_viewport().set_input_as_handled()
+		return
+		
+	# answer with E (edible) and P (poisonous) — must come before book_next check (E is bound to book_next)
+	if event is InputEventKey and event.pressed and not event.echo:
+		match event.keycode:
+			KEY_E:
+				_answer(true)
+				get_viewport().set_input_as_handled()
+				return
+			KEY_P:
+				_answer(false)
+				get_viewport().set_input_as_handled()
+				return
+			KEY_TAB:
 				get_viewport().set_input_as_handled()
 				return
 
+	# navigate plants with arrow keys / dpad
+	if event.is_action_pressed("ui_right") or event.is_action_pressed("book_next"):
+		_navigate(1)
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("ui_left") or event.is_action_pressed("book_prev"):
+		_navigate(-1)
+		get_viewport().set_input_as_handled()
+		return
+
+	# submit with Enter when all answered
+	if event.is_action_pressed("ui_accept"):
+		if not submit_btn.disabled:
+			_submit()
+		get_viewport().set_input_as_handled()
+		return
+		
+	# block movement
+	if event is InputEventMouseMotion:
+		get_viewport().set_input_as_handled()
+		return
+	for action in ["move_forward", "move_backward", "move_left",
+				   "move_right", "jump", "sprint", "crouch", "book_next", "book_prev"]:
+		if event.is_action(action):
+			get_viewport().set_input_as_handled()
+			return
+
 func _style_answer_buttons() -> void:
-	var font_bold = load("res://assets/fonts/Nunito-Bold.ttf")
-	
+	var font_bold = UiFonts.body_bold
+	if not font_bold:
+		push_error("UiFonts.body_bold is null")
+		return
+		
 	# edible - green
 	var edible_style = StyleBoxFlat.new()
 	edible_style.bg_color = Color("#2E7D32")

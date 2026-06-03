@@ -69,6 +69,16 @@ func _ready() -> void:
 	add_child(equip_item_player)
 
 func _process(delta: float) -> void:
+	var hud = _get_hud_hints()
+	
+	if hud:
+		if item_equipped:
+			hud.set_context("equipped")
+		elif potential_object and potential_interaction_component:
+			hud.set_context("near_object")
+		else:
+			hud.set_context("default")
+			
 	if item_equipped:
 		_update_reticle_state()
 		# still update potential_object so use_item knows what to target
@@ -490,3 +500,6 @@ func _style_note_overlay() -> void:
 	note_content.add_theme_font_override("normal_font", font_body)
 	note_content.add_theme_font_size_override("normal_font_size", 15)
 	note_content.add_theme_color_override("default_color", Color("#F5E6C8"))
+
+func _get_hud_hints() -> Node:
+	return get_tree().get_first_node_in_group("hud_hints")

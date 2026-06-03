@@ -1,30 +1,20 @@
 [gd_scene format=3 uid="uid://cw5bvhi5y8yhy"]
 
 [ext_resource type="ArrayMesh" uid="uid://bjhoqy7sypssv" path="res://assets/models/book.tres" id="1_tsikq"]
-[ext_resource type="ArrayMesh" uid="uid://bwu2ijvd2ocks" path="res://assets/models/book_open.tres" id="2_openbook"]
-[ext_resource type="PackedScene" uid="uid://bmpq1lpt8h5dt" path="res://interactions/CollectableInteraction/InspectableInteraction/inspectable_interaction.tscn" id="3_a4uc4"]
-[ext_resource type="AudioStream" uid="uid://dh4pukhvkdvmi" path="res://assets/audio/book_flip_kenney_cards.wav" id="4_p3g4h"]
-[ext_resource type="Script" uid="uid://c5boc4i7m1t8k" path="res://inventory/actions/inspectable_action.gd" id="5_i2poj"]
-[ext_resource type="Texture2D" uid="uid://b00pr0b04hh2l" path="res://assets/models/book_closed.png" id="6_tsikq"]
-[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="7_v2xrm"]
-[ext_resource type="Script" uid="uid://by63lsdojhodg" path="res://scripts/plant_field_guide.gd" id="8_guide"]
+[ext_resource type="ArrayMesh" uid="uid://c31mok7bmjkmc" path="res://assets/models/book_open.tres" id="2_openbook"]
+[ext_resource type="PackedScene" uid="uid://bxq26roaqt5ss" path="res://interactions/FieldGuideInteraction/field_guide_interaction.tscn" id="4_ugnuy"]
+[ext_resource type="Script" uid="uid://crkf2iigmuimi" path="res://data/plants_info.gd" id="5_a4qtw"]
+[ext_resource type="Resource" uid="uid://xfddx66rfaiv" path="res://data/blueberry.tres" id="6_3juwf"]
+[ext_resource type="Resource" uid="uid://mbk1xhu66rja" path="res://data/death_cap.tres" id="7_61ub0"]
+[ext_resource type="Resource" uid="uid://nvtolh5aqctp" path="res://data/elderberry.tres" id="8_wfwsa"]
+[ext_resource type="Resource" uid="uid://p8kq5824r1nf" path="res://data/fly_agaric.tres" id="9_x0qjd"]
+[ext_resource type="Resource" uid="uid://b831nfl14ho0c" path="res://data/nightshade.tres" id="10_00nh2"]
+[ext_resource type="Resource" uid="uid://dglhcqt8tg4n8" path="res://data/chanterelle.tres" id="11_hgfxj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_guide"]
 size = Vector3(0.24368286, 0.63460386, 0.5145508)
 
-[sub_resource type="Resource" id="Resource_guideact"]
-script = ExtResource("5_i2poj")
-metadata/_custom_type_script = "uid://c5boc4i7m1t8k"
-
-[sub_resource type="Resource" id="Resource_guidedata"]
-script = ExtResource("7_v2xrm")
-item_name = "plant_field_guide"
-item_icon = ExtResource("6_tsikq")
-action_data = SubResource("Resource_guideact")
-metadata/_custom_type_script = "uid://dwxgooifqus3f"
-
 [node name="PlantFieldGuide" type="StaticBody3D" unique_id=100000001]
-script = ExtResource("8_guide")
 
 [node name="ClosedBook" type="MeshInstance3D" parent="." unique_id=100000002]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
@@ -39,7 +29,5 @@ mesh = ExtResource("2_openbook")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01576233, 0.021241814, 0.014892578)
 shape = SubResource("BoxShape3D_guide")
 
-[node name="InspectableInteraction" parent="." unique_id=100000004 instance=ExtResource("3_a4uc4")]
-content = "[b]SCOUT FIELD GUIDE: EDIBLE & POISONOUS PLANTS[/b]\\n\\n[color=green][b]SAFE TO EAT:[/b][/color]\\n• [b]Chanterelle[/b] - Golden wavy funnel cap, smells like apricot\\n• [b]Blueberry[/b] - Small dark blue berries on low shrubs\\n• [b]Elderberry[/b] - Small dark purple clusters on small trees\\n\\n[color=red][b]DANGEROUS - DO NOT EAT:[/b][/color]\\n• [b]Death Cap[/b] - Pale greenish cap, white ring on stem, bulbous cup at base\\n• [b]Fly Agaric[/b] - Bright red cap with white warts\\n• [b]Nightshade[/b] - Shiny dark berries, white star-shaped flowers\\n\\nWhen in doubt - do NOT eat it!"
-collect_sound_effect = ExtResource("4_p3g4h")
-item_data = SubResource("Resource_guidedata")
+[node name="FieldGuideInteraction" parent="." unique_id=649472758 instance=ExtResource("4_ugnuy")]
+plant_entries = Array[ExtResource("5_a4qtw")]([ExtResource("6_3juwf"), ExtResource("7_61ub0"), ExtResource("8_wfwsa"), ExtResource("9_x0qjd"), ExtResource("10_00nh2"), ExtResource("11_hgfxj")])
