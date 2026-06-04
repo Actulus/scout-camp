@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bl2tn1kmaac5m"]
 
 [ext_resource type="PackedScene" uid="uid://bqs7yms3roulb" path="res://scenes/player/player.tscn" id="1_dphjl"]
+[ext_resource type="Script" uid="uid://c56dtlox2xkv6" path="res://scenes/world/world.gd" id="1_wnndm"]
 [ext_resource type="PackedScene" uid="uid://bekfi08ju8oo1" path="res://assets/models/camp_landscape_w_Mountains.glb" id="2_sl2e5"]
 [ext_resource type="ArrayMesh" uid="uid://cwdr2myxwjaqg" path="res://assets/models/kenney_nature-kit/Models/OBJ format/tree_oak_dark.obj" id="3_1yooq"]
 [ext_resource type="ArrayMesh" uid="uid://g1gaxbbvx2ud" path="res://assets/models/kenney_nature-kit/Models/OBJ format/tree_pineRoundD.obj" id="3_6m72w"]
@@ -72,6 +73,7 @@ mesh = ExtResource("3_1yooq")
 albedo_color = Color(0.54509807, 0.3882353, 0.2784314, 1)
 
 [node name="World" type="Node3D" unique_id=430405692]
+script = ExtResource("1_wnndm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=303823825]
 transform = Transform3D(-0.8141155, -0.58070296, -2.5383333e-08, 0, -4.371139e-08, 1, -0.58070296, 0.8141155, 3.558612e-08, 0, 0, 0)

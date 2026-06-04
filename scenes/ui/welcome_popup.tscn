@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://bt4r0kpbgdxnf"]
+
+[ext_resource type="Script" uid="uid://c6mpyg4pdebpy" path="res://scenes/ui/welcome_popup.gd" id="1_5bjrq"]
+[ext_resource type="FontFile" uid="uid://dnumgtoltjg7b" path="res://assets/fonts/Amatic_SC/AmaticSC-Bold.ttf" id="1_h3rhq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bjrq"]
+bg_color = Color(0.10980392, 0.18039216, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.54509807, 0.22745098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_ikxb4"]
+font = ExtResource("1_h3rhq")
+font_size = 32
+font_color = Color(0.9098039, 0.72156864, 0.29411766, 1)
+
+[node name="WelcomePopup" type="CanvasLayer" unique_id=882802400]
+layer = 15
+script = ExtResource("1_5bjrq")
+
+[node name="Control" type="Control" parent="." unique_id=1028744936]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1193489754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="WelcomePanel" type="PanelContainer" parent="Control/ColorRect" unique_id=889130370]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5bjrq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ColorRect/WelcomePanel" unique_id=1687945280]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect/WelcomePanel/MarginContainer" unique_id=66220687]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ColorRect/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1511376655]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Control/ColorRect/WelcomePanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1616350085]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Welcome!"
+label_settings = SubResource("LabelSettings_ikxb4")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/ColorRect/WelcomePanel/MarginContainer/VBoxContainer" unique_id=886550123]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/ColorRect/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1013743007]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentLabel" type="RichTextLabel" parent="Control/ColorRect/WelcomePanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1695470693]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.9607843, 0.9019608, 0.78431374, 1)
+bbcode_enabled = true
+fit_content = true
+scroll_following = true
+
+[node name="HSeparator2" type="HSeparator" parent="Control/ColorRect/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1110578934]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Control/ColorRect/WelcomePanel/MarginContainer/VBoxContainer" unique_id=582883946]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "I'm ready. Let's go! 🏕"

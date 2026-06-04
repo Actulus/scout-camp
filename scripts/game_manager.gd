@@ -23,6 +23,7 @@ var scattered_positions: Array[Vector3] = []
 var plant_guide_read: bool = false
 var animal_guide_read: bool = false
 var pages_found: int = 0
+var is_new_game: bool = false
 
 # Day/night time — 0.0 = dawn, 0.5 = noon, 1.0 = dusk
 #var current_time: float = 0.5
@@ -42,6 +43,7 @@ func _ready() -> void:
 	set_process_input(true)
 
 func reset() -> void:
+	is_new_game = true
 	current_day = 1
 	fire_lit = false
 	skills_completed = {
