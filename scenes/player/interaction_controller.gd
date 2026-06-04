@@ -56,14 +56,17 @@ func _ready() -> void:
 	invent_on_item_collected.connect(inventory_controller.pickup_item)
 	
 	interact_failure_player = AudioStreamPlayer.new()
+	interact_failure_player.bus = "SFX"
 	interact_failure_player.volume_db = -25.0
 	interact_failure_player.stream = interact_failure_sound_effect
 	add_child(interact_failure_player)
 	interact_success_player = AudioStreamPlayer.new()
-	interact_success_player.volume_db = -10.0 
+	interact_success_player.bus = "SFX"
+	interact_success_player.volume_db = -10.0
 	interact_success_player.stream = interact_success_sound_effect
 	add_child(interact_success_player)
 	equip_item_player = AudioStreamPlayer.new()
+	equip_item_player.bus = "SFX"
 	equip_item_player.volume_db = -20.0
 	equip_item_player.stream = equip_item_sound_effect
 	add_child(equip_item_player)
@@ -438,19 +441,16 @@ func _show_interaction_text(text: String, duration: float) -> void:
 	await get_tree().create_timer(duration).timeout
 	interaction_textbox.visible = false
 	
-# Plays a provided sound effect
+## Public API used by inventory_controller to avoid direct player access
+func play_success_sfx() -> void:
+	interact_success_player.play()
+
+func play_failure_sfx() -> void:
+	interact_failure_player.play()
+
+# Plays a provided sound effect via SoundManager (fire-and-forget on SFX bus)
 func _play_sound_effect(sound_effect: AudioStream) -> void:
-	if not sound_effect:
-		return
-
-	# Create the audio player and assign its sound effect
-	var audio_player := AudioStreamPlayer.new()
-	add_child(audio_player)
-	audio_player.stream = sound_effect
-
-	# Ensure the audio player is queue-free when its done playing
-	audio_player.finished.connect(audio_player.queue_free)
-	audio_player.play()
+	SoundManager.play_sfx(sound_effect)
 	
 # Sets every mesh layer in the provided array to the provided layer
 func _change_mesh_layer(meshes: Array[MeshInstance3D], layer: int) -> void:

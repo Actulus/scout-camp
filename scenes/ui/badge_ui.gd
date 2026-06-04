@@ -7,7 +7,7 @@ class_name BadgeUI
 @onready var detail_image: TextureRect = %DetailImage
 @onready var detail_title: Label = %DetailTitle
 @onready var detail_desc: Label = %DetailDescription
-#@onready var close_btn: Button = %CloseButton
+@onready var close_btn: Button = %CloseButton
 
 signal closed
 
@@ -15,7 +15,7 @@ var selected_badge_id: String = ""
 
 func _ready() -> void:
 	add_to_group("badge_ui")
-	#close_btn.pressed.connect(func(): _close())
+	close_btn.pressed.connect(func(): _close())
 	detail_panel.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var player = get_tree().get_first_node_in_group("player")

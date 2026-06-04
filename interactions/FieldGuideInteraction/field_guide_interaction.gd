@@ -52,6 +52,7 @@ func _open_guide() -> void:
 			guide_instance.entries.append(entry)
 	
 	print("entries after append: ", guide_instance.entries.size())
+	guide_instance.guide_title = guide_title
 	guide_instance.setup()
 	print("setup() called")
 	

@@ -33,14 +33,18 @@ alignment = 1
 
 [node name="TitleLabel" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1382850617]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Scout Tasks [T]"
-horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Control/PanelContainer/VBoxContainer/HBoxContainer" unique_id=611881670]
+unique_name_in_owner = true
+layout_mode = 2
+text = "✕"
 
 [node name="ProgressLabel" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=886551922]
 unique_name_in_owner = true
 layout_mode = 2
 text = "2 / 5 completed"
-horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1650665457]
 layout_mode = 2

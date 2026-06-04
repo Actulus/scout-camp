@@ -32,8 +32,9 @@ func load_settings() -> void:
 	_apply()
 
 func _apply() -> void:
-	AudioServer.set_bus_volume_db(
-		AudioServer.get_bus_index("Master"), linear_to_db(master_volume))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(master_volume))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),  linear_to_db(music_volume))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),    linear_to_db(sfx_volume))
 	match window_mode:
 		0: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		1: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

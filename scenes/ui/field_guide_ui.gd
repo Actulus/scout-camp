@@ -6,8 +6,10 @@ enum GuideType { PLANTS, ANIMALS }
 @export var guide_type: GuideType = GuideType.PLANTS
 @export var entries: Array = []
 @export var guide_title: String = "Field Guide"
+@export var page_turn_sound: AudioStream = preload("res://assets/audio/book_flip_kenney_cards.wav")
 
 @onready var tab_bar: HBoxContainer = %TabBar
+@onready var guide_title_ui: Label = %GuideTitle
 @onready var entry_image: TextureRect = %EntryImage
 @onready var safety_badge: PanelContainer = %SafetyBadge
 @onready var safety_label: Label = %SafetyLabel
@@ -15,6 +17,7 @@ enum GuideType { PLANTS, ANIMALS }
 @onready var entry_subtitle: Label = %EntrySubtitle
 @onready var entry_description: Label = %EntryDescription
 @onready var action_btn: Button = %ActionButton
+@onready var close_btn: Button = %CloseButton
 
 var current_index: int = 0
 var tab_buttons: Array = []
@@ -24,6 +27,7 @@ signal quiz_requested
 
 func _ready() -> void:
 	add_to_group("field_guide")
+	SoundManager.play_sfx(page_turn_sound)
 	var player = get_tree().get_first_node_in_group("player")
 	if player: player.ui_open = true
 
@@ -36,6 +40,7 @@ func _ready() -> void:
 	if hud: hud.set_context("reading")
 
 	action_btn.pressed.connect(_on_action_btn)
+	close_btn.pressed.connect(func(): _close())
 
 	# force mouse visible after 3 frames
 	await get_tree().process_frame
@@ -74,6 +79,7 @@ func _build_tabs() -> void:
 func _show_entry(index: int) -> void:
 	current_index = index
 	var entry = entries[index]
+	SoundManager.play_sfx(page_turn_sound)
 
 	# update tab styles
 	for i in tab_buttons.size():
@@ -125,6 +131,7 @@ func _show_entry(index: int) -> void:
 		action_btn.visible = true
 
 func setup() -> void:
+	guide_title_ui.text = guide_title
 	_build_tabs()
 	if entries.size() > 0:
 		_show_entry(0)

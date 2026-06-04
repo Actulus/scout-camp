@@ -28,6 +28,7 @@ LoadingScreen="*uid://b0n02sd66qamw"
 ThemeAnimator="*uid://ewha4es5cie"
 UiFonts="*uid://d3ygmdpmfhh6u"
 SaveSystem="*res://systems/save_system.gd"
+SoundManager="*res://systems/sound_manager.gd"
 
 [display]
 

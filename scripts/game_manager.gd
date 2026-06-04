@@ -24,10 +24,18 @@ var plant_guide_read: bool = false
 var animal_guide_read: bool = false
 var pages_found: int = 0
 
+# Day/night time — 0.0 = dawn, 0.5 = noon, 1.0 = dusk
+#var current_time: float = 0.5
+#var day_length_seconds: float = 600.0
+#var _dusk_fired: bool = false
+
 signal skill_completed(skill_id: String)
 signal badge_earned(badge_id: String)
-signal day_changed(day_number: int)
+#signal day_changed(day_number: int)
 signal flag_found(flag_index: int)
+#signal time_changed(time: float)
+#signal dawn_reached
+#signal dusk_reached
 
 func _ready() -> void:
 	reset()
@@ -50,6 +58,8 @@ func reset() -> void:
 	plant_guide_read = false
 	animal_guide_read = false
 	pages_found = 0
+	#current_time = 0.0
+	#_dusk_fired = false
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("task_menu"):
@@ -94,9 +104,21 @@ func _get_badge_menu() -> CanvasLayer:
 		get_tree().root.add_child(_badge_menu_instance)
 	return _badge_menu_instance
 
-func advance_day():
-	current_day += 1
-	emit_signal("day_changed", current_day)
+#func advance_time(delta: float) -> void:
+	#if current_time >= 1.0:
+		#return
+	#current_time = minf(current_time + delta / day_length_seconds, 1.0)
+	#emit_signal("time_changed", current_time)
+	#if current_time >= 0.85 and not _dusk_fired:
+		#_dusk_fired = true
+		#emit_signal("dusk_reached")
+
+#func advance_day() -> void:
+	#current_day += 1
+	#current_time = 0.0
+	#_dusk_fired = false
+	#emit_signal("day_changed", current_day)
+	#emit_signal("dawn_reached")
 	
 
 func _pause() -> void:

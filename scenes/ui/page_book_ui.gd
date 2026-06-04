@@ -1,6 +1,8 @@
 extends CanvasLayer
 class_name PageBookUI
 
+@export var page_turn_sound: AudioStream = preload("res://assets/audio/book_flip_kenney_cards.wav")
+
 @onready var book_title: Label = %BookTitle
 @onready var page_title: Label = %PageTitle
 @onready var page_content: RichTextLabel = %PageContent
@@ -16,6 +18,7 @@ signal closed
 
 func _ready() -> void:
 	add_to_group("page_book")
+	SoundManager.play_sfx(page_turn_sound)
 	close_btn.pressed.connect(func(): _close())
 	prev_btn.pressed.connect(func(): _navigate(-1))
 	next_btn.pressed.connect(func(): _navigate(1))
@@ -49,6 +52,8 @@ func _show_page(index: int) -> void:
 
 func _navigate(direction: int) -> void:
 	var new_index = clamp(current_page + direction, 0, pages.size() - 1)
+	if new_index != current_page:
+		SoundManager.play_sfx(page_turn_sound)
 	_show_page(new_index)
 
 func _close() -> void:

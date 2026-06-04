@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://bdyvldfbcy43l"]
 
 [ext_resource type="Script" uid="uid://c2xv4fe36re2j" path="res://interactions/FireInteraction/fire_interaction.gd" id="1_ge2ur"]
+[ext_resource type="AudioStream" uid="uid://dc4i8rfscck82" path="res://assets/audio/oxidvideos-lighting-a-match-465391.mp3" id="2_mlul7"]
 
 [node name="FireInteraction" type="Node" unique_id=1818648971]
 script = ExtResource("1_ge2ur")
-required_item = null
-required_amount = null
-boiled_water_scene = null
+ignite_sound = ExtResource("2_mlul7")

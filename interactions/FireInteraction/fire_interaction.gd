@@ -4,6 +4,7 @@ extends AbstractInteraction
 @export var required_item: String = "wood"
 @export var required_amount: int = 3
 @export var boiled_water_scene: PackedScene = preload("res://interactions/CollectableInteraction/EquippableInteraction/Interactables/boiled_water_mug.tscn")
+@export var ignite_sound: AudioStream
 
 var wood_meshes: Array = []
 var wood_count: int = 0
@@ -140,6 +141,8 @@ func _light_fire() -> void:
 	if fire_light:
 		fire_light.visible = true
 	if flames: flames.visible = true 
+	if ignite_sound:
+		SoundManager.play_sfx(ignite_sound)
 	
 	# notify any pot already on the fire to start cooking if it has contents
 	var pot = get_tree().get_first_node_in_group("cooking_pot")

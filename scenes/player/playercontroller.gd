@@ -90,6 +90,8 @@ func _ready() -> void:
 	add_to_group("player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	item_hand_rest_position = item_hand.position
+	footsteps_soundeffect.bus = "SFX"
+	jump_soundeffect.bus = "SFX"
 
 func _input(event: InputEvent) -> void:
 	# block all player input when UI is open

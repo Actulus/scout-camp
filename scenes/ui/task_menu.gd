@@ -3,6 +3,7 @@ class_name TaskMenu
 
 @onready var task_list: VBoxContainer = %TaskList
 @onready var progress_label: Label = %ProgressLabel
+@onready var close_btn: Button = %CloseButton
 
 const TASKS = [
 	{
@@ -41,9 +42,11 @@ var task_panels: Dictionary = {}
 
 func _ready() -> void:
 	add_to_group("task_menu")
-	visible = false
+	visible = false	
 	_build_task_list()
 	GameManager.skill_completed.connect(_on_skill_completed)
+	#close_btn.pressed.connect(func(): _close())
+	
 
 func _build_task_list() -> void:
 	for task in TASKS:
@@ -194,8 +197,15 @@ func _close() -> void:
 	visible = false
 	var player = get_tree().get_first_node_in_group("player")
 	if player: player.ui_open = false
-	if not get_tree().get_first_node_in_group("plant_quiz"):
+	
+	var any_ui_open = get_tree().get_first_node_in_group("plant_quiz") or \
+					  get_tree().get_first_node_in_group("field_guide") or \
+					  get_tree().get_first_node_in_group("animal_quiz") or \
+					  get_tree().get_first_node_in_group("badge_ui") or \
+					  get_tree().get_first_node_in_group("page_book")
+	if not any_ui_open:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
 
 func _input(event: InputEvent) -> void:
 	if not visible: return
@@ -206,6 +216,9 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if close_btn.get_global_rect().has_point(event.global_position):
+			return
+		
 		for panel in task_panels.values():
 			if panel.get_global_rect().has_point(event.global_position):
 				panel.grab_focus()

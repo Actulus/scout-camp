@@ -53,9 +53,18 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Heading" type="Label" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer" unique_id=28941200]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer" unique_id=425253276]
 layout_mode = 2
+
+[node name="Heading" type="Label" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=28941200]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "🏅 Scout Badges"
+
+[node name="CloseButton" type="Button" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2042243390]
+unique_name_in_owner = true
+layout_mode = 2
+text = "✕"
 
 [node name="EarnedLabel" type="Label" parent="Control/ColorRect/HBoxContainer/BadgeGridPanel/MarginContainer/VBoxContainer" unique_id=199864709]
 unique_name_in_owner = true

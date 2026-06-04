@@ -24,6 +24,7 @@ var inventory_full: bool = false
 ## Runs once, after the node and all its children have entered the scene tree and are ready
 func _ready() -> void:
 	swap_slot_player = AudioStreamPlayer.new()
+	swap_slot_player.bus = "SFX"
 	swap_slot_player.volume_db = -12.0
 	swap_slot_player.stream = swap_slot_sound_effect
 	add_child(swap_slot_player)
@@ -120,18 +121,18 @@ func use_collectable(slot_id: int) -> void:
 				if target_ic.use_item(item_data):
 					slot.fill_slot(null)
 					inventory_full = false
-					interaction_controller.interact_success_player.play()
+					interaction_controller.play_success_sfx()
 					return
 			# player not looking at valid target
 			_show_use_hint(usable.use_target_group)
-			interaction_controller.interact_failure_player.play()
+			interaction_controller.play_failure_sfx()
 			return
 			
 	# drinking purified water
 	if item_data.item_name == "purified_water_mug":
 		GameManager.complete_skill("water")
 		interaction_controller._show_interaction_text("Water drunk! Skill complete.", 3.0)
-		interaction_controller.interact_success_player.play()
+		interaction_controller.play_success_sfx()
 		slot.fill_slot(null)
 		inventory_full = false
 		return
@@ -187,7 +188,7 @@ func drop_collectable(slot_id: int) -> void:
 	var obstacle_hit: Dictionary = space_state.intersect_ray(obstacle_params)
 	if not obstacle_hit.is_empty():
 		print("Cannot drop: path blocked")
-		interaction_controller.interact_failure_player.play()
+		interaction_controller.play_failure_sfx()
 		instance.queue_free()
 		return
 
