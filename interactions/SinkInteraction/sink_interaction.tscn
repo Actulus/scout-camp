@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://74yrgumhaxgx"]
+
+[ext_resource type="Script" uid="uid://dqje36cg5unp4" path="res://interactions/SinkInteraction/sink_interaction.gd" id="1_waq1n"]
+
+[node name="SinkInteraction" type="Node" unique_id=1893315671]
+script = ExtResource("1_waq1n")

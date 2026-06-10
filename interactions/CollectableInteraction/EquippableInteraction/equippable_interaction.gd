@@ -37,12 +37,7 @@ func interact() -> void:
 		
 	if not can_interact:
 		return
-	
-	# The item is now in the player hand and should NOT be interacted with
-	if object_ref.is_in_group("cooking_pot"):
-		var ic = get_tree().get_first_node_in_group("interaction_controller")
-		if ic: ic._show_interaction_text("Pot is on the fire!", 1.5)
-		return
+
 	item_collected.emit(get_parent())
 	can_interact = false
 	

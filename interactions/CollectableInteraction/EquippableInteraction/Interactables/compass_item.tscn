@@ -4,9 +4,9 @@
 [ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="2_sound"]
 [ext_resource type="Shader" uid="uid://b15fib3a5ta47" path="res://assets/shaders/needle_gradient.gdshader" id="2_vpjvh"]
 [ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="3_eqact"]
-[ext_resource type="Texture2D" uid="uid://cgsrsfhts6ds8" path="res://assets/notes/oldpage.png" id="4_icon"]
 [ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="5_idata"]
 [ext_resource type="Script" uid="uid://cwre8iyixjxuy" path="res://scripts/compass_item.gd" id="6_cscr"]
+[ext_resource type="Texture2D" uid="uid://ujh082y2my1n" path="res://assets/models/compass.png" id="6_vpjvh"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_compass"]
 top_radius = 0.07
@@ -46,7 +46,7 @@ metadata/_custom_type_script = "uid://cwrr3yrlkcf84"
 [sub_resource type="Resource" id="Resource_compassdata"]
 script = ExtResource("5_idata")
 item_name = "compass"
-item_icon = ExtResource("4_icon")
+item_icon = ExtResource("6_vpjvh")
 action_data = SubResource("Resource_compassact")
 metadata/_custom_type_script = "uid://dwxgooifqus3f"
 

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://6uw73whhbpbh"]
+
+[ext_resource type="PackedScene" uid="uid://txwpo3fgx17d" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenStove.glb" id="1_6nm5f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fho63"]
+albedo_color = Color(0.33333334, 0.2, 0.81960785, 1)
+emission_enabled = true
+emission = Color(0.16862746, 0.2, 0.81960785, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ijqmr"]
+material = SubResource("StandardMaterial3D_fho63")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qdtc6"]
+size = Vector3(0.42871094, 0.49951172, 0.45458984)
+
+[node name="Stove" type="StaticBody3D" unique_id=501425635]
+
+[node name="kitchenStove" parent="." unique_id=1081583138 instance=ExtResource("1_6nm5f")]
+
+[node name="BurnerRing" type="MeshInstance3D" parent="." unique_id=857134996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29724178, 0.42840576, -0.3210466)
+visible = false
+mesh = SubResource("CylinderMesh_ijqmr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=344090201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21533203, 0.25024414, -0.2199707)
+shape = SubResource("BoxShape3D_qdtc6")
+
+[editable path="kitchenStove"]

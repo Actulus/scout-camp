@@ -99,6 +99,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.429, -0.1, -0.468)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5602107, -0.25, -0.75)
 
+[node name="HandLight" type="OmniLight3D" parent="Head/Eyes/SubViewportContainer/SubViewport/NoteCamera" unique_id=112233445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+layers = 2
+light_cull_mask = 2
+light_energy = 1.8
+omni_range = 3.5
+shadow_enabled = false
+
 [node name="GUI" type="Node" parent="." unique_id=1662015740]
 
 [node name="ReticleLayer" type="CanvasLayer" parent="GUI" unique_id=1252076530]

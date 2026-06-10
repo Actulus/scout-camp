@@ -81,6 +81,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
+show_percentage = false
 
 [node name="StatusLabel" type="Label" parent="Control/VBoxContainer" unique_id=856404483]
 unique_name_in_owner = true

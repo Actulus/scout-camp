@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://kteeyo67myww"]
+
+[ext_resource type="PackedScene" uid="uid://eh2qsfrhgxam" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenSink.glb" id="1_pkoca"]
+[ext_resource type="PackedScene" uid="uid://74yrgumhaxgx" path="res://interactions/SinkInteraction/sink_interaction.tscn" id="2_4t2fx"]
+[ext_resource type="PackedScene" uid="uid://dnyvrrl2fc73r" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/bucket_dirty_water.tscn" id="3_rldxn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4t2fx"]
+transparency = 1
+albedo_color = Color(0.39215687, 0.70980394, 0.9647059, 0.627451)
+metallic = 0.1
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.39215687, 0.70980394, 0.9647059, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_rldxn"]
+material = SubResource("StandardMaterial3D_4t2fx")
+size = Vector3(0.02, 0.15, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v12w0"]
+size = Vector3(0.43652344, 0.493042, 0.4753418)
+
+[node name="Sink" type="StaticBody3D" unique_id=1426072867]
+
+[node name="kitchenSink" parent="." unique_id=1123287193 instance=ExtResource("1_pkoca")]
+
+[node name="WaterBlock" type="MeshInstance3D" parent="." unique_id=1461418492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21787834, 0.38562107, -0.28434733)
+visible = false
+mesh = SubResource("BoxMesh_rldxn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1751645794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21533203, 0.253479, -0.21472168)
+shape = SubResource("BoxShape3D_v12w0")
+
+[node name="SinkInteraction" parent="." unique_id=1893315671 instance=ExtResource("2_4t2fx")]
+dirty_water_scene = ExtResource("3_rldxn")
+
+[editable path="kitchenSink"]

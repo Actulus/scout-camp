@@ -25,13 +25,20 @@ text = "Paused"
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
-focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../SaveButton")
 text = "Resume"
+
+[node name="SaveButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=381290047]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+text = "Save Game"
 
 [node name="SettingsButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1494880837]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_top = NodePath("../SaveButton")
 focus_neighbor_bottom = NodePath("../ControlsButton")
 text = "Settings"
 

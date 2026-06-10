@@ -3,7 +3,6 @@ extends Node
 const MAP_UI_SCENE: PackedScene = preload("res://scenes/ui/map_compass_ui.tscn")
 
 var map_ui: CanvasLayer = null
-var map_visible: bool = false
 
 func _ready() -> void:
 	map_ui = MAP_UI_SCENE.instantiate()
@@ -14,11 +13,13 @@ func _input(event: InputEvent) -> void:
 		_toggle_map()
 
 func _toggle_map() -> void:
+	if map_ui.visible:
+		map_ui.close_map()
+		return
 	if not _has_item("map") or not _has_item("compass"):
 		_show_text("You need a map and compass to navigate!", 2.0)
 		return
-	map_visible = not map_visible
-	map_ui.visible = map_visible
+	map_ui.visible = true
 
 func _has_item(item_name: String) -> bool:
 	var inventory = _get_inventory()
@@ -51,7 +52,7 @@ func _show_text(text: String, duration: float) -> void:
 		ic._show_interaction_text(text, duration)
 
 func _process(_delta: float) -> void:
-	if map_visible and map_ui:
+	if map_ui and map_ui.visible:
 		_update_map()
 
 func _update_map() -> void:

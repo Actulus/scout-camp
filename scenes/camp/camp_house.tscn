@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://ctcvgvwo4jaqa" path="res://assets/models/camp_house.glb" id="1_2iqrj"]
 [ext_resource type="PackedScene" uid="uid://dej28nybw6bcg" path="res://interactions/RotatableInteraction/DoorInteraction/Interactables/door.tscn" id="2_2iqrj"]
 [ext_resource type="PackedScene" uid="uid://bhvbioklpw0li" path="res://interactions/RotatableInteraction/ToogleDoorInteraction/toggle_door_interaction.tscn" id="3_0ta0h"]
-[ext_resource type="PackedScene" uid="uid://eh2qsfrhgxam" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenSink.glb" id="4_7d3cx"]
 [ext_resource type="PackedScene" uid="uid://c60yxxmqadrfy" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/bedBunk.glb" id="4_g2kk6"]
 [ext_resource type="PackedScene" uid="uid://dx3i2quod3wt5" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/cooking_pot.tscn" id="4_wriab"]
 [ext_resource type="PackedScene" uid="uid://diuofwyvbd7qk" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/bookcaseClosedDoors.glb" id="5_4aeeo"]
-[ext_resource type="PackedScene" uid="uid://txwpo3fgx17d" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenStove.glb" id="5_rxkok"]
 [ext_resource type="PackedScene" uid="uid://bqps2ox226mc4" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/mug.tscn" id="5_y1fmv"]
+[ext_resource type="PackedScene" uid="uid://kteeyo67myww" path="res://scenes/camp/sink.tscn" id="6_6bwv4"]
 [ext_resource type="PackedScene" uid="uid://dsn6tta37oehr" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenFridge.glb" id="6_6ptv0"]
+[ext_resource type="PackedScene" uid="uid://6uw73whhbpbh" path="res://scenes/camp/stove.tscn" id="7_eu4wj"]
 [ext_resource type="PackedScene" uid="uid://bphudv3isyi34" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenCabinetCornerInner.glb" id="7_j5wvj"]
 [ext_resource type="PackedScene" uid="uid://dxabe25ef4fds" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenCabinet.glb" id="8_43pta"]
 [ext_resource type="PackedScene" uid="uid://0ed27yct8gk" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/kitchenCabinetUpper.glb" id="9_j5wvj"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cnp2hmilvn1kg" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/loungeSofa.glb" id="14_o10fv"]
 [ext_resource type="PackedScene" uid="uid://dw1bkk585t16s" path="res://scenes/furniture/lamp_ceiling.tscn" id="15_0deac"]
 [ext_resource type="PackedScene" uid="uid://lko7d1rcwayp" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/tableCoffeeSquare.glb" id="15_r6rgf"]
+[ext_resource type="PackedScene" uid="uid://cnsy5msatjjc2" path="res://scenes/camp/match.tscn" id="16_cqot2"]
 [ext_resource type="PackedScene" uid="uid://djk3wc6b04d5y" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/loungeChair.glb" id="16_wjhdg"]
 [ext_resource type="PackedScene" uid="uid://d0jmkem66grg" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/lampRoundFloor.glb" id="17_d0fq1"]
 [ext_resource type="PackedScene" uid="uid://rsu7trrgevu6" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/toilet.glb" id="17_j4t2i"]
@@ -115,11 +116,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.8475342, -2.4282837)
 [node name="Kitchen" type="Node3D" parent="." unique_id=783334548]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7.6981764, 0, -4.8568954)
 
-[node name="kitchenSink" parent="Kitchen" unique_id=1946019768 instance=ExtResource("4_7d3cx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008337975, 0, 0)
+[node name="Sink" parent="Kitchen" unique_id=1426072867 instance=ExtResource("6_6bwv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007999897, 0, 0)
 
-[node name="kitchenStove" parent="Kitchen" unique_id=1929419164 instance=ExtResource("5_rxkok")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.0030026436, 0, 0.7223282)
+[node name="Stove" parent="Kitchen" unique_id=501425635 instance=ExtResource("7_eu4wj")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.003000021, 0, 0.722)
 
 [node name="kitchenFridge" parent="Kitchen" unique_id=1780563720 instance=ExtResource("6_6ptv0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4388268, 0, -0.16814351)
@@ -153,6 +154,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.050048828, 0.14261007, 0.0
 
 [node name="LampCeiling" parent="Kitchen" unique_id=1970280075 instance=ExtResource("15_0deac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72101665, 1.2651582, 0.36168003)
+
+[node name="Match" parent="Kitchen" unique_id=790908554 instance=ExtResource("16_cqot2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.138515, 0.42977262, 1.0884781)
 
 [node name="Diner" type="Node3D" parent="." unique_id=2029459379]
 
@@ -258,11 +262,15 @@ transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 3.50
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08142352, 0.37281537, -0.010273695)
 
 [node name="BookInteraction" parent="ChillZone/bookcaseClosedWide2/books" unique_id=1359576031 instance=ExtResource("26_nt226")]
+book_title = "Nature Survival Tips"
+book_type = 1
 
 [node name="books2" parent="ChillZone/bookcaseClosedWide2" unique_id=890207505 instance=ExtResource("19_xks8s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55637985, 0.103223085, -0.010273695)
 
 [node name="BookInteraction" parent="ChillZone/bookcaseClosedWide2/books2" unique_id=776414559 instance=ExtResource("26_nt226")]
+book_title = "Camp Rules "
+book_type = 2
 
 [node name="loungeChair3" parent="ChillZone" unique_id=422369422 instance=ExtResource("16_wjhdg")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.1453378, 0, -0.7341565)

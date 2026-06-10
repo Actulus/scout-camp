@@ -47,10 +47,14 @@ var interact_success_player: AudioStreamPlayer
 var interact_success_sound_effect: AudioStreamWAV = load("res://assets/audio/success_steel_drums_positive_long.wav")
 var equip_item_player: AudioStreamPlayer
 var equip_item_sound_effect: AudioStreamWAV = load("res://assets/audio/item_pickup_minifantasy.wav")
-	
+
+var _item_name_canvas: CanvasLayer
+var _item_name_label: Label
+
 func _ready() -> void:
 	add_to_group("interaction_controller")
 	_style_note_overlay()
+	_setup_item_name_label()
 	interactable_check.body_entered.connect(_collectable_item_entered_range)
 	interactable_check.body_exited.connect(_collectable_item_exited_range)
 	invent_on_item_collected.connect(inventory_controller.pickup_item)
@@ -79,13 +83,17 @@ func _process(delta: float) -> void:
 			hud.visible = false
 		else:
 			hud.visible = true
-			if item_equipped:
+			if inventory_controller.visible:
+				hud.set_context("inventory")
+			elif item_equipped:
 				hud.set_context("equipped")
 			elif potential_object and potential_interaction_component:
 				hud.set_context("near_object")
 			else:
 				hud.set_context("default")
 			
+	_update_item_name_label()
+
 	if item_equipped:
 		_update_reticle_state()
 		# still update potential_object so use_item knows what to target
@@ -461,6 +469,79 @@ func _change_mesh_layer(meshes: Array[MeshInstance3D], layer: int) -> void:
 func _remove_collision_shapes(collision_shapes: Array[CollisionShape3D]) -> void:
 	for collision_shape in collision_shapes:
 		collision_shape.disabled = true
+
+# ── Item name label ───────────────────────────────────────────────────────────
+
+func _setup_item_name_label() -> void:
+	_item_name_canvas = CanvasLayer.new()
+	_item_name_canvas.layer = 3
+	add_child(_item_name_canvas)
+
+	_item_name_label = Label.new()
+	_item_name_label.set_anchors_preset(Control.PRESET_CENTER)
+	_item_name_label.offset_left   = -120
+	_item_name_label.offset_right  =  120
+	_item_name_label.offset_top    =  38
+	_item_name_label.offset_bottom =  62
+	_item_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_item_name_label.add_theme_font_size_override("font_size", 13)
+	_item_name_label.add_theme_color_override("font_color", Color("#F5E6C8"))
+
+	var bg = StyleBoxFlat.new()
+	bg.bg_color = Color(0, 0, 0, 0.45)
+	bg.set_corner_radius_all(4)
+	bg.content_margin_left   = 10
+	bg.content_margin_right  = 10
+	bg.content_margin_top    = 3
+	bg.content_margin_bottom = 3
+	_item_name_label.add_theme_stylebox_override("normal", bg)
+
+	_item_name_label.visible = false
+	_item_name_canvas.add_child(_item_name_label)
+
+func _update_item_name_label() -> void:
+	if not is_instance_valid(_item_name_label):
+		return
+	if item_equipped or is_note_overlay_display \
+			or (inventory_controller and inventory_controller.visible):
+		_item_name_label.visible = false
+		return
+	if potential_interaction_component and potential_interaction_component.can_interact \
+			and potential_interaction_component is CollectableInteraction:
+		var raw := ""
+		if potential_interaction_component.item_data:
+			raw = potential_interaction_component.item_data.item_name
+		var display := _prettify_item_name(raw)
+		if not display.is_empty():
+			_item_name_label.text = display
+			_item_name_label.visible = true
+			return
+	_item_name_label.visible = false
+
+func _prettify_item_name(raw: String) -> String:
+	match raw:
+		"book_page_1":        return "Journal Page 1"
+		"book_page_2":        return "Journal Page 2"
+		"book_page_3":        return "Journal Page 3"
+		"plant_field_guide":  return "Plant Field Guide"
+		"animal_field_guide": return "Animal Field Guide"
+		"purified_water_mug": return "Purified Water"
+		"boiled_water_mug":   return "Boiled Water"
+		"bucket_dirty_water": return "Bucket (Dirty Water)"
+		"bucket_clean_water": return "Bucket (Clean Water)"
+		"compass_item":       return "Compass"
+		"map_item":           return "Map"
+		"purification_tablet": return "Purification Tablet"
+		"cooking_pot":        return "Cooking Pot"
+		"tent_bag":           return "Tent Bag"
+		"small_rock":         return "Small Rock"
+		"mushroom":           return "Mushroom"
+	var words := raw.split("_")
+	var result := ""
+	for word in words:
+		if not result.is_empty(): result += " "
+		result += word.capitalize()
+	return result
 
 func _update_reticle_state() -> void:
 	# Hide all reticles by default

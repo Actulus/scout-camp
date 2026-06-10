@@ -52,7 +52,8 @@ func _give_item_to_inventory(scene: PackedScene) -> void:
 	var instance = scene.instantiate()
 	get_tree().current_scene.add_child(instance)
 	for child in instance.get_children():
-		if child is AbstractInteraction:
+		if child is CollectableInteraction and child.item_data:
+			child.item_data.item_model_prefab = scene
 			var ic_node = get_tree().get_first_node_in_group("interaction_controller")
 			if ic_node:
 				ic_node.inventory_controller.pickup_item(child.item_data)

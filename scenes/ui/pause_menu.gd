@@ -3,6 +3,7 @@ extends CanvasLayer
 signal resumed
 
 @onready var resume_btn: Button = %ResumeButton
+@onready var save_btn: Button = %SaveButton
 @onready var main_menu_btn: Button = %MainMenuButton
 @onready var settings_btn: Button = %SettingsButton
 @onready var controls_btn: Button = %ControlsButton
@@ -14,16 +15,27 @@ var controls_instance = null
 
 func _ready() -> void:
 	resume_btn = get_node_or_null("%ResumeButton")
+	save_btn = get_node_or_null("%SaveButton")
 	main_menu_btn = get_node_or_null("%MainMenuButton")
 	settings_btn = get_node_or_null("%SettingsButton")
 	controls_btn = get_node_or_null("%ControlsButton")
-	
+
 	if resume_btn: resume_btn.pressed.connect(func(): resumed.emit())
+	if save_btn: save_btn.pressed.connect(_save_game)
 	if main_menu_btn: main_menu_btn.pressed.connect(_go_to_main_menu)
 	if settings_btn: settings_btn.pressed.connect(_open_settings)
 	if controls_btn: controls_btn.pressed.connect(_open_controls)
 	
 	resume_btn.grab_focus.call_deferred()
+
+func _save_game() -> void:
+	SaveSystem.save()
+	save_btn.text = "Saved!"
+	save_btn.disabled = true
+	await get_tree().create_timer(1.5, true).timeout
+	if is_instance_valid(save_btn):
+		save_btn.text = "Save Game"
+		save_btn.disabled = false
 
 func _go_to_main_menu() -> void:
 	# close everything before scene change
@@ -31,6 +43,8 @@ func _go_to_main_menu() -> void:
 	if map: map.queue_free()
 	var task = get_tree().get_first_node_in_group("task_menu")
 	if task: task.queue_free()
+	var dialogue = get_tree().get_first_node_in_group("dialogue_ui")
+	if dialogue: dialogue.queue_free()
 	get_tree().paused = false
 	queue_free()
 	LoadingScreen.load_scene("res://scenes/ui/main_menu.tscn")

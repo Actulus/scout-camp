@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dm3hqcay7tkxe"]
+
+[ext_resource type="PackedScene" uid="uid://c2v34yyx1s5p" path="res://assets/models/smallscout.glb" id="1_tp0fd"]
+[ext_resource type="PackedScene" uid="uid://bcj4iu0k1v830" path="res://interactions/NPCInteraction/npc_interaction.tscn" id="2_npcint"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_scout"]
+radius = 0.5209961
+height = 1.4652344
+
+[node name="ScoutNPC" type="CharacterBody3D" unique_id=1197251736]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1177845803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3732788, 0)
+shape = SubResource("CapsuleShape3D_scout")
+
+[node name="smallscout" parent="." unique_id=1287741388 instance=ExtResource("1_tp0fd")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="smallscout/character-male-a/root" parent_id_path=PackedInt32Array(1287741388, 406048172) index="0" unique_id=638273998]
+bones/0/position = Vector3(8.357096, -2.8750002, -17.625)
+bones/0/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/1/position = Vector3(-8.357096, -2.8750002, -17.625)
+bones/1/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/2/position = Vector3(-1.4438228e-13, -2.875, -17.625)
+bones/2/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/3/position = Vector3(9.989677, 11.150002, 1.15)
+bones/3/rotation = Quaternion(0, 0, -0.38268346, 0.92387956)
+bones/4/position = Vector3(-9.989677, 11.150002, 1.15)
+bones/4/rotation = Quaternion(0, 0, 0.3826835, 0.9238795)
+
+[node name="AnimationPlayer" parent="smallscout" index="1" unique_id=1062289197]
+autoplay = &"idle"
+
+[node name="NPCInteraction" parent="." unique_id=133155893 instance=ExtResource("2_npcint")]
+dialogue_lines = Array[String](["Nice day for scouting, right?", "I heard there are mushrooms near the tree line.", "Stay safe out there!"])
+
+[editable path="smallscout"]

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cnsy5msatjjc2"]
+
+[ext_resource type="Texture2D" uid="uid://d1e6uqtbgaj41" path="res://assets/models/match.jpg" id="1_rqjh7"]
+[ext_resource type="PackedScene" uid="uid://c3h303wte1cdb" path="res://interactions/CollectableInteraction/EquippableInteraction/equippable_interaction.tscn" id="1_v7ecl"]
+[ext_resource type="AudioStream" uid="uid://bync6ca6lgi6m" path="res://assets/audio/item_pickup_minifantasy.wav" id="2_rqjh7"]
+[ext_resource type="Script" uid="uid://cwrr3yrlkcf84" path="res://inventory/actions/equippable_action.gd" id="3_2qjfl"]
+[ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="4_k1mq2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0locv"]
+albedo_color = Color(0.6503562, 0, 0.10535211, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bi3vc"]
+material = SubResource("StandardMaterial3D_0locv")
+size = Vector3(0.05, 0.02, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qjfl"]
+albedo_texture = ExtResource("1_rqjh7")
+albedo_texture_force_srgb = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k1mq2"]
+material = SubResource("StandardMaterial3D_2qjfl")
+size = Vector2(0.05, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0hbrr"]
+size = Vector3(0.05, 0.02, 0.1)
+
+[sub_resource type="Resource" id="Resource_6hkxx"]
+script = ExtResource("3_2qjfl")
+metadata/_custom_type_script = "uid://cwrr3yrlkcf84"
+
+[sub_resource type="Resource" id="Resource_5rvql"]
+script = ExtResource("4_k1mq2")
+item_name = "Match"
+item_icon = ExtResource("1_rqjh7")
+action_data = SubResource("Resource_6hkxx")
+metadata/_custom_type_script = "uid://dwxgooifqus3f"
+
+[node name="Match" type="StaticBody3D" unique_id=790908554]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=306250155]
+mesh = SubResource("BoxMesh_bi3vc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=749080991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010375977, 0)
+mesh = SubResource("PlaneMesh_k1mq2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=656686337]
+shape = SubResource("BoxShape3D_0hbrr")
+
+[node name="EquippableInteraction" parent="." unique_id=489219896 instance=ExtResource("1_v7ecl")]
+collect_sound_effect = ExtResource("2_rqjh7")
+item_data = SubResource("Resource_5rvql")

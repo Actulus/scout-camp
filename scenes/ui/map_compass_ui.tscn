@@ -36,7 +36,7 @@ offset_left = -162.0
 offset_right = 162.0
 offset_bottom = 21.0
 grow_horizontal = 2
-text = "SCOUT CAMP MAP    [M] close"
+text = "SCOUT CAMP MAP    [M] "
 horizontal_alignment = 1
 
 [node name="CloseButton" type="Button" parent="Panel" unique_id=194090115]

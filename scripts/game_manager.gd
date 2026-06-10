@@ -1,10 +1,26 @@
 extends Node
 
+const BADGE_DATA: Dictionary = {
+	"fire":       {"title": "The Fire Starter",   "icon": "🔥", "color": "#FF6600",
+				   "description": "Brought wood to the campfire pit and lit it."},
+	"tent":       {"title": "The Tent Camper",     "icon": "⛺",  "color": "#A0522D",
+				   "description": "Assembled the tent at the designated marker near camp."},
+	"water":      {"title": "The Water Guardian",  "icon": "💧", "color": "#0088FF",
+				   "description": "Collected water, boiled it on the fire, purified it with a tablet, and drank it."},
+	"plants":     {"title": "The Nature Reader",   "icon": "🌿", "color": "#228B22",
+				   "description": "Read the plant field guide and passed the plant identification quiz."},
+	"animals":    {"title": "The Animal Expert",   "icon": "🦊", "color": "#CC4400",
+				   "description": "Read the animal field guide and passed the animal identification quiz."},
+	"navigation": {"title": "The Pathfinder",      "icon": "🧭", "color": "#FFD700",
+				   "description": "Collected all 3 navigation journal pages hidden in the forest."},
+}
+
 @export var pause_menu_scene: PackedScene = preload("res://scenes/ui/pause_menu.tscn")
 var pause_menu_instance = null
 
 const BadgeMenuScript        = preload("res://scenes/ui/badge_menu.gd")
 const BadgeEarnedPopupScript = preload("res://scenes/ui/badge_earned_popup.gd")
+const CompletionPopupScript  = preload("res://scenes/ui/completion_popup.gd")
 var _badge_menu_instance: CanvasLayer = null
 
 var current_day: int = 1 
@@ -94,10 +110,21 @@ func earn_badge(badge_id: String) -> void:
 	if badge_id not in badges_earned:
 		badges_earned.append(badge_id)
 		emit_signal("badge_earned", badge_id)
-		# Show earned popup
 		var popup = BadgeEarnedPopupScript.new()
 		get_tree().root.add_child(popup)
 		popup.show_badge(badge_id)
+
+		# Check if every badge in BADGE_DATA is now earned
+		var all_done := true
+		for key in BADGE_DATA:
+			if key not in badges_earned:
+				all_done = false
+				break
+		if all_done:
+			# Delay until the last badge popup has finished animating in
+			get_tree().create_timer(4.2, true).timeout.connect(func():
+				var cp = CompletionPopupScript.new()
+				get_tree().root.add_child(cp))
 
 		
 func _get_badge_menu() -> CanvasLayer:
@@ -141,6 +168,10 @@ func _pause() -> void:
 	var map = get_tree().get_first_node_in_group("map")
 	if map and map.visible:
 		map.visible = false
+
+	var dialogue = get_tree().get_first_node_in_group("dialogue_ui")
+	if dialogue and dialogue.visible:
+		dialogue.hide()
 
 	if is_instance_valid(_badge_menu_instance) and _badge_menu_instance.visible:
 		_badge_menu_instance._close()

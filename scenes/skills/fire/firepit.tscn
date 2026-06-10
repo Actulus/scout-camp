@@ -5,7 +5,6 @@
 [ext_resource type="ArrayMesh" uid="uid://sphv1rsbjby6" path="res://assets/models/kenney_nature-kit/Models/OBJ format/log.obj" id="3_hvlfo"]
 [ext_resource type="Shader" uid="uid://bf8t2otpyxnqj" path="res://assets/shaders/flame_shader.gdshader" id="4_njdky"]
 [ext_resource type="Texture2D" uid="uid://ba4wcdghlpvj6" path="res://assets/textures/flame_noise.tres" id="5_s8t07"]
-[ext_resource type="PackedScene" uid="uid://0tm5w3ybg2ot" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/boiled_water_mug.tscn" id="6_s8t07"]
 
 [sub_resource type="Gradient" id="Gradient_njdky"]
 offsets = PackedFloat32Array(0, 0.53090507, 1)
@@ -132,6 +131,3 @@ transform = Transform3D(0.9999879, 0, -0.0049218084, 0, 1, 0, 0.0049218084, 0, 0
 shape = SubResource("CylinderShape3D_v3guq")
 
 [node name="FireInteraction" parent="StaticBody3D" unique_id=1818648971 instance=ExtResource("2_6neqt")]
-required_item = "wood"
-required_amount = 3
-boiled_water_scene = ExtResource("6_s8t07")

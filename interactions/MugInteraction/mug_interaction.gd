@@ -3,6 +3,7 @@ extends AbstractInteraction
 
 # what can be added to the mug and what it produces
 # key: input item_name, value: output scene path
+# TODO: create recipes 
 @export var recipes: Dictionary = {
 	"boiled_water_mug": "res://path/to/purified_water_mug.tscn",
 	"coffee": "res://path/to/coffee_mug.tscn",

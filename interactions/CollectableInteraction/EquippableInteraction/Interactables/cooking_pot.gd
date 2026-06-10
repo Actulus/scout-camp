@@ -10,11 +10,11 @@ func get_interaction_component() -> AbstractInteraction:
 		elif child is EquippableInteraction and not equip_ic:
 			equip_ic = child
 
-	# On fire: always use pot interaction
-	if is_in_group("cooking_pot"):
-		return pot_ic if pot_ic else equip_ic
+	# On fire: pot interaction always takes priority; pickup via double-click in PotInteraction
+	if is_in_group("cooking_pot") and pot_ic:
+		return pot_ic
 
-	# Has contents: use pot interaction even when not on fire yet
+	# Has contents but not on fire: use pot interaction
 	if pot_ic and pot_ic.contents != "":
 		return pot_ic
 

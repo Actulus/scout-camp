@@ -40,6 +40,12 @@ const HINTS = {
 		{"key": "←→", "action": "Navigate"},
 		{"key": "Enter", "action": "Submit"},
 		{"key": "Esc", "action": "Close"}
+	],
+	"inventory": [
+		{"key": "DblClick", "action": "Use / Equip"},
+		{"key": "RClick", "action": "Drop"},
+		{"key": "Drag", "action": "Move"},
+		{"key": "Tab", "action": "Close"}
 	]
 }
 
@@ -77,6 +83,11 @@ const CONTROLLER_HINTS = {
 		{"key": "DPad", "action": "Navigate"},
 		{"key": "A", "action": "Confirm"},
 		{"key": "B", "action": "Close"}
+	],
+	"inventory": [
+		{"key": "A", "action": "Use / Equip"},
+		{"key": "B", "action": "Drop"},
+		{"key": "LB", "action": "Close"}
 	]
 }
 

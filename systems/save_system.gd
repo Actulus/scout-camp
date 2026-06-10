@@ -37,6 +37,17 @@ func save() -> void:
 		cfg.set_value("player", "pos_z",    player.global_position.z)
 		cfg.set_value("player", "rot_y",    player.rotation_degrees.y)
 
+	# Inventory slots (save scene path per slot, empty string for empty slots)
+	var inventory := _get_inventory(player)
+	if inventory:
+		var slot_paths: Array = []
+		for slot in inventory.inventory_slots:
+			if slot.slot_data and slot.slot_data.item_model_prefab:
+				slot_paths.append(slot.slot_data.item_model_prefab.resource_path)
+			else:
+				slot_paths.append("")
+		cfg.set_value("inventory", "slots", slot_paths)
+
 	var err := cfg.save(SAVE_PATH)
 	if err != OK:
 		push_error("SaveSystem: failed to write save file (error %d)" % err)
@@ -81,6 +92,7 @@ func _process(_delta: float) -> void:
 	if not player:
 		return  # world not ready yet — try again next frame
 	_apply_player_transform(player)
+	_restore_inventory(player)
 	_pending_player_restore = false
 	set_process(false)
 
@@ -94,3 +106,49 @@ func _apply_player_transform(player: Node) -> void:
 	var ry: float = cfg.get_value("player", "rot_y", 0.0)
 	player.global_position     = Vector3(px, py, pz)
 	player.rotation_degrees.y  = ry
+
+func _restore_inventory(player: Node) -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load(SAVE_PATH) != OK:
+		return
+	var slot_paths: Array = cfg.get_value("inventory", "slots", [])
+	if slot_paths.is_empty():
+		return
+	var inventory := _get_inventory(player)
+	if not inventory:
+		return
+	for i in min(slot_paths.size(), inventory.inventory_slots.size()):
+		var path: String = slot_paths[i]
+		if path.is_empty():
+			continue
+		var scene := load(path) as PackedScene
+		if not scene:
+			push_warning("SaveSystem: could not load item scene: %s" % path)
+			continue
+		var item_data := _extract_item_data(scene)
+		if item_data:
+			inventory.inventory_slots[i].fill_slot(item_data)
+	inventory.inventory_full = not inventory.has_free_slot()
+
+func _get_inventory(player: Node) -> InventoryController:
+	if not player:
+		return null
+	return player.get_node_or_null("%InventoryController/CanvasLayer/InventoryUI")
+
+func _extract_item_data(scene: PackedScene) -> ItemData:
+	var temp := scene.instantiate()
+	var item_data := _find_collectable_item_data(temp)
+	if item_data:
+		item_data.item_model_prefab = scene
+	temp.queue_free()
+	return item_data
+
+func _find_collectable_item_data(node: Node) -> ItemData:
+	for child in node.get_children():
+		if child is CollectableInteraction:
+			return child.item_data
+	for child in node.get_children():
+		var result := _find_collectable_item_data(child)
+		if result:
+			return result
+	return null

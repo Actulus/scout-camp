@@ -7,10 +7,18 @@ var compass_label: Label
 
 func _ready() -> void:
 	add_to_group("map")
-	
-	close_btn.pressed.connect(func(): _close())
+	add_to_group("map_ui")
+
+	close_btn.pressed.connect(func(): close_map())
 	visible = false
 	compass_label = get_node_or_null("Panel/CompassLabel")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not visible:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		close_map()
+		get_viewport().set_input_as_handled()
 
 func update_heading(y_rotation_degrees: float) -> void:
 	if not compass_label:
@@ -27,13 +35,5 @@ func update_player_position(_world_pos: Vector3) -> void:
 func update_found_pages(_count: int) -> void:
 	pass
 
-func _close() -> void:
-	var player = get_tree().get_first_node_in_group("player")
-	if player: player.ui_open = false
-	var ic = get_tree().get_first_node_in_group("interaction_controller")
-	if ic:
-		ic.set_process(true)
-		ic.set_physics_process(true)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	emit_signal("closed")
-	queue_free()
+func close_map() -> void:
+	visible = false

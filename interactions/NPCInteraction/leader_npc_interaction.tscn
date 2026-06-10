@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b2aqq6qhgqlff"]
+
+[ext_resource type="Script" uid="uid://buoqibmijuwy5" path="res://interactions/NPCInteraction/leader_npc_interaction.gd" id="1_rr2uy"]
+
+[node name="LeaderNPCInteraction" type="Node2D" unique_id=787595221]
+script = ExtResource("1_rr2uy")

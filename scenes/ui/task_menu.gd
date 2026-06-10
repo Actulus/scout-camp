@@ -9,8 +9,8 @@ const TASKS = [
 	{
 		"id": "fire",
 		"title": "🔥 Light a Fire",
-		"description": "Find wood in the forest.\nBring it to the fire pit at camp.\nUse wood on the fire pit 3 times to light it.",
-		"hint": "Look for wood scattered near the trees."
+		"description": "Find 3 pieces of wood in the forest.\nBring them to the fire pit at camp.\nFind a match.\nUse the match on the fire pit to light it.",
+		"hint": "Wood is scattered near the trees. Check the camp house for matches."
 	},
 	{
 		"id": "tent",
