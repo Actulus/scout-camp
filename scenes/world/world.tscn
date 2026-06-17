@@ -2,13 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bqs7yms3roulb" path="res://scenes/player/player.tscn" id="1_dphjl"]
 [ext_resource type="Script" uid="uid://c56dtlox2xkv6" path="res://scenes/world/world.gd" id="1_wnndm"]
-[ext_resource type="PackedScene" uid="uid://bekfi08ju8oo1" path="res://assets/models/camp_landscape_w_Mountains.glb" id="2_sl2e5"]
-[ext_resource type="ArrayMesh" uid="uid://cwdr2myxwjaqg" path="res://assets/models/kenney_nature-kit/Models/OBJ format/tree_oak_dark.obj" id="3_1yooq"]
-[ext_resource type="ArrayMesh" uid="uid://g1gaxbbvx2ud" path="res://assets/models/kenney_nature-kit/Models/OBJ format/tree_pineRoundD.obj" id="3_6m72w"]
 [ext_resource type="PackedScene" uid="uid://dx1alfdeco5xl" path="res://interactions/WaterInteraction/water_interaction.tscn" id="3_wbwoo"]
 [ext_resource type="PackedScene" uid="uid://cdtlmia3x0i8o" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/bench.glb" id="4_ckok1"]
 [ext_resource type="PackedScene" uid="uid://c1od2lbapn5de" path="res://scenes/skills/shelter/tent_spot.tscn" id="4_dlabj"]
-[ext_resource type="Script" uid="uid://b0vsknat0qtq2" path="res://scripts/scatterer.gd" id="4_v5dby"]
+[ext_resource type="PackedScene" uid="uid://cd7p1gsl8t874" path="res://assets/models/camp_landscape3.glb" id="4_sygq6"]
 [ext_resource type="Script" uid="uid://uf3v57djnjuy" path="res://scripts/collectible_scatterer.gd" id="5_t5ptc"]
 [ext_resource type="PackedScene" uid="uid://c4ue8v2vgfle5" path="res://interactions/CollectableInteraction/EquippableInteraction/Interactables/wood.tscn" id="6_bq33v"]
 [ext_resource type="PackedScene" uid="uid://byv5cmbadxk32" path="res://interactions/CollectableInteraction/ConsumableInteraction/Interactables/mushroom.tscn" id="7_bq33v"]
@@ -33,26 +30,36 @@
 [ext_resource type="PackedScene" uid="uid://dm3hqcay7tkxe" path="res://scenes/npcs/scout_npc.tscn" id="31_scout"]
 [ext_resource type="PackedScene" uid="uid://cnsy5msatjjc2" path="res://scenes/camp/match.tscn" id="32_5o5dd"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5dby"]
-sky_top_color = Color(0.09, 0.42, 0.78, 1)
-sky_horizon_color = Color(0.56, 0.78, 0.95, 1)
-ground_bottom_color = Color(0.25399244, 0.21624544, 0.17379308, 1)
-ground_horizon_color = Color(0.56, 0.78, 0.95, 1)
-sun_angle_max = 45.0
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d0ajt"]
+sky_top_color = Color(0.60512364, 0.8548614, 0.72603554, 1)
+sky_horizon_color = Color(0.528694, 0.7974745, 0.66144776, 1)
+ground_bottom_color = Color(0.31764707, 0.5568628, 0.13725491, 1)
+ground_horizon_color = Color(0.5294118, 0.79607844, 0.6627451, 1)
 
-[sub_resource type="Sky" id="Sky_t5ptc"]
-sky_material = SubResource("ProceduralSkyMaterial_v5dby")
+[sub_resource type="Sky" id="Sky_fymcc"]
+sky_material = SubResource("ProceduralSkyMaterial_d0ajt")
 
-[sub_resource type="Environment" id="Environment_bq33v"]
+[sub_resource type="Environment" id="Environment_fymcc"]
 background_mode = 2
-background_color = Color(0, 0.661958, 0.8088382, 1)
-sky = SubResource("Sky_t5ptc")
-reflected_light_source = 1
+background_color = Color(0.99215686, 0.9372549, 0.7764706, 1)
+sky = SubResource("Sky_fymcc")
 tonemap_mode = 2
+tonemap_white = 6.0
+ssao_enabled = true
 glow_enabled = true
+glow_intensity = 0.08
+glow_bloom = 0.05
+glow_hdr_threshold = 2.0
+fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.7565671, 0.7755554, 0.94321704, 1)
+fog_light_color = Color(0.8901961, 0.76862746, 0.42745098, 1)
+fog_sun_scatter = 0.29
 fog_density = 1.0
+fog_sky_affect = 0.1
+fog_depth_begin = 25.9
+fog_depth_end = 514.5
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_lbnhc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbwoo"]
 albedo_color = Color(0.08813135, 0.2653635, 0.29818428, 1)
@@ -64,72 +71,50 @@ size = Vector2(150, 400)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dlabj"]
 data = PackedVector3Array(75, 0, 200, -75, 0, 200, 75, 0, -200, -75, 0, 200, -75, 0, -200, 75, 0, -200)
 
-[sub_resource type="MultiMesh" id="MultiMesh_gb53w"]
-transform_format = 1
-mesh = ExtResource("3_6m72w")
-
-[sub_resource type="MultiMesh" id="MultiMesh_5qq27"]
-transform_format = 1
-mesh = ExtResource("3_1yooq")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwifv"]
 albedo_color = Color(0.54509807, 0.3882353, 0.2784314, 1)
 
 [node name="World" type="Node3D" unique_id=430405692]
 script = ExtResource("1_wnndm")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=303823825]
-transform = Transform3D(-0.8141155, -0.58070296, -2.5383333e-08, 0, -4.371139e-08, 1, -0.58070296, 0.8141155, 3.558612e-08, 0, 0, 0)
-light_color = Color(1, 0.97, 0.88, 1)
-light_energy = 1.5
-shadow_enabled = true
-directional_shadow_max_distance = 158.0
-sky_mode = 1
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1629449219]
+environment = SubResource("Environment_fymcc")
+camera_attributes = SubResource("CameraAttributesPractical_lbnhc")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1403228488]
-environment = SubResource("Environment_bq33v")
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=893464417]
+transform = Transform3D(0.12814665, -0.26943487, 0.9544544, 0.05888482, 0.9627583, 0.26387304, -0.99000555, 0.022388436, 0.13923988, 0, 0, 0)
+light_intensity_lux = 63535.92
+light_temperature = 2900.0
+light_color = Color(1, 1, 0.47843137, 1)
+light_energy = 2.459
+shadow_enabled = true
+directional_shadow_split_1 = 0.22
+directional_shadow_split_2 = 0.11
+directional_shadow_split_3 = 0.33
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 200.0
 
 [node name="Player" parent="." unique_id=561802944 groups=["player"] instance=ExtResource("1_dphjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7254868, 1, 9)
 
-[node name="camp_landscape_w_Mountains" parent="." unique_id=1766557002 instance=ExtResource("2_sl2e5")]
+[node name="camp_landscape" parent="." unique_id=1863066061 instance=ExtResource("4_sygq6")]
 
-[node name="Plane" parent="camp_landscape_w_Mountains" index="0" unique_id=203088422 groups=["player"]]
-
-[node name="RiverNLake" type="MeshInstance3D" parent="camp_landscape_w_Mountains" unique_id=1560386257]
+[node name="RiverNLake" type="MeshInstance3D" parent="camp_landscape" unique_id=1560386257]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -124.37633, -1.6937828, 0)
 mesh = SubResource("PlaneMesh_tytul")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="camp_landscape_w_Mountains/RiverNLake" unique_id=961696819]
+[node name="StaticBody3D" type="StaticBody3D" parent="camp_landscape/RiverNLake" unique_id=961696819]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="camp_landscape_w_Mountains/RiverNLake/StaticBody3D" unique_id=1669697987]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="camp_landscape/RiverNLake/StaticBody3D" unique_id=1669697987]
 shape = SubResource("ConcavePolygonShape3D_dlabj")
 
-[node name="WaterInteraction" parent="camp_landscape_w_Mountains/RiverNLake/StaticBody3D" unique_id=2088268351 instance=ExtResource("3_wbwoo")]
+[node name="WaterInteraction" parent="camp_landscape/RiverNLake/StaticBody3D" unique_id=2088268351 instance=ExtResource("3_wbwoo")]
 
-[node name="bench" parent="camp_landscape_w_Mountains" unique_id=1202134445 instance=ExtResource("4_ckok1")]
+[node name="bench" parent="camp_landscape" unique_id=1202134445 instance=ExtResource("4_ckok1")]
 transform = Transform3D(0.8502999, 0, -1.9318516, 0, 2, 0, 3.1733627, 0, 0.517638, -112.24117, 0.8093881, 27.497663)
 
 [node name="Bucket" parent="." unique_id=310901583 instance=ExtResource("15_wbwoo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.936745, -0.19255362, -0.28085375)
-
-[node name="TreeScatterer" type="MultiMeshInstance3D" parent="." unique_id=2122310135]
-multimesh = SubResource("MultiMesh_gb53w")
-script = ExtResource("4_v5dby")
-count = 500
-world_radius = 100.0
-camp_clear_radius = 20.0
-min_distance_from_others = 5.0
-avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer2"), NodePath("../StickScatterer"), NodePath("../MushroomScatterer"), NodePath("../StoneScatterer"), NodePath("../BookPage3"), NodePath("../BookPage1"), NodePath("../BookPage2")])
-
-[node name="TreeScatterer2" type="MultiMeshInstance3D" parent="." unique_id=666373439]
-multimesh = SubResource("MultiMesh_5qq27")
-script = ExtResource("4_v5dby")
-count = 500
-world_radius = 90.0
-camp_clear_radius = 20.0
-min_distance_from_others = 5.0
-avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../StickScatterer"), NodePath("../MushroomScatterer"), NodePath("../StoneScatterer"), NodePath("../BookPage1"), NodePath("../BookPage2"), NodePath("../BookPage3")])
 
 [node name="StickScatterer" type="Node3D" parent="." unique_id=1770372274]
 script = ExtResource("5_t5ptc")
@@ -137,7 +122,7 @@ collectible_scene = ExtResource("6_bq33v")
 count = 300
 world_radius = 150.0
 camp_clear_radius = 15.0
-avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../TreeScatterer2"), NodePath("../MushroomScatterer"), NodePath("../StoneScatterer"), NodePath("../FirePit"), NodePath("../camp_landscape_w_Mountains/RiverNLake")])
+avoid_multimeshes = Array[NodePath]([NodePath("../MushroomScatterer"), NodePath("../StoneScatterer"), NodePath("../FirePit"), NodePath("../camp_landscape/RiverNLake")])
 
 [node name="MushroomScatterer" type="Node3D" parent="." unique_id=866722671]
 script = ExtResource("5_t5ptc")
@@ -146,26 +131,26 @@ count = 150
 world_radius = 100.0
 camp_clear_radius = 15.0
 min_distance_from_others = 5.0
-avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../TreeScatterer2"), NodePath("../StickScatterer"), NodePath("../StoneScatterer")])
+avoid_multimeshes = Array[NodePath]([NodePath("../StickScatterer"), NodePath("../StoneScatterer")])
 
 [node name="StoneScatterer" type="Node3D" parent="." unique_id=1018371530]
 script = ExtResource("5_t5ptc")
 collectible_scene = ExtResource("8_j2gmx")
 count = 200
 world_radius = 150.0
-avoid_multimeshes = Array[NodePath]([NodePath("../TreeScatterer"), NodePath("../TreeScatterer2"), NodePath("../StickScatterer"), NodePath("../MushroomScatterer")])
+avoid_multimeshes = Array[NodePath]([NodePath("../StickScatterer"), NodePath("../MushroomScatterer")])
 
 [node name="FirePit" parent="." unique_id=2016362658 instance=ExtResource("9_1yooq")]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 6.061266, -0.16248083, 9.856425)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 6.061266, -0.16248083, 14.52716)
 
 [node name="TentSpot" parent="." unique_id=58251706 instance=ExtResource("4_dlabj")]
-transform = Transform3D(0.2447997, 0, -0.9695737, 0, 1, 0, 0.9695737, 0, 0.2447997, 13.856089, -0.0034715384, 6.152485)
+transform = Transform3D(0.2447997, 0, -0.9695737, 0, 1, 0, 0.9695737, 0, 0.2447997, 14.617418, -0.0034715384, 8.457021)
 
 [node name="TentCanvas" parent="." unique_id=557959429 instance=ExtResource("13_umvgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.817813, 0.22259486, 4.385173)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.579143, 0.22259486, 6.6897087)
 
 [node name="TentPoles" parent="." unique_id=1915320521 instance=ExtResource("12_srmg5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.228617, -0.03214907, 3.3481884)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.989946, -0.03214907, 5.6527243)
 
 [node name="MapItem" parent="." unique_id=800000002 instance=ExtResource("26_map")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.463501, 0.55378413, -0.25274658)
@@ -220,5 +205,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6382446, -0.17297363, 0)
 [node name="Match" parent="." unique_id=790908554 instance=ExtResource("32_5o5dd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.011261, 0.5466211, -0.17797852)
 
-[editable path="camp_landscape_w_Mountains"]
+[editable path="camp_landscape"]
 [editable path="table"]
