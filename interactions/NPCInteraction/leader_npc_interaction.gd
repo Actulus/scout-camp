@@ -4,10 +4,10 @@ extends AbstractInteraction
 @export var npc_name: String = "Scout"
 @export var dialogue_lines: Array[String] = []
 @export var is_leader: bool = false
-@export var idle_animation: String = "RootAction"
-@export var wave_animation: String = "Wave"
+@export var idle_animation: String = "leader_breathing_idle"
+@export var wave_animation: String = "leader_talking"
 
-@onready var anim_player: AnimationPlayer = $"../scout_leader_char_anim/AnimationPlayer"
+@onready var anim_player: AnimationPlayer = $"../LeaderT-Pose/AnimationPlayer"
 
 var _met_before: bool = false
 
@@ -15,6 +15,8 @@ func _ready() -> void:
 	super()
 	await get_tree().process_frame
 	if anim_player:
+		print("Animations found: ", anim_player.get_animation_list())
+		print("Libraries found: ", anim_player.get_animation_library_list())
 		if anim_player.has_animation(idle_animation):
 			var anim = anim_player.get_animation(idle_animation)
 			if anim:

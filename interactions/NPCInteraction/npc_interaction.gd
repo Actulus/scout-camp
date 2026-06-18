@@ -5,18 +5,21 @@ extends AbstractInteraction
 @export var dialogue_lines: Array[String] = []
 @export var is_leader: bool = false
 
-@onready var anim_player: AnimationPlayer = $"../smallscout/AnimationPlayer"
+@onready var anim_player: AnimationPlayer = $"../Scout-T-Pose/AnimationPlayer"
 
 var _met_before: bool = false
+var idle_animation: String = "scout_idle"
 
 func _ready() -> void:
 	super()
 	await get_tree().process_frame
 	if anim_player:
-		print("Animations available: ", anim_player.get_animation_list())
-		var anim = anim_player.get_animation("idle")  # this is the name showing in your AnimationPlayer
+		print("Animations found: ", anim_player.get_animation_list())
+		print("Libraries found: ", anim_player.get_animation_library_list())
+		var anim = anim_player.get_animation(idle_animation)  # this is the name showing in your AnimationPlayer
 		if anim:
 			anim.loop_mode = Animation.LOOP_LINEAR
+		anim_player.play(idle_animation)
 	else:
 		push_error("AnimationPlayer not found")
 
