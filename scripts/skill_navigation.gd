@@ -1,6 +1,6 @@
 extends Node3D
 
-var flags_found = 0 
+var papers_found = 0 
 var player_ref: Node
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +17,7 @@ func set_player(p: Node):
 	print("player_ref set to: ", player_ref)
 
 func _on_flag_found(idx: int):
-	flags_found += 1
-	if flags_found >= 3: 
+	papers_found += 1
+	if papers_found >= 3: 
 		GameManager.complete_skill("navigation")
 		queue_free()

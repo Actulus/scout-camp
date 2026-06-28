@@ -19,7 +19,7 @@ size = Vector3(0.24993896, 0.3569336, 0.2358737)
 
 [node name="LampTable" type="StaticBody3D" unique_id=1970280075]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=58779810]
+[node name="Lamp" type="MeshInstance3D" parent="." unique_id=58779810]
 mesh = ExtResource("1_1rxni")
 surface_material_override/0 = ExtResource("2_a2wcc")
 surface_material_override/1 = ExtResource("3_cdkvw")
@@ -27,6 +27,7 @@ surface_material_override/1 = ExtResource("3_cdkvw")
 [node name="Bulb" type="MeshInstance3D" parent="." unique_id=136146441]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -0.056396484, 0.23891497, 0.06047885)
 visible = false
+cast_shadow = 0
 mesh = SubResource("SphereMesh_wiliy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1017473124]
@@ -36,8 +37,9 @@ shape = SubResource("BoxShape3D_qo5m1")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2132475821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.061718583, 0.22051191, 0.06461558)
 visible = false
+light_intensity_lumens = 15000.0
 light_color = Color(0.8526918, 0.6468476, 0, 1)
-light_energy = 1.5
-shadow_enabled = true
+light_energy = 16.0
 
-[node name="LightInteraction" parent="." unique_id=1084398401 instance=ExtResource("4_vu34m")]
+[node name="LightInteraction" parent="." unique_id=1084398401 node_paths=PackedStringArray("lamp_mesh") instance=ExtResource("4_vu34m")]
+lamp_mesh = NodePath("../Lamp")

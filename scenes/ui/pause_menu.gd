@@ -29,7 +29,9 @@ func _ready() -> void:
 	resume_btn.grab_focus.call_deferred()
 
 func _save_game() -> void:
+	PerformanceMonitor.start_timer()
 	SaveSystem.save()
+	PerformanceMonitor.end_timer("save()")
 	save_btn.text = "Saved!"
 	save_btn.disabled = true
 	await get_tree().create_timer(1.5, true).timeout

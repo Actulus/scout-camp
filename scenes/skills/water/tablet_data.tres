@@ -2,9 +2,11 @@
 
 [ext_resource type="Resource" uid="uid://b1d65cdasl28y" path="res://scenes/skills/water/tablet_action.tres" id="1_xiaj5"]
 [ext_resource type="Script" uid="uid://dwxgooifqus3f" path="res://inventory/item_data.gd" id="2_k84wc"]
+[ext_resource type="Texture2D" uid="uid://duse1g8jhmyy3" path="res://assets/items/water_purifyer_tablet.png" id="2_wdrj8"]
 
 [resource]
 script = ExtResource("2_k84wc")
 item_name = "purification_tablet"
+item_icon = ExtResource("2_wdrj8")
 action_data = ExtResource("1_xiaj5")
 metadata/_custom_type_script = "uid://dwxgooifqus3f"

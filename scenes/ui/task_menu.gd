@@ -21,7 +21,7 @@ const TASKS = [
 	{
 		"id": "water",
 		"title": "💧 Purify Water",
-		"description": "1. Collect water from the river with a bucket.\n2. Pour into the cooking pot on the fire.\n3. Wait for it to boil.\n4. Use a mug to collect boiled water.\n5. Add a purification tablet.\n6. Drink the purified water.",
+		"description": "1. Collect water from the river with a bucket.\n2. Pour into the cooking pot on the fire.\n3. Wait for it to boil.\n4. Add a purification tablet to the pot.\n5. Use a mug to collect the purified water.\n6. Drink the purified water.",
 		"hint": "The bucket is near camp. The river is to the west."
 	},
 	{
@@ -33,8 +33,8 @@ const TASKS = [
 	{
 		"id": "navigation",
 		"title": "🧭 Navigate the Camp",
-		"description": "Find the map and compass near camp.\nPress M to open the map.\nCollect all 3 navigation book pages in the forest.",
-		"hint": "Look for glowing markers on the map showing page locations."
+		"description": "Find the map and compass near camp.\nPress M to open the map.\nCollect all 3 pages in the forest.",
+		"hint": "Look for white pages on the grass."
 	}
 ]
 
@@ -45,7 +45,7 @@ func _ready() -> void:
 	visible = false	
 	_build_task_list()
 	GameManager.skill_completed.connect(_on_skill_completed)
-	#close_btn.pressed.connect(func(): _close())
+	close_btn.pressed.connect(func(): _close())
 	
 
 func _build_task_list() -> void:
@@ -217,8 +217,9 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if close_btn.get_global_rect().has_point(event.global_position):
+			_close()
+			get_viewport().set_input_as_handled()
 			return
-		
 		for panel in task_panels.values():
 			if panel.get_global_rect().has_point(event.global_position):
 				panel.grab_focus()

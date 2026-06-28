@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://lko7d1rcwayp" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/tableCoffeeSquare.glb" id="15_r6rgf"]
 [ext_resource type="PackedScene" uid="uid://cnsy5msatjjc2" path="res://scenes/camp/match.tscn" id="16_cqot2"]
 [ext_resource type="PackedScene" uid="uid://djk3wc6b04d5y" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/loungeChair.glb" id="16_wjhdg"]
-[ext_resource type="PackedScene" uid="uid://d0jmkem66grg" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/lampRoundFloor.glb" id="17_d0fq1"]
 [ext_resource type="PackedScene" uid="uid://rsu7trrgevu6" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/toilet.glb" id="17_j4t2i"]
 [ext_resource type="PackedScene" uid="uid://c5x00blfr7bld" path="res://interactions/SaveInteraction/save_interaction.tscn" id="18_0ta0h"]
 [ext_resource type="PackedScene" uid="uid://cisscicul2e5m" path="res://assets/models/kenney_furniture-kit/Models/GLTF format/bookcaseClosedWide.glb" id="18_hqiuy"]
@@ -52,14 +51,6 @@ size = Vector3(1.6, 2.6, 0.1)
 size = Vector3(1.6, 2.6, 0.1)
 
 [node name="CampHouse" type="Node3D" unique_id=174347405]
-
-[node name="Lights" type="Node3D" parent="." unique_id=1121525805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3584137, 0)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=588224308]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9842949, 0)
-visible = false
-shadow_enabled = true
 
 [node name="camp_house" parent="." unique_id=390335370 instance=ExtResource("1_2iqrj")]
 
@@ -106,6 +97,9 @@ text = "BACK"
 [node name="ToggleDoorInteraction" parent="camp_house/Cube_005/Door2/PivotPoint2/Door" unique_id=524960099 node_paths=PackedStringArray("pivot_point") instance=ExtResource("3_0ta0h")]
 open_angle = -90.0
 pivot_point = NodePath("../..")
+
+[node name="Cube_009" parent="camp_house" index="9" unique_id=1574187368]
+transform = Transform3D(1.0278107, 0, 0, 0, 1, 0, 0, 0, 1.0453205, 0, 0, 0)
 
 [node name="CookingPot" parent="camp_house" unique_id=29031691 instance=ExtResource("4_wriab")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1502495, 0.85653424, -5.1858253)
@@ -243,9 +237,6 @@ transform = Transform3D(-1.9193949, 0, 0.5620703, 0, 2, 0, -0.5620703, 0, -1.919
 
 [node name="loungeChair2" parent="ChillZone" unique_id=803339606 instance=ExtResource("16_wjhdg")]
 transform = Transform3D(-1.5390443, 0, -1.2772403, 0, 2, 0, 1.2772403, 0, -1.5390443, -0.9507272, 0, 1.0776806)
-
-[node name="lampRoundFloor" parent="ChillZone" unique_id=1417677229 instance=ExtResource("17_d0fq1")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -3.8843765, 0, -1.0419922)
 
 [node name="bookcaseClosedWide" parent="ChillZone" unique_id=1585422398 instance=ExtResource("18_hqiuy")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.187501, 0, -1.0553803)

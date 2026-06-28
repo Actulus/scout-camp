@@ -49,7 +49,7 @@ var is_new_game: bool = false
 signal skill_completed(skill_id: String)
 signal badge_earned(badge_id: String)
 #signal day_changed(day_number: int)
-signal flag_found(flag_index: int)
+signal page_found(flag_index: int)
 #signal time_changed(time: float)
 #signal dawn_reached
 #signal dusk_reached
@@ -171,7 +171,7 @@ func _pause() -> void:
 
 	var dialogue = get_tree().get_first_node_in_group("dialogue_ui")
 	if dialogue and dialogue.visible:
-		dialogue.hide()
+		dialogue.close()
 
 	if is_instance_valid(_badge_menu_instance) and _badge_menu_instance.visible:
 		_badge_menu_instance._close()

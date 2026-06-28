@@ -69,7 +69,9 @@ func _apply_settings() -> void:
 	GameSettings.sfx_volume = sfx_slider.value
 	GameSettings.mouse_sensitivity = sensitivity_slider.value
 	GameSettings.window_mode = fullscreen_option.selected
+	PerformanceMonitor.start_timer()
 	GameSettings.save()
+	PerformanceMonitor.end_timer("save()")
 
 func _set_bus_volume(bus_name: String, volume: float) -> void:
 	var idx = AudioServer.get_bus_index(bus_name)

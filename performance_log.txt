@@ -1,0 +1,59 @@
+
+[Timer] world.tscn load: 0 ms
+
+=== Snapshot: 2026-06-24T16:35:35 ===
+Location:      (7.0, -0.3, 10.9)
+FPS:           52 (avg: 51.7, min: 51.0)
+RAM:           146.0 MB
+VRAM:          243.5 MB
+Draw Calls:    1346
+
+=== Snapshot: 2026-06-24T16:35:40 ===
+Location:      (0.2, 0.0, -5.1)
+FPS:           47 (avg: 47.4, min: 47.0)
+RAM:           146.1 MB
+VRAM:          243.5 MB
+Draw Calls:    1965
+
+[Timer] world.tscn load: 1 ms
+
+=== Snapshot: 2026-06-24T16:42:43 ===
+Location:      (-1.7, -0.3, 9.0)
+FPS:           50 (avg: 51.7, min: 50.0)
+RAM:           147.7 MB
+VRAM:          243.4 MB
+Draw Calls:    3148
+
+=== Snapshot: 2026-06-24T16:42:49 ===
+Location:      (-0.2, 0.0, -7.8)
+FPS:           46 (avg: 48.6, min: 46.0)
+RAM:           147.8 MB
+VRAM:          243.4 MB
+Draw Calls:    4399
+
+[Timer] save(): 0 ms
+
+[Timer] save(): 1 ms
+
+=== Snapshot: 2026-06-24T16:43:32 ===
+Location:      (12.4, -0.1, 9.2)
+FPS:           42 (avg: 43.6, min: 41.0)
+RAM:           150.1 MB
+VRAM:          245.9 MB
+Draw Calls:    1374
+
+=== Snapshot: 2026-06-24T16:43:43 ===
+Location:      (35.3, 0.2, 31.2)
+FPS:           47 (avg: 47.0, min: 47.0)
+RAM:           150.1 MB
+VRAM:          245.9 MB
+Draw Calls:    752
+
+[Timer] save(): 1 ms
+
+=== Snapshot: 2026-06-24T16:44:26 ===
+Location:      (0.8, 0.0, -6.6)
+FPS:           41 (avg: 41.0, min: 41.0)
+RAM:           150.2 MB
+VRAM:          246.0 MB
+Draw Calls:    4444

@@ -41,7 +41,11 @@ func _ready() -> void:
 		fire_pit.get_node_or_null("Wood2"),
 		fire_pit.get_node_or_null("Wood3")
 	]
-	
+
+	# Restore visual fire state if the skill was already completed before this load
+	if fire_type == FireType.CAMPFIRE and GameManager.skills_completed.get("fire", false):
+		_restore_lit_visuals()
+
 func pre_interact() -> void:
 	super()
 
@@ -176,6 +180,16 @@ func use_item(item_data: ItemData) -> bool:
 		return false
 
 	return false
+
+func _restore_lit_visuals() -> void:
+	is_lit = true
+	wood_count = WOOD_REQUIRED
+	for mesh in wood_meshes:
+		if mesh: mesh.visible = true
+	if burner_ring: burner_ring.visible = true
+	if fire_particles: fire_particles.emitting = true
+	if fire_light: fire_light.visible = true
+	if flames: flames.visible = true
 
 func _light_fire() -> void:
 	is_lit = true

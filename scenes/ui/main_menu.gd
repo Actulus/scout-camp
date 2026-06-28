@@ -75,12 +75,16 @@ func _inject_continue_button() -> void:
 func _on_continue() -> void:
 	# Load saved game state into GameManager; player position applied after world loads
 	SaveSystem.load_game_state()
+	PerformanceMonitor.start_timer()
 	LoadingScreen.load_scene("res://scenes/world/world.tscn")
+	PerformanceMonitor.end_timer("world.tscn load")
 
 func _on_play() -> void:
 	SaveSystem.delete_save()
 	GameManager.reset()
+	PerformanceMonitor.start_timer()
 	LoadingScreen.load_scene("res://scenes/world/world.tscn")
+	PerformanceMonitor.end_timer("world.tscn load")
 
 func _on_settings() -> void:
 	if settings_instance and is_instance_valid(settings_instance):

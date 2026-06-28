@@ -64,7 +64,7 @@ func interact() -> void:
 			else:
 				ic._show_interaction_text("Light the fire to boil the water!", 1.5)
 		"boiled_water":
-			ic._show_interaction_text("Boiled! Equip a mug and use it here, or add purification tablet.", 2.0)
+			ic._show_interaction_text("Boiled! Equip the purification tablet and add it to the pot.", 2.0)
 		"purified_water":
 			ic._show_interaction_text("Purified! Equip a mug and use it here to collect.", 2.0)
 
@@ -94,12 +94,8 @@ func use_item(item_data: ItemData) -> bool:
 
 		"mug":
 			if contents == "boiled_water":
-				if ic: ic.swap_equipped_item_after_use(BOILED_MUG_SCENE)
-				contents = ""
-				if water_surface: water_surface.visible = false
-				_update_pot_equippable()
-				if ic: ic._show_interaction_text("Boiled water collected in mug!", 2.0)
-				return true
+				if ic: ic._show_interaction_text("Add a purification tablet to the pot first!", 2.0)
+				return false
 			elif contents == "purified_water":
 				if ic: ic.swap_equipped_item_after_use(PURIFIED_MUG_SCENE)
 				contents = ""
@@ -166,7 +162,7 @@ func _start_cooking() -> void:
 	_set_water(COLOR_BOILED)
 
 	ic = get_tree().get_first_node_in_group("interaction_controller")
-	if ic: ic._show_interaction_text("Water boiled! Use a mug on the pot, or add a tablet to purify.", 5.0)
+	if ic: ic._show_interaction_text("Water boiled! Add a purification tablet to the pot to purify it.", 5.0)
 
 func _update_pot_equippable() -> void:
 	var equippable = null

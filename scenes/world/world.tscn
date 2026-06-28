@@ -43,6 +43,11 @@ sky_material = SubResource("ProceduralSkyMaterial_d0ajt")
 background_mode = 2
 background_color = Color(0.99215686, 0.9372549, 0.7764706, 1)
 sky = SubResource("Sky_fymcc")
+ambient_light_source = 2
+ambient_light_color = Color(0.6887001, 0.53828174, 0.33001047, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.2
+reflected_light_source = 2
 tonemap_mode = 2
 tonemap_white = 6.0
 ssao_enabled = true
@@ -61,11 +66,11 @@ fog_depth_end = 514.5
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_lbnhc"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbwoo"]
-albedo_color = Color(0.08813135, 0.2653635, 0.29818428, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26xou"]
+albedo_color = Color(1.8289685e-06, 0.43250725, 0.6599568, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tytul"]
-material = SubResource("StandardMaterial3D_wbwoo")
+material = SubResource("StandardMaterial3D_26xou")
 size = Vector2(150, 400)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dlabj"]
@@ -107,6 +112,7 @@ mesh = SubResource("PlaneMesh_tytul")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="camp_landscape/RiverNLake/StaticBody3D" unique_id=1669697987]
 shape = SubResource("ConcavePolygonShape3D_dlabj")
+debug_color = Color(0.8442877, 0, 0.1714102, 0.41960785)
 
 [node name="WaterInteraction" parent="camp_landscape/RiverNLake/StaticBody3D" unique_id=2088268351 instance=ExtResource("3_wbwoo")]
 
@@ -162,7 +168,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0491943, 0.5426758, 0.03509
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -0.16630858, -5)
 
 [node name="BookPage2" parent="." unique_id=800000005 instance=ExtResource("24_page2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.250305, 0.76885986, -119.47711)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.802475, 0.76885986, -117.13307)
 
 [node name="BookPage3" parent="." unique_id=800000006 instance=ExtResource("25_page3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112.02557, 0.7846801, 29.443146)
@@ -176,7 +182,7 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -3.7
 [node name="TaskMenu" parent="." unique_id=1432026446 instance=ExtResource("28_2x71e")]
 
 [node name="CampHouse" parent="." unique_id=174347405 instance=ExtResource("29_wnndm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.087927245, -7.245)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.527237e-05, 0.10528841, -7.245055)
 
 [node name="table" parent="." unique_id=1332696875 instance=ExtResource("26_rwifv")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 5.6936646, -0.13205457, 0.1875894)

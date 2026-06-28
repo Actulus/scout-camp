@@ -29,6 +29,19 @@ func _ready() -> void:
 	if tent_frame: tent_frame.visible = false
 	if tent_canvas: tent_canvas.visible = false
 
+	# Restore built state if the tent was assembled before this load
+	if GameManager.skills_completed.get("tent", false):
+		_restore_built_visuals()
+
+func _restore_built_visuals() -> void:
+	poles_added = true
+	canvas_added = true
+	is_built = true
+	can_interact = false
+	if tent_frame: tent_frame.visible = true
+	if tent_canvas: tent_canvas.visible = true
+	if placement_marker: placement_marker.visible = false
+
 func pre_interact() -> void:
 	super()
 

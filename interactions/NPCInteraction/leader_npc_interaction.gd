@@ -54,10 +54,14 @@ func _on_wave_finished(_anim_name: String) -> void:
 
 func _on_dialogue_closed() -> void:
 	is_interacting = false
-	can_interact = true
 	_met_before = true
 	if anim_player and anim_player.has_animation(idle_animation):
 		anim_player.play(idle_animation)
+	# Defer by one frame so the click that closed the dialogue isn't
+	# immediately re-processed as a new interaction trigger.
+	await get_tree().process_frame
+	if is_instance_valid(self):
+		can_interact = true
 
 func _build_lines() -> Array[String]:
 	if is_leader:

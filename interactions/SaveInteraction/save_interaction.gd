@@ -7,7 +7,9 @@ func _ready() -> void:
 
 func pre_interact() -> void:
 	super.pre_interact()
+	PerformanceMonitor.start_timer()
 	SaveSystem.save()
+	PerformanceMonitor.end_timer("save()")
 
 	var ic := get_tree().get_first_node_in_group("interaction_controller")
 	if ic:

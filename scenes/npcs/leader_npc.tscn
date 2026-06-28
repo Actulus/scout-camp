@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://chc5xiw82wgmg" path="res://assets/leader_anim/LeaderT-Pose_2.png" id="2_vcdm8"]
 [ext_resource type="AnimationLibrary" uid="uid://5vnhqywakrvg" path="res://assets/leader_anim/LeaderBreathingIdle.fbx" id="3_j48d5"]
 [ext_resource type="Animation" uid="uid://dwfsifdvctj4a" path="res://assets/leader_anim/leader_breathing_idle.res" id="3_x8eru"]
-[ext_resource type="Animation" uid="uid://c8utxipru8qmh" path="res://assets/leader_anim/leader_idle.res" id="4_myrdh"]
+[ext_resource type="Animation" uid="uid://miyy3016i2d0" path="res://assets/leader_anim/leader_idle.res" id="4_myrdh"]
 [ext_resource type="AnimationLibrary" uid="uid://eyn1qb7p3k1j" path="res://assets/leader_anim/LeaderTalking.fbx" id="4_vcdm8"]
-[ext_resource type="Animation" uid="uid://damiab37wp10u" path="res://assets/leader_anim/leader_talking.res" id="5_7cupu"]
-[ext_resource type="Animation" uid="uid://d6s64humaakq" path="res://assets/leader_anim/leader_walking.res" id="6_xwifr"]
-[ext_resource type="Animation" uid="uid://bv8iiabqqhkek" path="res://assets/leader_anim/leader_walking_circle.res" id="7_w7lay"]
+[ext_resource type="Animation" uid="uid://da2rlp43kih3p" path="res://assets/leader_anim/leader_talking.res" id="5_7cupu"]
+[ext_resource type="Animation" uid="uid://dvtu7xaom0aua" path="res://assets/leader_anim/leader_walking.res" id="6_xwifr"]
+[ext_resource type="Animation" uid="uid://b3d0bwsvfx1ps" path="res://assets/leader_anim/leader_walking_circle.res" id="7_w7lay"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_leader"]
 radius = 1.0

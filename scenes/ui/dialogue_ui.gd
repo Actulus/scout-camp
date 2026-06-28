@@ -25,10 +25,15 @@ func open(npc_name: String, lines: Array[String], on_close: Callable) -> void:
 func _show_line() -> void:
 	_text_label.text = _lines[_line_index]
 	var is_last := _line_index >= _lines.size() - 1
-	_hint_label.text = "[Enter]/[LMB] to close" if is_last else "[Enter]/[LMB] to continue"
+	_hint_label.text = "[LMB]/[Enter] close  •  [RMB] dismiss" if is_last else "[LMB]/[Enter] continue  •  [RMB] dismiss"
 
 func _input(event: InputEvent) -> void:
 	if not visible:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT \
+			and event.pressed and not event.is_echo():
+		get_viewport().set_input_as_handled()
+		_close_dialogue()
 		return
 	var accepted: bool = (event.is_action_pressed("ui_accept") and not event.is_echo()) \
 		or (event is InputEventMouseButton \
@@ -45,6 +50,9 @@ func _advance() -> void:
 		_close_dialogue()
 	else:
 		_show_line()
+
+func close() -> void:
+	_close_dialogue()
 
 func _close_dialogue() -> void:
 	hide()

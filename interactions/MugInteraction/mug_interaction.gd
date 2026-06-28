@@ -3,15 +3,13 @@ extends AbstractInteraction
 
 # what can be added to the mug and what it produces
 # key: input item_name, value: output scene path
-# TODO: create recipes 
 @export var recipes: Dictionary = {
-	"boiled_water_mug": "res://path/to/purified_water_mug.tscn",
 	"coffee": "res://path/to/coffee_mug.tscn",
 	"tea_leaves": "res://path/to/tea_mug.tscn"
 }
 
-# which items require a purification tablet as second ingredient
-@export var requires_tablet: Array[String] = ["boiled_water_mug"]
+# purification now happens in the pot, not the mug
+@export var requires_tablet: Array[String] = []
 
 # what happens when player drinks from mug
 @export var drink_skill: String = ""  # e.g. "water", "morale_boost"
